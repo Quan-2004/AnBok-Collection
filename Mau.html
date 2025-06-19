@@ -330,110 +330,6 @@
                 gap: 0.7rem;
             }
         }
-        .hero-slider {
-            width: 100vw;
-            max-width: 100%;
-            overflow: hidden;
-            position: relative;
-            margin: 0 auto 2rem auto;
-            background: linear-gradient(120deg, #e3f2fd 60%, #fff 100%);
-            min-height: 320px;
-        }
-        .hero-slides {
-            display: flex;
-            transition: transform 0.7s cubic-bezier(.25,.8,.25,1);
-            will-change: transform;
-        }
-        .hero-slide {
-            min-width: 100vw;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2.5rem 0;
-            position: relative;
-        }
-        .hero-slide-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.85);
-            border-radius: 18px;
-            box-shadow: 0 4px 16px rgba(25, 118, 210, 0.07);
-            padding: 1.5rem 2rem;
-        }
-        .hero-slide img {
-            width: 120px;
-            height: 170px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
-        }
-        .hero-slide-info {
-            flex: 1;
-        }
-        .hero-slide-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        .hero-slide-author {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 0.7rem;
-        }
-        .hero-slide-desc {
-            font-size: 0.95rem;
-            color: #444;
-            margin-bottom: 1rem;
-        }
-        .hero-slide-btn {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 0.5rem 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .hero-slide-btn:hover {
-            background: var(--accent);
-        }
-        .hero-dots {
-            position: absolute;
-            left: 50%;
-            bottom: 18px;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-        }
-        .hero-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #b3c6e6;
-            cursor: pointer;
-            transition: background 0.3s;
-            border: none;
-        }
-        .hero-dot.active {
-            background: var(--primary);
-        }
-        @media (max-width: 700px) {
-            .hero-slide-content {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-            .hero-slide img {
-                width: 90px;
-                height: 120px;
-            }
-        }
         .modal-auth {
             display: none;
             position: fixed;
@@ -602,8 +498,7 @@
         body.dark .modal-auth-form input:focus {
             border-color: var(--primary);
         }
-        body.dark .main-banner,
-        body.dark .hero-slider {
+        body.dark .main-banner {
             background: none !important;
         }
         .go {
@@ -666,6 +561,36 @@
             border: 2px solid #ff6600;
             transition: all 0.2s;
         }
+        
+        /* MAIN CONTENT */
+        .main-content {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+            background: var(--bg);
+        }
+        
+        .main-content .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .main-content h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .main-content p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            text-align: center;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -687,19 +612,15 @@
             </div>
         </div>
     </header>
-    <section>
-        <div class="hero-slider">
-            <div id="heroSlides" class="hero-slides"></div>
-            <div id="heroDots" class="hero-dots"></div>
-        </div>
-        <div style="max-width:900px;margin:2rem auto;padding:2rem 1rem;background:#fff;border-radius:18px;box-shadow:0 2px 8px rgba(25,118,210,0.07);text-align:center;">
-            <h2>Chào mừng bạn đến với AnBok!</h2>
-            <p>Đây là khu vực nội dung chính. Bạn có thể thêm danh sách sách, truyện hoặc các thông tin khác tại đây.</p>
+
+    <section class="main-content">
+        <div class="container">
         </div>
     </section>
+
     <!-- FOOTER -->
     <footer class="main-footer">
-        <div class="container">
+        <div class="container" id="heroDots">
             <div class="footer-about">
                 <h3>Về chúng tôi</h3>
                 <p>Thư viện sách & truyện điện tử hàng đầu Việt Nam.</p>
@@ -785,58 +706,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <!-- Giữ lại các script chức năng động, cập nhật selector nếu cần -->
     <script>
-        // ... giữ lại các hàm fetchAllBooks, fetchBooksByCategory, searchBooks, fetchNewBooks, v.v. ...
-        // ... cập nhật lại selector cho phù hợp với giao diện mới ...
-        // HERO SLIDER DATA (demo 10 sách/truyện nổi bật)
-        const heroBooks = [
-            { title: 'Đắc Nhân Tâm', author: 'Dale Carnegie', desc: 'Cuốn sách kỹ năng sống kinh điển giúp bạn thành công trong giao tiếp và cuộc sống.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6d/7d/7d/6d7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d.jpg', link: '#' },
-            { title: 'Nhà Giả Kim', author: 'Paulo Coelho', desc: 'Hành trình phiêu lưu kỳ diệu và truyền cảm hứng về ước mơ và số phận.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/2e/2e/2e/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e.jpg', link: '#' },
-            { title: 'Harry Potter và Hòn Đá Phù Thủy', author: 'J.K. Rowling', desc: 'Khám phá thế giới phù thủy kỳ diệu cùng Harry Potter.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/3e/3e/3e/3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e.jpg', link: '#' },
-            { title: 'Dế Mèn Phiêu Lưu Ký', author: 'Tô Hoài', desc: 'Tác phẩm thiếu nhi kinh điển của văn học Việt Nam.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/4e/4e/4e/4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e.jpg', link: '#' },
-            { title: 'Totto-chan bên cửa sổ', author: 'Tetsuko Kuroyanagi', desc: 'Câu chuyện cảm động về tuổi thơ và giáo dục nhân văn.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/5e/5e/5e/5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e.jpg', link: '#' },
-            { title: 'Sapiens: Lược Sử Loài Người', author: 'Yuval Noah Harari', desc: 'Khám phá lịch sử phát triển của loài người từ thuở sơ khai.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6e/6e/6e/6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e.jpg', link: '#' },
-            { title: 'Bố Già', author: 'Mario Puzo', desc: 'Tiểu thuyết kinh điển về thế giới mafia và quyền lực.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/7e/7e/7e/7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e.jpg', link: '#' },
-            { title: 'Tuổi Trẻ Đáng Giá Bao Nhiêu', author: 'Rosie Nguyễn', desc: 'Cẩm nang truyền cảm hứng cho người trẻ Việt Nam.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/8e/8e/8e/8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg', link: '#' },
-            { title: 'Sherlock Holmes Toàn Tập', author: 'Arthur Conan Doyle', desc: 'Bộ truyện trinh thám nổi tiếng nhất mọi thời đại.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/9e/9e/9e/9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e.jpg', link: '#' },
-            { title: 'Chuyện Con Mèo Dạy Hải Âu Bay', author: 'Luis Sepúlveda', desc: 'Câu chuyện cảm động về tình bạn và lòng dũng cảm.', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/ae/ae/ae/aeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeae.jpg', link: '#' },
-        ];
-        let heroIndex = 0;
-        function renderHeroSlides() {
-            const slides = heroBooks.map(book => `
-                <div class="hero-slide">
-                    <div class="hero-slide-content">
-                        <img src="${book.img}" alt="${book.title}">
-                        <div class="hero-slide-info">
-                            <div class="hero-slide-title">${book.title}</div>
-                            <div class="hero-slide-author">${book.author}</div>
-                            <div class="hero-slide-desc">${book.desc}</div>
-                            <a href="${book.link}" class="hero-slide-btn">Đọc ngay</a>
-            </div>
-            </div>
-                </div>
-            `).join('');
-            document.getElementById('heroSlides').innerHTML = slides;
-            // Dots
-            const dots = heroBooks.map((_, i) => `<button class="hero-dot${i===0?' active':''}" onclick="goToHeroSlide(${i})"></button>`).join('');
-            document.getElementById('heroDots').innerHTML = dots;
-            document.getElementById('heroSlides').style.transform = `translateX(-${heroIndex*100}vw)`;
-        }
-        function goToHeroSlide(idx) {
-            heroIndex = idx;
-            updateHeroSlider();
-        }
-        function updateHeroSlider() {
-            document.getElementById('heroSlides').style.transform = `translateX(-${heroIndex*100}vw)`;
-            document.querySelectorAll('.hero-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === heroIndex);
-            });
-        }
-        function nextHeroSlide() {
-            heroIndex = (heroIndex + 1) % heroBooks.length;
-            updateHeroSlider();
-        }
-        renderHeroSlides();
-        setInterval(nextHeroSlide, 3000);
         // Modal auth logic
         const loginModal = document.getElementById('loginModal');
         const registerModal = document.getElementById('registerModal');
@@ -884,18 +753,33 @@
         const darkModeIcon = document.getElementById('darkModeIcon');
         const sunIcon = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2600.png'; // sun
         const moonIcon = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f319.png'; // moon
+        
         function setDarkMode(on) {
             document.body.classList.toggle('dark', on);
-            darkModeIcon.src = on ? moonIcon : sunIcon;
-            darkModeIcon.alt = on ? 'Chế độ tối' : 'Chế độ sáng';
+            if (darkModeIcon) {
+                darkModeIcon.src = on ? moonIcon : sunIcon;
+                darkModeIcon.alt = on ? 'Chế độ tối' : 'Chế độ sáng';
+            }
             localStorage.setItem('darkMode', on ? '1' : '0');
         }
-        darkModeToggle.onclick = function() {
-            setDarkMode(!document.body.classList.contains('dark'));
-        };
+        
+        if (darkModeToggle) {
+            darkModeToggle.onclick = function() {
+                const isDark = document.body.classList.contains('dark');
+                setDarkMode(!isDark);
+            };
+        }
+        
         // Khởi động theo localStorage
-        if(localStorage.getItem('darkMode')==='1') setDarkMode(true);
-        else setDarkMode(false);
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode === '1') {
+            setDarkMode(true);
+        } else if (savedDarkMode === '0') {
+            setDarkMode(false);
+        } else {
+            // Mặc định là light mode nếu chưa có setting
+            setDarkMode(false);
+        }
         // --- FIREBASE CONFIG ---
         const firebaseConfig = {
             apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",

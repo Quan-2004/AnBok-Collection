@@ -602,8 +602,7 @@
         body.dark .modal-auth-form input:focus {
             border-color: var(--primary);
         }
-        body.dark .main-banner,
-        body.dark .hero-slider {
+        body.dark .main-banner {
             background: none !important;
         }
         body.dark aside {
@@ -759,6 +758,34 @@
             border: 2px solid #ff6600;
             transition: all 0.2s;
         }
+        @keyframes cart-bounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.3); }
+            50% { transform: scale(0.9); }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .cart-bounce {
+            animation: cart-bounce 0.6s;
+        }
+        .custom-rating-dropdown ul {
+            background: #fff;
+            color: #222;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #0001;
+        }
+        .custom-rating-dropdown button {
+            background: #fff;
+            color: #222;
+            border: 1.5px solid #e3e3e3;
+        }
+        body.dark .custom-rating-dropdown ul {
+            background: #232a36 !important;
+            color: #f5f5f5 !important;
+            box-shadow: 0 4px 16px #000c, 0 0 0 1.5px #444c5a;
+            border: 1.5px solid #444c5a;
+        }
+
     </style>
 </head>
 <body>
@@ -884,8 +911,29 @@
             </aside>
             <!-- MAIN CONTENT: GRID SÁCH -->
             <div style="flex:1;">
-                <div class="section-header" style="margin-bottom:1.5rem;">
+                <div class="section-header" style="margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;">
                     <h2>Danh sách Sách</h2>
+                    <div class="filters" style="display:flex;align-items:center;gap:1rem;">
+                        <select id="sortSelect" style="padding:0.4rem 1rem;border-radius:8px;border:1.5px solid #e3e3e3;font-size:1rem;">
+                            <option value="default">Mặc định</option>
+                            <option value="sold">Bán chạy nhất</option>
+                            <option value="price-asc">Giá tăng dần</option>
+                            <option value="price-desc">Giá giảm dần</option>
+                        </select>
+                        <div class="custom-rating-dropdown" style="position:relative;">
+                            <button id="ratingDropdownBtn" type="button" style="padding:0.4rem 1rem;border-radius:8px;border:1.5px solid #e3e3e3;font-size:1rem;display:flex;align-items:center;gap:0.4rem;min-width:120px;background:#fff;cursor:pointer;">
+                                <i sstyle="color:#fbc02d;"></i> <span id="ratingDropdownLabel">Tất cả</span> <i class="fas fa-caret-down" style="margin-left:auto;"></i>
+                            </button>
+                            <ul id="ratingDropdownList" style="display:none;position:absolute;z-index:10;top:110%;left:0;width:100%;background:#fff;border-radius:8px;box-shadow:0 2px 8px #0001;padding:0.3rem 0;margin:0;list-style:none;">
+                                <li data-value="0" style="padding:0.5rem 1rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;">Tất cả</li>
+                                <li data-value="5" style="padding:0.5rem 1rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;"><i class='fas fa-star' style='color:#fbc02d;'></i> 5</li>
+                                <li data-value="4" style="padding:0.5rem 1rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;"><i class='fas fa-star' style='color:#fbc02d;'></i> 4 trở lên</li>
+                                <li data-value="3" style="padding:0.5rem 1rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;"><i class='fas fa-star' style='color:#fbc02d;'></i> 3 trở lên</li>
+                                <li data-value="2" style="padding:0.5rem 1rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;"><i class='fas fa-star' style='color:#fbc02d;'></i> 2 trở lên</li>
+                                <li data-value="1" style="padding:0.5rem 1rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;"><i class='fas fa-star' style='color:#fbc02d;'></i> 1 trở lên</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div id="bookGrid" class="book-grid" style="grid-template-columns:repeat(5,1fr);">
                     <!-- Sách sẽ render ở đây bằng JS -->
@@ -1053,18 +1101,33 @@
         const darkModeIcon = document.getElementById('darkModeIcon');
         const sunIcon = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2600.png'; // sun
         const moonIcon = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f319.png'; // moon
+        
         function setDarkMode(on) {
             document.body.classList.toggle('dark', on);
-            darkModeIcon.src = on ? moonIcon : sunIcon;
-            darkModeIcon.alt = on ? 'Chế độ tối' : 'Chế độ sáng';
+            if (darkModeIcon) {
+                darkModeIcon.src = on ? moonIcon : sunIcon;
+                darkModeIcon.alt = on ? 'Chế độ tối' : 'Chế độ sáng';
+            }
             localStorage.setItem('darkMode', on ? '1' : '0');
         }
-        darkModeToggle.onclick = function() {
-            setDarkMode(!document.body.classList.contains('dark'));
-        };
+        
+        if (darkModeToggle) {
+            darkModeToggle.onclick = function() {
+                const isDark = document.body.classList.contains('dark');
+                setDarkMode(!isDark);
+            };
+        }
+        
         // Khởi động theo localStorage
-        if(localStorage.getItem('darkMode')==='1') setDarkMode(true);
-        else setDarkMode(false);
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode === '1') {
+            setDarkMode(true);
+        } else if (savedDarkMode === '0') {
+            setDarkMode(false);
+        } else {
+            // Mặc định là light mode nếu chưa có setting
+            setDarkMode(false);
+        }
         // --- FIREBASE CONFIG ---
         const firebaseConfig = {
             apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
@@ -1205,7 +1268,13 @@
                 };
             }
             const cartBtn = document.getElementById('cartBtn');
-            if(cartBtn) cartBtn.onclick = function() { window.location.href = 'cart.html'; };
+            if(cartBtn) cartBtn.onclick = function() { 
+                cartBtn.classList.add('cart-bounce');
+                setTimeout(()=>{
+                    cartBtn.classList.remove('cart-bounce');
+                    window.location.href = 'cart.html';
+                }, 400);
+            };
         }
         // Nếu đã đăng nhập trước đó, tự động hiển thị
         auth.onAuthStateChanged(function(user) {
@@ -1213,16 +1282,16 @@
         });
         // Demo data sách
         const allBooks = [
-            { title: 'Đắc Nhân Tâm', author: 'Dale Carnegie', genre: 'Kỹ năng sống', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6d/7d/7d/6d7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d.jpg', rating: 4.8 },
-            { title: 'Nhà Giả Kim', author: 'Paulo Coelho', genre: 'Văn học', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/2e/2e/2e/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e.jpg', rating: 4.7 },
-            { title: 'Harry Potter 1', author: 'J.K. Rowling', genre: 'Thiếu nhi', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/3e/3e/3e/3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e.jpg', rating: 4.9 },
-            { title: 'Dế Mèn Phiêu Lưu Ký', author: 'Tô Hoài', genre: 'Thiếu nhi', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/4e/4e/4e/4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e.jpg', rating: 4.6 },
-            { title: 'Totto-chan', author: 'Tetsuko Kuroyanagi', genre: 'Thiếu nhi', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/5e/5e/5e/5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e.jpg', rating: 4.8 },
-            { title: 'Sapiens', author: 'Yuval Noah Harari', genre: 'Khoa học – Công nghệ', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6e/6e/6e/6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e.jpg', rating: 4.7 },
-            { title: 'Bố Già', author: 'Mario Puzo', genre: 'Văn học', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/7e/7e/7e/7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e.jpg', rating: 4.8 },
-            { title: 'Tuổi Trẻ Đáng Giá Bao Nhiêu', author: 'Rosie Nguyễn', genre: 'Kỹ năng sống', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/8e/8e/8e/8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg', rating: 4.7 },
-            { title: 'Sherlock Holmes', author: 'Arthur Conan Doyle', genre: 'Trinh thám – Hình sự', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/9e/9e/9e/9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e.jpg', rating: 4.9 },
-            { title: 'Chuyện Con Mèo Dạy Hải Âu Bay', author: 'Luis Sepúlveda', genre: 'Thiếu nhi', img: 'https://salt.tikicdn.com/cache/280x360/ts/product/ae/ae/ae/aeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeae.jpg', rating: 4.6 },
+            { title: 'Đắc Nhân Tâm', author: 'Dale Carnegie', genre: 'Kỹ năng sống', price: 89000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6d/7d/7d/6d7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d.jpg', rating: 4.8, sold: 1200 },
+            { title: 'Nhà Giả Kim', author: 'Paulo Coelho', genre: 'Văn học', price: 99000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/2e/2e/2e/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e.jpg', rating: 4.7, sold: 950 },
+            { title: 'Harry Potter 1', author: 'J.K. Rowling', genre: 'Thiếu nhi', price: 159000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/3e/3e/3e/3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e.jpg', rating: 4.9, sold: 2000 },
+            { title: 'Dế Mèn Phiêu Lưu Ký', author: 'Tô Hoài', genre: 'Thiếu nhi', price: 59000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/4e/4e/4e/4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e.jpg', rating: 4.6, sold: 800 },
+            { title: 'Totto-chan', author: 'Tetsuko Kuroyanagi', genre: 'Thiếu nhi', price: 109000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/5e/5e/5e/5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e.jpg', rating: 4.8, sold: 1100 },
+            { title: 'Sapiens', author: 'Yuval Noah Harari', genre: 'Khoa học – Công nghệ', price: 199000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6e/6e/6e/6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e.jpg', rating: 4.7, sold: 600 },
+            { title: 'Bố Già', author: 'Mario Puzo', genre: 'Văn học', price: 129000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/7e/7e/7e/7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e.jpg', rating: 4.8, sold: 1300 },
+            { title: 'Tuổi Trẻ Đáng Giá Bao Nhiêu', author: 'Rosie Nguyễn', genre: 'Kỹ năng sống', price: 99000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/8e/8e/8e/8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg', rating: 4.7, sold: 900 },
+            { title: 'Sherlock Holmes', author: 'Arthur Conan Doyle', genre: 'Trinh thám – Hình sự', price: 259000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/9e/9e/9e/9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e.jpg', rating: 4.9, sold: 1700 },
+            { title: 'Chuyện Con Mèo Dạy Hải Âu Bay', author: 'Luis Sepúlveda', genre: 'Thiếu nhi', price: 79000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/ae/ae/ae/aeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeae.jpg', rating: 4.6, sold: 700 },
         ];
         function renderBooks(books) {
             const grid = document.getElementById('bookGrid');
@@ -1233,7 +1302,10 @@
                         <div class="book-title">${book.title}</div>
                         <div class="book-author">${book.author}</div>
                         <div class="book-rating"><i class="fas fa-star"></i> ${book.rating}</div>
-                        <button class="book-btn">Đọc ngay</button>
+                        <div class="book-sold" style="color:var(--muted);font-size:0.95rem;margin-bottom:0.3rem;">Đã bán: ${book.sold.toLocaleString()}</div>
+                        <div class="book-price" style="color:var(--primary);font-weight:bold;font-size:1.1rem;margin-bottom:0.5rem;">${book.price.toLocaleString()}đ</div>
+                        <button class="book-btn" onclick="addToCart('${book.title}', ${book.price})">Thêm giỏ hàng</button>
+                        <button class="book-btn" style="background:var(--accent);margin-top:0.5rem;" onclick="buyNow('${book.title}', ${book.price})">Mua ngay</button>
                     </div>
                 </div>
             `).join('');
@@ -1241,11 +1313,26 @@
         function filterBooks() {
             const checked = document.querySelector('.genre-radio:checked');
             const genre = checked ? checked.value : '';
-            if (!genre) {
-                renderBooks(allBooks);
-            } else {
-                renderBooks(allBooks.filter(book => book.genre === genre));
+            const sortType = document.getElementById('sortSelect').value;
+            // const rating = parseInt(document.getElementById('ratingSelect').value);
+            let filtered = !genre ? allBooks : allBooks.filter(book => book.genre === genre);
+            if (ratingValue > 0) {
+                filtered = filtered.filter(book => Math.floor(book.rating) >= ratingValue);
             }
+            filtered = sortBooks(filtered, sortType);
+            renderBooks(filtered);
+        }
+        document.getElementById('sortSelect').addEventListener('change', filterBooks);
+        // Thêm hàm sortBooks và cập nhật filterBooks
+        function sortBooks(books, sortType) {
+            if (sortType === 'sold') {
+                return books.slice().sort((a, b) => b.sold - a.sold);
+            } else if (sortType === 'price-asc') {
+                return books.slice().sort((a, b) => a.price - b.price);
+            } else if (sortType === 'price-desc') {
+                return books.slice().sort((a, b) => b.price - a.price);
+            }
+            return books;
         }
         document.querySelectorAll('.genre-radio').forEach(rb => {
             rb.addEventListener('change', filterBooks);
@@ -1293,6 +1380,62 @@
             });
         }
         updateCartCount();
+        // --- THÊM GIỎ HÀNG ---
+        function addToCart(title, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')||'[]');
+            const exist = cart.find(item => item.title === title);
+            if(exist) {
+                exist.qty += 1;
+            } else {
+                cart.push({title, price, qty: 1});
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Hiệu ứng nảy cho icon giỏ hàng
+            const cartIcon = document.querySelector('.fa-shopping-cart');
+            if(cartIcon) {
+                cartIcon.classList.add('cart-bounce');
+                setTimeout(()=>cartIcon.classList.remove('cart-bounce'), 600);
+            }
+            
+            updateCartCount();
+        }
+        // --- MUA NGAY ---
+        function buyNow(title, price) {
+            showNotifyModal(`Bạn đã mua thành công: ${title} - ${price.toLocaleString()}đ`, 'success');
+        }
+        // Xử lý click icon giỏ hàng
+        const cartBtn = document.querySelector('.fa-shopping-cart');
+        if(cartBtn) {
+            cartBtn.onclick = function() {
+                cartBtn.classList.add('cart-bounce');
+                setTimeout(()=>{
+                    cartBtn.classList.remove('cart-bounce');
+                    window.location.href = 'cart.html';
+                }, 400);
+            }
+        }
+        // Demo data sách
+        // --- CUSTOM RATING DROPDOWN LOGIC ---
+        let ratingValue = 0;
+        const ratingBtn = document.getElementById('ratingDropdownBtn');
+        const ratingList = document.getElementById('ratingDropdownList');
+        const ratingLabel = document.getElementById('ratingDropdownLabel');
+        ratingBtn.onclick = function(e) {
+            e.stopPropagation();
+            ratingList.style.display = ratingList.style.display === 'block' ? 'none' : 'block';
+        };
+        ratingList.querySelectorAll('li').forEach(li => {
+            li.onclick = function(e) {
+                ratingValue = parseInt(this.getAttribute('data-value'));
+                ratingLabel.innerHTML = this.innerHTML;
+                ratingList.style.display = 'none';
+                filterBooks();
+            };
+        });
+        document.body.addEventListener('click', function() {
+            ratingList.style.display = 'none';
+        });
     </script>
 </body>
 </html> 
