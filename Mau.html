@@ -100,6 +100,25 @@
         .main-btn:hover {
             background: var(--accent);
         }
+        .main-btn-gold {
+            background: rgba(255, 215, 0, 0.12);
+            color: #ffc107;
+            border: 2px solid #ffc107;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 0.5rem 1.2rem;
+            margin-right: 0.5rem;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .main-btn-gold i {
+            margin-right: 0.4em;
+            color: #ffc107;
+        }
+        .main-btn-gold:hover {
+            background: #ffc107;
+            color: #fff;
+            border-color: #ffc107;
+        }
         /* BANNER */
         .main-banner {
             background: linear-gradient(120deg, #e3f2fd 60%, #fff 100%);
@@ -607,6 +626,7 @@
                 <a href="author.html">Sáng tác</a>
             </nav>
             <div class="header-actions">
+                <button class="main-btn main-btn-gold" id="membershipBtn"><i class="fas fa-crown"></i> Gói cước</button>
                 <button class="icon-btn"><i class="fas fa-shopping-cart"></i></button>
                 <button class="icon-btn"><i class="fas fa-user"></i></button>
             </div>
@@ -901,7 +921,8 @@
             const headerActions = document.querySelector('.header-actions');
             if (!headerActions) return;
             headerActions.innerHTML = `
-                <button class="icon-btn" id="cartBtn"><i class="fas fa-shopping-cart"></i></button>
+                <button class="main-btn main-btn-gold" id="membershipBtn"><i class="fas fa-crown"></i> Gói cước</button>
+                <button class="icon-btn"><i class="fas fa-shopping-cart"></i></button>
                 <img id="userAvatar" src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName || user.email)}" alt="avatar" style="width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:8px;vertical-align:middle;">
                 <button class="icon-btn" id="logoutBtn" title="Đăng xuất"><i class="fas fa-sign-out-alt"></i></button>
             `;
@@ -912,15 +933,15 @@
                     setTimeout(()=>location.reload(), 1000);
                 });
             };
-            // Thêm sự kiện click cho avatar để chuyển sang member.html
+            // Thêm sự kiện click cho avatar để chuyển sang account.html
             const avatar = document.getElementById('userAvatar');
             if (avatar) {
                 avatar.style.cursor = 'pointer';
                 avatar.onclick = function() {
-                    window.location.href = 'member.html';
+                    window.location.href = 'account.html';
                 };
             }
-            const cartBtn = document.getElementById('cartBtn');
+            const cartBtn = document.querySelector('.fa-shopping-cart');
             if(cartBtn) cartBtn.onclick = function() { window.location.href = 'cart.html'; };
         }
         // Nếu đã đăng nhập trước đó, tự động hiển thị
@@ -946,6 +967,11 @@
             });
         }
         updateCartCount();
+        // Sự kiện click cho nút Gói cước
+        const membershipBtn = document.getElementById('membershipBtn');
+        if(membershipBtn) membershipBtn.onclick = function() {
+            window.location.href = 'membership.html';
+        };
     </script>
 </body>
 </html> 
