@@ -759,6 +759,15 @@
         // Icon user click
         const userBtn = document.querySelector('.fa-user');
         if(userBtn) userBtn.addEventListener('click', showLoginModal);
+        // Gán sự kiện cho nút Gói cước và Cart khi chưa đăng nhập
+        document.addEventListener('DOMContentLoaded', function() {
+            const membershipBtn = document.getElementById('membershipBtn');
+            if(membershipBtn) membershipBtn.onclick = function() {
+                window.location.href = 'membership.html';
+            };
+            const cartBtn = document.querySelector('.fa-shopping-cart');
+            if(cartBtn) cartBtn.onclick = function() { window.location.href = 'cart.html'; };
+        });
         // Demo submit
         ['loginForm','registerForm','forgotForm'].forEach(id=>{
             const form = document.getElementById(id);
@@ -941,6 +950,11 @@
                     window.location.href = 'account.html';
                 };
             }
+            // Đảm bảo nút Gói cước luôn hoạt động
+            const membershipBtn = document.getElementById('membershipBtn');
+            if(membershipBtn) membershipBtn.onclick = function() {
+                window.location.href = 'membership.html';
+            };
             const cartBtn = document.querySelector('.fa-shopping-cart');
             if(cartBtn) cartBtn.onclick = function() { window.location.href = 'cart.html'; };
         }
@@ -967,11 +981,6 @@
             });
         }
         updateCartCount();
-        // Sự kiện click cho nút Gói cước
-        const membershipBtn = document.getElementById('membershipBtn');
-        if(membershipBtn) membershipBtn.onclick = function() {
-            window.location.href = 'membership.html';
-        };
     </script>
 </body>
 </html> 

@@ -1147,6 +1147,11 @@
                     window.location.href = 'cart.html';
                 }, 400);
             };
+            // Gán lại sự kiện cho nút Gói cước
+            const membershipBtn = document.getElementById('membershipBtn');
+            if(membershipBtn) membershipBtn.onclick = function() {
+                window.location.href = 'membership.html';
+            };
         }
         // Nếu đã đăng nhập trước đó, tự động hiển thị
         auth.onAuthStateChanged(function(user) {
@@ -1305,11 +1310,6 @@
         function buyNow(title, price) {
             showNotifyModal(`Bạn đã mua thành công: ${title} - ${price.toLocaleString()}đ`, 'success');
         }
-        // Sự kiện click cho nút Gói cước
-        const membershipBtn = document.getElementById('membershipBtn');
-        if(membershipBtn) membershipBtn.onclick = function() {
-            window.location.href = 'membership.html';
-        };
     </script>
 </body>
 </html> 

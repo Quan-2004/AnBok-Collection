@@ -488,7 +488,7 @@
         body.dark .main-header, body.dark .main-footer, body.dark .modal-auth-content {
             box-shadow: 0 2px 8px rgba(0,0,0,0.18);
         }
-        body.dark .book-card, body.dark .modal-auth-content {
+        body.dark .book-card, body.dark .hero-slide-content, body.dark .modal-auth-content {
             background: var(--card) !important;
             color: var(--text) !important;
         }
@@ -560,16 +560,6 @@
             object-fit: contain;
             display: inline-block;
         }
-        @keyframes cart-bounce {
-            0% { transform: scale(1); }
-            30% { transform: scale(1.3); }
-            50% { transform: scale(0.9); }
-            70% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .cart-bounce {
-            animation: cart-bounce 0.6s;
-        }
         .cart-badge {
             position: absolute !important;
             top: -5px !important;
@@ -589,6 +579,36 @@
             pointer-events: none;
             border: 2px solid #ff6600;
             transition: all 0.2s;
+        }
+        
+        /* MAIN CONTENT */
+        .main-content {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+            background: var(--bg);
+        }
+        
+        .main-content .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .main-content h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .main-content p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            text-align: center;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -612,37 +632,42 @@
             </div>
         </div>
     </header>
-    <!-- FLASH SALES SECTION -->
-    <section class="section-books" id="flashSales" style="padding-top:2.5rem;">
-        <div class="flashsale-modern-bg" style="background:linear-gradient(100deg,#ffecd2 0%,#fcb69f 100%);border-radius:24px;padding:2rem 1.5rem 2.5rem 1.5rem;box-shadow:0 8px 32px rgba(255,152,0,0.13);margin-bottom:2.5rem;position:relative;overflow:hidden;">
-            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
-                <div style="display:flex;align-items:center;gap:1.2rem;">
-                    <img src='https://cdn-icons-png.flaticon.com/512/3523/3523887.png' alt="flash" style="width:54px;height:54px;">
-                    <h2 style="font-size:2.1rem;color:#ff9800;font-weight:900;letter-spacing:1px;margin:0;">FLASH SALE</h2>
-                    <span id="flashCountdown" style="font-size:1.2rem;color:#fff;background:#ff9800;padding:0.4rem 1.2rem;border-radius:20px;font-weight:bold;box-shadow:0 2px 8px #ff980033;">00:00:00</span>
+
+    <section class="main-content">
+        <div class="container">
+            <!-- FLASH SALES SECTION -->
+            <section class="section-books" id="flashSales" style="padding-top:2.5rem;">
+                <div class="flashsale-modern-bg" style="background:linear-gradient(100deg,#ffecd2 0%,#fcb69f 100%);border-radius:24px;padding:2rem 1.5rem 2.5rem 1.5rem;box-shadow:0 8px 32px rgba(255,152,0,0.13);margin-bottom:2.5rem;position:relative;overflow:hidden;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+                        <div style="display:flex;align-items:center;gap:1.2rem;">
+                            <img src='https://cdn-icons-png.flaticon.com/512/3523/3523887.png' alt="flash" style="width:54px;height:54px;">
+                            <h2 style="font-size:2.1rem;color:#ff9800;font-weight:900;letter-spacing:1px;margin:0;">FLASH SALE</h2>
+                            <span id="flashCountdown" style="font-size:1.2rem;color:#fff;background:#ff9800;padding:0.4rem 1.2rem;border-radius:20px;font-weight:bold;box-shadow:0 2px 8px #ff980033;">00:00:00</span>
+                        </div>
+                        <div style="font-size:1.1rem;color:#e65100;font-weight:500;">Số lượng có hạn - Nhanh tay kẻo lỡ!</div>
+                    </div>
+                    <div class="flashsale-cards" id="flashSalesGrid" style="display:flex;gap:2rem;margin-top:2.2rem;overflow-x:auto;padding-bottom:0.5rem;"></div>
                 </div>
-                <div style="font-size:1.1rem;color:#e65100;font-weight:500;">Số lượng có hạn - Nhanh tay kẻo lỡ!</div>
-            </div>
-            <div class="flashsale-cards" id="flashSalesGrid" style="display:flex;gap:2rem;margin-top:2.2rem;overflow-x:auto;padding-bottom:0.5rem;"></div>
+            </section>
+            <!-- FILTER & BOOKS LIST -->
+            <section class="section-books">
+                <div class="section-header" style="align-items:flex-end;">
+                    <h2>Sách/Truyện nổi bật</h2>
+                    <div style="margin-left:auto;">
+                        <select id="sortDropdown" style="padding:0.5rem 1.2rem;border-radius:18px;border:1.5px solid #e3f2fd;font-size:1rem;background:#fff;color:var(--primary);font-weight:500;outline:none;box-shadow:0 2px 8px #e3f2fd44;">
+                            <option value="bestseller">Bán chạy nhất</option>
+                            <option value="price-asc">Giá tăng dần</option>
+                            <option value="price-desc">Giá giảm dần</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="book-grid" id="booksGrid"></div>
+            </section>
         </div>
-    </section>
-    <!-- FILTER & BOOKS LIST -->
-    <section class="section-books">
-        <div class="section-header" style="align-items:flex-end;">
-            <h2>Sách/Truyện nổi bật</h2>
-            <div style="margin-left:auto;">
-                <select id="sortDropdown" style="padding:0.5rem 1.2rem;border-radius:18px;border:1.5px solid #e3f2fd;font-size:1rem;background:#fff;color:var(--primary);font-weight:500;outline:none;box-shadow:0 2px 8px #e3f2fd44;">
-                    <option value="bestseller">Bán chạy nhất</option>
-                    <option value="price-asc">Giá tăng dần</option>
-                    <option value="price-desc">Giá giảm dần</option>
-                </select>
-            </div>
-        </div>
-        <div class="book-grid" id="booksGrid"></div>
     </section>
     <!-- FOOTER -->
     <footer class="main-footer">
-        <div class="container">
+        <div class="container" id="heroDots">
             <div class="footer-about">
                 <h3>Về chúng tôi</h3>
                 <p>Thư viện sách & truyện điện tử hàng đầu Việt Nam.</p>
@@ -728,81 +753,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <!-- Giữ lại các script chức năng động, cập nhật selector nếu cần -->
     <script>
-        // --- DỮ LIỆU SÁCH/TRUYỆN DEMO ---
-        const allBooks = [
-            { id: 1, title: 'Đắc Nhân Tâm', author: 'Dale Carnegie', price: 89000, sold: 1200, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6d/7d/7d/6d7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d.jpg', flash: true, flashPrice: 59000 },
-            { id: 2, title: 'Nhà Giả Kim', author: 'Paulo Coelho', price: 99000, sold: 950, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/2e/2e/2e/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e.jpg', flash: true, flashPrice: 69000 },
-            { id: 3, title: 'Harry Potter và Hòn Đá Phù Thủy', author: 'J.K. Rowling', price: 159000, sold: 2000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/3e/3e/3e/3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e.jpg', flash: false },
-            { id: 4, title: 'Dế Mèn Phiêu Lưu Ký', author: 'Tô Hoài', price: 59000, sold: 800, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/4e/4e/4e/4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e.jpg', flash: false },
-            { id: 5, title: 'Totto-chan bên cửa sổ', author: 'Tetsuko Kuroyanagi', price: 109000, sold: 1100, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/5e/5e/5e/5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e.jpg', flash: true, flashPrice: 79000 },
-            { id: 6, title: 'Sapiens: Lược Sử Loài Người', author: 'Yuval Noah Harari', price: 199000, sold: 700, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6e/6e/6e/6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e.jpg', flash: false },
-            { id: 7, title: 'Bố Già', author: 'Mario Puzo', price: 129000, sold: 1500, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/7e/7e/7e/7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e.jpg', flash: false },
-            { id: 8, title: 'Tuổi Trẻ Đáng Giá Bao Nhiêu', author: 'Rosie Nguyễn', price: 99000, sold: 1700, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/8e/8e/8e/8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg', flash: false },
-            { id: 9, title: 'Sherlock Holmes Toàn Tập', author: 'Arthur Conan Doyle', price: 259000, sold: 600, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/9e/9e/9e/9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e.jpg', flash: false },
-            { id: 10, title: 'Chuyện Con Mèo Dạy Hải Âu Bay', author: 'Luis Sepúlveda', price: 79000, sold: 900, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/ae/ae/ae/aeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeae.jpg', flash: false },
-        ];
-        // --- FLASH SALES ---
-        function renderFlashSales() {
-            const now = Date.now();
-            const end = now + 2*60*60*1000; // 2h từ lúc load trang
-            function updateCountdown() {
-                const left = Math.max(0, end - Date.now());
-                const h = Math.floor(left/3600000).toString().padStart(2,'0');
-                const m = Math.floor((left%3600000)/60000).toString().padStart(2,'0');
-                const s = Math.floor((left%60000)/1000).toString().padStart(2,'0');
-                document.getElementById('flashCountdown').textContent = `${h}:${m}:${s}`;
-            }
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
-            const flashBooks = allBooks.filter(b=>b.flash);
-            document.getElementById('flashSalesGrid').innerHTML = flashBooks.map(book=>`
-                <div class="flashsale-card-modern" style="background:#fff;border-radius:18px;box-shadow:0 4px 16px #ff980022;display:flex;flex-direction:column;align-items:center;min-width:220px;max-width:240px;position:relative;padding:1.2rem 1rem 1.5rem 1rem;">
-                    <div style="position:absolute;top:1rem;left:1rem;background:#ff9800;color:#fff;font-size:0.9rem;font-weight:bold;padding:0.2rem 0.8rem;border-radius:12px;box-shadow:0 2px 8px #ff980033;">Giảm {${Math.round(100-(book.flashPrice/book.price)*100)}}%</div>
-                    <img src="${book.img}" alt="${book.title}" style="width:110px;height:160px;object-fit:cover;border-radius:10px;box-shadow:0 2px 8px #ff980033;margin-bottom:1rem;">
-                    <div class="book-title" style="font-size:1.1rem;font-weight:700;color:#ff9800;text-align:center;">${book.title}</div>
-                    <div class="book-author" style="color:#888;font-size:0.95rem;margin-bottom:0.5rem;text-align:center;">${book.author}</div>
-                    <div style="margin-bottom:0.7rem;">
-                        <span style="text-decoration:line-through;color:#bbb;font-size:0.95rem;">${book.price.toLocaleString()}đ</span>
-                        <span style="color:#e65100;font-size:1.1rem;font-weight:bold;margin-left:0.5rem;">${book.flashPrice.toLocaleString()}đ</span>
-                    </div>
-                    <button class="book-btn" style="background:linear-gradient(90deg,#ff9800,#fcb69f);color:#fff;font-weight:bold;font-size:1rem;padding:0.7rem 0;width:100%;border-radius:10px;box-shadow:0 2px 8px #ff980033;" onclick="buyNow(${book.id})">Mua ngay</button>
-                </div>
-            `).join('');
-        }
-        // --- DANH SÁCH SÁCH/TRUYỆN & BỘ LỌC ---
-        let currentSort = 'bestseller';
-        function renderBooks() {
-            let books = allBooks.slice();
-            if(currentSort==='bestseller') books.sort((a,b)=>b.sold-a.sold);
-            else if(currentSort==='price-asc') books.sort((a,b)=>(a.flashPrice||a.price)-(b.flashPrice||b.price));
-            else if(currentSort==='price-desc') books.sort((a,b)=>(b.flashPrice||b.price)-(a.flashPrice||a.price));
-            document.getElementById('booksGrid').innerHTML = books.map(book=>`
-                <div class="book-card">
-                    <img src="${book.img}" alt="${book.title}">
-                    <div class="book-info">
-                        <div class="book-title">${book.title}</div>
-                        <div class="book-author">${book.author}</div>
-                        <div class="book-rating">Giá: <span style="color:var(--primary);font-weight:bold;">${(book.flashPrice||book.price).toLocaleString()}đ</span></div>
-                        <div class="book-sold" style="color:#888;font-size:0.95rem;margin-bottom:0.5rem;">Đã bán: ${book.sold ? book.sold.toLocaleString() : 0}</div>
-                        <button class="book-btn" onclick="addToCart(${book.id}, this)">Thêm vào giỏ hàng</button>
-                        <button class="book-btn" style="background:var(--accent);margin-top:0.5rem;" onclick="buyNow(${book.id})">Mua ngay</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-        document.getElementById('sortDropdown').onchange = function() {
-            currentSort = this.value;
-            renderBooks();
-        };
-        // --- MUA NGAY ---
-        function buyNow(id) {
-            const book = allBooks.find(b=>b.id===id);
-            if(!book) return;
-            showNotifyModal('Bạn đã mua thành công: '+book.title, 'success');
-        }
-        // --- KHỞI TẠO ---
-        renderFlashSales();
-        renderBooks();
         // Modal auth logic
         const loginModal = document.getElementById('loginModal');
         const registerModal = document.getElementById('registerModal');
@@ -836,6 +786,15 @@
         // Icon user click
         const userBtn = document.querySelector('.fa-user');
         if(userBtn) userBtn.addEventListener('click', showLoginModal);
+        // Gán sự kiện cho nút Gói cước và Cart khi chưa đăng nhập
+        document.addEventListener('DOMContentLoaded', function() {
+            const membershipBtn = document.getElementById('membershipBtn');
+            if(membershipBtn) membershipBtn.onclick = function() {
+                window.location.href = 'membership.html';
+            };
+            const cartBtn = document.querySelector('.fa-shopping-cart');
+            if(cartBtn) cartBtn.onclick = function() { window.location.href = 'cart.html'; };
+        });
         // Demo submit
         ['loginForm','registerForm','forgotForm'].forEach(id=>{
             const form = document.getElementById(id);
@@ -850,18 +809,33 @@
         const darkModeIcon = document.getElementById('darkModeIcon');
         const sunIcon = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2600.png'; // sun
         const moonIcon = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f319.png'; // moon
+        
         function setDarkMode(on) {
             document.body.classList.toggle('dark', on);
-            darkModeIcon.src = on ? moonIcon : sunIcon;
-            darkModeIcon.alt = on ? 'Chế độ tối' : 'Chế độ sáng';
+            if (darkModeIcon) {
+                darkModeIcon.src = on ? moonIcon : sunIcon;
+                darkModeIcon.alt = on ? 'Chế độ tối' : 'Chế độ sáng';
+            }
             localStorage.setItem('darkMode', on ? '1' : '0');
         }
-        darkModeToggle.onclick = function() {
-            setDarkMode(!document.body.classList.contains('dark'));
-        };
+        
+        if (darkModeToggle) {
+            darkModeToggle.onclick = function() {
+                const isDark = document.body.classList.contains('dark');
+                setDarkMode(!isDark);
+            };
+        }
+        
         // Khởi động theo localStorage
-        if(localStorage.getItem('darkMode')==='1') setDarkMode(true);
-        else setDarkMode(false);
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode === '1') {
+            setDarkMode(true);
+        } else if (savedDarkMode === '0') {
+            setDarkMode(false);
+        } else {
+            // Mặc định là light mode nếu chưa có setting
+            setDarkMode(false);
+        }
         // --- FIREBASE CONFIG ---
         const firebaseConfig = {
             apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
@@ -1003,24 +977,22 @@
                     window.location.href = 'account.html';
                 };
             }
-            const cartBtn = document.querySelector('.fa-shopping-cart');
-            if(cartBtn) cartBtn.onclick = function() {
-                cartBtn.classList.add('cart-bounce');
-                setTimeout(()=>{
-                    cartBtn.classList.remove('cart-bounce');
-                    window.location.href = 'cart.html';
-                }, 400);
+            // Đảm bảo nút Gói cước luôn hoạt động
+            const membershipBtn = document.getElementById('membershipBtn');
+            if(membershipBtn) membershipBtn.onclick = function() {
+                window.location.href = 'membership.html';
             };
+            const cartBtn = document.querySelector('.fa-shopping-cart');
+            if(cartBtn) cartBtn.onclick = function() { window.location.href = 'cart.html'; };
         }
         // Nếu đã đăng nhập trước đó, tự động hiển thị
         auth.onAuthStateChanged(function(user) {
             if (user) showUserInfo(user);
         });
-        // Hiển thị số lượng sản phẩm trong giỏ hàng trên icon
+        // --- BADGE SỐ LƯỢNG GIỎ HÀNG ---
         function updateCartCount() {
             let cart = JSON.parse(localStorage.getItem('cart')||'[]');
             let count = cart.reduce((sum, item) => sum + item.qty, 0);
-            // Tìm tất cả icon giỏ hàng trong header-actions
             document.querySelectorAll('.header-actions .fa-shopping-cart').forEach(cartIcon => {
                 let btn = cartIcon.parentElement;
                 if (!btn) return;
@@ -1035,8 +1007,79 @@
                 badge.style.display = count > 0 ? 'flex' : 'none';
             });
         }
-        // Gọi khi load trang
         updateCartCount();
+        // --- DỮ LIỆU SÁCH/TRUYỆN DEMO ---
+        const allBooks = [
+            { id: 1, title: 'Đắc Nhân Tâm', author: 'Dale Carnegie', price: 89000, sold: 1200, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6d/7d/7d/6d7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d.jpg', flash: true, flashPrice: 59000 },
+            { id: 2, title: 'Nhà Giả Kim', author: 'Paulo Coelho', price: 99000, sold: 950, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/2e/2e/2e/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e.jpg', flash: true, flashPrice: 69000 },
+            { id: 3, title: 'Harry Potter và Hòn Đá Phù Thủy', author: 'J.K. Rowling', price: 159000, sold: 2000, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/3e/3e/3e/3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e.jpg', flash: false },
+            { id: 4, title: 'Dế Mèn Phiêu Lưu Ký', author: 'Tô Hoài', price: 59000, sold: 800, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/4e/4e/4e/4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e.jpg', flash: false },
+            { id: 5, title: 'Totto-chan bên cửa sổ', author: 'Tetsuko Kuroyanagi', price: 109000, sold: 1100, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/5e/5e/5e/5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e.jpg', flash: true, flashPrice: 79000 },
+            { id: 6, title: 'Sapiens: Lược Sử Loài Người', author: 'Yuval Noah Harari', price: 199000, sold: 700, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/6e/6e/6e/6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e.jpg', flash: false },
+            { id: 7, title: 'Bố Già', author: 'Mario Puzo', price: 129000, sold: 1500, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/7e/7e/7e/7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e.jpg', flash: false },
+            { id: 8, title: 'Tuổi Trẻ Đáng Giá Bao Nhiêu', author: 'Rosie Nguyễn', price: 99000, sold: 1700, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/8e/8e/8e/8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg', flash: false },
+            { id: 9, title: 'Sherlock Holmes Toàn Tập', author: 'Arthur Conan Doyle', price: 259000, sold: 600, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/9e/9e/9e/9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e.jpg', flash: false },
+            { id: 10, title: 'Chuyện Con Mèo Dạy Hải Âu Bay', author: 'Luis Sepúlveda', price: 79000, sold: 900, img: 'https://salt.tikicdn.com/cache/280x360/ts/product/ae/ae/ae/aeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeae.jpg', flash: false },
+        ];
+        // --- FLASH SALES ---
+        function renderFlashSales() {
+            const now = Date.now();
+            const end = now + 2*60*60*1000; // 2h từ lúc load trang
+            function updateCountdown() {
+                const left = Math.max(0, end - Date.now());
+                const h = Math.floor(left/3600000).toString().padStart(2,'0');
+                const m = Math.floor((left%3600000)/60000).toString().padStart(2,'0');
+                const s = Math.floor((left%60000)/1000).toString().padStart(2,'0');
+                const el = document.getElementById('flashCountdown');
+                if(el) el.textContent = `${h}:${m}:${s}`;
+            }
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+            const flashBooks = allBooks.filter(b=>b.flash);
+            const grid = document.getElementById('flashSalesGrid');
+            if(grid) grid.innerHTML = flashBooks.map(book=>`
+                <div class="flashsale-card-modern" style="background:#fff;border-radius:18px;box-shadow:0 4px 16px #ff980022;display:flex;flex-direction:column;align-items:center;min-width:220px;max-width:240px;position:relative;padding:1.2rem 1rem 1.5rem 1rem;">
+                    <div style="position:absolute;top:1rem;left:1rem;background:#ff9800;color:#fff;font-size:0.9rem;font-weight:bold;padding:0.2rem 0.8rem;border-radius:12px;box-shadow:0 2px 8px #ff980033;">Giảm ${Math.round(100-(book.flashPrice/book.price)*100)}%</div>
+                    <img src="${book.img}" alt="${book.title}" style="width:110px;height:160px;object-fit:cover;border-radius:10px;box-shadow:0 2px 8px #ff980033;margin-bottom:1rem;">
+                    <div class="book-title" style="font-size:1.1rem;font-weight:700;color:#ff9800;text-align:center;">${book.title}</div>
+                    <div class="book-author" style="color:#888;font-size:0.95rem;margin-bottom:0.5rem;text-align:center;">${book.author}</div>
+                    <div style="margin-bottom:0.7rem;">
+                        <span style="text-decoration:line-through;color:#bbb;font-size:0.95rem;">${book.price.toLocaleString()}đ</span>
+                        <span style="color:#e65100;font-size:1.1rem;font-weight:bold;margin-left:0.5rem;">${book.flashPrice.toLocaleString()}đ</span>
+                    </div>
+                    <button class="book-btn" style="background:linear-gradient(90deg,#ff9800,#fcb69f);color:#fff;font-weight:bold;font-size:1rem;padding:0.7rem 0;width:100%;border-radius:10px;box-shadow:0 2px 8px #ff980033;" onclick="buyNow(${book.id})">Mua ngay</button>
+                </div>
+            `).join('');
+        }
+        // --- DANH SÁCH SÁCH/TRUYỆN & BỘ LỌC ---
+        let currentSort = 'bestseller';
+        function renderBooks() {
+            let books = allBooks.slice();
+            if(currentSort==='bestseller') books.sort((a,b)=>b.sold-a.sold);
+            else if(currentSort==='price-asc') books.sort((a,b)=>(a.flashPrice||a.price)-(b.flashPrice||b.price));
+            else if(currentSort==='price-desc') books.sort((a,b)=>(b.flashPrice||b.price)-(a.flashPrice||a.price));
+            const grid = document.getElementById('booksGrid');
+            if(grid) grid.innerHTML = books.map(book=>`
+                <div class="book-card">
+                    <img src="${book.img}" alt="${book.title}">
+                    <div class="book-info">
+                        <div class="book-title">${book.title}</div>
+                        <div class="book-author">${book.author}</div>
+                        <div class="book-rating">Giá: <span style="color:var(--primary);font-weight:bold;">${(book.flashPrice||book.price).toLocaleString()}đ</span></div>
+                        <div class="book-sold" style="color:#888;font-size:0.95rem;margin-bottom:0.5rem;">Đã bán: ${book.sold ? book.sold.toLocaleString() : 0}</div>
+                        <button class="book-btn" onclick="addToCart(${book.id}, this)">Thêm vào giỏ hàng</button>
+                        <button class="book-btn" style="background:var(--accent);margin-top:0.5rem;" onclick="buyNow(${book.id})">Mua ngay</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        // --- MUA NGAY ---
+        function buyNow(id) {
+            const book = allBooks.find(b=>b.id===id);
+            if(!book) return;
+            showNotifyModal('Bạn đã mua thành công: '+book.title, 'success');
+        }
+        // --- THÊM VÀO GIỎ HÀNG ---
         function addToCart(id, btn) {
             const book = allBooks.find(b=>b.id===id);
             if(!book) return;
@@ -1053,11 +1096,17 @@
             }
             updateCartCount();
         }
-        // Sự kiện click cho nút Gói cước
-        const membershipBtn = document.getElementById('membershipBtn');
-        if(membershipBtn) membershipBtn.onclick = function() {
-            window.location.href = 'membership.html';
-        };
+        // --- KHỞI TẠO ---
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFlashSales();
+            renderBooks();
+            updateCartCount();
+            const sortDropdown = document.getElementById('sortDropdown');
+            if(sortDropdown) sortDropdown.onchange = function() {
+                currentSort = this.value;
+                renderBooks();
+            };
+        });
     </script>
 </body>
 </html> 

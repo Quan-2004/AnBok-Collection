@@ -1285,7 +1285,7 @@
             if (avatar) {
                 avatar.style.cursor = 'pointer';
                 avatar.onclick = function() {
-                    window.location.href = 'member.html';
+                    window.location.href = 'account.html';
                 };
             }
             const cartBtn = document.querySelector('.fa-shopping-cart');
@@ -1295,6 +1295,11 @@
                     cartBtn.classList.remove('cart-bounce');
                     window.location.href = 'cart.html';
                 }, 400);
+            };
+            // Gán lại sự kiện cho nút Gói cước
+            const membershipBtn = document.getElementById('membershipBtn');
+            if(membershipBtn) membershipBtn.onclick = function() {
+                window.location.href = 'membership.html';
             };
         }
         // Nếu đã đăng nhập trước đó, tự động hiển thị
