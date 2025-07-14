@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnBok - Nhà sách trực tuyến</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithPopup, GoogleAuthProvider, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
+            authDomain: "anbok-collection.firebaseapp.com",
+            databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "anbok-collection",
+            storageBucket: "anbok-collection.firebasestorage.app",
+            messagingSenderId: "835844957818",
+            appId: "1:835844957818:web:33fc3d03875d49fc5c3dc3",
+            measurementId: "G-MS5FT355WW"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        // Make Firebase available globally
+        window.firebaseAuth = auth;
+        window.googleProvider = googleProvider;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+        window.sendPasswordResetEmail = sendPasswordResetEmail;
+        window.signInWithPopup = signInWithPopup;
+        window.updateProfile = updateProfile;
+
+        // Dispatch custom event when Firebase is ready
+        window.dispatchEvent(new CustomEvent('firebaseReady'));
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            position: relative;
+            padding-right: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #ffd700;
+        }
+
+        .nav-menu a.active {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            color: white;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .login-btn {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 2px solid #e1e8ed;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+            min-width: 140px;
+            font-size: 1rem;
+            line-height: 1.2;
+            height: 44px;
+            justify-content: center;
+        }
+        .login-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #ffd700 100%);
+            border-color: #764ba2;
+            color: #7c3aed;
+            box-shadow: 0 4px 16px rgba(124,58,237,0.12);
+        }
+        .login-btn i {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* HERO CUSTOM DESIGN */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 540px;
+            padding: 32px 0;
+        }
+        .hero-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero-left {
+            align-items: flex-start;
+            padding-left: 32px;
+        }
+        .hero-icon {
+            width: 84px;
+            margin-bottom: 12px;
+        }
+        .hero-badge {
+            background: #ede7f6;
+            color: #6c47c7;
+            font-weight: 600;
+            border-radius: 20px;
+            padding: 8px 24px;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+        }
+        .hero-title-main {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #7c3aed;
+            letter-spacing: -2px;
+        }
+        .hero-title-highlight {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #222;
+            margin-left: 8px;
+        }
+        .hero-desc {
+            color: #555;
+            font-size: 1.15rem;
+            margin-bottom: 32px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+        .hero-search {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .hero-search .search-box {
+            display: flex;
+            align-items: center;
+            background: #f3f3fa;
+            border-radius: 32px;
+            box-shadow: 0 2px 12px rgba(124,58,237,0.07);
+            padding: 8px 18px;
+            min-width: 260px;
+            max-width: 340px;
+            flex: 1;
+            transition: box-shadow 0.2s;
+        }
+        .hero-search .search-box:focus-within {
+            box-shadow: 0 4px 24px rgba(124,58,237,0.13);
+        }
+        .hero-search .search-box i {
+            color: #a259ff;
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        .hero-search .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 1.08rem;
+            color: #444;
+            flex: 1;
+            padding: 8px 0;
+        }
+        .hero-search .search-box input::placeholder {
+            color: #888;
+            opacity: 1;
+        }
+        .hero-search .search-btn {
+            background: linear-gradient(90deg, #7c3aed 60%, #a259ff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 10px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(124,58,237,0.12);
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            margin-left: 8px;
+        }
+        .hero-search .search-btn:hover {
+            background: linear-gradient(90deg, #a259ff 0%, #7c3aed 100%);
+            box-shadow: 0 4px 16px rgba(124,58,237,0.18);
+        }
+        @media (max-width: 900px) {
+            .hero-search {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+            .hero-search .search-box {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+            }
+            .hero-search .search-btn {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+        .hero-right {
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .hero-book-img {
+            width: 320px;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(124,58,237,0.18);
+            z-index: 2;
+            background: #fff;
+        }
+        .hero-decor {
+            position: absolute;
+            left: 0;
+            bottom: -40px;
+            width: 300px;
+            z-index: 1;
+        }
+        .hero-decor2 {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 120px;
+            z-index: 1;
+        }
+        @media (max-width: 900px) {
+            .hero-container {
+                flex-direction: column;
+                padding: 24px 0;
+            }
+            .hero-left {
+                align-items: center;
+                padding-left: 0;
+                text-align: center;
+            }
+            .hero-right {
+                margin-top: 32px;
+            }
+            .hero-search {
+                margin: 0 auto;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        /* Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .category-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Featured Books */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .book-info {
+            padding: 1.5rem;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .book-author {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+
+        .book-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #5a6fd8;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #ff5252;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            margin-top: 2rem;
+            color: #bdc3c7;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        /* Notification Modal Styles */
+        .notification-modal {
+            display: none !important;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-content {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: notificationSlideIn 0.4s ease-out;
+            overflow: hidden;
+        }
+
+        @keyframes notificationSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .notification-header {
+            padding: 2rem 2rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .notification-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .notification-icon.success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .notification-icon.error {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .notification-icon.warning {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+        }
+
+        .notification-icon.info {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .notification-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .notification-message {
+            color: #7f8c8d;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .notification-body {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .notification-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .notification-btn.primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .notification-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .notification-btn.secondary {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 2px solid #e9ecef;
+        }
+
+        .notification-btn.secondary:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .notification-btn.danger {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .notification-btn.danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        .notification-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #bdc3c7;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .notification-close:hover {
+            background: #f8f9fa;
+            color: #e74c3c;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #e74c3c;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .google-login {
+            width: 100%;
+            background: white;
+            color: #333;
+            padding: 0.8rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .google-login:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+        }
+
+        .google-login img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e1e8ed;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .form-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .login-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        .account-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .account-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+        }
+        .account-btn:hover, .account-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #764ba2;
+            color: #ffd700;
+        }
+        .account-dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 110%;
+            background: #fff;
+            min-width: 220px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.18);
+            border-radius: 16px;
+            z-index: 3000;
+            overflow: hidden;
+            padding: 0.5rem 0;
+            border: 1.5px solid #e1e8ed;
+            animation: dropdownFadeIn 0.25s;
+        }
+        @keyframes dropdownFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .account-dropdown-menu.show {
+            display: block;
+        }
+        .account-dropdown-menu a, .account-dropdown-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.85rem 1.5rem;
+            color: #2c3e50;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.18s, color 0.18s;
+            gap: 0.7em;
+        }
+        .account-dropdown-menu a:hover, .account-dropdown-menu button:hover {
+            background: linear-gradient(90deg, #e9e6f7 0%, #f3f0fa 100%);
+            color: #764ba2;
+        }
+        .account-dropdown-menu button {
+            border-top: 1px solid #f0f0f0;
+        }
+        .account-dropdown-menu button:hover {
+            background: #ffeaea;
+            color: #e74c3c;
+        }
+        .account-dropdown-menu .dropdown-divider {
+            height: 1px;
+            background: #e1e8ed;
+            margin: 0.25rem 0;
+            border: none;
+        }
+
+        /* HEADER SEARCH SLIDE EFFECT */
+        .header-search {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .search-toggle:hover {
+            background: rgba(255,255,255,0.18);
+        }
+        .search-form {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: -16px;
+            top: 50%;
+            transform: translateY(-50%) scaleX(0);
+            transform-origin: right;
+            background: #fff;
+            border-radius: 32px;
+            box-shadow: 0 2px 12px rgba(124,58,237,0.07);
+            padding: 6px 16px;
+            min-width: 220px;
+            max-width: 320px;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(.4,2,.6,1), opacity 0.2s;
+            z-index: 2000;
+        }
+        .header-search.active .search-form {
+            transform: translateY(-50%) scaleX(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .search-form input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 1rem;
+            color: #444;
+            flex: 1;
+            padding: 8px 0;
+        }
+        .search-form input::placeholder {
+            color: #888;
+        }
+        .search-form .search-btn {
+            background: none;
+            border: none;
+            color: #7c3aed;
+            font-size: 1.1rem;
+            margin-left: 8px;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .search-form .search-btn:hover {
+            background: #f3f3fa;
+        }
+        @media (max-width: 600px) {
+            .search-form {
+                min-width: 120px;
+                max-width: 100vw;
+            }
+        }
+        /* Hide cart icon when not logged in */
+        .hide-cart {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">AnBok</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Trang chủ</a></li>
+                    <li><a href="books.html">Sách</a></li>
+                    <li><a href="story.html">Truyện</a></li>
+                    <li><a href="categories.html">Danh mục</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="header-search">
+                    <button class="search-toggle" aria-label="Tìm kiếm">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <form class="search-form">
+                        <input type="text" placeholder="Tìm kiếm sách..." />
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <a href="#" class="login-btn" onclick="showModal('loginModal'); return false;">
+                    <i class="fas fa-user"></i>
+                    Đăng nhập
+                </a>
+                <a href="javascript:void(0)" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </a>
+            </div>
+    </header>
+
+   
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AnBok</h3>
+                <p>Nhà sách trực tuyến hàng đầu Việt Nam, cung cấp những cuốn sách chất lượng với dịch vụ tốt nhất.</p>
+                <div class="social-links">
+                    <a href="javascript:void(0)"><i class="fab fa-facebook"></i></a>
+                    <a href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
+                    <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                    <a href="javascript:void(0)"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Danh mục</h3>
+                <p><a href="javascript:void(0)">Sách giáo khoa</a></p>
+                <p><a href="javascript:void(0)">Văn học</a></p>
+                <p><a href="javascript:void(0)">Kinh tế - Kinh doanh</a></p>
+                <p><a href="javascript:void(0)">Công nghệ</a></p>
+                <p><a href="javascript:void(0)">Sách thiếu nhi</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Hỗ trợ</h3>
+                <p><a href="javascript:void(0)">Hướng dẫn mua hàng</a></p>
+                <p><a href="javascript:void(0)">Chính sách đổi trả</a></p>
+                <p><a href="javascript:void(0)">Phương thức thanh toán</a></p>
+                <p><a href="javascript:void(0)">Chính sách bảo mật</a></p>
+                <p><a href="javascript:void(0)">Điều khoản sử dụng</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</p>
+                <p><i class="fas fa-phone"></i> 1900-1234</p>
+                <p><i class="fas fa-envelope"></i> info@anbok.com</p>
+                <p><i class="fas fa-clock"></i> 8:00 - 22:00 (Thứ 2 - Chủ nhật)</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AnBok. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Đăng nhập</h2>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Nhập email của bạn" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mật khẩu</label>
+                    <input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#" onclick="showModal('forgotPasswordModal'); closeModal('loginModal'); return false;">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="form-submit">Đăng nhập</button>
+                <div class="divider">
+                    <span>hoặc</span>
+                </div>
+                <button type="button" class="google-login" onclick="loginWithGoogle()">
+                    <img src="image/Google__G__logo.svg-Photoroom.png" alt="Google">
+                    Đăng nhập bằng Google
+                </button>
+                <div class="form-footer">
+                    <p>Chưa có tài khoản? <a href="#" onclick="showModal('registerModal'); closeModal('loginModal'); return false;">Đăng ký ngay</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Đăng ký</h2>
+                <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            </div>
+            <form id="registerForm"
+                <div class="form-group">
+                    <label for="registerName">Họ và tên</label>
+                    <input type="text" id="registerName" placeholder="Nhập họ và tên" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="Nhập email của bạn" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Mật khẩu</label>
+                    <input type="password" id="registerPassword" placeholder="Nhập mật khẩu" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Xác nhận mật khẩu</label>
+                    <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                </div>
+                <button type="submit" class="form-submit">Đăng ký</button>
+                <div class="divider">
+                    <span>hoặc</span>
+                </div>
+                <button type="button" class="google-login" onclick="registerWithGoogle()">
+                    <img src="image/Google__G__logo.svg-Photoroom.png" alt="Google">
+                    Đăng ký bằng Google
+                </button>
+                <div class="form-footer">
+                    <p>Đã có tài khoản? <a href="#" onclick="showModal('loginModal'); closeModal('registerModal'); return false;">Đăng nhập</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Quên mật khẩu</h2>
+                <span class="close" onclick="closeModal('forgotPasswordModal')">&times;</span>
+            </div>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="forgotEmail">Email</label>
+                    <input type="email" id="forgotEmail" placeholder="Nhập email của bạn" required>
+                </div>
+                <p style="color: #7f8c8d; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    Chúng tôi sẽ gửi link đặt lại mật khẩu vào email của bạn.
+                </p>
+                <button type="submit" class="form-submit">Gửi yêu cầu</button>
+                <div class="form-footer">
+                    <p><a href="#" onclick="showModal('loginModal'); closeModal('forgotPasswordModal'); return false;">Quay lại đăng nhập</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notificationModal" class="notification-modal">
+        <div class="notification-content">
+            <button class="notification-close" onclick="closeNotification()">&times;</button>
+            <div class="notification-header">
+                <div class="notification-icon" id="notificationIcon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3 class="notification-title" id="notificationTitle">Thông báo</h3>
+                <p class="notification-message" id="notificationMessage">Nội dung thông báo</p>
+            </div>
+            <div class="notification-body">
+                <div class="notification-actions" id="notificationActions">
+                    <button class="notification-btn primary" onclick="closeNotification()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                // Skip if href is just "#" (no target)
+                if (href === '#') {
+                    return;
+                }
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const cartCount = document.querySelector('.cart-count');
+                let currentCount = parseInt(cartCount.textContent);
+                cartCount.textContent = currentCount + 1;
+                
+                // Show notification
+                this.textContent = 'Đã thêm!';
+                this.style.background = '#27ae60';
+                
+                setTimeout(() => {
+                    this.textContent = 'Thêm vào giỏ';
+                    this.style.background = '#667eea';
+                }, 2000);
+            });
+        });
+
+        // Newsletter form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    if (email) {
+                        showSuccess('Đăng ký thành công!', 'Cảm ơn bạn đã đăng ký nhận tin tức!\nChúng tôi sẽ gửi thông báo về những cuốn sách mới và khuyến mãi đặc biệt.');
+                        this.reset();
+                    }
+                });
+            }
+        });
+
+        // Modal functionality
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Login button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBtn = document.querySelector('.login-btn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showModal('loginModal');
+                });
+            }
+        });
+
+        // Google login functionality with Firebase
+        async function loginWithGoogle() {
+            if (!window.firebaseAuth || !window.googleProvider) {
+                showError('Lỗi hệ thống', 'Firebase chưa được khởi tạo. Vui lòng thử lại!');
+                return;
+            }
+            
+            try {
+                const result = await window.signInWithPopup(window.firebaseAuth, window.googleProvider);
+                const user = result.user;
+                
+                // Check if this is a new user (first time login)
+                const isNewUser = result._tokenResponse?.isNewUser;
+                const displayName = user.displayName || user.email;
+                
+                if (isNewUser) {
+                    showSuccess('Đăng ký Google thành công!', 'Chào mừng ' + displayName + '\nBạn đã được đăng nhập tự động.');
+                    
+                    // Show welcome message for new users
+                    setTimeout(() => {
+                        showInfo('Chào mừng!', 'Chào mừng bạn đến với AnBok!\nBạn có thể bắt đầu mua sách ngay bây giờ.');
+                    }, 1000);
+                } else {
+                    showSuccess('Đăng nhập Google thành công!', 'Chào mừng ' + displayName);
+                    
+                    // Show welcome back message for existing users
+                    setTimeout(() => {
+                        showInfo('Chào mừng trở lại!', 'Chào mừng bạn trở lại AnBok!\nBạn có thể tiếp tục mua sách.');
+                    }, 1000);
+                }
+                
+                closeModal('loginModal');
+                updateLoginButton(user);
+                closeModal('loginModal'); // Đảm bảo ẩn loginModal khi đăng nhập Google
+                
+            } catch (error) {
+                let errorMessage = 'Đăng nhập Google thất bại!';
+                switch (error.code) {
+                    case 'auth/popup-closed-by-user':
+                        errorMessage = 'Đăng nhập bị hủy!';
+                        break;
+                    case 'auth/popup-blocked':
+                        errorMessage = 'Popup bị chặn! Vui lòng cho phép popup cho trang web này.';
+                        break;
+                }
+                showError('Đăng nhập Google thất bại', errorMessage);
+            }
+        }
+
+        // Google register functionality with Firebase
+        async function registerWithGoogle() {
+            if (!window.firebaseAuth || !window.googleProvider) {
+                alert('Firebase chưa được khởi tạo. Vui lòng thử lại!');
+                return;
+            }
+            
+            try {
+                const result = await window.signInWithPopup(window.firebaseAuth, window.googleProvider);
+                const user = result.user;
+                alert('Đăng ký Google thành công! Chào mừng ' + (user.displayName || user.email));
+                closeModal('registerModal');
+                updateLoginButton(user);
+            } catch (error) {
+                let errorMessage = 'Đăng ký Google thất bại!';
+                switch (error.code) {
+                    case 'auth/popup-closed-by-user':
+                        errorMessage = 'Đăng ký bị hủy!';
+                        break;
+                    case 'auth/popup-blocked':
+                        errorMessage = 'Popup bị chặn! Vui lòng cho phép popup cho trang web này.';
+                        break;
+                }
+                alert(errorMessage);
+            }
+        }
+
+        // Email/Password login functionality
+        async function loginWithEmail(email, password) {
+            if (!window.firebaseAuth) {
+                showError('Lỗi hệ thống', 'Firebase chưa được khởi tạo. Vui lòng thử lại!');
+                return;
+            }
+            
+            try {
+                const result = await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+                const user = result.user;
+                
+                // Show success message with user info
+                const displayName = user.displayName || user.email;
+                showSuccess('Đăng nhập thành công!', 'Chào mừng ' + displayName);
+                closeModal('loginModal');
+                updateLoginButton(user);
+                
+                // Optional: Show welcome back message
+                setTimeout(() => {
+                    showInfo('Chào mừng trở lại!', 'Chào mừng bạn trở lại AnBok!\nBạn có thể tiếp tục mua sách.');
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                let errorMessage = 'Đăng nhập thất bại!';
+                
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage = 'Email không tồn tại! Vui lòng đăng ký tài khoản mới.';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = 'Mật khẩu không đúng! Vui lòng kiểm tra lại.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Email không hợp lệ! Vui lòng nhập email đúng định dạng.';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = 'Quá nhiều lần thử đăng nhập! Vui lòng đợi 5-10 phút trước khi thử lại.\n\nLý do: Firebase đã tạm thời khóa tài khoản để bảo vệ khỏi tấn công brute force.';
+                        break;
+                    case 'auth/user-disabled':
+                        errorMessage = 'Tài khoản đã bị vô hiệu hóa!';
+                        break;
+                    case 'auth/network-request-failed':
+                        errorMessage = 'Lỗi kết nối mạng! Vui lòng kiểm tra internet.';
+                        break;
+                    default:
+                        errorMessage = 'Đăng nhập thất bại: ' + error.message;
+                }
+                
+                showError('Đăng nhập thất bại', errorMessage);
+            }
+        }
+
+        // Email/Password register functionality
+        async function registerWithEmail(email, password, displayName) {
+            if (!window.firebaseAuth) {
+                showError('Lỗi hệ thống', 'Firebase chưa được khởi tạo. Vui lòng thử lại!');
+                return;
+            }
+            
+            try {
+                console.log('Starting registration for:', email);
+                
+                const result = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+                const user = result.user;
+                
+                console.log('User created:', user);
+                
+                // Update display name
+                await window.updateProfile(user, { displayName: displayName });
+                console.log('Display name updated to:', displayName);
+                
+                // Force update the login button immediately
+                updateLoginButton(user);
+                
+                // Auto login after successful registration
+                showSuccess('Đăng ký thành công!', 'Chào mừng ' + displayName + '\nBạn đã được đăng nhập tự động.');
+                closeModal('registerModal');
+                
+                // Force refresh auth state
+                setTimeout(() => {
+                    updateLoginButton(window.firebaseAuth.currentUser);
+                }, 100);
+                
+                // Optional: Show welcome message
+                setTimeout(() => {
+                    showInfo('Chào mừng!', 'Chào mừng bạn đến với AnBok!\nBạn có thể bắt đầu mua sách ngay bây giờ.');
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Register error:', error);
+                let errorMessage = 'Đăng ký thất bại!';
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage = 'Email đã được sử dụng! Vui lòng đăng nhập hoặc sử dụng email khác.';
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage = 'Mật khẩu quá yếu! Vui lòng sử dụng mật khẩu có ít nhất 6 ký tự.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Email không hợp lệ! Vui lòng nhập email đúng định dạng.';
+                        break;
+                    case 'auth/operation-not-allowed':
+                        errorMessage = 'Đăng ký bằng email/password chưa được bật! Vui lòng liên hệ admin.';
+                        break;
+                    case 'auth/network-request-failed':
+                        errorMessage = 'Lỗi kết nối mạng! Vui lòng kiểm tra internet.';
+                        break;
+                    default:
+                        errorMessage = 'Đăng ký thất bại: ' + error.message;
+                }
+                showError('Đăng ký thất bại', errorMessage);
+            }
+        }
+
+        // Forgot password functionality
+        async function forgotPassword(email) {
+            if (!window.firebaseAuth) {
+                showError('Lỗi hệ thống', 'Firebase chưa được khởi tạo. Vui lòng thử lại!');
+                return;
+            }
+            
+            try {
+                await window.sendPasswordResetEmail(window.firebaseAuth, email);
+                showSuccess('Email đã được gửi!', 'Email đặt lại mật khẩu đã được gửi!\nVui lòng kiểm tra hộp thư của bạn.');
+                closeModal('forgotPasswordModal');
+            } catch (error) {
+                let errorMessage = 'Gửi email thất bại!';
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage = 'Email không tồn tại!';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Email không hợp lệ!';
+                        break;
+                }
+                showError('Gửi email thất bại', errorMessage);
+            }
+        }
+
+        // Update login button based on auth state
+        function updateLoginButton(user) {
+            console.log('Updating login button for user:', user);
+            const loginBtn = document.querySelector('.login-btn');
+            const headerActions = document.querySelector('.header-actions');
+            const cartIcon = document.querySelector('.cart-icon');
+            if (!loginBtn || !headerActions) {
+                console.error('Login button or header actions not found!');
+                return;
+            }
+            // Xóa dropdown cũ nếu có
+            const oldDropdown = document.querySelector('.account-dropdown');
+            if (oldDropdown) oldDropdown.remove();
+            if (user) {
+                // Hiện cart-icon khi đã đăng nhập
+                if (cartIcon) cartIcon.classList.remove('hide-cart');
+                // Show user name or email, truncate if too long
+                const displayName = user.displayName || user.email;
+                const shortName = displayName.length > 15 ? displayName.substring(0, 12) + '...' : displayName;
+                
+                // Tạo dropdown
+                const dropdown = document.createElement('div');
+                dropdown.className = 'account-dropdown';
+                dropdown.innerHTML = `
+                    <button class="account-btn" id="accountBtn" title="${displayName}">
+                        <i class=\"fas fa-user\"></i>
+                        ${shortName}
+                        <i class=\"fas fa-chevron-down\" style=\"font-size:0.9em;\"></i>
+                    </button>
+                    <div class="account-dropdown-menu" id="accountDropdownMenu">
+                        <a href="profile.html?tab=profile">Quản lý tài khoản</a>
+                        <a href="profile.html?tab=bookshelf">Tủ sách cá nhân</a>
+                        <a href="profile.html?tab=orders">Quản lý đơn hàng</a>
+                        <a href="profile.html?tab=support">Hỗ trợ khách hàng</a>
+                        <hr class="dropdown-divider">
+                        <button onclick="closeModal('loginModal'); confirmLogout('${displayName}'); return false;">Đăng xuất</button>
+                    </div>
+                `;
+                // Thay thế loginBtn bằng dropdown
+                loginBtn.style.display = 'none';
+                const searchBox = headerActions.querySelector('.search-box');
+                if (searchBox && searchBox.nextSibling) {
+                    headerActions.insertBefore(dropdown, searchBox.nextSibling);
+                } else {
+                    headerActions.appendChild(dropdown);
+                }
+                
+                // Xử lý dropdown toggle
+                const accountBtn = dropdown.querySelector('#accountBtn');
+                const dropdownMenu = dropdown.querySelector('#accountDropdownMenu');
+                accountBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                    accountBtn.classList.toggle('active');
+                });
+                // Ẩn dropdown khi click ra ngoài
+                document.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdownMenu.classList.remove('show');
+                        accountBtn.classList.remove('active');
+                    }
+                });
+            } else {
+                // Ẩn cart-icon khi chưa đăng nhập
+                if (cartIcon) cartIcon.classList.add('hide-cart');
+                // Nếu chưa đăng nhập, chỉ hiện nút đăng nhập
+                const oldDropdown = document.querySelector('.account-dropdown');
+                if (oldDropdown) oldDropdown.remove();
+                loginBtn.style.display = '';
+                loginBtn.innerHTML = `
+                    <i class=\"fas fa-user\"></i>
+                    Đăng nhập
+                `;
+                loginBtn.title = '';
+                loginBtn.onclick = function(e) {
+                    e.preventDefault();
+                    showModal('loginModal');
+                };
+            }
+        }
+
+        // Flag to prevent notifications on page load
+        // This prevents unwanted notifications when the page loads
+        // Set to false after 1 second to allow normal notifications
+        // Use forceShowNotification() to bypass this check when needed
+        let isPageLoad = true;
+        
+
+        
+        // Ensure notification modal is hidden on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationModal = document.getElementById('notificationModal');
+            if (notificationModal) {
+                notificationModal.style.display = 'none';
+                console.log('Notification modal hidden on page load');
+            }
+        });
+        
+        // Wait for Firebase to be initialized
+        function initializeAuth() {
+            if (window.firebaseAuth) {
+                console.log('Initializing Firebase Auth listener');
+                
+                // Listen for auth state changes
+                window.firebaseAuth.onAuthStateChanged(function(user) {
+                    console.log('Auth state changed:', user);
+                    updateLoginButton(user);
+                });
+                
+                // Also check current user immediately
+                const currentUser = window.firebaseAuth.currentUser;
+                if (currentUser) {
+                    console.log('Current user found:', currentUser);
+                    updateLoginButton(currentUser);
+                }
+                
+                // Set flag to false after initial load
+                setTimeout(() => {
+                    isPageLoad = false;
+                }, 1000);
+            }
+        }
+
+        // Listen for Firebase ready event
+        window.addEventListener('firebaseReady', function() {
+            console.log('Firebase ready event received');
+            initializeAuth();
+        });
+
+        // Also try on DOMContentLoaded as fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded');
+            // Check if Firebase Auth is available
+            if (window.firebaseAuth) {
+                console.log('Firebase Auth available on DOMContentLoaded');
+                initializeAuth();
+            } else {
+                console.log('Firebase Auth not available, retrying...');
+                // Retry after a short delay
+                setTimeout(function() {
+                    if (window.firebaseAuth) {
+                        console.log('Firebase Auth available after retry');
+                        initializeAuth();
+                    } else {
+                        console.error('Firebase Auth still not available');
+                    }
+                }, 1000);
+            }
+        });
+
+        // Form event listeners
+        function initializeForms() {
+            // Login form
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    loginWithEmail(email, password);
+                });
+            }
+
+            // Register form
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('registerName').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const password = document.getElementById('registerPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    
+                    if (password !== confirmPassword) {
+                        showError('Lỗi xác nhận', 'Mật khẩu xác nhận không khớp!');
+                        return;
+                    }
+                    
+                    if (password.length < 6) {
+                        showError('Mật khẩu yếu', 'Mật khẩu phải có ít nhất 6 ký tự!');
+                        return;
+                    }
+                    
+                    registerWithEmail(email, password, name);
+                });
+            }
+
+            // Forgot password form
+            const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+            if (forgotPasswordForm) {
+                forgotPasswordForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('forgotEmail').value;
+                    forgotPassword(email);
+                });
+            }
+        }
+
+        // Initialize forms when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeForms();
+        });
+
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-box input');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        showInfo('Tìm kiếm', 'Đang tìm kiếm: ' + this.value);
+                    }
+                });
+            }
+        });
+
+        // Debug Firebase status
+        function checkFirebaseStatus() {
+            console.log('Firebase Auth available:', !!window.firebaseAuth);
+            console.log('Google Provider available:', !!window.googleProvider);
+            if (window.firebaseAuth) {
+                console.log('Firebase Auth object:', window.firebaseAuth);
+            }
+        }
+
+        // Check Firebase status after a delay (silent - no notifications)
+        setTimeout(() => {
+            checkFirebaseStatus();
+        }, 2000);
+
+      
+
+        // Test Firebase Auth after initialization (silent - no notifications)
+        setTimeout(() => {
+            testFirebaseAuth();
+        }, 3000);
+
+        // Function to create a test user (for development only)
+        async function createTestUser() {
+            if (!window.firebaseAuth) {
+                showError('Lỗi hệ thống', 'Firebase Auth not available');
+                return;
+            }
+
+            try {
+                const testEmail = 'test@anbok.com';
+                const testPassword = '123456';
+                const testName = 'Test User';
+
+                const result = await window.createUserWithEmailAndPassword(window.firebaseAuth, testEmail, testPassword);
+                const user = result.user;
+                
+                // Update display name
+                await window.updateProfile(user, { displayName: testName });
+                
+                showSuccess('Tạo test user thành công!', 'Test user created successfully!\nEmail: ' + testEmail + '\nPassword: ' + testPassword);
+                console.log('Test user created:', user);
+                
+            } catch (error) {
+                console.error('Create test user error:', error);
+                if (error.code === 'auth/email-already-in-use') {
+                    showInfo('Test user đã tồn tại', 'Test user already exists!\nEmail: test@anbok.com\nPassword: 123456');
+                } else {
+                    showError('Lỗi tạo test user', 'Error creating test user: ' + error.message);
+                }
+            }
+        }
+
+        // Uncomment the line below to create a test user (for development only)
+        // setTimeout(createTestUser, 4000);
+
+        // Test auto-login functionality
+        function testAutoLogin() {
+            console.log('Testing auto-login...');
+            console.log('Current Firebase Auth:', window.firebaseAuth);
+            console.log('Current user:', window.firebaseAuth?.currentUser);
+            
+            if (window.firebaseAuth?.currentUser) {
+                console.log('User is logged in:', window.firebaseAuth.currentUser);
+                updateLoginButton(window.firebaseAuth.currentUser);
+            } else {
+                console.log('No user logged in');
+                updateLoginButton(null);
+            }
+        }
+
+        // Test auto-login after a delay (commented out to avoid showing notifications on page load)
+        // setTimeout(testAutoLogin, 5000);
+
+        // Test notification modal (for development - uncomment to test)
+        function testNotificationModal() {
+            forceShowSuccess('Test Success', 'Đây là thông báo thành công!');
+            setTimeout(() => {
+                forceShowError('Test Error', 'Đây là thông báo lỗi!');
+            }, 2000);
+            setTimeout(() => {
+                forceShowWarning('Test Warning', 'Đây là thông báo cảnh báo!');
+            }, 4000);
+            setTimeout(() => {
+                forceShowInfo('Test Info', 'Đây là thông báo thông tin!');
+            }, 6000);
+        }
+
+        // Force show helper functions (bypass page load check)
+        function forceShowSuccess(title, message, actions = null) {
+            forceShowNotification(title, message, 'success', actions);
+        }
+
+        function forceShowError(title, message, actions = null) {
+            forceShowNotification(title, message, 'error', actions);
+        }
+
+        function forceShowWarning(title, message, actions = null) {
+            forceShowNotification(title, message, 'warning', actions);
+        }
+
+        function forceShowInfo(title, message, actions = null) {
+            forceShowNotification(title, message, 'info', actions);
+        }
+
+        // Uncomment to test notification modal
+        // testNotificationModal();
+        
+        // Debug function to check notification status
+        function debugNotificationStatus() {
+            console.log('Page load flag:', isPageLoad);
+            console.log('Firebase Auth available:', !!window.firebaseAuth);
+            if (window.firebaseAuth) {
+                console.log('Current user:', window.firebaseAuth.currentUser);
+            }
+        }
+        
+        // Call debug function after page load
+        setTimeout(() => {
+            debugNotificationStatus();
+        }, 2000);
+
+        // Notification Modal Functions
+        function showNotification(title, message, type = 'info', actions = null) {
+            // Don't show notifications during page load to prevent unwanted popups
+            // Use forceShowNotification() if you need to show notifications during page load
+            if (isPageLoad) {
+                console.log('Skipping notification during page load:', title);
+                return;
+            }
+            
+            const modal = document.getElementById('notificationModal');
+            const icon = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            const actionsEl = document.getElementById('notificationActions');
+
+            // Set icon and type
+            icon.className = 'notification-icon ' + type;
+            const iconMap = {
+                'success': 'fas fa-check',
+                'error': 'fas fa-times',
+                'warning': 'fas fa-exclamation-triangle',
+                'info': 'fas fa-info-circle'
+            };
+            icon.innerHTML = `<i class="${iconMap[type] || iconMap.info}"></i>`;
+
+            // Set content
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+
+            // Set actions
+            if (actions) {
+                actionsEl.innerHTML = actions;
+            } else {
+                actionsEl.innerHTML = '<button class="notification-btn primary" onclick="closeNotification()">OK</button>';
+            }
+
+            // Show modal with !important to override CSS
+            modal.style.setProperty('display', 'flex', 'important');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeNotification() {
+            const modal = document.getElementById('notificationModal');
+            modal.style.setProperty('display', 'none', 'important');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close notification when clicking outside
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationModal = document.getElementById('notificationModal');
+            if (notificationModal) {
+                notificationModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeNotification();
+                    }
+                });
+            }
+        });
+
+        // Helper functions for different notification types
+        function showSuccess(title, message, actions = null) {
+            showNotification(title, message, 'success', actions);
+        }
+
+        function showError(title, message, actions = null) {
+            showNotification(title, message, 'error', actions);
+        }
+
+        function showWarning(title, message, actions = null) {
+            showNotification(title, message, 'warning', actions);
+        }
+
+        function showInfo(title, message, actions = null) {
+            showNotification(title, message, 'info', actions);
+        }
+        
+        // Force show notification (bypass page load check)
+        function forceShowNotification(title, message, type = 'info', actions = null) {
+            const modal = document.getElementById('notificationModal');
+            const icon = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            const actionsEl = document.getElementById('notificationActions');
+
+            // Set icon and type
+            icon.className = 'notification-icon ' + type;
+            const iconMap = {
+                'success': 'fas fa-check',
+                'error': 'fas fa-times',
+                'warning': 'fas fa-exclamation-triangle',
+                'info': 'fas fa-info-circle'
+            };
+            icon.innerHTML = `<i class="${iconMap[type] || iconMap.info}"></i>`;
+
+            // Set content
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+
+            // Set actions
+            if (actions) {
+                actionsEl.innerHTML = actions;
+            } else {
+                actionsEl.innerHTML = '<button class="notification-btn primary" onclick="closeNotification()">OK</button>';
+            }
+
+            // Show modal with !important to override CSS
+            modal.style.setProperty('display', 'flex', 'important');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Confirm dialog
+        function showConfirm(title, message, onConfirm, onCancel = null) {
+            const actions = `
+                <button class="notification-btn secondary" onclick="closeNotification(); ${onCancel ? onCancel : ''}">Hủy</button>
+                <button class="notification-btn primary" onclick="closeNotification(); ${onConfirm}">Xác nhận</button>
+            `;
+            forceShowNotification(title, message, 'warning', actions);
+        }
+
+        // Logout function
+        function logoutUser() {
+            if (window.firebaseAuth) {
+                window.firebaseAuth.signOut().then(() => {
+                    showSuccess('Đăng xuất thành công!', 'Bạn đã đăng xuất khỏi tài khoản.');
+                    updateLoginButton(null);
+                    closeModal('loginModal'); // Đảm bảo ẩn loginModal khi đăng xuất
+                }).catch((error) => {
+                    showError('Lỗi đăng xuất', 'Không thể đăng xuất: ' + error.message);
+                });
+            } else {
+                showError('Lỗi hệ thống', 'Firebase chưa được khởi tạo!');
+            }
+        }
+
+        // Confirm logout function
+        function confirmLogout(displayName) {
+            showConfirm(
+                'Xác nhận đăng xuất', 
+                'Bạn có muốn đăng xuất khỏi tài khoản ' + displayName + '?', 
+                'logoutUser()'
+            );
+        }
+
+        // Test confirm dialog (for development - uncomment to test)
+        function testConfirmDialog() {
+            showConfirm(
+                'Test Confirm Dialog',
+                'Đây là dialog xác nhận test. Bạn có muốn tiếp tục?',
+                'console.log("User confirmed")',
+                'console.log("User cancelled")'
+            );
+        }
+
+        // Uncomment to test confirm dialog
+        // testConfirmDialog();
+        
+        // Test notification system (for development)
+        function testNotificationSystem() {
+            console.log('Testing notification system...');
+            console.log('Page load flag:', isPageLoad);
+            
+            // Test force show notification
+            setTimeout(() => {
+                forceShowSuccess('Test Force Show', 'Đây là test force show notification!');
+            }, 1000);
+            
+            // Test normal notification (should be blocked during page load)
+            setTimeout(() => {
+                showSuccess('Test Normal Show', 'Đây là test normal notification!');
+            }, 2000);
+            
+            // Test after page load flag is false
+            setTimeout(() => {
+                isPageLoad = false;
+                showInfo('Test After Page Load', 'Đây là test sau khi page load flag = false!');
+            }, 3000);
+        }
+        
+
+        
+        // Uncomment to test notification system
+        // testNotificationSystem();
+        
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const headerSearch = document.querySelector('.header-search');
+            const searchToggle = document.querySelector('.search-toggle');
+            const searchForm = document.querySelector('.search-form');
+            if (headerSearch && searchToggle && searchForm) {
+                searchToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    headerSearch.classList.toggle('active');
+                    if (headerSearch.classList.contains('active')) {
+                        setTimeout(() => searchForm.querySelector('input').focus(), 200);
+                    }
+                });
+                // Đóng khi click ra ngoài
+                document.addEventListener('click', function(e) {
+                    if (!headerSearch.contains(e.target)) {
+                        headerSearch.classList.remove('active');
+                    }
+                });
+                // Đóng khi submit
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    headerSearch.classList.remove('active');
+                    // Xử lý tìm kiếm ở đây nếu muốn
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>

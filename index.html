@@ -68,6 +68,8 @@
         }
 
         .header-content {
+            position: relative;
+            padding-right: 40px;
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
@@ -100,7 +102,14 @@
             color: #ffd700;
         }
 
+        .nav-menu a.active {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
         .header-actions {
+            position: relative;
+            z-index: 10;
             display: flex;
             gap: 1rem;
             align-items: center;
@@ -128,8 +137,8 @@
 
         .login-btn {
             background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid rgba(255,255,255,0.3);
+            color: #fff;
+            border: 2px solid #e1e8ed;
             padding: 0.5rem 1.5rem;
             border-radius: 25px;
             text-decoration: none;
@@ -139,17 +148,24 @@
             align-items: center;
             gap: 0.5rem;
             cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+            min-width: 140px;
+            font-size: 1rem;
+            line-height: 1.2;
+            height: 44px;
+            justify-content: center;
         }
-
         .login-btn:hover {
-            background: rgba(255,255,255,0.3);
-            border-color: rgba(255,255,255,0.5);
-            transform: translateY(-1px);
-            color: #ffd700;
+            background: linear-gradient(135deg, #667eea 0%, #ffd700 100%);
+            border-color: #764ba2;
+            color: #7c3aed;
+            box-shadow: 0 4px 16px rgba(124,58,237,0.12);
         }
-
         .login-btn i {
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
         }
 
         .cart-icon {
@@ -173,48 +189,176 @@
             font-size: 0.8rem;
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 500px;
+        /* HERO CUSTOM DESIGN */
+        .hero-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 540px;
+            padding: 32px 0;
         }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        .hero-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-
-        .hero-content p {
+        .hero-left {
+            align-items: flex-start;
+            padding-left: 32px;
+        }
+        .hero-icon {
+            width: 84px;
+            margin-bottom: 12px;
+        }
+        .hero-badge {
+            background: #ede7f6;
+            color: #6c47c7;
+            font-weight: 600;
+            border-radius: 20px;
+            padding: 8px 24px;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(124,58,237,0.06);
+        }
+        .hero-title-main {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #7c3aed;
+            letter-spacing: -2px;
+        }
+        .hero-title-highlight {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #222;
+            margin-left: 8px;
+        }
+        .hero-desc {
+            color: #555;
+            font-size: 1.15rem;
+            margin-bottom: 32px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+        .hero-search {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .hero-search .search-box {
+            display: flex;
+            align-items: center;
+            background: #f3f3fa;
+            border-radius: 32px;
+            box-shadow: 0 2px 12px rgba(124,58,237,0.07);
+            padding: 8px 18px;
+            min-width: 260px;
+            max-width: 340px;
+            flex: 1;
+            transition: box-shadow 0.2s;
+        }
+        .hero-search .search-box:focus-within {
+            box-shadow: 0 4px 24px rgba(124,58,237,0.13);
+        }
+        .hero-search .search-box i {
+            color: #a259ff;
             font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
+            margin-right: 8px;
         }
-
-        .cta-button {
-            background: #ff6b6b;
-            color: white;
-            padding: 1rem 2rem;
+        .hero-search .search-box input {
             border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+            background: transparent;
+            outline: none;
+            font-size: 1.08rem;
+            color: #444;
+            flex: 1;
+            padding: 8px 0;
         }
-
-        .cta-button:hover {
-            background: #ff5252;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+        .hero-search .search-box input::placeholder {
+            color: #888;
+            opacity: 1;
+        }
+        .hero-search .search-btn {
+            background: linear-gradient(90deg, #7c3aed 60%, #a259ff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 10px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(124,58,237,0.12);
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            margin-left: 8px;
+        }
+        .hero-search .search-btn:hover {
+            background: linear-gradient(90deg, #a259ff 0%, #7c3aed 100%);
+            box-shadow: 0 4px 16px rgba(124,58,237,0.18);
+        }
+        @media (max-width: 900px) {
+            .hero-search {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+            .hero-search .search-box {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+            }
+            .hero-search .search-btn {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+        .hero-right {
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .hero-book-img {
+            width: 320px;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(124,58,237,0.18);
+            z-index: 2;
+            background: #fff;
+        }
+        .hero-decor {
+            position: absolute;
+            left: 0;
+            bottom: -40px;
+            width: 300px;
+            z-index: 1;
+        }
+        .hero-decor2 {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 120px;
+            z-index: 1;
+        }
+        @media (max-width: 900px) {
+            .hero-container {
+                flex-direction: column;
+                padding: 24px 0;
+            }
+            .hero-left {
+                align-items: center;
+                padding-left: 0;
+                text-align: center;
+            }
+            .hero-right {
+                margin-top: 32px;
+            }
+            .hero-search {
+                margin: 0 auto;
+            }
         }
 
         /* Main Content */
@@ -815,26 +959,236 @@
                 text-align: center;
             }
         }
+        .account-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .account-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+        }
+        .account-btn:hover, .account-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #764ba2;
+            color: #ffd700;
+        }
+        .account-dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 110%;
+            background: #fff;
+            min-width: 220px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.18);
+            border-radius: 16px;
+            z-index: 3000;
+            overflow: hidden;
+            padding: 0.5rem 0;
+            border: 1.5px solid #e1e8ed;
+            animation: dropdownFadeIn 0.25s;
+        }
+        @keyframes dropdownFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .account-dropdown-menu.show {
+            display: block;
+        }
+        .account-dropdown-menu a, .account-dropdown-menu button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.85rem 1.5rem;
+            color: #2c3e50;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.18s, color 0.18s;
+            gap: 0.7em;
+        }
+        .account-dropdown-menu a:hover, .account-dropdown-menu button:hover {
+            background: linear-gradient(90deg, #e9e6f7 0%, #f3f0fa 100%);
+            color: #764ba2;
+        }
+        .account-dropdown-menu button {
+            border-top: 1px solid #f0f0f0;
+        }
+        .account-dropdown-menu button:hover {
+            background: #ffeaea;
+            color: #e74c3c;
+        }
+        .account-dropdown-menu .dropdown-divider {
+            height: 1px;
+            background: #e1e8ed;
+            margin: 0.25rem 0;
+            border: none;
+        }
+
+        /* HEADER SEARCH SLIDE EFFECT */
+        .header-search {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .search-toggle:hover {
+            background: rgba(255,255,255,0.18);
+        }
+        .search-form {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: -16px;
+            top: 50%;
+            transform: translateY(-50%) scaleX(0);
+            transform-origin: right;
+            background: #fff;
+            border-radius: 32px;
+            box-shadow: 0 2px 12px rgba(124,58,237,0.07);
+            padding: 6px 16px;
+            min-width: 220px;
+            max-width: 320px;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(.4,2,.6,1), opacity 0.2s;
+            z-index: 2000;
+        }
+        .header-search.active .search-form {
+            transform: translateY(-50%) scaleX(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .search-form input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 1rem;
+            color: #444;
+            flex: 1;
+            padding: 8px 0;
+        }
+        .search-form input::placeholder {
+            color: #888;
+        }
+        .search-form .search-btn {
+            background: none;
+            border: none;
+            color: #7c3aed;
+            font-size: 1.1rem;
+            margin-left: 8px;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .search-form .search-btn:hover {
+            background: #f3f3fa;
+        }
+        @media (max-width: 600px) {
+            .search-form {
+                min-width: 120px;
+                max-width: 100vw;
+            }
+        }
+        /* Hide cart icon when not logged in */
+        .hide-cart {
+            display: none !important;
+        }
+        /* Back to Top Button Styles */
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 3000;
+            background: #fff;
+            color: #222;
+            border: 1.5px solid #ccc;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+            opacity: 0.92;
+            box-shadow: none;
+            outline: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #backToTopBtn:hover {
+            background: #f2f2f2;
+            color: #111;
+            border-color: #bbb;
+            opacity: 1;
+        }
+        #backToTopBtn i {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        @media (max-width: 600px) {
+            #backToTopBtn {
+                bottom: 16px;
+                right: 16px;
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <a href="javascript:void(0)" class="logo">AnBok</a>
+            <a href="index.html" class="logo">AnBok</a>
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li><a href="#books">Sách</a></li>
-                    <li><a href="#categories">Danh mục</a></li>
-                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="index.html" class="active">Trang chủ</a></li>
+                    <li><a href="books.html">Sách</a></li>
+                    <li><a href="story.html">Truyện</a></li>
+                    <li><a href="categories.html">Danh mục</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
                     <li><a href="#contact">Liên hệ</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Tìm kiếm sách...">
+                <div class="header-search">
+                    <button class="search-toggle" aria-label="Tìm kiếm">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <form class="search-form">
+                        <input type="text" placeholder="Tìm kiếm sách..." />
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
                 <a href="#" class="login-btn" onclick="showModal('loginModal'); return false;">
                     <i class="fas fa-user"></i>
@@ -849,11 +1203,31 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Khám phá thế giới qua từng trang sách</h1>
-            <p>AnBok - Nơi bạn tìm thấy những cuốn sách hay nhất, với dịch vụ giao hàng nhanh chóng và chất lượng</p>
-            <a href="#books" class="cta-button">Khám phá ngay</a>
+      <div class="hero-container">
+        <div class="hero-col hero-left">
+          <img src="https://shop-bookstore.matbao.website/wp-content/uploads/2020/07/Group-7672.png" alt="icon" class="hero-icon" />
+          <div class="hero-badge">Nền tảng dịch vụ đầy đủ của chúng tôi</div>
+          <h1>
+            <span class="hero-title-main">Sách</span>
+            <span class="hero-title-highlight">Hay nhất</span>
+          </h1>
+          <p class="hero-desc">
+            Chúng tôi chuyên cung cấp những quyển sách hấp dẫn và hay nhất đến đọc giả. Với chính sách khuyến mãi thường xuyên và hấp dẫn.
+          </p>
+          <div class="hero-search">
+            <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm sách...">
+                </div>
+            <button class="search-btn">Search</button>
+          </div>
         </div>
+        <div class="hero-col hero-right">
+          <img src="https://shop-bookstore.matbao.website/wp-content/uploads/2020/09/Mask-Group-14.png" alt="Book" class="hero-book-img" />
+          <img src="https://shop-bookstore.matbao.website/wp-content/uploads/2020/07/Group-7748.svg" class="hero-decor" alt="decor" />
+          <img src="https://shop-bookstore.matbao.website/wp-content/uploads/2020/07/Group-7671.svg" class="hero-decor2" alt="decor2" />
+        </div>
+      </div>
     </section>
 
     <!-- Main Content -->
@@ -997,7 +1371,7 @@
                 <p><a href="javascript:void(0)">Điều khoản sử dụng</a></p>
             </div>
             <div class="footer-section">
-                <h3>Liên hệ</h3>
+                <h3 id="contact">Liên hệ</h3>
                 <p><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</p>
                 <p><i class="fas fa-phone"></i> 1900-1234</p>
                 <p><i class="fas fa-envelope"></i> info@anbok.com</p>
@@ -1008,6 +1382,11 @@
             <p>&copy; 2024 AnBok. Tất cả quyền được bảo lưu.</p>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="Lên đầu trang">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
@@ -1050,7 +1429,7 @@
                 <h2 class="modal-title">Đăng ký</h2>
                 <span class="close" onclick="closeModal('registerModal')">&times;</span>
             </div>
-            <form id="registerForm">
+            <form id="registerForm"
                 <div class="form-group">
                     <label for="registerName">Họ và tên</label>
                     <input type="text" id="registerName" placeholder="Nhập họ và tên" required>
@@ -1245,6 +1624,7 @@
                 
                 closeModal('loginModal');
                 updateLoginButton(user);
+                closeModal('loginModal'); // Đảm bảo ẩn loginModal khi đăng nhập Google
                 
             } catch (error) {
                 let errorMessage = 'Đăng nhập Google thất bại!';
@@ -1430,33 +1810,72 @@
         // Update login button based on auth state
         function updateLoginButton(user) {
             console.log('Updating login button for user:', user);
-            
             const loginBtn = document.querySelector('.login-btn');
-            if (!loginBtn) {
-                console.error('Login button not found!');
+            const headerActions = document.querySelector('.header-actions');
+            const cartIcon = document.querySelector('.cart-icon');
+            if (!loginBtn || !headerActions) {
+                console.error('Login button or header actions not found!');
                 return;
             }
-            
+            // Xóa dropdown cũ nếu có
+            const oldDropdown = document.querySelector('.account-dropdown');
+            if (oldDropdown) oldDropdown.remove();
             if (user) {
+                // Hiện cart-icon khi đã đăng nhập
+                if (cartIcon) cartIcon.classList.remove('hide-cart');
                 // Show user name or email, truncate if too long
                 const displayName = user.displayName || user.email;
                 const shortName = displayName.length > 15 ? displayName.substring(0, 12) + '...' : displayName;
                 
-                console.log('Setting logged in state for:', displayName);
-                
-                loginBtn.innerHTML = `
-                    <i class=\"fas fa-user\"></i>
-                    ${shortName}
+                // Tạo dropdown
+                const dropdown = document.createElement('div');
+                dropdown.className = 'account-dropdown';
+                dropdown.innerHTML = `
+                    <button class="account-btn" id="accountBtn" title="${displayName}">
+                        <i class=\"fas fa-user\"></i>
+                        ${shortName}
+                        <i class=\"fas fa-chevron-down\" style=\"font-size:0.9em;\"></i>
+                    </button>
+                    <div class="account-dropdown-menu" id="accountDropdownMenu">
+                        <a href="profile.html?tab=profile">Quản lý tài khoản</a>
+                        <a href="profile.html?tab=bookshelf">Tủ sách cá nhân</a>
+                        <a href="profile.html?tab=orders">Quản lý đơn hàng</a>
+                        <a href="profile.html?tab=support">Hỗ trợ khách hàng</a>
+                        <hr class="dropdown-divider">
+                        <button onclick="closeModal('loginModal'); confirmLogout('${displayName}'); return false;">Đăng xuất</button>
+                    </div>
                 `;
-                loginBtn.title = displayName; // Show full name on hover
+                // Thay thế loginBtn bằng dropdown
+                loginBtn.style.display = 'none';
+                const searchBox = headerActions.querySelector('.search-box');
+                if (searchBox && searchBox.nextSibling) {
+                    headerActions.insertBefore(dropdown, searchBox.nextSibling);
+                } else {
+                    headerActions.appendChild(dropdown);
+                }
                 
-                loginBtn.onclick = function(e) {
-                    e.preventDefault();
-                    confirmLogout(displayName);
-                };
+                // Xử lý dropdown toggle
+                const accountBtn = dropdown.querySelector('#accountBtn');
+                const dropdownMenu = dropdown.querySelector('#accountDropdownMenu');
+                accountBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                    accountBtn.classList.toggle('active');
+                });
+                // Ẩn dropdown khi click ra ngoài
+                document.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdownMenu.classList.remove('show');
+                        accountBtn.classList.remove('active');
+                    }
+                });
             } else {
-                console.log('Setting logged out state');
-                
+                // Ẩn cart-icon khi chưa đăng nhập
+                if (cartIcon) cartIcon.classList.add('hide-cart');
+                // Nếu chưa đăng nhập, chỉ hiện nút đăng nhập
+                const oldDropdown = document.querySelector('.account-dropdown');
+                if (oldDropdown) oldDropdown.remove();
+                loginBtn.style.display = '';
                 loginBtn.innerHTML = `
                     <i class=\"fas fa-user\"></i>
                     Đăng nhập
@@ -1849,6 +2268,7 @@
                 window.firebaseAuth.signOut().then(() => {
                     showSuccess('Đăng xuất thành công!', 'Bạn đã đăng xuất khỏi tài khoản.');
                     updateLoginButton(null);
+                    closeModal('loginModal'); // Đảm bảo ẩn loginModal khi đăng xuất
                 }).catch((error) => {
                     showError('Lỗi đăng xuất', 'Không thể đăng xuất: ' + error.message);
                 });
@@ -1906,6 +2326,51 @@
         // Uncomment to test notification system
         // testNotificationSystem();
         
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const headerSearch = document.querySelector('.header-search');
+            const searchToggle = document.querySelector('.search-toggle');
+            const searchForm = document.querySelector('.search-form');
+            if (headerSearch && searchToggle && searchForm) {
+                searchToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    headerSearch.classList.toggle('active');
+                    if (headerSearch.classList.contains('active')) {
+                        setTimeout(() => searchForm.querySelector('input').focus(), 200);
+                    }
+                });
+                // Đóng khi click ra ngoài
+                document.addEventListener('click', function(e) {
+                    if (!headerSearch.contains(e.target)) {
+                        headerSearch.classList.remove('active');
+                    }
+                });
+                // Đóng khi submit
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    headerSearch.classList.remove('active');
+                    // Xử lý tìm kiếm ở đây nếu muốn
+                });
+            }
+        });
+
+        // Back to Top Button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopBtn = document.getElementById('backToTopBtn');
+            // Luôn ẩn nút khi vừa tải trang
+            backToTopBtn.style.display = 'none';
+            // Lắng nghe sự kiện cuộn
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
 
     </script>
 </body>
