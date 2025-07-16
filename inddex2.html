@@ -44,10 +44,10 @@
     </script>
     <style>
         /* === TONE MÀU MỚI === */
-        /* Nền: #E6F3FA (xanh nhạt) */
-        /* Văn bản: #1E3A8A (xanh than đậm) */
-        /* Màu nhấn: #E4B04A (vàng ánh kim nhạt) */
-        /* Màu nút: nền vàng ánh kim nhạt, chữ xanh than đậm hoặc nền xanh than đậm, chữ vàng ánh kim nhạt */
+        /* Nền: #333333 (xám đậm) */
+        /* Văn bản: #F5F5F5 (trắng nhạt) */
+        /* Màu nhấn: #FFA500 (cam) */
+        /* Màu nút: nền cam, chữ xám đậm hoặc nền xám đậm, chữ cam */
         * {
             margin: 0;
             padding: 0;
@@ -57,14 +57,14 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #1E3A8A; /* Văn bản chính */
-            background-color: #E6F3FA; /* Nền chính */
+            color: #F5F5F5; /* Văn bản chính */
+            background-color: #333333; /* Nền chính */
         }
 
         /* Header */
         .header {
-            background: #E6F3FA; /* Nền header */
-            color: #1E3A8A;
+            background: #333333; /* Nền header */
+            color: #F5F5F5;
             padding: 1rem 0;
             position: sticky;
             top: 0;
@@ -86,7 +86,7 @@
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            color: #E4B04A; /* Màu nhấn logo */
+            color: #FFA500; /* Màu nhấn logo */
             text-decoration: none;
         }
 
@@ -97,18 +97,18 @@
         }
 
         .nav-menu a {
-            color: #1E3A8A;
+            color: #F5F5F5;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .nav-menu a:hover {
-            color: #E4B04A; /* Màu nhấn khi hover/active */
+            color: #FFA500; /* Màu nhấn khi hover/active */
         }
 
         .nav-menu a.active {
-            color: #E4B04A; /* Màu nhấn khi hover/active */
+            color: #FFA500; /* Màu nhấn khi hover/active */
             font-weight: 700;
         }
 
@@ -123,7 +123,7 @@
         .search-box {
             display: flex;
             align-items: center;
-            background: #F0F7FB; /* Nền search box header */
+            background: #222; /* Nền search box header */
             border-radius: 25px;
             padding: 0.5rem 1rem;
         }
@@ -131,19 +131,19 @@
         .search-box input {
             background: none;
             border: none;
-            color: #1E3A8A;
+            color: #F5F5F5;
             outline: none;
             width: 200px;
         }
 
         .search-box input::placeholder {
-            color: #E4B04A; /* Màu nhấn placeholder */
+            color: #FFA500; /* Màu nhấn placeholder */
         }
 
         .login-btn {
-            background: #E6F3FA;
-            color: #E4B04A; /* Nút đăng nhập: chữ vàng ánh kim nhạt */
-            border: 2px solid #E4B04A;
+            background: #333333;
+            color: #FFA500; /* Nút đăng nhập: chữ cam */
+            border: 2px solid #FFA500;
             padding: 0.5rem 1.5rem;
             border-radius: 25px;
             text-decoration: none;
@@ -162,9 +162,9 @@
             justify-content: center;
         }
         .login-btn:hover {
-            background: #E4B04A; /* Nút hover: nền vàng ánh kim nhạt */
-            border-color: #E4B04A;
-            color: #1E3A8A; /* Chữ xanh than đậm */
+            background: #FFA500; /* Nút hover: nền cam */
+            border-color: #FFA500;
+            color: #333333; /* Chữ xám đậm */
             box-shadow: 0 4px 16px rgba(124,58,237,0.12);
         }
         .login-btn i {
@@ -174,7 +174,7 @@
         }
 
         .cart-icon {
-            color: #E4B04A; /* Màu nhấn icon giỏ hàng */
+            color: #FFA500; /* Màu nhấn icon giỏ hàng */
             font-size: 1.5rem;
             position: relative;
         }
@@ -183,8 +183,8 @@
             position: absolute;
             top: -8px;
             right: -8px;
-            background: #E4B04A; /* Màu nhấn số lượng */
-            color: #fff;
+            background: #FFA500; /* Màu nhấn số lượng */
+            color: #333333;
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -219,8 +219,8 @@
             margin-bottom: 12px;
         }
         .hero-badge {
-            background: #F0F7FB;
-            color: #E4B04A; /* Màu nhấn badge */
+            background: #222;
+            color: #FFA500; /* Màu nhấn badge */
             font-weight: 600;
             border-radius: 20px;
             padding: 8px 24px;
@@ -232,17 +232,17 @@
         .hero-title-main {
             font-size: 3.2rem;
             font-weight: 800;
-            color: #E4B04A; /* Màu nhấn tiêu đề */
+            color: #FFA500; /* Màu nhấn tiêu đề */
             letter-spacing: -2px;
         }
         .hero-title-highlight {
             font-size: 3.2rem;
             font-weight: 800;
-            color: #1E3A8A;
+            color: #F5F5F5;
             margin-left: 8px;
         }
         .hero-desc {
-            color: #1E3A8A;
+            color: #F5F5F5;
             font-size: 1.15rem;
             margin-bottom: 32px;
             max-width: 500px;
@@ -257,7 +257,7 @@
         .hero-search .search-box {
             display: flex;
             align-items: center;
-            background: #F0F7FB;
+            background: #222;
             border-radius: 32px;
             box-shadow: 0 2px 12px rgba(124,58,237,0.07);
             padding: 8px 18px;
@@ -284,12 +284,12 @@
             padding: 8px 0;
         }
         .hero-search .search-box input::placeholder {
-            color: #E4B04A;
+            color: #FFA500;
             opacity: 1;
         }
         .hero-search .search-btn {
-            background: #E4B04A; /* Nút search vàng ánh kim nhạt */
-            color: #fff;
+            background: #FFA500; /* Nút search cam */
+            color: #333333;
             border: none;
             border-radius: 24px;
             padding: 10px 28px;
@@ -301,8 +301,8 @@
             margin-left: 8px;
         }
         .hero-search .search-btn:hover {
-            background: #1E3A8A;
-            color: #fff;
+            background: #F5F5F5;
+            color: #333333;
             box-shadow: 0 4px 16px rgba(124,58,237,0.18);
         }
         @media (max-width: 900px) {
@@ -331,9 +331,9 @@
             height: 420px;
             object-fit: cover;
             border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(228,176,74,0.18);
+            box-shadow: 0 12px 40px rgba(70,130,180,0.18);
             z-index: 2;
-            background: #F0F7FB;
+            background: #222;
         }
         .hero-decor {
             position: absolute;
@@ -372,14 +372,14 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 3rem 2rem;
-            color: #1E3A8A;
+            color: #F5F5F5;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #E4B04A; /* Màu nhấn tiêu đề section */
+            color: #FFA500; /* Màu nhấn tiêu đề section */
         }
 
         /* Categories */
@@ -391,11 +391,11 @@
         }
 
         .category-card {
-            background: #F0F7FB; /* Nền card */
+            background: #222; /* Nền card */
             border-radius: 15px;
             padding: 2rem;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(228,176,74,0.05);
+            box-shadow: 0 5px 15px rgba(255,255,0,0.05);
             transition: transform 0.3s ease;
         }
 
@@ -405,18 +405,18 @@
 
         .category-icon {
             font-size: 3rem;
-            color: #E4B04A; /* Màu nhấn icon */
+            color: #FFA500; /* Màu nhấn icon */
             margin-bottom: 1rem;
         }
 
         .category-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #E4B04A;
+            color: #FFA500;
         }
 
         .category-card p {
-            color: #1E3A8A;
+            color: #F5F5F5;
             line-height: 1.6;
         }
 
@@ -429,10 +429,10 @@
         }
 
         .book-card {
-            background: #F0F7FB;
+            background: #222;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(228,176,74,0.05);
+            box-shadow: 0 5px 15px rgba(255,255,0,0.05);
             transition: transform 0.3s ease;
         }
 
@@ -454,24 +454,24 @@
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
-            color: #E4B04A;
+            color: #FFA500;
         }
 
         .book-author {
-            color: #1E3A8A;
+            color: #F5F5F5;
             margin-bottom: 1rem;
         }
 
         .book-price {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #E4B04A;
+            color: #FFA500;
             margin-bottom: 1rem;
         }
 
         .add-to-cart {
-            background: #E4B04A; /* Nút thêm vào giỏ vàng ánh kim nhạt */
-            color: #fff;
+            background: #FFA500; /* Nút thêm vào giỏ cam */
+            color: #333333;
             border: none;
             padding: 0.8rem 1.5rem;
             border-radius: 25px;
@@ -482,14 +482,14 @@
         }
 
         .add-to-cart:hover {
-            background: #1E3A8A;
-            color: #fff;
+            background: #F5F5F5;
+            color: #333333;
         }
 
         /* Newsletter */
         .newsletter {
-            background: #F0F7FB; /* Nền newsletter */
-            color: #1E3A8A;
+            background: #222; /* Nền newsletter */
+            color: #F5F5F5;
             padding: 3rem 0;
             text-align: center;
             margin: 3rem 0;
@@ -498,7 +498,7 @@
         .newsletter h2 {
             font-size: 2rem;
             margin-bottom: 1rem;
-            color: #E4B04A;
+            color: #FFA500;
         }
 
         .newsletter p {
@@ -521,13 +521,13 @@
             border-radius: 25px;
             outline: none;
             font-size: 1rem;
-            background: #E6F3FA;
-            color: #1E3A8A;
+            background: #333333;
+            color: #F5F5F5;
         }
 
         .newsletter-form button {
-            background: #E4B04A;
-            color: #fff;
+            background: #FFA500;
+            color: #333333;
             border: none;
             padding: 1rem 2rem;
             border-radius: 25px;
@@ -537,14 +537,14 @@
         }
 
         .newsletter-form button:hover {
-            background: #1E3A8A;
-            color: #fff;
+            background: #F5F5F5;
+            color: #333333;
         }
 
         /* Footer */
         .footer {
-            background: #F0F7FB;
-            color: #1E3A8A;
+            background: #222;
+            color: #F5F5F5;
             padding: 3rem 0 1rem;
         }
 
@@ -559,17 +559,17 @@
 
         .footer-section h3 {
             margin-bottom: 1rem;
-            color: #E4B04A;
+            color: #FFA500;
         }
 
         .footer-section p, .footer-section a {
-            color: #1E3A8A;
+            color: #F5F5F5;
             text-decoration: none;
             line-height: 1.8;
         }
 
         .footer-section a:hover {
-            color: #E4B04A;
+            color: #FFA500;
         }
 
         .social-links {
@@ -579,13 +579,13 @@
         }
 
         .social-links a {
-            color: #E4B04A;
+            color: #FFA500;
             font-size: 1.5rem;
             transition: color 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #1E3A8A;
+            color: #F5F5F5;
         }
 
         .footer-bottom {
@@ -593,7 +593,7 @@
             padding-top: 2rem;
             border-top: 1px solid #34495e;
             margin-top: 2rem;
-            color: #1E3A8A;
+            color: #F5F5F5;
         }
 
         /* Modal Styles */
@@ -610,7 +610,7 @@
         }
 
         .modal-content {
-            background-color: #F0F7FB; /* Nền modal */
+            background-color: #222; /* Nền modal */
             margin: 5% auto;
             padding: 2rem;
             border-radius: 15px;
@@ -636,7 +636,7 @@
         }
 
         .notification-content {
-            background: #F0F7FB;
+            background: #222;
             border-radius: 20px;
             padding: 0;
             width: 90%;
@@ -694,12 +694,12 @@
         .notification-title {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #E4B04A;
+            color: #FFA500;
             margin-bottom: 0.5rem;
         }
 
         .notification-message {
-            color: #1E3A8A;
+            color: #F5F5F5;
             line-height: 1.6;
             font-size: 1rem;
         }
@@ -728,29 +728,29 @@
         }
 
         .notification-btn.primary {
-            background: #E4B04A;
-            color: #fff;
+            background: #FFA500;
+            color: #333333;
         }
 
         .notification-btn.primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.4);
         }
 
         .notification-btn.secondary {
-            background: #E6F3FA;
-            color: #E4B04A;
-            border: 2px solid #E4B04A;
+            background: #333333;
+            color: #FFA500;
+            border: 2px solid #FFA500;
         }
 
         .notification-btn.secondary:hover {
-            background: #F0F7FB;
-            color: #1E3A8A;
+            background: #222;
+            color: #F5F5F5;
         }
 
         .notification-btn.danger {
-            background: #E4B04A;
-            color: #fff;
+            background: #F5F5F5;
+            color: #333333;
         }
 
         .notification-btn.danger:hover {
@@ -765,7 +765,7 @@
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: #1E3A8A;
+            color: #F5F5F5;
             cursor: pointer;
             padding: 0.5rem;
             border-radius: 50%;
@@ -773,8 +773,8 @@
         }
 
         .notification-close:hover {
-            background: #E6F3FA;
-            color: #E4B04A;
+            background: #333333;
+            color: #FFA500;
         }
 
         @keyframes modalSlideIn {
@@ -798,7 +798,7 @@
         .modal-title {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #E4B04A;
+            color: #FFA500;
         }
 
         .close {
@@ -820,14 +820,14 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #E4B04A;
+            color: #FFA500;
             font-weight: 500;
         }
 
         .form-group input {
             width: 100%;
             padding: 0.8rem;
-            border: 2px solid #E6F3FA;
+            border: 2px solid #333333;
             border-radius: 8px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
@@ -835,13 +835,13 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #E4B04A;
+            border-color: #FFA500;
         }
 
         .form-submit {
             width: 100%;
-            background: #E4B04A;
-            color: #fff;
+            background: #FFA500;
+            color: #333333;
             padding: 1rem;
             border: none;
             border-radius: 8px;
@@ -853,15 +853,15 @@
 
         .form-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.4);
         }
 
         .google-login {
             width: 100%;
-            background: #E6F3FA;
-            color: #E4B04A;
+            background: #333333;
+            color: #FFA500;
             padding: 0.8rem;
-            border: 2px solid #E4B04A;
+            border: 2px solid #FFA500;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
@@ -874,8 +874,8 @@
         }
 
         .google-login:hover {
-            background: #F0F7FB;
-            color: #1E3A8A;
+            background: #222;
+            color: #F5F5F5;
         }
 
         .google-login img {
@@ -900,9 +900,9 @@
         }
 
         .divider span {
-            background: #F0F7FB;
+            background: #222;
             padding: 0 1rem;
-            color: #E4B04A;
+            color: #FFA500;
             font-size: 0.9rem;
         }
 
@@ -912,7 +912,7 @@
         }
 
         .form-footer a {
-            color: #E4B04A;
+            color: #FFA500;
             text-decoration: none;
             font-weight: 500;
         }
@@ -927,7 +927,7 @@
         }
 
         .forgot-password a {
-            color: #E4B04A;
+            color: #FFA500;
             text-decoration: none;
             font-size: 0.9rem;
         }
@@ -976,9 +976,9 @@
             display: inline-block;
         }
         .account-btn {
-            background: #E6F3FA;
-            color: #E4B04A;
-            border: 2px solid #E4B04A;
+            background: #333333;
+            color: #FFA500;
+            border: 2px solid #FFA500;
             padding: 0.5rem 1.5rem;
             border-radius: 25px;
             text-decoration: none;
@@ -992,22 +992,22 @@
             box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
         }
         .account-btn:hover, .account-btn.active {
-            background: #E4B04A;
-            color: #fff;
+            background: #FFA500;
+            color: #333333;
         }
         .account-dropdown-menu {
             display: none;
             position: absolute;
             right: 0;
             top: 110%;
-            background: #F0F7FB;
+            background: #222;
             min-width: 220px;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.18);
+            box-shadow: 0 8px 32px rgba(255, 165, 0, 0.18);
             border-radius: 16px;
             z-index: 3000;
             overflow: hidden;
             padding: 0.5rem 0;
-            border: 1.5px solid #E4B04A;
+            border: 1.5px solid #FFA500;
             animation: dropdownFadeIn 0.25s;
         }
         @keyframes dropdownFadeIn {
@@ -1022,7 +1022,7 @@
             align-items: center;
             width: 100%;
             padding: 0.85rem 1.5rem;
-            color: #1E3A8A;
+            color: #F5F5F5;
             background: none;
             border: none;
             text-align: left;
@@ -1035,19 +1035,19 @@
             gap: 0.7em;
         }
         .account-dropdown-menu a:hover, .account-dropdown-menu button:hover {
-            background: #E6F3FA;
-            color: #E4B04A;
+            background: #333333;
+            color: #FFA500;
         }
         .account-dropdown-menu button {
-            border-top: 1px solid #E6F3FA;
+            border-top: 1px solid #333333;
         }
         .account-dropdown-menu button:hover {
-            background: #1E3A8A;
-            color: #fff;
+            background: #F5F5F5;
+            color: #333333;
         }
         .account-dropdown-menu .dropdown-divider {
             height: 1px;
-            background: #E6F3FA;
+            background: #333333;
             margin: 0.25rem 0;
             border: none;
         }
@@ -1061,7 +1061,7 @@
         .search-toggle {
             background: none;
             border: none;
-            color: #E4B04A;
+            color: #FFA500;
             font-size: 1.3rem;
             cursor: pointer;
             padding: 8px;
@@ -1069,7 +1069,7 @@
             transition: background 0.2s;
         }
         .search-toggle:hover {
-            background: #F0F7FB;
+            background: #222;
         }
         .search-form {
             display: flex;
@@ -1079,7 +1079,7 @@
             top: 50%;
             transform: translateY(-50%) scaleX(0);
             transform-origin: right;
-            background: #F0F7FB;
+            background: #222;
             border-radius: 32px;
             box-shadow: 0 2px 12px rgba(124,58,237,0.07);
             padding: 6px 16px;
@@ -1100,17 +1100,17 @@
             background: transparent;
             outline: none;
             font-size: 1rem;
-            color: #1E3A8A;
+            color: #F5F5F5;
             flex: 1;
             padding: 8px 0;
         }
         .search-form input::placeholder {
-            color: #E4B04A;
+            color: #FFA500;
         }
         .search-form .search-btn {
             background: none;
             border: none;
-            color: #E4B04A;
+            color: #FFA500;
             font-size: 1.1rem;
             margin-left: 8px;
             cursor: pointer;
@@ -1119,8 +1119,8 @@
             transition: background 0.2s;
         }
         .search-form .search-btn:hover {
-            background: #E6F3FA;
-            color: #E4B04A;
+            background: #333333;
+            color: #F5F5F5;
         }
         @media (max-width: 600px) {
             .search-form {
@@ -1139,9 +1139,9 @@
             bottom: 32px;
             right: 32px;
             z-index: 3000;
-            background: #E6F3FA;
-            color: #E4B04A;
-            border: 1.5px solid #E4B04A;
+            background: #333333;
+            color: #FFA500;
+            border: 1.5px solid #FFA500;
             border-radius: 50%;
             width: 44px;
             height: 44px;
@@ -1157,9 +1157,9 @@
             justify-content: center;
         }
         #backToTopBtn:hover {
-            background: #E4B04A;
-            color: #fff;
-            border-color: #E6F3FA;
+            background: #FFA500;
+            color: #333333;
+            border-color: #333333;
             opacity: 1;
         }
         #backToTopBtn i {
@@ -1485,7 +1485,7 @@
                     <label for="forgotEmail">Email</label>
                     <input type="email" id="forgotEmail" placeholder="Nhập email của bạn" required>
                 </div>
-                <p style="color: #1E3A8A; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                <p style="color: #F5F5F5; font-size: 0.9rem; margin-bottom: 1.5rem;">
                     Chúng tôi sẽ gửi link đặt lại mật khẩu vào email của bạn.
                 </p>
                 <button type="submit" class="form-submit">Gửi yêu cầu</button>
