@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="css/owl.carousel.css">
 	<link rel="stylesheet" href="css/transitions.css">
 	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/color-purple.css">
+	<link rel="stylesheet" href="css/color-custom.css">
 	<link rel="stylesheet" href="css/responsive.css">
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 	<style>
@@ -33,6 +33,38 @@
 	.tg-banner .tg-btn:hover {
 		transform: translateY(-3px);
 		box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+	}
+	
+	/* Membership Package Hover Effects */
+	.tg-package-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+	}
+	
+	.tg-package-card .tg-btn:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+	}
+	
+	/* Basic Package Button Hover */
+	.tg-package-card:not([style*="gradient"]) .tg-btn:hover {
+		background: #4A6366 !important;
+		color: white !important;
+		box-shadow: 0 6px 20px rgba(74, 99, 102, 0.4) !important;
+	}
+	
+	/* Premium Package Button Hover */
+	.tg-package-card[style*="gradient"] .tg-btn:hover {
+		background: rgba(255,255,255,0.9) !important;
+		color: #4A6366 !important;
+		box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4) !important;
+	}
+	
+	/* VIP Package Button Hover */
+	.tg-package-card[style*="#ffd700"] .tg-btn:hover {
+		background: #E8944A !important;
+		color: white !important;
+		box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4) !important;
 	}
 	
 	.tg-banner .tg-btn:not(.tg-active):hover {
@@ -73,7 +105,7 @@
 	
 	/* Banner Styles */
 	.tg-banner {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
 		min-height: 600px;
 		position: relative;
 		overflow: hidden;
@@ -85,8 +117,8 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-		opacity: 0.3;
+		background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23BEB6F2" fill-opacity="0.15"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+		opacity: 0.4;
 	}
 	
 	/* User Login Design */
@@ -130,6 +162,21 @@
 		white-space: nowrap;
 	}
 	
+	/* Navigation Menu Layout */
+	.tg-navigation ul {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		gap: 0;
+		width: 100%;
+	}
+	
+	.tg-navigation ul li {
+		display: flex;
+		align-items: center;
+	}
+	
 	/* Middle Container Layout */
 	.tg-middlecontainer .col-xs-12 {
 		display: flex;
@@ -143,16 +190,82 @@
 		flex-shrink: 0;
 	}
 	
+	/* Navigation Action Buttons */
+	.tg-action-buttons {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-left: auto;
+		padding: 0;
+	}
+	
+	.tg-action-buttons .dropdown {
+		display: flex;
+		align-items: center;
+		margin: 0;
+	}
+	
 	/* Search Dropdown Styles */
 	.tg-wishlistandcart {
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		justify-content: center;
+		gap: 15px;
+		margin-left: auto;
+		padding: 0 15px;
 	}
 	
 	.tg-wishlistandcart .dropdown {
 		display: flex;
 		align-items: center;
+		justify-content: center;
+		margin: 0 5px;
+	}
+	
+	.tg-action-buttons .tg-searchbtn,
+	.tg-action-buttons .tg-btnthemedropdown {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #666;
+		width: 28px;
+		height: 28px;
+		border-radius: 50%;
+		color: white;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+		position: relative;
+	}
+	
+	.tg-action-buttons .tg-searchbtn:hover,
+	.tg-action-buttons .tg-btnthemedropdown:hover {
+		background: #F4A261;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);
+		color: white;
+		text-decoration: none;
+	}
+	
+	.tg-action-buttons .tg-searchbtn i,
+	.tg-action-buttons .tg-btnthemedropdown i {
+		font-size: 12px;
+	}
+	
+	.tg-action-buttons .tg-themebadge {
+		position: absolute;
+		top: -5px;
+		right: -5px;
+		background: #e74c3c;
+		color: white;
+		border-radius: 50%;
+		width: 16px;
+		height: 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 10px;
+		font-weight: bold;
 	}
 	
 	.tg-searchdropdown {
@@ -174,9 +287,9 @@
 	}
 	
 	.tg-searchbtn:hover {
-		background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+		background: #F4A261;
 		transform: translateY(-2px);
-		box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+		box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);
 		color: white;
 		text-decoration: none;
 	}
@@ -273,14 +386,20 @@
 	
 	/* Mobile Responsive for Search */
 	@media (max-width: 768px) {
-		.tg-wishlistandcart {
-			flex-direction: column;
-			gap: 10px;
-			width: 100%;
+		.tg-action-buttons {
+			gap: 8px;
+			margin-left: auto;
 		}
 		
-		.tg-searchdropdown {
-			align-self: center;
+		.tg-action-buttons .tg-searchbtn,
+		.tg-action-buttons .tg-btnthemedropdown {
+			width: 24px;
+			height: 24px;
+		}
+		
+		.tg-action-buttons .tg-searchbtn i,
+		.tg-action-buttons .tg-btnthemedropdown i {
+			font-size: 10px;
 		}
 		
 		.tg-searchdropdownmenu {
@@ -340,10 +459,61 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<strong class="tg-logo"><a href="index-2.html"><img src="images/logo.png" alt="company name here"></a></strong>
+							<strong class="tg-logo"><a href="index.html"><img src="images/logo1-Photoroom.png" alt="Thư Viện Sách" style="max-height: 60px; width: auto;"></a></strong>
 							<div class="tg-userlogin">
-								<figure><a href="javascript:void(0);"><img src="images/users/img-01.jpg" alt="image description"></a></figure>
-								<span>Xin chào, John</span>
+								<figure><a href="javascript:void(0);" id="user-dropdown-trigger"><img src="images/users/img-01.jpg" alt="image description"></a></figure>
+								<span>Đăng nhập</span>
+								<i class="fa fa-chevron-down"></i>
+								
+								<!-- User Dropdown Menu -->
+								<div class="tg-user-dropdown" id="user-dropdown">
+									<div class="tg-user-profile">
+										<div class="tg-user-info">
+											<h4>Quân Phạm</h4>
+											<div class="tg-user-avatar">
+												<img src="images/users/img-01.jpg" alt="User Avatar">
+											</div>
+										</div>
+										<div class="tg-membership-info">
+											<div class="tg-points">
+												<i class="fa fa-coins"></i>
+												<span>0</span>
+											</div>
+										</div>
+										<button class="tg-become-member">Trở thành hội viên</button>
+									</div>
+									
+									<div class="tg-user-menu">
+										<a href="javascript:void(0);" class="tg-menu-item">
+											<i class="fa fa-user"></i>
+											<span>Quản lý tài khoản</span>
+										</a>
+										<a href="javascript:void(0);" class="tg-menu-item">
+											<i class="fa fa-book"></i>
+											<span>Tủ sách cá nhân</span>
+										</a>
+										<a href="javascript:void(0);" class="tg-menu-item">
+											<i class="fa fa-shopping-cart"></i>
+											<span>Quản lý đơn hàng</span>
+										</a>
+										<a href="javascript:void(0);" class="tg-menu-item">
+											<i class="fa fa-trophy"></i>
+											<span>Thứ hạng đọc sách</span>
+										</a>
+										<a href="javascript:void(0);" class="tg-menu-item">
+											<i class="fa fa-dollar-sign"></i>
+											<span>Lịch sử giao dịch</span>
+										</a>
+										<a href="javascript:void(0);" class="tg-menu-item">
+											<i class="fa fa-headphones"></i>
+											<span>Hỗ trợ khách hàng</span>
+										</a>
+										<a href="javascript:void(0);" class="tg-menu-item tg-logout">
+											<i class="fa fa-sign-out"></i>
+											<span>Đăng xuất</span>
+										</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -412,87 +582,89 @@
 										<li><a href="aboutus.html">Về chúng tôi</a></li>
 										<li><a href="contactus.html">Liên hệ</a></li>
 										
+										<!-- Action Buttons -->
+										<li class="tg-action-buttons">
+											<div class="dropdown tg-themedropdown tg-searchdropdown">
+											<a href="javascript:void(0);" class="tg-searchbtn" id="tg-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="fa fa-search"></i>
+											</a>
+											<div class="dropdown-menu tg-searchdropdownmenu" aria-labelledby="tg-search">
+												<div class="tg-searchform">
+													<div class="tg-inputgroup">
+														<input type="text" class="form-control" placeholder="Tìm kiếm sách..." name="search">
+														<button type="submit" class="tg-searchsubmit">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="dropdown tg-themedropdown tg-wishlistdropdown">
+											<a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="tg-themebadge">3</span>
+												<i class="icon-heart"></i>
+											</a>
+											<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
+												<div class="tg-description"><p>Chưa có sản phẩm nào được thêm vào danh sách yêu thích!</p></div>
+											</div>
+										</div>
+										<div class="dropdown tg-themedropdown tg-minicartdropdown">
+											<a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="tg-themebadge">3</span>
+												<i class="icon-cart"></i>
+											</a>
+											<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
+												<div class="tg-minicartbody">
+													<div class="tg-minicarproduct">
+														<figure>
+															<img src="images/products/img-01.jpg" alt="image description">
+															
+														</figure>
+														<div class="tg-minicarproductdata">
+															<h5><a href="javascript:void(0);">Our State Fair Is A Great Function</a></h5>
+															<h6><a href="javascript:void(0);">$ 12.15</a></h6>
+														</div>
+													</div>
+													<div class="tg-minicarproduct">
+														<figure>
+															<img src="images/products/img-02.jpg" alt="image description">
+															
+														</figure>
+														<div class="tg-minicarproductdata">
+															<h5><a href="javascript:void(0);">Bring Me To Light</a></h5>
+															<h6><a href="javascript:void(0);">$ 12.15</a></h6>
+														</div>
+													</div>
+													<div class="tg-minicarproduct">
+														<figure>
+															<img src="images/products/img-03.jpg" alt="image description">
+															
+														</figure>
+														<div class="tg-minicarproductdata">
+															<h5><a href="javascript:void(0);">Have Faith In Your Soul</a></h5>
+															<h6><a href="javascript:void(0);">$ 12.15</a></h6>
+														</div>
+													</div>
+												</div>
+												<div class="tg-minicartfoot">
+													<a class="tg-btnemptycart" href="javascript:void(0);">
+														<i class="fa fa-trash-o"></i>
+														<span>Xóa giỏ hàng</span>
+													</a>
+													<span class="tg-subtotal">Tổng cộng: <strong>35.78</strong></span>
+													<div class="tg-btns">
+														<a class="tg-btn tg-active" href="javascript:void(0);">Xem giỏ hàng</a>
+														<a class="tg-btn" href="javascript:void(0);">Thanh toán</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
 									</ul>
+									
 									</div>
 								</nav>
-								<div class="tg-wishlistandcart">
-									<!-- Search Icon with Dropdown -->
-									<div class="dropdown tg-themedropdown tg-searchdropdown">
-										<a href="javascript:void(0);" class="tg-searchbtn" id="tg-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<i class="fa fa-search"></i>
-										</a>
-										<div class="dropdown-menu tg-searchdropdownmenu" aria-labelledby="tg-search">
-											<div class="tg-searchform">
-												<div class="tg-inputgroup">
-													<input type="text" class="form-control" placeholder="Tìm kiếm sách..." name="search">
-													<button type="submit" class="tg-searchsubmit">
-														<i class="fa fa-search"></i>
-													</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="dropdown tg-themedropdown tg-wishlistdropdown">
-										<a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="tg-themebadge">3</span>
-											<i class="icon-heart"></i>
-										</a>
-										<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
-											<div class="tg-description"><p>Chưa có sản phẩm nào được thêm vào danh sách yêu thích!</p></div>
-										</div>
-									</div>
-									<div class="dropdown tg-themedropdown tg-minicartdropdown">
-										<a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="tg-themebadge">3</span>
-											<i class="icon-cart"></i>
-										</a>
-										<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
-											<div class="tg-minicartbody">
-												<div class="tg-minicarproduct">
-													<figure>
-														<img src="images/products/img-01.jpg" alt="image description">
-														
-													</figure>
-													<div class="tg-minicarproductdata">
-														<h5><a href="javascript:void(0);">Our State Fair Is A Great Function</a></h5>
-														<h6><a href="javascript:void(0);">$ 12.15</a></h6>
-													</div>
-												</div>
-												<div class="tg-minicarproduct">
-													<figure>
-														<img src="images/products/img-02.jpg" alt="image description">
-														
-													</figure>
-													<div class="tg-minicarproductdata">
-														<h5><a href="javascript:void(0);">Bring Me To Light</a></h5>
-														<h6><a href="javascript:void(0);">$ 12.15</a></h6>
-													</div>
-												</div>
-												<div class="tg-minicarproduct">
-													<figure>
-														<img src="images/products/img-03.jpg" alt="image description">
-														
-													</figure>
-													<div class="tg-minicarproductdata">
-														<h5><a href="javascript:void(0);">Have Faith In Your Soul</a></h5>
-														<h6><a href="javascript:void(0);">$ 12.15</a></h6>
-													</div>
-												</div>
-											</div>
-											<div class="tg-minicartfoot">
-												<a class="tg-btnemptycart" href="javascript:void(0);">
-													<i class="fa fa-trash-o"></i>
-													<span>Xóa giỏ hàng</span>
-												</a>
-												<span class="tg-subtotal">Tổng cộng: <strong>35.78</strong></span>
-												<div class="tg-btns">
-													<a class="tg-btn tg-active" href="javascript:void(0);">Xem giỏ hàng</a>
-													<a class="tg-btn" href="javascript:void(0);">Thanh toán</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -531,7 +703,7 @@
 									Hơn <strong>10,000+</strong> đầu sách đa dạng thể loại, từ văn học kinh điển đến sách khoa học hiện đại. Tìm kiếm, mua sắm và tận hưởng niềm vui đọc sách cùng chúng tôi.
 								</p>
 								<div class="tg-bannerbtns" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-									<a class="tg-btn tg-active" href="products.html" style="background: #fff; color: #667eea; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: inline-flex; align-items: center; gap: 10px;">
+									<a class="tg-btn tg-active" href="products.html" style="background: #F4A261; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3); display: inline-flex; align-items: center; gap: 10px;">
 										<i class="fa fa-shopping-basket" style="font-size: 1.1rem;"></i>
 										<em>Khám phá ngay</em>
 									</a>
@@ -565,9 +737,9 @@
 								<img src="images/img-01.jpg" alt="Banner Thư Viện Sách" style="max-width: 100%; height: auto; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); transform: perspective(1000px) rotateY(-15deg); transition: transform 0.3s ease;">
 								
 								<!-- Floating Book Elements -->
-								<div style="position: absolute; top: -20px; left: -30px; width: 80px; height: 100px; background: linear-gradient(45deg, #ff6b6b, #ee5a24); border-radius: 8px; transform: rotate(-15deg); box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: float 4s ease-in-out infinite;"></div>
-								<div style="position: absolute; top: 50px; right: -20px; width: 60px; height: 80px; background: linear-gradient(45deg, #4834d4, #686de0); border-radius: 8px; transform: rotate(10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: float 5s ease-in-out infinite reverse;"></div>
-								<div style="position: absolute; bottom: -10px; left: 20px; width: 70px; height: 90px; background: linear-gradient(45deg, #00b894, #00cec9); border-radius: 8px; transform: rotate(-5deg); box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: float 6s ease-in-out infinite;"></div>
+								<div style="position: absolute; top: -20px; left: -30px; width: 80px; height: 100px; background: linear-gradient(45deg, #F4A261, #E8944A); border-radius: 8px; transform: rotate(-15deg); box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: float 4s ease-in-out infinite;"></div>
+								<div style="position: absolute; top: 50px; right: -20px; width: 60px; height: 80px; background: linear-gradient(45deg, #4A6366, #6B7F82); border-radius: 8px; transform: rotate(10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: float 5s ease-in-out infinite reverse;"></div>
+								<div style="position: absolute; bottom: -10px; left: 20px; width: 70px; height: 90px; background: linear-gradient(45deg, #A8D5BA, #8BC4A3); border-radius: 8px; transform: rotate(-5deg); box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: float 6s ease-in-out infinite;"></div>
 							</figure>
 						</div>
 					</div>
@@ -850,34 +1022,151 @@
 			<!--************************************
 					Best Selling End
 			*************************************-->
-			<!--************************************
-					Featured Item Start
+				<!--************************************
+					Member Benefits Banner Start
 			*************************************-->
 			<section class="tg-bglight tg-haslayout">
 				<div class="container">
 					<div class="row">
-						<div class="tg-featureditm">
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
-								<figure><img src="images/img-02.png" alt="image description"></figure>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-								<div class="tg-featureditmcontent">
-									<div class="tg-themetagbox"><span class="tg-themetag">nổi bật</span></div>
-									<div class="tg-booktitle">
-										<h3><a href="javascript:void(0);">Những điều cần biết về thiết kế phẳng xanh</a></h3>
+						<div class="tg-memberbenefits">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<div class="tg-memberbenefitscontent" style="padding: 30px 0;">
+									<div class="tg-themetagbox" style="text-align: center; margin-bottom: 20px;">
+										<span class="tg-themetag" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: 600;">GÓI HỘI VIÊN</span>
 									</div>
-									<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Farrah Whisenhunt</a></span>
-									<span class="tg-stars"><span></span></span>
-									<div class="tg-priceandbtn">
-										<span class="tg-bookprice">
-											<ins>$23.18</ins>
-											<del>$30.20</del>
-										</span>
-										<a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
-											<i class="fa fa-shopping-basket"></i>
-											<em>Thêm vào giỏ</em>
-										</a>
+									<div class="tg-membertitle" style="margin: 20px 0; text-align: center;">
+										<h3 style="font-size: 2.2rem; font-weight: 700; color: #333; margin-bottom: 15px;">
+											<a href="membership.html" style="color: inherit; text-decoration: none;">Chọn gói hội viên phù hợp</a>
+										</h3>
 									</div>
+									
+									<!-- 3 Gói Hội Viên -->
+									<div class="tg-membershippackages" style="margin: 30px 0;">
+										<div class="row" style="display: flex; align-items: stretch;">
+											<!-- Gói Cơ Bản -->
+											<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="display: flex;">
+												<div class="tg-package-card" style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center; transition: all 0.3s ease; border: 2px solid #e0e0e0; width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+													<div class="tg-package-header" style="margin-bottom: 20px;">
+														<h4 style="font-size: 1.5rem; font-weight: 700; color: #333; margin-bottom: 10px;">Gói Cơ Bản</h4>
+														<div class="tg-package-price" style="margin-bottom: 15px;">
+															<ins style="font-size: 1.8rem; font-weight: 700; color: #667eea;">99K</ins>
+															<span style="font-size: 0.9rem; color: #666;">/tháng</span>
+														</div>
+													</div>
+													<div class="tg-package-benefits" style="margin-bottom: 25px;">
+														<ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #667eea; margin-right: 8px; font-size: 14px;"></i>
+																<span>Giảm giá 5% cho tất cả sách</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #667eea; margin-right: 8px; font-size: 14px;"></i>
+																<span>Giao hàng miễn phí từ 500K</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #667eea; margin-right: 8px; font-size: 14px;"></i>
+																<span>Thông báo sách mới</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #667eea; margin-right: 8px; font-size: 14px;"></i>
+																<span>Hỗ trợ qua email</span>
+															</li>
+														</ul>
+													</div>
+													<a class="tg-btn" href="membership.html?package=basic" style="background: #f8f9fa; color: #4A6366; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; border: 2px solid #4A6366; box-shadow: 0 4px 15px rgba(74, 99, 102, 0.2);">
+														<em>Chọn gói</em>
+													</a>
+												</div>
+											</div>
+											
+											<!-- Gói Premium -->
+											<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="display: flex;">
+												<div class="tg-package-card" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 8px 30px rgba(74, 99, 102, 0.3); text-align: center; transition: all 0.3s ease; border: 2px solid #4A6366; position: relative; transform: scale(1.05); width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+													<div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 15px; font-size: 12px; font-weight: 600;">PHỔ BIẾN</div>
+													<div class="tg-package-header" style="margin-bottom: 20px;">
+														<h4 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 10px;">Gói Premium</h4>
+														<div class="tg-package-price" style="margin-bottom: 15px;">
+															<ins style="font-size: 1.8rem; font-weight: 700; color: white;">199K</ins>
+															<span style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">/tháng</span>
+														</div>
+													</div>
+													<div class="tg-package-benefits" style="margin-bottom: 25px;">
+														<ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
+																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
+																<span>Giảm giá 15% cho tất cả sách</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
+																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
+																<span>Miễn phí giao hàng toàn quốc</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
+																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
+																<span>Ưu tiên đặt sách mới phát hành</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
+																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
+																<span>Tham gia các sự kiện đặc biệt</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
+																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
+																<span>Hỗ trợ 24/7 qua chat</span>
+															</li>
+														</ul>
+													</div>
+													<a class="tg-btn" href="membership.html?package=premium" style="background: white; color: #4A6366; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);">
+														<em>Chọn gói</em>
+													</a>
+												</div>
+											</div>
+											
+											<!-- Gói VIP -->
+											<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="display: flex;">
+												<div class="tg-package-card" style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center; transition: all 0.3s ease; border: 2px solid #ffd700; width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+													<div class="tg-package-header" style="margin-bottom: 20px;">
+														<h4 style="font-size: 1.5rem; font-weight: 700; color: #333; margin-bottom: 10px;">Gói VIP</h4>
+														<div class="tg-package-price" style="margin-bottom: 15px;">
+															<ins style="font-size: 1.8rem; font-weight: 700; color: #ffd700;">399K</ins>
+															<span style="font-size: 0.9rem; color: #666;">/tháng</span>
+														</div>
+													</div>
+													<div class="tg-package-benefits" style="margin-bottom: 25px;">
+														<ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
+																<span>Giảm giá 25% cho tất cả sách</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
+																<span>Miễn phí giao hàng toàn quốc</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
+																<span>Đặt trước sách mới phát hành</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
+																<span>Tham gia sự kiện VIP độc quyền</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
+																<span>Hỗ trợ 24/7 qua điện thoại</span>
+															</li>
+															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
+																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
+																<span>Tặng quà sinh nhật đặc biệt</span>
+															</li>
+														</ul>
+													</div>
+													<a class="tg-btn" href="membership.html?package=vip" style="background: #F4A261; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);">
+														<em>Chọn gói</em>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									
 								</div>
 							</div>
 						</div>
@@ -885,7 +1174,7 @@
 				</div>
 			</section>
 			<!--************************************
-					Featured Item End
+					Member Benefits Banner End
 			*************************************-->
 			<!--************************************
 					New Release Start
@@ -1046,6 +1335,48 @@
 			<!--************************************
 					Collection Count End
 			*************************************-->
+				<!--************************************
+					Testimonials Start
+			*************************************-->
+			<section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-05.jpg">
+				<div class="tg-sectionspace tg-haslayout">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-push-2">
+								<div id="tg-testimonialsslider" class="tg-testimonialsslider tg-testimonials owl-carousel">
+									<div class="item tg-testimonial">
+										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+										<blockquote><q>Thư viện sách này thực sự tuyệt vời! Tôi đã tìm thấy rất nhiều cuốn sách hay và bổ ích. Dịch vụ giao hàng nhanh chóng và nhân viên rất nhiệt tình. Chắc chắn sẽ giới thiệu cho bạn bè!</q></blockquote>
+										<div class="tg-testimonialauthor">
+											<h3>Nguyễn Thị Hương</h3>
+											<span>Giáo viên @ Trường THPT Lê Quý Đôn</span>
+										</div>
+									</div>
+									<div class="item tg-testimonial">
+										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+										<blockquote><q>Là một sinh viên, tôi rất hài lòng với chất lượng sách và giá cả hợp lý. Thư viện có đầy đủ các thể loại sách từ văn học đến khoa học. Rất phù hợp cho việc học tập và nghiên cứu.</q></blockquote>
+										<div class="tg-testimonialauthor">
+											<h3>Trần Văn Minh</h3>
+											<span>Sinh viên @ Đại học Quốc gia Hà Nội</span>
+										</div>
+									</div>
+									<div class="item tg-testimonial">
+										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+										<blockquote><q>Đã mua sách ở đây được 2 năm rồi. Chất lượng sách rất tốt, bìa đẹp và nội dung hay. Đặc biệt thích chương trình khuyến mãi và gói hội viên VIP. Rất đáng tin cậy!</q></blockquote>
+										<div class="tg-testimonialauthor">
+											<h3>Lê Thị Lan</h3>
+											<span>Kế toán @ Công ty TNHH ABC</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--************************************
+					Testimonials End
+			*************************************-->
 			<!--************************************
 					Picked By Author Start
 			*************************************-->
@@ -1054,7 +1385,7 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div class="tg-sectionhead">
-								<h2><span>Những cuốn sách tuyệt vời</span>Được chọn bởi tác giả</h2>
+								<h2><span>Những cuốn sách tuyệt vời</span>Được chọn bởi đọc giả</h2>
 								<a class="tg-btn" href="javascript:void(0);">Xem tất cả</a>
 							</div>
 						</div>
@@ -1067,22 +1398,22 @@
 										</div>
 										<div class="tg-hovercontent">
 											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
+												<p>Một cuốn sách tuyệt vời về tình yêu và những khoảnh khắc đáng nhớ trong cuộc sống. Nội dung sâu sắc và cảm động.</p>
 											</div>
-											<strong class="tg-bookpage">Book Pages: 206</strong>
-											<strong class="tg-bookcategory">Category: Adventure, Fun</strong>
-											<strong class="tg-bookprice">Price: $23.18</strong>
+											<strong class="tg-bookpage">Số trang: 206</strong>
+											<strong class="tg-bookcategory">Thể loại: Lãng mạn, Tình cảm</strong>
+											<strong class="tg-bookprice">Giá: 23.18$</strong>
 											<div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
 										</div>
 									</figure>
 									<div class="tg-postbookcontent">
 										<div class="tg-booktitle">
-											<h3><a href="javascript:void(0);">Seven Minutes In Heaven</a></h3>
+											<h3><a href="javascript:void(0);">Bảy Phút Thiên Đường</a></h3>
 										</div>
-										<span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
+										<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Sunshine Orlando</a></span>
 										<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 											<i class="fa fa-shopping-basket"></i>
-											<em>Add To Basket</em>
+											<em>Thêm vào giỏ</em>
 										</a>
 									</div>
 								</div>
@@ -1095,22 +1426,22 @@
 										</div>
 										<div class="tg-hovercontent">
 											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
+												<p>Cuốn sách về sự kiên nhẫn và bền bỉ trong cuộc sống. Những bài học quý giá về thành công và thất bại.</p>
 											</div>
-											<strong class="tg-bookpage">Book Pages: 206</strong>
-											<strong class="tg-bookcategory">Category: Adventure, Fun</strong>
-											<strong class="tg-bookprice">Price: $23.18</strong>
+											<strong class="tg-bookpage">Số trang: 206</strong>
+											<strong class="tg-bookcategory">Thể loại: Phát triển bản thân, Kinh doanh</strong>
+											<strong class="tg-bookprice">Giá: 23.18$</strong>
 											<div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
 										</div>
 									</figure>
 									<div class="tg-postbookcontent">
 										<div class="tg-booktitle">
-											<h3><a href="javascript:void(0);">Slow And Steady Wins The Race</a></h3>
+											<h3><a href="javascript:void(0);">Chậm Mà Chắc Thắng Cuộc Đua</a></h3>
 										</div>
-										<span class="tg-bookwriter">By: <a href="javascript:void(0);">Drusilla Glandon</a></span>
+										<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Drusilla Glandon</a></span>
 										<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 											<i class="fa fa-shopping-basket"></i>
-											<em>Add To Basket</em>
+											<em>Thêm vào giỏ</em>
 										</a>
 									</div>
 								</div>
@@ -1123,11 +1454,11 @@
 										</div>
 										<div class="tg-hovercontent">
 											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
+												<p>Cuốn sách về thời gian và cách tận dụng từng khoảnh khắc trong cuộc sống. Những triết lý sâu sắc về cuộc sống.</p>
 											</div>
-											<strong class="tg-bookpage">Book Pages: 206</strong>
-											<strong class="tg-bookcategory">Category: Adventure, Fun</strong>
-											<strong class="tg-bookprice">Price: $23.18</strong>
+											<strong class="tg-bookpage">Số trang: 206</strong>
+											<strong class="tg-bookcategory">Thể loại: Triết học, Cuộc sống</strong>
+											<strong class="tg-bookprice">Giá: 23.18$</strong>
 											<div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
 										</div>
 									</figure>
@@ -1135,10 +1466,10 @@
 										<div class="tg-booktitle">
 											<h3><a href="javascript:void(0);">Không có thời gian nào như hiện tại</a></h3>
 										</div>
-										<span class="tg-bookwriter">By: <a href="javascript:void(0);">Patrick Seller</a></span>
+										<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Patrick Seller</a></span>
 										<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 											<i class="fa fa-shopping-basket"></i>
-											<em>Add To Basket</em>
+											<em>Thêm vào giỏ</em>
 										</a>
 									</div>
 								</div>
@@ -1151,22 +1482,22 @@
 										</div>
 										<div class="tg-hovercontent">
 											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
+												<p>Cuốn sách về những khoảnh khắc đẹp nhất trong tình yêu và cuộc sống. Những câu chuyện cảm động về tình yêu.</p>
 											</div>
-											<strong class="tg-bookpage">Book Pages: 206</strong>
-											<strong class="tg-bookcategory">Category: Adventure, Fun</strong>
-											<strong class="tg-bookprice">Price: $23.18</strong>
+											<strong class="tg-bookpage">Số trang: 206</strong>
+											<strong class="tg-bookcategory">Thể loại: Lãng mạn, Tình cảm</strong>
+											<strong class="tg-bookprice">Giá: 23.18$</strong>
 											<div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
 										</div>
 									</figure>
 									<div class="tg-postbookcontent">
 										<div class="tg-booktitle">
-											<h3><a href="javascript:void(0);">Seven Minutes In Heaven</a></h3>
+											<h3><a href="javascript:void(0);">Bảy Phút Thiên Đường</a></h3>
 										</div>
-										<span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
+										<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Sunshine Orlando</a></span>
 										<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 											<i class="fa fa-shopping-basket"></i>
-											<em>Add To Basket</em>
+											<em>Thêm vào giỏ</em>
 										</a>
 									</div>
 								</div>
@@ -1179,22 +1510,22 @@
 										</div>
 										<div class="tg-hovercontent">
 											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
+												<p>Cuốn sách về chiến lược và phương pháp để đạt được thành công trong cuộc sống và sự nghiệp.</p>
 											</div>
-											<strong class="tg-bookpage">Book Pages: 206</strong>
-											<strong class="tg-bookcategory">Category: Adventure, Fun</strong>
-											<strong class="tg-bookprice">Price: $23.18</strong>
+											<strong class="tg-bookpage">Số trang: 206</strong>
+											<strong class="tg-bookcategory">Thể loại: Phát triển bản thân, Kinh doanh</strong>
+											<strong class="tg-bookprice">Giá: 23.18$</strong>
 											<div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
 										</div>
 									</figure>
 									<div class="tg-postbookcontent">
 										<div class="tg-booktitle">
-											<h3><a href="javascript:void(0);">Slow And Steady Wins The Race</a></h3>
+											<h3><a href="javascript:void(0);">Chậm Mà Chắc Thắng Cuộc Đua</a></h3>
 										</div>
-										<span class="tg-bookwriter">By: <a href="javascript:void(0);">Drusilla Glandon</a></span>
+										<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Drusilla Glandon</a></span>
 										<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 											<i class="fa fa-shopping-basket"></i>
-											<em>Add To Basket</em>
+											<em>Thêm vào giỏ</em>
 										</a>
 									</div>
 								</div>
@@ -1209,42 +1540,42 @@
 			<!--************************************
 					Testimonials Start
 			*************************************-->
-			<section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-05.jpg">
-				<div class="tg-sectionspace tg-haslayout">
-					<div class="container">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-push-2">
-								<div id="tg-testimonialsslider" class="tg-testimonialsslider tg-testimonials owl-carousel">
-									<div class="item tg-testimonial">
-										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-										<blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
-										<div class="tg-testimonialauthor">
-											<h3>Holli Fenstermacher</h3>
-											<span>Manager @ CIFP</span>
+				<section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-05.jpg">
+					<div class="tg-sectionspace tg-haslayout">
+						<div class="container">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-push-2">
+									<div id="tg-testimonialsslider" class="tg-testimonialsslider tg-testimonials owl-carousel">
+										<div class="item tg-testimonial">
+											<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+											<blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
+											<div class="tg-testimonialauthor">
+												<h3>Holli Fenstermacher</h3>
+												<span>Manager @ CIFP</span>
+											</div>
 										</div>
-									</div>
-									<div class="item tg-testimonial">
-										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-										<blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
-										<div class="tg-testimonialauthor">
-											<h3>Holli Fenstermacher</h3>
-											<span>Manager @ CIFP</span>
+										<div class="item tg-testimonial">
+											<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+											<blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
+											<div class="tg-testimonialauthor">
+												<h3>Holli Fenstermacher</h3>
+												<span>Manager @ CIFP</span>
+											</div>
 										</div>
-									</div>
-									<div class="item tg-testimonial">
-										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-										<blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
-										<div class="tg-testimonialauthor">
-											<h3>Holli Fenstermacher</h3>
-											<span>Manager @ CIFP</span>
+										<div class="item tg-testimonial">
+											<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+											<blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua enim ad minim veniam, quis nostrud exercitation ullamcoiars nisi ut aliquip commodo.</q></blockquote>
+											<div class="tg-testimonialauthor">
+												<h3>Holli Fenstermacher</h3>
+												<span>Manager @ CIFP</span>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</section>
+				</section>
 			<!--************************************
 					Testimonials End
 			*************************************-->
@@ -1252,7 +1583,7 @@
 			<!--************************************
 					Call to Action Start
 			*************************************-->
-			<section class="tg-parallax tg-bgcalltoaction tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-06.jpg">
+			<!-- <section class="tg-parallax tg-bgcalltoaction tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-06.jpg">
 				<div class="tg-sectionspace tg-haslayout">
 					<div class="container">
 						<div class="row">
@@ -1266,7 +1597,7 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</section> -->
 			<!--************************************
 					Call to Action End
 			*************************************-->
@@ -1410,65 +1741,65 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<ul class="tg-clientservices">
-								<li class="tg-devlivery">
-									<span class="tg-clientserviceicon"><i class="icon-rocket"></i></span>
-									<div class="tg-titlesubtitle">
-										<h3>Giao hàng nhanh</h3>
-										<p>Giao hàng toàn cầu</p>
-									</div>
-								</li>
-								<li class="tg-discount">
-									<span class="tg-clientserviceicon"><i class="icon-tag"></i></span>
-									<div class="tg-titlesubtitle">
-										<h3>Giảm giá mở</h3>
-										<p>Ưu đãi giảm giá</p>
-									</div>
-								</li>
-								<li class="tg-quality">
-									<span class="tg-clientserviceicon"><i class="icon-leaf"></i></span>
-									<div class="tg-titlesubtitle">
-										<h3>Chú trọng chất lượng</h3>
-										<p>Xuất bản tác phẩm chất lượng</p>
-									</div>
-								</li>
-								<li class="tg-support">
-									<span class="tg-clientserviceicon"><i class="icon-heart"></i></span>
-									<div class="tg-titlesubtitle">
-										<h3>Hỗ trợ 24/7</h3>
-										<p>Phục vụ mọi lúc</p>
-									</div>
-								</li>
-							</ul>
+							                            <ul class="tg-clientservices" style="display: flex; align-items: stretch;">
+                                <li class="tg-devlivery" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                                    <span class="tg-clientserviceicon"><i class="icon-rocket"></i></span>
+                                    <div class="tg-titlesubtitle">
+                                        <h3 style="color: white; font-weight: 600;">Giao hàng nhanh</h3>
+                                        <p style="color: rgba(255, 255, 255, 0.8);">Giao hàng toàn cầu</p>
+                                    </div>
+                                </li>
+                                <li class="tg-discount" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                                    <span class="tg-clientserviceicon"><i class="icon-tag"></i></span>
+                                    <div class="tg-titlesubtitle">
+                                        <h3 style="color: white; font-weight: 600;">Giảm giá mở</h3>
+                                        <p style="color: rgba(255, 255, 255, 0.8);">Ưu đãi giảm giá</p>
+                                    </div>
+                                </li>
+                                <li class="tg-quality" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                                    <span class="tg-clientserviceicon"><i class="icon-leaf"></i></span>
+                                    <div class="tg-titlesubtitle">
+                                        <h3 style="color: white; font-weight: 600;">Chú trọng chất lượng</h3>
+                                        <p style="color: rgba(255, 255, 255, 0.8);">Xuất bản tác phẩm chất lượng</p>
+                                    </div>
+                                </li>
+                                <li class="tg-support" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                                    <span class="tg-clientserviceicon"><i class="icon-heart"></i></span>
+                                    <div class="tg-titlesubtitle">
+                                        <h3 style="color: white; font-weight: 600;">Hỗ trợ 24/7</h3>
+                                        <p style="color: rgba(255, 255, 255, 0.8);">Phục vụ mọi lúc</p>
+                                    </div>
+                                </li>
+                            </ul>
 						</div>
 						<div class="tg-threecolumns">
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 								<div class="tg-footercol">
 									<strong class="tg-logo"><a href="javascript:void(0);"><img src="images/flogo.png" alt="image description"></a></strong>
-									<ul class="tg-contactinfo">
-										<li>
-											<i class="icon-apartment"></i>
-											<address>Suit # 07, Rose world Building, Street # 02, AT246T Manchester</address>
-										</li>
-										<li>
-											<i class="icon-phone-handset"></i>
-											<span>
-												<em>0800 12345 - 678 - 89</em>
-												<em>+4 1234 - 4567 - 67</em>
-											</span>
-										</li>
-										<li>
-											<i class="icon-clock"></i>
-											<span>Serving 7 Days A Week From 9am - 5pm</span>
-										</li>
-										<li>
-											<i class="icon-envelope"></i>
-											<span>
-												<em><a href="mailto:support@domain.com">support@domain.com</a></em>
-												<em><a href="mailto:info@domain.com">info@domain.com</a></em>
-											</span>
-										</li>
-									</ul>
+									                                    <ul class="tg-contactinfo">
+                                        <li style="color: rgba(255, 255, 255, 0.9);">
+                                            <i class="icon-apartment" style="color: #F4A261;"></i>
+                                            <address style="color: rgba(255, 255, 255, 0.9);">Phòng 07, Tòa nhà Rose World, Đường số 02, Quận 1, TP.HCM</address>
+                                        </li>
+                                        <li style="color: rgba(255, 255, 255, 0.9);">
+                                            <i class="icon-phone-handset" style="color: #F4A261;"></i>
+                                            <span>
+                                                <em style="color: rgba(255, 255, 255, 0.9);">1900 1234 - 567 - 89</em>
+                                                <em style="color: rgba(255, 255, 255, 0.9);">+84 28 1234 - 5678 - 90</em>
+                                            </span>
+                                        </li>
+                                        <li style="color: rgba(255, 255, 255, 0.9);">
+                                            <i class="icon-clock" style="color: #F4A261;"></i>
+                                            <span style="color: rgba(255, 255, 255, 0.9);">Phục vụ 7 ngày/tuần từ 8h - 22h</span>
+                                        </li>
+                                        <li style="color: rgba(255, 255, 255, 0.9);">
+                                            <i class="icon-envelope" style="color: #F4A261;"></i>
+                                            <span>
+                                                <em><a href="mailto:support@thuviensach.vn" style="color: rgba(255, 255, 255, 0.9);">support@thuviensach.vn</a></em>
+                                                <em><a href="mailto:info@thuviensach.vn" style="color: rgba(255, 255, 255, 0.9);">info@thuviensach.vn</a></em>
+                                            </span>
+                                        </li>
+                                    </ul>
 									<ul class="tg-socialicons">
 										<li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
 										<li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
@@ -1480,91 +1811,74 @@
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 								<div class="tg-footercol tg-widget tg-widgetnavigation">
-									<div class="tg-widgettitle">
-										<h3>Thông tin giao hàng và hỗ trợ</h3>
-									</div>
-									<div class="tg-widgetcontent">
-										<ul>
-											<li><a href="javascript:void(0);">Terms of Use</a></li>
-											<li><a href="javascript:void(0);">Terms of Sale</a></li>
-											<li><a href="javascript:void(0);">Returns</a></li>
-											<li><a href="javascript:void(0);">Privacy</a></li>
-											<li><a href="javascript:void(0);">Cookies</a></li>
-											<li><a href="javascript:void(0);">Contact Us</a></li>
-											<li><a href="javascript:void(0);">Our Affiliates</a></li>
-											<li><a href="javascript:void(0);">Vision &amp; Aim</a></li>
-										</ul>
-										<ul>
-											<li><a href="javascript:void(0);">Our Story</a></li>
-											<li><a href="javascript:void(0);">Meet Our Team</a></li>
-											<li><a href="javascript:void(0);">FAQ</a></li>
-											<li><a href="javascript:void(0);">Testimonials</a></li>
-											<li><a href="javascript:void(0);">Join Our Team</a></li>
-										</ul>
-									</div>
+									                                    <div class="tg-widgettitle">
+                                        <h3 style="color: white; font-weight: 600;">Thông tin giao hàng và hỗ trợ</h3>
+                                    </div>
+                                    <div class="tg-widgetcontent">
+                                                                                <ul>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Điều khoản sử dụng</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Điều khoản mua bán</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách đổi trả</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách bảo mật</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách Cookie</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Liên hệ chúng tôi</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Đối tác của chúng tôi</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Tầm nhìn &amp; Mục tiêu</a></li>
+                                        </ul>
+                                        <ul>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Câu chuyện của chúng tôi</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Gặp gỡ đội ngũ</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Câu hỏi thường gặp</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Đánh giá khách hàng</a></li>
+                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Tham gia cùng chúng tôi</a></li>
+                                        </ul>
+                                    </div>
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 								<div class="tg-footercol tg-widget tg-widgettopsellingauthors">
-									<div class="tg-widgettitle">
-										<h3>Tác giả bán chạy nhất</h3>
-									</div>
-									<div class="tg-widgetcontent">
-										<ul>
-											<li>
-												<figure><a href="javascript:void(0);"><img src="images/author/imag-09.jpg" alt="image description"></a></figure>
-												<div class="tg-authornamebooks">
-													<h4><a href="javascript:void(0);">Jude Morphew</a></h4>
-													<p>21,658 Published Books</p>
-												</div>
-											</li>
-											<li>
-												<figure><a href="javascript:void(0);"><img src="images/author/imag-10.jpg" alt="image description"></a></figure>
-												<div class="tg-authornamebooks">
-													<h4><a href="javascript:void(0);">Shaun Humes</a></h4>
-													<p>20,257 Published Books</p>
-												</div>
-											</li>
-											<li>
-												<figure><a href="javascript:void(0);"><img src="images/author/imag-11.jpg" alt="image description"></a></figure>
-												<div class="tg-authornamebooks">
-													<h4><a href="javascript:void(0);">Kathrine Culbertson</a></h4>
-													<p>15,686 Published Books</p>
-												</div>
-											</li>
-										</ul>
-									</div>
+									                                    <div class="tg-widgettitle">
+                                        <h3 style="color: white; font-weight: 600;">Tác giả bán chạy nhất</h3>
+                                    </div>
+                                    <div class="tg-widgetcontent">
+                                        <ul>
+                                                                                        <li>
+                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-09.jpg" alt="image description"></a></figure>
+                                                <div class="tg-authornamebooks">
+                                                    <h4><a href="javascript:void(0);" style="color: white;">Nguyễn Văn An</a></h4>
+                                                    <p style="color: rgba(255, 255, 255, 0.8);">21,658 cuốn sách đã xuất bản</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-10.jpg" alt="image description"></a></figure>
+                                                <div class="tg-authornamebooks">
+                                                    <h4><a href="javascript:void(0);" style="color: white;">Trần Thị Bình</a></h4>
+                                                    <p style="color: rgba(255, 255, 255, 0.8);">20,257 cuốn sách đã xuất bản</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-11.jpg" alt="image description"></a></figure>
+                                                <div class="tg-authornamebooks">
+                                                    <h4><a href="javascript:void(0);" style="color: white;">Lê Văn Cường</a></h4>
+                                                    <p style="color: rgba(255, 255, 255, 0.8);">15,686 cuốn sách đã xuất bản</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="tg-newsletter">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-							<h4>Đăng ký nhận tin tức!</h4>
-							<h5>Nhận thông tin mới nhất về sách và khuyến mãi.</h5>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-							<form class="tg-formtheme tg-formnewsletter">
-								<fieldset>
-									<input type="email" name="email" class="form-control" placeholder="Nhập địa chỉ email của bạn">
-									<button type="button"><i class="icon-envelope"></i></button>
-								</fieldset>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 			<div class="tg-footerbar">
 				<a id="tg-btnbacktotop" class="tg-btnbacktotop" href="javascript:void(0);"><i class="icon-chevron-up"></i></a>
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<span class="tg-paymenttype"><img src="images/paymenticon.png" alt="image description"></span>
-							<span class="tg-copyright">2017 Bản quyền thuộc về &copy; Thư Viện Sách</span>
+							                            <span class="tg-copyright" style="color: rgba(255, 255, 255, 0.8);">2017 Bản quyền thuộc về &copy; Thư Viện Sách</span>
 						</div>
 					</div>
 				</div>
@@ -1601,6 +1915,41 @@
 			$(document).on('click', function(e) {
 				if (!$(e.target).closest('.tg-searchdropdown').length) {
 					$('.tg-searchdropdownmenu').removeClass('show');
+				}
+			});
+			
+			// User dropdown functionality
+			$('#user-dropdown-trigger, .tg-userlogin').on('click', function(e) {
+				e.preventDefault();
+				$('#user-dropdown').toggleClass('show');
+			});
+			
+			// Close dropdown when clicking outside
+			$(document).on('click', function(e) {
+				if (!$(e.target).closest('.tg-userlogin').length) {
+					$('#user-dropdown').removeClass('show');
+				}
+			});
+			
+			// Menu item hover effects
+			$('.tg-menu-item').on('mouseenter', function() {
+				$(this).find('i').addClass('fa-bounce');
+			}).on('mouseleave', function() {
+				$(this).find('i').removeClass('fa-bounce');
+			});
+			
+			// Become member button
+			$('.tg-become-member').on('click', function(e) {
+				e.preventDefault();
+				alert('Chuyển hướng đến trang đăng ký hội viên...');
+			});
+			
+			// Logout functionality
+			$('.tg-logout').on('click', function(e) {
+				e.preventDefault();
+				if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+					alert('Đăng xuất thành công!');
+					$('#user-dropdown').removeClass('show');
 				}
 			});
 		});

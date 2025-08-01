@@ -1,0 +1,992 @@
+/* Custom Color Scheme - Gray Blue & Orange Theme */
+
+:root {
+    /* Primary Colors */
+    --primary-color: #4A6366;      /* Gray Blue - Main */
+    --secondary-color: #F4A261;    /* Light Orange - Accent */
+    --background-color: #FFFFFF;    /* Pure White - Background */
+    --accent-color: #A8D5BA;       /* Light Green - Creative */
+    --text-color: #2D2D2D;         /* Light Black - Text */
+    
+    /* Additional Colors */
+    --primary-light: #6B7F82;      /* Lighter Gray Blue */
+    --primary-dark: #3A4F52;       /* Darker Gray Blue */
+    --secondary-light: #F7B580;    /* Lighter Orange */
+    --secondary-dark: #E8944A;     /* Darker Orange */
+    --accent-light: #C4E4D1;       /* Lighter Green */
+    --accent-dark: #8BC4A3;        /* Darker Green */
+    --text-light: #5A5A5A;         /* Light Gray Text */
+    --text-lighter: #8A8A8A;       /* Lighter Gray Text */
+    --border-color: #E5E5E5;       /* Light Gray Border */
+    --shadow-color: rgba(74, 99, 102, 0.1); /* Primary with opacity */
+}
+
+/* Global Color Overrides */
+body {
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+/* Header & Navigation */
+.tg-header {
+    background: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tg-navigationarea {
+    background: var(--primary-color);
+}
+
+.tg-nav ul li a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tg-nav ul li a:hover,
+.tg-nav ul li.current-menu-item a {
+    color: var(--secondary-color);
+}
+
+.tg-nav ul li ul {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+}
+
+.tg-nav ul li ul li a {
+    color: var(--text-color);
+}
+
+.tg-nav ul li ul li a:hover {
+    background: var(--accent-color);
+    color: var(--text-color);
+}
+
+/* Logo */
+.tg-logo a {
+    color: var(--primary-color);
+}
+
+/* Middle Container Improvements */
+.tg-middlecontainer {
+    background: linear-gradient(135deg, var(--background-color) 0%, rgba(74, 99, 102, 0.02) 100%);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 10;
+}
+
+.tg-middlecontainer .col-xs-12 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.tg-logo {
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.tg-logo:hover {
+    transform: scale(1.05);
+}
+
+.tg-logo img {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    max-height: 60px;
+    width: auto;
+}
+
+.tg-logo:hover img {
+    box-shadow: 0 6px 20px rgba(74, 99, 102, 0.2);
+}
+
+/* User Login */
+.tg-userlogin {
+    background: rgba(74, 99, 102, 0.1);
+    border: 1px solid rgba(74, 99, 102, 0.2);
+    border-radius: 25px;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tg-userlogin:hover {
+    background: rgba(74, 99, 102, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 99, 102, 0.2);
+}
+
+.tg-userlogin span {
+    color: var(--primary-color) !important;
+    font-weight: 500;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 8px;
+    transition: all 0.3s ease;
+}
+
+.tg-userlogin:hover span {
+    color: var(--secondary-color) !important;
+}
+
+.tg-userlogin figure {
+    margin: 0;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(74, 99, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.tg-userlogin:hover figure {
+    border-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.tg-userlogin figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* User Login with Dropdown */
+.tg-userlogin {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tg-userlogin:hover {
+    transform: translateY(-2px);
+}
+
+.tg-userlogin .fa-chevron-down {
+    margin-left: 8px;
+    font-size: 12px;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.tg-userlogin:hover .fa-chevron-down {
+    transform: rotate(180deg);
+    color: var(--secondary-color);
+}
+
+/* Search Button */
+.tg-searchbtn {
+    background: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(74, 99, 102, 0.2);
+    border: 2px solid transparent;
+}
+
+.tg-searchbtn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(244, 162, 97, 0.3);
+    border-color: var(--secondary-color);
+}
+
+.tg-searchbtn i {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+/* Wishlist & Cart */
+.tg-btnthemedropdown {
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(74, 99, 102, 0.1);
+    border: 2px solid transparent;
+}
+
+.tg-btnthemedropdown:hover {
+    color: var(--secondary-color);
+    background: rgba(244, 162, 97, 0.1);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(244, 162, 97, 0.2);
+}
+
+.tg-btnthemedropdown i {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.tg-themebadge {
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    box-shadow: 0 2px 5px rgba(244, 162, 97, 0.3);
+}
+
+/* Banner Section */
+.tg-banner {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+.tg-banner .tg-btn.tg-active {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.tg-banner .tg-btn.tg-active:hover {
+    background: var(--secondary-dark);
+}
+
+.tg-banner .tg-btn:not(.tg-active) {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.tg-banner .tg-btn:not(.tg-active):hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--secondary-color);
+}
+
+/* Section Headers */
+.tg-sectionhead h2 {
+    color: var(--text-color);
+}
+
+.tg-sectionhead h2 span {
+    color: var(--primary-color);
+}
+
+.tg-btn {
+    background: var(--primary-color);
+    color: white;
+}
+
+.tg-btn:hover {
+    background: var(--primary-dark);
+}
+
+.tg-btn.tg-active {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.tg-btn.tg-active:hover {
+    background: var(--secondary-dark);
+}
+
+/* Book Cards */
+.tg-postbook {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+}
+
+.tg-postbook:hover {
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.tg-booktitle h3 a {
+    color: var(--text-color);
+}
+
+.tg-booktitle h3 a:hover {
+    color: var(--primary-color);
+}
+
+.tg-bookwriter {
+    color: var(--text-light);
+}
+
+.tg-bookwriter a {
+    color: var(--primary-color);
+}
+
+.tg-bookwriter a:hover {
+    color: var(--secondary-color);
+}
+
+.tg-bookprice ins {
+    color: var(--secondary-color);
+}
+
+.tg-bookprice del {
+    color: var(--text-lighter);
+}
+
+/* Categories */
+.tg-bookscategories li a {
+    background: var(--accent-color);
+    color: var(--text-color);
+}
+
+.tg-bookscategories li a:hover {
+    background: var(--accent-dark);
+}
+
+/* Tags */
+.tg-themetag {
+    background: var(--secondary-color);
+    color: white;
+}
+
+/* Add to Wishlist */
+.tg-btnaddtowishlist {
+    background: var(--primary-color);
+    color: white;
+}
+
+.tg-btnaddtowishlist:hover {
+    background: var(--secondary-color);
+}
+
+/* Add to Cart Button */
+.tg-btnstyletwo {
+    background: var(--accent-color);
+    color: var(--text-color);
+}
+
+.tg-btnstyletwo:hover {
+    background: var(--accent-dark);
+}
+
+/* Membership Packages */
+.tg-package-card {
+    border: 2px solid var(--border-color);
+}
+
+.tg-package-card:hover {
+    border-color: var(--primary-color);
+}
+
+/* Premium Package */
+.tg-package-card[style*="gradient"] {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    border-color: var(--primary-color);
+}
+
+/* VIP Package */
+.tg-package-card[style*="#ffd700"] {
+    border-color: var(--secondary-color);
+}
+
+.tg-package-card[style*="#ffd700"] .tg-btn {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.tg-package-card[style*="#ffd700"] .tg-btn:hover {
+    background: var(--secondary-dark);
+}
+
+/* Testimonials */
+.tg-testimonial blockquote {
+    color: var(--text-color);
+}
+
+.tg-testimonialauthor h3 {
+    color: var(--primary-color);
+}
+
+/* Footer */
+.tg-footer {
+    background: var(--primary-color);
+    color: white;
+}
+
+.tg-footer h3 {
+    color: white;
+}
+
+.tg-footer a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tg-footer a:hover {
+    color: var(--secondary-color);
+}
+
+.tg-clientserviceicon {
+    color: var(--secondary-color);
+}
+
+.tg-socialicons li a {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.tg-socialicons li a:hover {
+    background: var(--secondary-color);
+}
+
+/* Footer Text Improvements */
+.tg-footer p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tg-footer span {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tg-footer em {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tg-footer address {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tg-footer .tg-titlesubtitle h3 {
+    color: white;
+    font-weight: 600;
+}
+
+.tg-footer .tg-titlesubtitle p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.tg-footer .tg-widgettitle h3 {
+    color: white;
+    font-weight: 600;
+}
+
+.tg-footer .tg-widgetcontent ul li a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.tg-footer .tg-widgetcontent ul li a:hover {
+    color: var(--secondary-color);
+}
+
+.tg-footer .tg-authornamebooks h4 a {
+    color: white;
+}
+
+.tg-footer .tg-authornamebooks p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.tg-footer .tg-contactinfo li {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tg-footer .tg-contactinfo li i {
+    color: var(--secondary-color);
+}
+
+.tg-footer .tg-copyright {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Back to Top */
+.tg-btnbacktotop {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.tg-btnbacktotop:hover {
+    background: var(--secondary-dark);
+}
+
+/* Dropdown Menus */
+.tg-themedropdownmenu {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+}
+
+.tg-themedropdownmenu .tg-description {
+    color: var(--text-light);
+}
+
+/* Mini Cart */
+.tg-minicarproductdata h5 a {
+    color: var(--text-color);
+}
+
+.tg-minicarproductdata h5 a:hover {
+    color: var(--primary-color);
+}
+
+.tg-minicarproductdata h6 a {
+    color: var(--secondary-color);
+}
+
+.tg-subtotal strong {
+    color: var(--primary-color);
+}
+
+/* Search Form */
+.tg-searchform .form-control {
+    border: 1px solid var(--border-color);
+}
+
+.tg-searchform .form-control:focus {
+    border-color: var(--primary-color);
+}
+
+.tg-searchsubmit {
+    background: var(--primary-color);
+    color: white;
+}
+
+.tg-searchsubmit:hover {
+    background: var(--primary-dark);
+}
+
+/* Mega Menu */
+.mega-menu {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+}
+
+.tg-themetabnav li a {
+    color: var(--text-color);
+}
+
+.tg-themetabnav li.active a,
+.tg-themetabnav li a:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tg-banner h1 {
+        color: white;
+    }
+    
+    .tg-banner h2 {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .tg-banner p {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Mobile Middle Container */
+    .tg-middlecontainer {
+        padding: 10px 0;
+    }
+    
+    .tg-middlecontainer .col-xs-12 {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .tg-logo {
+        order: 1;
+    }
+    
+    .tg-userlogin {
+        order: 2;
+        margin: 0 auto;
+    }
+    
+    .tg-wishlistandcart {
+        order: 3;
+        margin: 0 auto;
+        gap: 10px;
+    }
+    
+    .tg-searchbtn,
+    .tg-btnthemedropdown {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .tg-searchbtn i,
+    .tg-btnthemedropdown i {
+        font-size: 12px;
+    }
+    
+    /* Mobile User Login */
+    .tg-userlogin {
+        margin: 0 auto;
+    }
+    
+    /* Mobile User Dropdown */
+    .tg-user-dropdown {
+        width: 280px;
+        right: -50px;
+    }
+    
+    .tg-user-dropdown::before {
+        right: 60px;
+    }
+    
+    /* Disable hover on mobile devices */
+    @media (hover: none) {
+        .tg-userlogin:hover .tg-user-dropdown {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .tg-user-dropdown:hover {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+    
+    .tg-user-info h4 {
+        font-size: 16px;
+    }
+    
+    .tg-user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .tg-menu-item {
+        padding: 10px 15px;
+    }
+    
+    .tg-menu-item span {
+        font-size: 13px;
+    }
+}
+
+/* Hover Effects */
+.tg-postbook:hover .tg-featureimg img {
+    transform: scale(1.05);
+}
+
+.tg-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+/* Animation Enhancements */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px); 
+    }
+    50% { 
+        transform: translateY(-20px); 
+    }
+}
+
+.floating-element {
+    background: rgba(244, 162, 97, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--border-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Focus States */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* Loading States */
+.tg-btn:disabled {
+    background: var(--text-lighter);
+    cursor: not-allowed;
+}
+
+/* Success States */
+.tg-success {
+    background: var(--accent-color);
+    color: var(--text-color);
+}
+
+/* Error States */
+.tg-error {
+    background: #FF6B6B;
+    color: white;
+}
+
+/* Warning States */
+.tg-warning {
+    background: var(--secondary-color);
+    color: white;
+}
+
+/* User Dropdown */
+.tg-user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 320px;
+    background: var(--background-color);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    margin-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Hover to show dropdown */
+.tg-userlogin:hover .tg-user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Keep dropdown visible when hovering over it */
+.tg-user-dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.tg-user-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--background-color);
+}
+
+/* User Profile Section */
+.tg-user-profile {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+.tg-user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.tg-user-info h4 {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.tg-user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);
+}
+
+.tg-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Membership Info */
+.tg-membership-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tg-membership-badge {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tg-membership-badge:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+.tg-points {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.tg-points i {
+    font-size: 14px;
+}
+
+.tg-become-member {
+    width: 100%;
+    background: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tg-become-member:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(168, 213, 186, 0.4);
+}
+
+/* User Menu */
+.tg-user-menu {
+    padding: 10px 0;
+    background: var(--background-color);
+}
+
+.tg-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.tg-menu-item:hover {
+    background: rgba(74, 99, 102, 0.1);
+    color: var(--primary-color);
+    transform: translateX(5px);
+    padding-left: 25px;
+}
+
+.tg-menu-item i {
+    width: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--primary-color);
+}
+
+.tg-menu-item:hover i {
+    color: var(--secondary-color);
+}
+
+.tg-menu-item span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.tg-menu-item.tg-logout {
+    border-top: 1px solid var(--border-color);
+    margin-top: 5px;
+    padding-top: 15px;
+}
+
+.tg-menu-item.tg-logout:hover {
+    color: #FF6B6B;
+}
+
+.tg-menu-item.tg-logout:hover i {
+    color: #FF6B6B;
+}
+
+/* Dropdown Animation */
+@keyframes dropdownSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tg-user-dropdown.show {
+    animation: dropdownSlideIn 0.3s ease forwards;
+}
+
+/* Icon bounce animation */
+@keyframes iconBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-3px);
+    }
+    60% {
+        transform: translateY(-1px);
+    }
+}
+
+.fa-bounce {
+    animation: iconBounce 0.6s ease;
+}
+
+/* Membership badge pulse */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(168, 213, 186, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(168, 213, 186, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(168, 213, 186, 0);
+    }
+}
+
+.tg-become-member {
+    animation: pulse 2s infinite;
+} 

@@ -35,7 +35,7 @@ a:active,
 .tg-quantityholder .plus:hover,
 .tg-themetabs li a:before,
 .tg-tag:hover,
-.tg-btnreply:hover{background:#b22565;}
+.tg-btnreply:hover{background:#8F60BF;}
 /*=============================================
 			Theme Border Color
 =============================================*/
@@ -86,7 +86,7 @@ input:focus,
 =============================================*/
 .tg-themetag { background: #f16945; }
 
-.tg-themetag:before { border-color: #f16945; }
+/* .tg-themetag:before { border-color: #f16945; } */
 
 
 
