@@ -66,10 +66,7 @@ iframe {
 	float: left;
 	border: none;
 }
-.wp-caption,
-.wp-caption-text,
-.gallery-caption,
-.bypostauthor {}
+/* WordPress caption styles - intentionally empty for compatibility */
 .wp-caption.alignleft,
 .wp-caption.alignnone { width: 100%; }
 button { border: none; }
@@ -1091,8 +1088,7 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 	width:100%;
 	float:left;
 	position: relative;
-	display: inline-block;
-	vertical-align: top;
+	display: block;
 }
 .tg-navigation > ul > li{
 	float: left;
@@ -1336,7 +1332,6 @@ li.menu-item-has-mega-menu { position: static; }
 	width:2px;
 	height:2px;
 	margin:-1px 0 0;
-	background:#fff;
 	position:absolute;
 }
 .tg-headervtwo .tg-navigation ul li:first-child a:after,
@@ -2111,7 +2106,7 @@ li.menu-item-has-mega-menu { position: static; }
 	-o-transform: perspective(3000px) rotateY(80deg) rotateZ(3deg);
 	transform: perspective(3000px) rotateY(80deg) rotateZ(3deg);
 }
-.tg-pickedbyauthor .tg-postbook:hover .tg-bookimg:before{}
+/* Hover effect for book image - intentionally empty for compatibility */
 .tg-pickedbyauthor .tg-backcover,
 .tg-pickedbyauthor .tg-backcover:after{display: none;}
 .tg-hovercontent{
@@ -2157,6 +2152,7 @@ li.menu-item-has-mega-menu { position: static; }
 	overflow: hidden;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
+	line-clamp: 3;
 	-webkit-box-orient: vertical;
 }
 .tg-bookpage{left: 80%;}
@@ -2831,25 +2827,7 @@ li.menu-item-has-mega-menu { position: static; }
 }
 .tg-paymenttype{float: right;}
 .tg-paymenttype img{display: block;}
-.tg-btnbacktotop{
-	top: -20px;
-	right: 30px;
-	width: 40px;
-	height: 40px;
-	color: #484848;
-	background: #fff;
-	line-height: 40px;
-	border-radius: 3px;
-	position: absolute;
-	text-align: center;
-	-webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.20);
-	box-shadow: 0 0 10px 0 rgba(0,0,0,0.20);
-}
-.tg-btnbacktotop i{
-	display: block;
-	color: #484848;
-	line-height: inherit;
-}
+
 /* ==========================================================================
 			Inner Pages Style												
 ========================================================================== */

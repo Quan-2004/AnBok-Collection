@@ -6,14 +6,7 @@ jQuery(document).on('ready', function() {
 	jQuery('.tg-themetabnav > li > a').hover(function() {
 		jQuery(this).tab('show');
 	});
-	/*--------------------------------------
-			SCROLL TO TOP					
-	--------------------------------------*/
-	var _tg_btnscrolltop = jQuery("#tg-btnbacktotop");
-	_tg_btnscrolltop.on('click', function(){
-		var _scrollUp = jQuery('html, body');
-		_scrollUp.animate({ scrollTop: 0 }, 'slow');
-	})
+
 	/* -------------------------------------
 			COLLAPSE MENU SMALL DEVICES
 	-------------------------------------- */

@@ -302,7 +302,9 @@
 	.tg-booksfromauthor .tg-postbook {min-height: 535px;}
 	.tg-productgrid .tg-postbook {min-height: 550px;}
 }
-@media (max-width:800px){}
+@media (max-width:800px){
+	/* Empty media query for future responsive styles */
+}
 @media (max-width:767px){
 	.tg-homeslider .item{padding:0;}
 	.tg-clientservices li{
@@ -613,4 +615,6 @@
 		margin:5px 0;
 	}
 }
-@media (max-width:320px){}
+@media (max-width:320px){
+	/* Empty media query for future responsive styles */
+}
