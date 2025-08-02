@@ -81,7 +81,7 @@
 		}
 
 		.auth-video-logo img {
-			max-height: 60px;
+			max-height: 40px;
 			width: auto;
 		}
 
@@ -151,7 +151,7 @@
 		}
 
 		.auth-form-logo img {
-			max-height: 80px;
+			max-height: 50px;
 			width: auto;
 		}
 
@@ -627,9 +627,6 @@
 							<img src="images/Google__G__logo.svg-Photoroom.png" alt="Google">
 							Đăng nhập bằng Google
 						</button>
-						<div class="auth-footer">
-							<p>Chưa có tài khoản? <a href="#" onclick="switchTab('register')">Đăng ký ngay</a></p>
-						</div>
 					</form>
 				</div>
 
@@ -667,16 +664,7 @@
 						<button type="submit" class="auth-submit">
 							Đăng ký
 						</button>
-						<div class="auth-divider">
-							<span>hoặc</span>
-						</div>
-						<button type="button" class="auth-social" onclick="registerWithGoogle()">
-							<img src="images/Google__G__logo.svg-Photoroom.png" alt="Google">
-							Đăng ký bằng Google
-						</button>
-						<div class="auth-footer">
-							<p>Đã có tài khoản? <a href="#" onclick="switchTab('login')">Đăng nhập</a></p>
-						</div>
+				
 					</form>
 				</div>
 
@@ -704,6 +692,56 @@
 
 	<script src="js/vendor/jquery-library.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
+	
+	<!-- Firebase SDK -->
+	<script type="module">
+		// Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+		import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithPopup, GoogleAuthProvider, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+		// Your web app's Firebase configuration
+		const firebaseConfig = {
+			apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
+			authDomain: "anbok-collection.firebaseapp.com",
+			databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
+			projectId: "anbok-collection",
+			storageBucket: "anbok-collection.firebasestorage.app",
+			messagingSenderId: "835844957818",
+			appId: "1:835844957818:web:33fc3d03875d49fc5c3dc3",
+			measurementId: "G-MS5FT355WW"
+		};
+
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const auth = getAuth(app);
+		const analytics = getAnalytics(app);
+		const googleProvider = new GoogleAuthProvider();
+
+		// Make Firebase available globally
+		window.firebaseAuth = auth;
+		window.googleProvider = googleProvider;
+		window.signInWithPopup = signInWithPopup;
+		window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+		window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+		window.sendPasswordResetEmail = sendPasswordResetEmail;
+		window.updateProfile = updateProfile;
+		
+		// Check Firebase status
+		console.log('Firebase initialized:', app);
+		console.log('Auth initialized:', auth);
+		console.log('Google provider:', googleProvider);
+		
+		// Listen for auth state changes
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				console.log('User is signed in:', user);
+			} else {
+				console.log('User is signed out');
+			}
+		});
+	</script>
+	
 	<script>
 		// Switch between auth tabs
 		function switchTab(tab) {
@@ -764,7 +802,7 @@
 		}
 
 		// Handle login
-		function handleLogin(event) {
+		async function handleLogin(event) {
 			event.preventDefault();
 			const email = document.getElementById('loginEmail').value;
 			const password = document.getElementById('loginPassword').value;
@@ -775,25 +813,37 @@
 			submitBtn.classList.add('loading');
 			submitBtn.textContent = 'Đang đăng nhập...';
 
-			// Simulate API call
-			setTimeout(() => {
+			try {
+				// Firebase authentication
+				const userCredential = await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+				const user = userCredential.user;
+				
 				submitBtn.classList.remove('loading');
 				submitBtn.textContent = 'Đăng nhập';
-
-				// Demo validation
-				if (email === 'demo@example.com' && password === 'password') {
-					showMessage('Đăng nhập thành công!', 'success');
-					setTimeout(() => {
-						window.location.href = 'index.html';
-					}, 1500);
-				} else {
-					showMessage('Email hoặc mật khẩu không đúng!', 'error');
+				
+				showMessage('Đăng nhập thành công!', 'success');
+				setTimeout(() => {
+					window.location.href = 'index.html';
+				}, 1500);
+			} catch (error) {
+				submitBtn.classList.remove('loading');
+				submitBtn.textContent = 'Đăng nhập';
+				
+				let errorMessage = 'Đăng nhập thất bại!';
+				if (error.code === 'auth/user-not-found') {
+					errorMessage = 'Email không tồn tại!';
+				} else if (error.code === 'auth/wrong-password') {
+					errorMessage = 'Mật khẩu không đúng!';
+				} else if (error.code === 'auth/invalid-email') {
+					errorMessage = 'Email không hợp lệ!';
 				}
-			}, 2000);
+				
+				showMessage(errorMessage, 'error');
+			}
 		}
 
 		// Handle register
-		function handleRegister(event) {
+		async function handleRegister(event) {
 			event.preventDefault();
 			const name = document.getElementById('registerName').value;
 			const email = document.getElementById('registerEmail').value;
@@ -812,25 +862,52 @@
 				return;
 			}
 
+			if (password.length < 6) {
+				showMessage('Mật khẩu phải có ít nhất 6 ký tự!', 'error');
+				return;
+			}
+
 			// Show loading state
 			const submitBtn = event.target.querySelector('.auth-submit');
 			submitBtn.classList.add('loading');
 			submitBtn.textContent = 'Đang đăng ký...';
 
-			// Simulate API call
-			setTimeout(() => {
+			try {
+				// Firebase registration
+				const userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+				const user = userCredential.user;
+				
+				// Update user profile with display name
+				await window.updateProfile(user, {
+					displayName: name
+				});
+				
 				submitBtn.classList.remove('loading');
 				submitBtn.textContent = 'Đăng ký';
-
+				
 				showMessage('Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.', 'success');
 				setTimeout(() => {
 					switchTab('login');
 				}, 2000);
-			}, 2000);
+			} catch (error) {
+				submitBtn.classList.remove('loading');
+				submitBtn.textContent = 'Đăng ký';
+				
+				let errorMessage = 'Đăng ký thất bại!';
+				if (error.code === 'auth/email-already-in-use') {
+					errorMessage = 'Email đã được sử dụng!';
+				} else if (error.code === 'auth/invalid-email') {
+					errorMessage = 'Email không hợp lệ!';
+				} else if (error.code === 'auth/weak-password') {
+					errorMessage = 'Mật khẩu quá yếu!';
+				}
+				
+				showMessage(errorMessage, 'error');
+			}
 		}
 
 		// Handle forgot password
-		function handleForgotPassword(event) {
+		async function handleForgotPassword(event) {
 			event.preventDefault();
 			const email = document.getElementById('forgotEmail').value;
 
@@ -839,26 +916,98 @@
 			submitBtn.classList.add('loading');
 			submitBtn.textContent = 'Đang gửi...';
 
-			// Simulate API call
-			setTimeout(() => {
+			try {
+				// Firebase password reset
+				await window.sendPasswordResetEmail(window.firebaseAuth, email);
+				
 				submitBtn.classList.remove('loading');
 				submitBtn.textContent = 'Gửi yêu cầu';
-
+				
 				showMessage('Email đặt lại mật khẩu đã được gửi! Vui lòng kiểm tra hộp thư.', 'success');
-			}, 2000);
+			} catch (error) {
+				submitBtn.classList.remove('loading');
+				submitBtn.textContent = 'Gửi yêu cầu';
+				
+				let errorMessage = 'Gửi email thất bại!';
+				if (error.code === 'auth/user-not-found') {
+					errorMessage = 'Email không tồn tại trong hệ thống!';
+				} else if (error.code === 'auth/invalid-email') {
+					errorMessage = 'Email không hợp lệ!';
+				}
+				
+				showMessage(errorMessage, 'error');
+			}
 		}
 
 		// Google login
-		function loginWithGoogle() {
-			showMessage('Đang chuyển hướng đến Google...', 'info');
-			// Implement Google OAuth here
+		async function loginWithGoogle() {
+			try {
+				showMessage('Đang chuyển hướng đến Google...', 'info');
+				
+				// Configure Google provider
+				window.googleProvider.setCustomParameters({
+					prompt: 'select_account'
+				});
+				
+				const result = await window.signInWithPopup(window.firebaseAuth, window.googleProvider);
+				const user = result.user;
+				
+				console.log('Google login successful:', user);
+				showMessage('Đăng nhập Google thành công!', 'success');
+				setTimeout(() => {
+					window.location.href = 'index.html';
+				}, 1500);
+			} catch (error) {
+				console.error('Google login error:', error);
+				let errorMessage = 'Đăng nhập Google thất bại!';
+				
+				switch(error.code) {
+					case 'auth/popup-closed-by-user':
+						errorMessage = 'Đăng nhập bị hủy!';
+						break;
+					case 'auth/popup-blocked':
+						errorMessage = 'Popup bị chặn! Vui lòng cho phép popup.';
+						break;
+					case 'auth/unauthorized-domain':
+						errorMessage = 'Domain không được phép! Vui lòng liên hệ admin.';
+						break;
+					case 'auth/operation-not-allowed':
+						errorMessage = 'Đăng nhập Google chưa được bật! Vui lòng liên hệ admin.';
+						break;
+					case 'auth/network-request-failed':
+						errorMessage = 'Lỗi kết nối mạng! Vui lòng thử lại.';
+						break;
+					default:
+						errorMessage = `Lỗi: ${error.message}`;
+				}
+				
+				showMessage(errorMessage, 'error');
+			}
 		}
 
-		// Google register
-		function registerWithGoogle() {
-			showMessage('Đang chuyển hướng đến Google...', 'info');
-			// Implement Google OAuth here
+		// Google register (same as login for new users)
+		async function registerWithGoogle() {
+			await loginWithGoogle();
 		}
+		
+		// Test Firebase configuration
+		function testFirebaseConfig() {
+			console.log('Testing Firebase configuration...');
+			console.log('Auth object:', window.firebaseAuth);
+			console.log('Google provider:', window.googleProvider);
+			console.log('Current domain:', window.location.hostname);
+			
+			// Check if running on localhost or HTTPS
+			if (window.location.protocol !== 'https:' && 
+				window.location.hostname !== 'localhost' && 
+				window.location.hostname !== '127.0.0.1') {
+				console.warn('Firebase Auth requires HTTPS or localhost');
+				showMessage('Cần HTTPS để đăng nhập Google!', 'error');
+			}
+		}
+		
+		// Call test function on page load
+		window.addEventListener('load', testFirebaseConfig);
 
 		// Auto-hide messages after 5 seconds
 		setInterval(() => {
