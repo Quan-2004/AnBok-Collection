@@ -70,13 +70,19 @@
 		}
 
 		.auth-video-logo {
-			margin-bottom: 30px;
+			position: absolute;
+			top: 10px;
+			right: 20px;
+			background: white;
+			padding: 10px 15px;
+			border-radius: 10px;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+			z-index: 4;
 		}
 
 		.auth-video-logo img {
-			max-height: 80px;
+			max-height: 60px;
 			width: auto;
-			filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 		}
 
 		.auth-video-title {
@@ -137,6 +143,16 @@
 		.auth-form-container {
 			width: 100%;
 			max-width: 450px;
+		}
+
+		.auth-form-logo {
+			text-align: center;
+			margin-bottom: 30px;
+		}
+
+		.auth-form-logo img {
+			max-height: 80px;
+			width: auto;
 		}
 
 		.auth-form-header {
@@ -333,7 +349,7 @@
 		.auth-divider::before {
 			content: '';
 			position: absolute;
-			top: 50%;
+			top: 10%;
 			left: 0;
 			right: 0;
 			height: 1px;
@@ -553,38 +569,18 @@
 		<!-- Video Section -->
 		<div class="auth-video-section">
 			<video class="auth-video-bg" autoplay muted loop>
-				<source src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=139&oauth2_token_id=57447761" type="video/mp4">
+				<source src="images/846-140823862_small.mp4" type="video/mp4">
 				<!-- Fallback image if video doesn't load -->
 			</video>
-
-			<div class="auth-video-content">
-				<div class="auth-video-logo">
-					<img src="images/logo-Photoroom.png" alt="AnBok">
-				</div>
-				<h1 class="auth-video-title">Chào mừng đến với AnBok</h1>
-				<p class="auth-video-subtitle">
-					Khám phá thế giới tri thức vô tận với kho sách đa dạng và trải nghiệm đọc tuyệt vời
-				</p>
-				<div class="auth-video-features">
-					<div class="auth-video-feature">
-						<i class="fa fa-book"></i>
-						<span>Hơn 10,000 đầu sách đa dạng</span>
-					</div>
-					<div class="auth-video-feature">
-						<i class="fa fa-shipping-fast"></i>
-						<span>Giao hàng miễn phí toàn quốc</span>
-					</div>
-					<div class="auth-video-feature">
-						<i class="fa fa-headphones"></i>
-						<span>Hỗ trợ 24/7 chuyên nghiệp</span>
-					</div>
-				</div>
-			</div>
+		
 		</div>
 
 		<!-- Form Section -->
 		<div class="auth-form-section">
 			<div class="auth-form-container">
+				<div class="auth-form-logo">
+					<img src="images/logo-Photoroom.png" alt="AnBok">
+				</div>
 				<div class="auth-form-header">
 					<h2 class="auth-form-title" id="authTitle">Đăng nhập</h2>
 					<p class="auth-form-subtitle" id="authSubtitle">Chào mừng bạn trở lại với AnBok</p>
