@@ -96,7 +96,174 @@
 			gap: 15px;
 		}
 		
-
+		/* Book card text truncation */
+		.tg-booktitle h3 a {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: block;
+			max-width: 100%;
+		}
+		
+		.tg-bookwriter {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: block;
+		}
+		
+		.tg-bookscategories li a {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: block;
+			max-width: 100%;
+		}
+	}
+	
+	/* Book card text truncation for all screen sizes */
+	.tg-booktitle h3 a {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: block;
+		max-width: 100%;
+	}
+	
+	.tg-bookwriter {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: block;
+	}
+	
+	.tg-bookscategories li a {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: block;
+		max-width: 100%;
+	}
+	
+	.tg-btnaddtowishlist span {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: block;
+		max-width: 100%;
+	}
+	
+	.tg-btn tg-btnstyletwo em {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: block;
+		max-width: 100%;
+	}
+	
+	/* Top Trending Styles */
+	.trending-column {
+		padding: 20px;
+		height: 100%;
+	}
+	
+	.trending-header {
+		display: flex;
+		align-items: center;
+		margin-bottom: 20px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #333;
+	}
+	
+	.trending-header h3 {
+		font-size: 18px;
+		font-weight: bold;
+	}
+	
+	.trending-list {
+		margin-bottom: 20px;
+	}
+	
+	.trending-item {
+		display: flex;
+		align-items: center;
+		margin-bottom: 15px;
+		padding: 8px 0;
+	}
+	
+	.trending-number {
+		font-weight: bold;
+		color: #ffd700;
+		min-width: 20px;
+	}
+	
+	.trending-title {
+		font-size: 14px;
+		color: #ccc;
+		flex: 1;
+	}
+	
+	.trending-footer {
+		text-align: center;
+		padding-top: 15px;
+		border-top: 1px solid #333;
+	}
+	
+	.trending-comments {
+		margin-bottom: 20px;
+	}
+	
+	.comment-card {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 15px;
+		padding: 12px;
+		background: rgba(255,255,255,0.05);
+		border-radius: 8px;
+	}
+	
+	.comment-content {
+		flex: 1;
+		margin-left: 12px;
+	}
+	
+	.comment-user {
+		font-weight: bold;
+		color: #ffd700;
+		font-size: 14px;
+		margin-bottom: 4px;
+	}
+	
+	.comment-text {
+		color: #ccc;
+		font-size: 13px;
+		margin-bottom: 6px;
+		line-height: 1.4;
+	}
+	
+	.comment-movie {
+		display: flex;
+		align-items: center;
+		font-size: 12px;
+		color: #999;
+	}
+	
+	.comment-movie i {
+		margin-right: 6px;
+	}
+	
+	@media (max-width: 768px) {
+		.trending-column {
+			margin-bottom: 30px;
+		}
+		
+		.trending-item {
+			flex-wrap: wrap;
+		}
+		
+		.trending-title {
+			font-size: 12px;
+		}
 	}
 	
 	/* Banner Styles */
@@ -119,56 +286,72 @@
 	
 
 	
-	/* Navigation Menu Layout */
-	.tg-navigation ul {
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		gap: 0;
-		width: 100%;
-	}
+			/* Navigation Menu Layout */
+		.tg-navigationarea {
+			background: white;
+			border-bottom: 1px solid #e0e0e0;
+		}
+		
+		.tg-navigation ul {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			flex-wrap: wrap;
+			gap: 0;
+			width: 100%;
+		}
 	
 	.tg-navigation ul li {
 		display: flex;
 		align-items: center;
 	}
 	
-	/* Menu Item Alignment */
-	.tg-navigation ul li a {
-		padding: 15px 20px;
-		display: flex;
-		align-items: center;
-		text-decoration: none;
-		color: #333;
-		font-weight: 500;
-		transition: all 0.3s ease;
-		position: relative;
-	}
+			/* Menu Item Alignment */
+		.tg-navigation ul li a {
+			padding: 15px 20px;
+			display: flex;
+			align-items: center;
+			text-decoration: none;
+			color: #333;
+			font-weight: 500;
+			transition: all 0.3s ease;
+			position: relative;
+		}
+		
+		/* Navigation Container */
+		.tg-navigationholder {
+			background: white;
+			padding: 0;
+		}
 	
 	.tg-navigation ul li a:hover {
 		color: #F4A261;
 		background: rgba(244, 162, 97, 0.1);
 	}
 	
-	/* Sub-menu Alignment */
-	.tg-navigation ul li .sub-menu {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-		min-width: 220px;
-		box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-		border-radius: 12px;
-		padding: 8px 0;
-		z-index: 1000;
-		opacity: 0;
-		visibility: hidden;
-		transform: translateY(-15px) scale(0.95);
-		transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		border: 1px solid rgba(255,255,255,0.2);
-		backdrop-filter: blur(10px);
-	}
+			/* Sub-menu Alignment */
+		.tg-navigation ul li .sub-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+			min-width: 220px;
+			box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+			border-radius: 12px;
+			padding: 8px 0;
+			z-index: 1000;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-15px) scale(0.95);
+			transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			border: 1px solid rgba(255,255,255,0.2);
+			backdrop-filter: blur(10px);
+		}
+		
+		/* Mega Menu Position */
+		.tg-navigation ul li.menu-item-has-mega-menu {
+			position: static;
+		}
 	
 	.tg-navigation ul li:hover .sub-menu {
 		opacity: 1;
@@ -182,18 +365,17 @@
 		position: relative;
 	}
 	
-	.tg-navigation ul li .sub-menu li a {
-		padding: 12px 20px;
-		display: flex;
-		align-items: center;
-		color: #333;
-		font-size: 14px;
-		font-weight: 500;
-		border-radius: 0;
-		transition: all 0.3s ease;
-		position: relative;
-		overflow: hidden;
-	}
+			.tg-navigation ul li .sub-menu li a {
+			padding: 12px 20px;
+			display: block;
+			color: #333;
+			font-size: 14px;
+			font-weight: 500;
+			border-radius: 0;
+			transition: all 0.3s ease;
+			position: relative;
+			overflow: hidden;
+		}
 	
 	.tg-navigation ul li .sub-menu li a::before {
 		content: '';
@@ -240,18 +422,222 @@
 		border-radius: 0 0 12px 12px;
 	}
 	
-	/* Sub-menu item icons */
-	.tg-navigation ul li .sub-menu li a i {
-		margin-right: 10px;
-		font-size: 12px;
-		opacity: 0.7;
-		transition: all 0.3s ease;
-	}
 	
-	.tg-navigation ul li .sub-menu li a:hover i {
-		opacity: 1;
-		transform: scale(1.1);
-	}
+		
+		/* Mega Menu Styles */
+		.mega-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: white;
+			min-width: 800px;
+			box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+			border-radius: 12px;
+			padding: 0;
+			z-index: 1000;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-15px) scale(0.95);
+			transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			border: 1px solid rgba(255,255,255,0.2);
+			backdrop-filter: blur(10px);
+		}
+		
+		.menu-item-has-mega-menu:hover .mega-menu {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0) scale(1);
+		}
+		
+		.mega-menu-container {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 25px;
+			gap: 20px;
+		}
+		
+		.mega-menu-column {
+			flex: 1;
+			min-width: 180px;
+		}
+		
+		.mega-menu-section {
+			margin-bottom: 20px;
+			padding: 15px;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+		}
+		
+		.mega-menu-section:hover {
+			background: rgba(244, 162, 97, 0.05);
+			transform: translateY(-2px);
+		}
+		
+		.mega-menu-section h4 {
+			color: #4A6366;
+			font-size: 16px;
+			font-weight: 700;
+			margin-bottom: 15px;
+			padding-bottom: 8px;
+			border-bottom: 2px solid #F4A261;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		
+		.mega-menu-section ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		
+		.mega-menu-section ul li {
+			margin-bottom: 8px;
+		}
+		
+		.mega-menu-section ul li a {
+			color: #666;
+			font-size: 14px;
+			font-weight: 500;
+			text-decoration: none;
+			transition: all 0.3s ease;
+			display: block;
+			padding: 6px 0;
+			position: relative;
+			padding-left: 15px;
+		}
+		
+		.mega-menu-section ul li a::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 4px;
+			height: 4px;
+			background: #F4A261;
+			border-radius: 50%;
+			opacity: 0;
+			transition: all 0.3s ease;
+		}
+		
+		.mega-menu-section ul li a:hover {
+			color: #4A6366;
+			transform: translateX(5px);
+		}
+		
+		.mega-menu-section ul li a:hover::before {
+			opacity: 1;
+		}
+		
+		/* Mega Menu Badge */
+		.mega-menu-section ul li a .badge {
+			background: #F4A261;
+			color: white;
+			font-size: 10px;
+			padding: 2px 6px;
+			border-radius: 10px;
+			margin-left: 8px;
+			font-weight: 600;
+		}
+		
+		/* Mega Menu Section Count */
+		.mega-menu-section h4 .count {
+			background: #4A6366;
+			color: white;
+			font-size: 11px;
+			padding: 2px 6px;
+			border-radius: 10px;
+			margin-left: auto;
+			font-weight: 600;
+		}
+		
+		/* Mega Menu Arrow */
+		.mega-menu::before {
+			content: '';
+			position: absolute;
+			top: -8px;
+			left: 25px;
+			width: 0;
+			height: 0;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-bottom: 8px solid #ffffff;
+			filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.1));
+		}
+		
+		/* Responsive Mega Menu */
+		@media (max-width: 768px) {
+			.mega-menu {
+				min-width: 300px;
+				left: -50px;
+			}
+			
+			.mega-menu-container {
+				flex-direction: column;
+				padding: 15px;
+				gap: 15px;
+			}
+			
+			.mega-menu-column {
+				min-width: auto;
+			}
+			
+			.mega-menu-section h4 {
+				font-size: 14px;
+			}
+			
+			.mega-menu-section ul li a {
+				font-size: 13px;
+			}
+			
+			.mega-menu-section {
+				padding: 10px;
+			}
+			
+			.mega-menu-section .count {
+				font-size: 10px;
+				padding: 1px 4px;
+			}
+			
+			.mega-menu-section .badge {
+				font-size: 9px;
+				padding: 1px 4px;
+			}
+		}
+		
+		@media (max-width: 480px) {
+			.mega-menu {
+				min-width: 280px;
+				left: -80px;
+			}
+			
+			.mega-menu-container {
+				padding: 10px;
+				gap: 10px;
+			}
+		}
+		
+		/* Mega Menu Hover Effects */
+		.mega-menu-section:hover h4 {
+			color: #F4A261;
+		}
+		
+		/* Mega Menu Animation */
+		@keyframes megaMenuFadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(-20px) scale(0.9);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0) scale(1);
+			}
+		}
+		
+		.menu-item-has-mega-menu:hover .mega-menu {
+			animation: megaMenuFadeIn 0.3s ease;
+		}
 	
 	/* Middle Container Layout */
 	.tg-middlecontainer .col-xs-12 {
@@ -266,14 +652,26 @@
 		flex-shrink: 0;
 	}
 	
-	/* Navigation Action Buttons */
-	.tg-action-buttons {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		margin-left: auto;
-		padding: 0;
-	}
+			/* Navigation Action Buttons */
+		.tg-action-buttons {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin-left: auto;
+			padding: 0;
+		}
+		
+		/* Navigation Container Background */
+		.tg-navigationarea .container {
+			background: white;
+		}
+		
+		/* Navigation Area Styling */
+		.tg-navigationarea {
+			background: white;
+			border-bottom: 1px solid #e0e0e0;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		}
 	
 	/* Action Container Styling */
 	.tg-action-container {
@@ -491,29 +889,35 @@
 		display: none;
 	}
 	
-	/* Mobile Responsive for Search */
-	@media (max-width: 768px) {
-		.tg-action-buttons {
-			gap: 8px;
-			margin-left: auto;
+			/* Mobile Responsive for Search */
+		@media (max-width: 768px) {
+			.tg-action-buttons {
+				gap: 8px;
+				margin-left: auto;
+			}
+			
+			.tg-action-buttons .tg-searchbtn,
+			.tg-action-buttons .tg-btnthemedropdown {
+				width: 24px;
+				height: 24px;
+			}
+			
+			.tg-action-buttons .tg-searchbtn i,
+			.tg-action-buttons .tg-btnthemedropdown i {
+				font-size: 10px;
+			}
+			
+			.tg-searchdropdownmenu {
+				min-width: 280px;
+				right: -120px;
+			}
+			
+			/* Mobile Navigation Area */
+			.tg-navigationarea {
+				background: white;
+				box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+			}
 		}
-		
-		.tg-action-buttons .tg-searchbtn,
-		.tg-action-buttons .tg-btnthemedropdown {
-			width: 24px;
-			height: 24px;
-		}
-		
-		.tg-action-buttons .tg-searchbtn i,
-		.tg-action-buttons .tg-btnthemedropdown i {
-			font-size: 10px;
-		}
-		
-		.tg-searchdropdownmenu {
-			min-width: 280px;
-			right: -120px;
-		}
-	}
 	
 
 	
@@ -608,10 +1012,12 @@
 			display: none;
 			flex-direction: column;
 			overflow: hidden;
+			z-index: 1000;
+			box-sizing: border-box;
 		}
 		
 		.tg-chat-window.active {
-			display: flex;
+			display: flex !important;
 		}
 		
 		.tg-chat-header {
@@ -621,6 +1027,9 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			flex-shrink: 0;
+			height: 60px;
+			box-sizing: border-box;
 		}
 		
 		.tg-chat-title {
@@ -653,6 +1062,8 @@
 			flex: 1;
 			display: flex;
 			flex-direction: column;
+			min-height: 0;
+			height: 100%;
 		}
 		
 		.tg-chat-messages {
@@ -660,6 +1071,8 @@
 			padding: 15px;
 			overflow-y: auto;
 			background: #f8f9fa;
+			min-height: 0;
+			height: calc(100% - 140px);
 		}
 		
 		.tg-message {
@@ -719,6 +1132,11 @@
 			gap: 10px;
 			background: white;
 			border-top: 1px solid #eee;
+			flex-shrink: 0;
+			position: relative;
+			z-index: 1;
+			height: 80px;
+			box-sizing: border-box;
 		}
 		
 		.tg-chat-input input {
@@ -773,8 +1191,8 @@
 			position: fixed;
 			bottom: 100px;
 			right: 20px;
-			width: 50px;
-			height: 50px;
+			width: 45px;
+			height: 45px;
 			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
 			color: white;
 			border-radius: 50%;
@@ -784,21 +1202,43 @@
 			cursor: pointer;
 			opacity: 0;
 			visibility: hidden;
-			transform: translateY(20px);
-			transition: all 0.3s ease;
+			transform: translateY(20px) scale(0.8);
+			transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 			z-index: 999;
 			box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+			font-size: 16px;
+			border: 2px solid rgba(255,255,255,0.1);
+			backdrop-filter: blur(10px);
 		}
 		
 		.tg-back-to-top.active {
 			opacity: 1;
 			visibility: visible;
-			transform: translateY(0);
+			transform: translateY(0) scale(1);
 		}
 		
 		.tg-back-to-top:hover {
-			transform: translateY(-3px);
+			transform: translateY(-3px) scale(1.05);
 			box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+			background: linear-gradient(135deg, #5A7376 0%, #4A5F62 100%);
+		}
+		
+		.tg-back-to-top:active,
+		.tg-back-to-top.clicked {
+			transform: translateY(-1px) scale(0.95);
+			transition: all 0.1s ease;
+			background: linear-gradient(135deg, #6A8386 0%, #5A6F72 100%);
+		}
+		
+		/* Mobile responsive for back-to-top */
+		@media (max-width: 768px) {
+			.tg-back-to-top {
+				width: 40px;
+				height: 40px;
+				bottom: 80px;
+				right: 15px;
+				font-size: 14px;
+			}
 		}
 		
 		/* Quick Actions Menu */
@@ -926,8 +1366,9 @@
 			position: relative;
 			background: white;
 			border-radius: 15px;
-			max-width: 90%;
-			max-height: 90%;
+			max-width: 95%;
+			max-height: 95%;
+			width: 800px;
 			overflow: hidden;
 			box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 			animation: modalSlideIn 0.3s ease;
@@ -945,12 +1386,13 @@
 		}
 		
 		.tg-modal-header {
-			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
-			color: white;
+			background: white;
+			color: #333;
 			padding: 20px 25px;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			border-bottom: 1px solid #e0e0e0;
 		}
 		
 		.tg-modal-header h3 {
@@ -960,18 +1402,25 @@
 		}
 		
 		.tg-modal-close {
-			background: none;
+			background: #f8f9fa;
 			border: none;
-			color: white;
-			font-size: 18px;
+			color: #666;
+			font-size: 20px;
 			cursor: pointer;
-			padding: 5px;
+			padding: 8px;
 			border-radius: 50%;
-			transition: background 0.3s ease;
+			transition: all 0.3s ease;
+			width: 40px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 		
 		.tg-modal-close:hover {
-			background: rgba(255,255,255,0.2);
+			background: #e9ecef;
+			color: #333;
+			transform: scale(1.1);
 		}
 		
 		.tg-modal-body {
@@ -1160,6 +1609,580 @@
 				justify-content: center;
 			}
 		}
+		
+		/* Auth Modal Styles */
+		.auth-modal {
+			display: none;
+			position: fixed;
+			z-index: 10001;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0,0,0,0.5);
+			backdrop-filter: blur(5px);
+		}
+		
+		.auth-modal-content {
+			background-color: #fefefe;
+			margin: 5% auto;
+			padding: 0;
+			border-radius: 15px;
+			width: 90%;
+			max-width: 400px;
+			box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+			animation: modalSlideIn 0.3s ease;
+			position: relative;
+		}
+		
+		.auth-modal-header {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			padding: 20px 25px;
+			border-radius: 15px 15px 0 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		
+		.auth-modal-title {
+			margin: 0;
+			font-size: 1.3rem;
+			font-weight: 600;
+		}
+		
+		.auth-close {
+			color: white;
+			font-size: 28px;
+			font-weight: bold;
+			cursor: pointer;
+			background: none;
+			border: none;
+			padding: 0;
+			line-height: 1;
+		}
+		
+		.auth-close:hover {
+			opacity: 0.7;
+		}
+		
+		.auth-form {
+			padding: 25px;
+		}
+		
+		.auth-form-group {
+			margin-bottom: 20px;
+		}
+		
+		.auth-form-group label {
+			display: block;
+			margin-bottom: 8px;
+			font-weight: 600;
+			color: #333;
+			font-size: 14px;
+		}
+		
+		.auth-form-group input {
+			width: 100%;
+			padding: 12px 15px;
+			border: 2px solid #e1e5e9;
+			border-radius: 8px;
+			font-size: 14px;
+			transition: all 0.3s ease;
+			box-sizing: border-box;
+		}
+		
+		.auth-form-group input:focus {
+			outline: none;
+			border-color: #4A6366;
+			box-shadow: 0 0 0 3px rgba(74, 99, 102, 0.1);
+		}
+		
+		.auth-forgot-password {
+			text-align: right;
+			margin-bottom: 20px;
+		}
+		
+		.auth-forgot-password a {
+			color: #4A6366;
+			text-decoration: none;
+			font-size: 14px;
+			font-weight: 500;
+		}
+		
+		.auth-forgot-password a:hover {
+			text-decoration: underline;
+		}
+		
+		.auth-form-submit {
+			width: 100%;
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			padding: 12px;
+			border: none;
+			border-radius: 8px;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			margin-bottom: 20px;
+		}
+		
+		.auth-form-submit:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(74, 99, 102, 0.3);
+		}
+		
+		.auth-divider {
+			text-align: center;
+			margin: 20px 0;
+			position: relative;
+		}
+		
+		.auth-divider::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background: #e1e5e9;
+		}
+		
+		.auth-divider span {
+			background: white;
+			padding: 0 15px;
+			color: #666;
+			font-size: 14px;
+		}
+		
+		.auth-google-login {
+			width: 100%;
+			background: white;
+			color: #333;
+			padding: 12px;
+			border: 2px solid #e1e5e9;
+			border-radius: 8px;
+			font-size: 14px;
+			font-weight: 500;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			margin-bottom: 20px;
+		}
+		
+		.auth-google-login:hover {
+			background: #f8f9fa;
+			border-color: #4A6366;
+		}
+		
+		.auth-google-login img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.auth-form-footer {
+			text-align: center;
+			margin-top: 20px;
+		}
+		
+		.auth-form-footer p {
+			margin: 0;
+			color: #666;
+			font-size: 14px;
+		}
+		
+		.auth-form-footer a {
+			color: #4A6366;
+			text-decoration: none;
+			font-weight: 600;
+		}
+		
+		.auth-form-footer a:hover {
+			text-decoration: underline;
+		}
+		
+		.auth-info-text {
+			color: #1E3A8A;
+			font-size: 0.9rem;
+			margin-bottom: 1.5rem;
+			line-height: 1.5;
+		}
+		
+		/* Mobile Responsive for Auth Modals */
+		@media (max-width: 768px) {
+			.auth-modal-content {
+				margin: 10% auto;
+				width: 95%;
+			}
+			
+			.auth-form {
+				padding: 20px;
+			}
+		}
+		
+		/* Universal Modal Styles */
+		.tg-universal-modal {
+			display: none;
+			position: fixed;
+			z-index: 10002;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0,0,0,0.5);
+			backdrop-filter: blur(5px);
+		}
+		
+		.tg-universal-modal-content {
+			max-width: 420px;
+			padding: 0;
+			border-radius: 15px;
+			overflow: hidden;
+			background: #E6F3FA;
+			margin: 5% auto;
+			box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+			animation: modalSlideIn 0.3s ease;
+		}
+		
+		.tg-universal-modal-header {
+			background: #E6F3FA;
+			color: #1E3A8A;
+			padding: 20px 24px;
+			margin: 0;
+			border-bottom: 1px solid #E4B04A;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		
+		.tg-universal-modal-title {
+			margin: 0;
+			font-size: 1.2rem;
+			font-weight: 600;
+			color: #1E3A8A;
+		}
+		
+		.tg-universal-close {
+			color: #1E3A8A;
+			font-size: 1.5rem;
+			cursor: pointer;
+			background: none;
+			border: none;
+			padding: 0;
+			line-height: 1;
+		}
+		
+		.tg-universal-close:hover {
+			opacity: 0.7;
+		}
+		
+		.tg-universal-modal-body {
+			padding: 24px;
+		}
+		
+		.tg-universal-icon {
+			color: #e74c3c;
+			font-size: 3rem;
+			margin-bottom: 16px;
+		}
+		
+		.tg-universal-heading {
+			color: #1E3A8A;
+			font-size: 1.1rem;
+			font-weight: 600;
+			margin-bottom: 8px;
+		}
+		
+		.tg-universal-description {
+			color: #7f8c8d;
+			font-size: 0.95rem;
+			line-height: 1.5;
+			margin: 0;
+		}
+		
+		.tg-universal-info-box {
+			background: #F0F7FB;
+			border-radius: 8px;
+			padding: 16px;
+			margin-bottom: 24px;
+			border-left: 4px solid #e74c3c;
+		}
+		
+		.tg-universal-info-text {
+			color: #1E3A8A;
+			font-size: 0.9rem;
+			line-height: 1.5;
+			margin: 0;
+		}
+		
+		.tg-universal-info-icon {
+			color: #e74c3c;
+			margin-right: 8px;
+		}
+		
+		.tg-universal-buttons {
+			display: flex;
+			gap: 16px;
+		}
+		
+		.tg-universal-btn {
+			flex: 1;
+			border: none;
+			border-radius: 8px;
+			padding: 14px 0;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		
+		.tg-universal-btn-cancel {
+			background: #95a5a6;
+			color: white;
+		}
+		
+		.tg-universal-btn-cancel:hover {
+			background: #7f8c8d;
+		}
+		
+		.tg-universal-btn-danger {
+			background: #e74c3c;
+			color: white;
+		}
+		
+		.tg-universal-btn-danger:hover {
+			background: #c0392b;
+		}
+		
+		.tg-universal-btn-success {
+			background: #27ae60;
+			color: white;
+		}
+		
+		.tg-universal-btn-success:hover {
+			background: #229954;
+		}
+		
+		.tg-universal-btn-primary {
+			background: #3498db;
+			color: white;
+		}
+		
+		.tg-universal-btn-primary:hover {
+			background: #2980b9;
+		}
+		
+		/* Mobile Responsive for Universal Modal */
+		@media (max-width: 768px) {
+			.tg-universal-modal-content {
+				margin: 10% auto;
+				width: 95%;
+			}
+			
+			.tg-universal-buttons {
+				flex-direction: column;
+			}
+		}
+		
+		/* Notification System Styles */
+		.tg-notification {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			background: white;
+			border-radius: 8px;
+			box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+			padding: 12px 16px;
+			transform: translateX(100%);
+			transition: transform 0.3s ease;
+			z-index: 10000;
+			border-left: 3px solid #4A6366;
+			font-size: 13px;
+			max-width: 300px;
+			min-width: 250px;
+		}
+		
+		.tg-notification.show {
+			transform: translateX(0);
+		}
+		
+		.tg-notification-content {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+		
+		.tg-notification-content i {
+			font-size: 16px;
+			flex-shrink: 0;
+		}
+		
+		.tg-notification-content span {
+			font-size: 13px;
+			line-height: 1.4;
+			color: #333;
+		}
+		
+		.tg-notification-success {
+			border-left-color: #28a745;
+		}
+		
+		.tg-notification-success i {
+			color: #28a745;
+		}
+		
+		.tg-notification-error {
+			border-left-color: #dc3545;
+		}
+		
+		.tg-notification-error i {
+			color: #dc3545;
+		}
+		
+		.tg-notification-info {
+			border-left-color: #17a2b8;
+		}
+		
+		.tg-notification-info i {
+			color: #17a2b8;
+		}
+		
+			/* Mobile Responsive for Notifications */
+	@media (max-width: 768px) {
+		.tg-notification {
+			top: 10px;
+			right: 10px;
+			left: 10px;
+			max-width: none;
+			min-width: auto;
+		}
+	}
+	
+	/* Uniform Book Item Heights */
+	.tg-bestsellingbooksslider .item {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.tg-bestsellingbooksslider .tg-postbook {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		min-height: 500px;
+	}
+	
+	.tg-bestsellingbooksslider .tg-postbookcontent {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.tg-bestsellingbooksslider .tg-booktitle {
+		flex: 1;
+		margin-bottom: 10px;
+	}
+	
+	.tg-bestsellingbooksslider .tg-booktitle h3 {
+		line-height: 1.3;
+		min-height: 2.6em;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	
+	.tg-bestsellingbooksslider .tg-bookprice {
+		margin-top: auto;
+	}
+	
+	.tg-bestsellingbooksslider 		.tg-btn {
+			margin-top: 10px;
+		}
+		
+		/* Căn chỉnh Client Services */
+		.tg-clientservices {
+			display: flex;
+			align-items: stretch;
+			gap: 0;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		
+		.tg-clientservices li {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			padding: 30px 20px;
+			height: 100%;
+			min-height: 120px;
+		}
+		
+		.tg-clientservices .tg-clientserviceicon {
+			margin-bottom: 15px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		.tg-clientservices .tg-clientserviceicon i {
+			font-size: 3rem;
+			color: #ffd700;
+		}
+		
+		.tg-clientservices .tg-titlesubtitle {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		
+		.tg-clientservices .tg-titlesubtitle h3 {
+			margin: 0 0 8px 0;
+			font-size: 1.4rem;
+			line-height: 1.3;
+			font-weight: 600;
+		}
+		
+		.tg-clientservices .tg-titlesubtitle p {
+			margin: 0;
+			font-size: 1.1rem;
+			line-height: 1.4;
+		}
+		
+		/* Responsive cho Client Services */
+		@media (max-width: 768px) {
+			.tg-clientservices {
+				flex-direction: column;
+				gap: 20px;
+			}
+			
+			.tg-clientservices li {
+				min-height: 100px;
+				padding: 20px 15px;
+			}
+			
+			.tg-clientservices .tg-clientserviceicon i {
+				font-size: 2.5rem;
+			}
+			
+			.tg-clientservices .tg-titlesubtitle h3 {
+				font-size: 1.2rem;
+			}
+			
+			.tg-clientservices .tg-titlesubtitle p {
+				font-size: 1rem;
+			}
+		}
 	</style>
 </head>
 <body class="tg-home tg-homevtwo">
@@ -1176,7 +2199,138 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<strong class="tg-logo"><a href="index.html"><img src="images/logo1-Photoroom.png" alt="Thư Viện Sách" style="max-height: 60px; width: auto;"></a></strong>
+							<strong class="tg-logo"><a href="index.html"><img src="images/logo1-Photoroom.png" alt="AnBok" style="max-height: 60px; width: auto;"></a></strong>
+							<div class="tg-auth-buttons" style="float: right; margin-top: 15px;">
+								<a href="#" onclick="showAuthModal('loginModal'); return false;" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s ease; display: inline-block;">
+									<i class="fa fa-sign-in" style="margin-right: 8px;"></i>Đăng nhập
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Auth Modals -->
+			<!-- Login Modal -->
+			<div id="loginModal" class="auth-modal">
+				<div class="auth-modal-content">
+					<div class="auth-modal-header">
+						<h2 class="auth-modal-title">Đăng nhập</h2>
+						<button class="auth-close" onclick="closeAuthModal('loginModal')">&times;</button>
+					</div>
+					<form id="loginForm" class="auth-form">
+						<div class="auth-form-group">
+							<label for="loginEmail">Email</label>
+							<input type="email" id="loginEmail" placeholder="Nhập email của bạn" required>
+						</div>
+						<div class="auth-form-group">
+							<label for="loginPassword">Mật khẩu</label>
+							<input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required>
+						</div>
+						<div class="auth-forgot-password">
+							<a href="#" onclick="showAuthModal('forgotPasswordModal'); closeAuthModal('loginModal'); return false;">Quên mật khẩu?</a>
+						</div>
+						<button type="submit" class="auth-form-submit">Đăng nhập</button>
+						<div class="auth-divider">
+							<span>hoặc</span>
+						</div>
+						<button type="button" class="auth-google-login" onclick="loginWithGoogle()">
+							<img src="images/Google__G__logo.svg-Photoroom.png" alt="Google">
+							Đăng nhập bằng Google
+						</button>
+						<div class="auth-form-footer">
+							<p>Chưa có tài khoản? <a href="#" onclick="showAuthModal('registerModal'); closeAuthModal('loginModal'); return false;">Đăng ký ngay</a></p>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- Register Modal -->
+			<div id="registerModal" class="auth-modal">
+				<div class="auth-modal-content">
+					<div class="auth-modal-header">
+						<h2 class="auth-modal-title">Đăng ký</h2>
+						<button class="auth-close" onclick="closeAuthModal('registerModal')">&times;</button>
+					</div>
+					<form id="registerForm" class="auth-form">
+						<div class="auth-form-group">
+							<label for="registerName">Họ và tên</label>
+							<input type="text" id="registerName" placeholder="Nhập họ và tên" required>
+						</div>
+						<div class="auth-form-group">
+							<label for="registerEmail">Email</label>
+							<input type="email" id="registerEmail" placeholder="Nhập email của bạn" required>
+						</div>
+						<div class="auth-form-group">
+							<label for="registerPassword">Mật khẩu</label>
+							<input type="password" id="registerPassword" placeholder="Nhập mật khẩu" required>
+						</div>
+						<div class="auth-form-group">
+							<label for="confirmPassword">Xác nhận mật khẩu</label>
+							<input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+						</div>
+						<button type="submit" class="auth-form-submit">Đăng ký</button>
+						<div class="auth-divider">
+							<span>hoặc</span>
+						</div>
+						<div class="auth-form-footer">
+							<p>Đã có tài khoản? <a href="#" onclick="showAuthModal('loginModal'); closeAuthModal('registerModal'); return false;">Đăng nhập</a></p>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- Forgot Password Modal -->
+			<div id="forgotPasswordModal" class="auth-modal">
+				<div class="auth-modal-content">
+					<div class="auth-modal-header">
+						<h2 class="auth-modal-title">Quên mật khẩu</h2>
+						<button class="auth-close" onclick="closeAuthModal('forgotPasswordModal')">&times;</button>
+					</div>
+					<form id="forgotPasswordForm" class="auth-form">
+						<div class="auth-form-group">
+							<label for="forgotEmail">Email</label>
+							<input type="email" id="forgotEmail" placeholder="Nhập email của bạn" required>
+						</div>
+						<p class="auth-info-text">
+							Chúng tôi sẽ gửi link đặt lại mật khẩu vào email của bạn.
+						</p>
+						<button type="submit" class="auth-form-submit">Gửi yêu cầu</button>
+						<div class="auth-form-footer">
+							<p><a href="#" onclick="showAuthModal('loginModal'); closeAuthModal('forgotPasswordModal'); return false;">Quay lại đăng nhập</a></p>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<!-- Universal Modal for All Notifications -->
+			<div id="universalModal" class="tg-universal-modal">
+				<div class="tg-universal-modal-content">
+					<div class="tg-universal-modal-header">
+						<h2 class="tg-universal-modal-title" id="universalModalTitle">Xác nhận</h2>
+						<button class="tg-universal-close" onclick="closeUniversalModal()">&times;</button>
+					</div>
+					<div class="tg-universal-modal-body">
+						<div style="text-align: center; margin-bottom: 20px;">
+							<i class="fas fa-question-circle tg-universal-icon" id="universalModalIcon"></i>
+							<h3 class="tg-universal-heading" id="universalModalHeading">Bạn có chắc chắn?</h3>
+							<p class="tg-universal-description" id="universalModalDescription">
+								Mô tả chi tiết về hành động này sẽ được hiển thị ở đây.
+							</p>
+						</div>
+						<div class="tg-universal-info-box" id="universalModalInfoBox" style="display: none;">
+							<p class="tg-universal-info-text">
+								<i class="fas fa-info-circle tg-universal-info-icon"></i>
+								<span id="universalModalInfoText">Thông tin bổ sung sẽ được hiển thị ở đây.</span>
+							</p>
+						</div>
+						<div class="tg-universal-buttons">
+							<button class="tg-universal-btn tg-universal-btn-cancel" onclick="closeUniversalModal()" id="universalModalCancelBtn">
+								Hủy bỏ
+							</button>
+							<button class="tg-universal-btn tg-universal-btn-danger" onclick="confirmUniversalAction()" id="universalModalConfirmBtn">
+								Xác nhận
+							</button>
 						</div>
 					</div>
 				</div>
@@ -1200,24 +2354,93 @@
 										<li class="menu-item-has-children menu-item-has-mega-menu">
 											<a href="javascript:void(0);">Tất cả danh mục</a>
 											<div class="mega-menu">
-												<ul class="tg-themetabnav" role="tablist">
-													<li role="presentation" class="active">
-														<a href="#childrensbook" aria-controls="childrensbook" role="tab" data-toggle="tab">Sách thiếu nhi</a>
-													</li>
-													<li role="presentation">
-														<a href="#crimethriller" aria-controls="crimethriller" role="tab" data-toggle="tab">Tội phạm &amp; Kinh dị</a>
-													</li>
-													<li role="presentation">
-														<a href="#fiction" aria-controls="fiction" role="tab" data-toggle="tab">Tiểu thuyết</a>
-													</li>
-													<li role="presentation">
-														<a href="#graphicanimemanga" aria-controls="graphicanimemanga" role="tab" data-toggle="tab">Truyện tranh, Anime &amp; Manga</a>
-													</li>
-													<li role="presentation">
-														<a href="#sciencefiction" aria-controls="sciencefiction" role="tab" data-toggle="tab">Khoa học viễn tưởng</a>
-													</li>
-												</ul>
-												
+												<div class="mega-menu-container">
+													<div class="mega-menu-column">
+														<div class="mega-menu-section">
+															<h4>Yêu thích <span class="count">4</span></h4>
+															<ul>
+																<li><a href="javascript:void(0);">Sách bán chạy nhất <span class="badge">Hot</span></a></li>
+																<li><a href="javascript:void(0);">Sách được đánh giá cao</a></li>
+																<li><a href="javascript:void(0);">Sách được đề xuất</a></li>
+																<li><a href="javascript:void(0);">Sách phổ biến</a></li>
+															</ul>
+														</div>
+													</div>
+													
+													<div class="mega-menu-column">
+														<div class="mega-menu-section">
+															<h4>Top bình chọn <span class="count">4</span></h4>
+															<ul>
+																<li><a href="javascript:void(0);">Sách hay nhất tháng <span class="badge">New</span></a></li>
+																<li><a href="javascript:void(0);">Sách hay nhất năm</a></li>
+																<li><a href="javascript:void(0);">Sách được bình chọn nhiều</a></li>
+																<li><a href="javascript:void(0);">Sách có đánh giá cao</a></li>
+															</ul>
+														</div>
+													</div>
+													
+													<div class="mega-menu-column">
+														<div class="mega-menu-section">
+															<h4>Sách <span class="count">5</span></h4>
+															<ul>
+																<li><a href="javascript:void(0);">Sách văn học</a></li>
+																<li><a href="javascript:void(0);">Sách khoa học</a></li>
+																<li><a href="javascript:void(0);">Sách kinh tế</a></li>
+																<li><a href="javascript:void(0);">Sách giáo khoa</a></li>
+																<li><a href="javascript:void(0);">Sách tham khảo</a></li>
+															</ul>
+														</div>
+													</div>
+													
+													<div class="mega-menu-column">
+														<div class="mega-menu-section">
+															<h4>Truyện <span class="count">5</span></h4>
+															<ul>
+																<li><a href="javascript:void(0);">Truyện tranh</a></li>
+																<li><a href="javascript:void(0);">Truyện ngắn</a></li>
+																<li><a href="javascript:void(0);">Truyện dài</a></li>
+																<li><a href="javascript:void(0);">Truyện cười</a></li>
+																<li><a href="javascript:void(0);">Truyện cổ tích</a></li>
+															</ul>
+														</div>
+													</div>
+													
+													<div class="mega-menu-column">
+														<div class="mega-menu-section">
+															<h4>Nổi bật <span class="count">4</span></h4>
+															<ul>
+																<li><a href="javascript:void(0);">Sách mới phát hành <span class="badge">Sale</span></a></li>
+																<li><a href="javascript:void(0);">Sách bán chạy</a></li>
+																<li><a href="javascript:void(0);">Sách khuyến mãi</a></li>
+																<li><a href="javascript:void(0);">Sách được quan tâm</a></li>
+															</ul>
+														</div>
+													</div>
+													
+													<div class="mega-menu-column">
+														<div class="mega-menu-section">
+															<h4>Mới <span class="count">4</span></h4>
+															<ul>
+																<li><a href="javascript:void(0);">Sách mới nhất <span class="badge">New</span></a></li>
+																<li><a href="javascript:void(0);">Truyện mới nhất</a></li>
+																<li><a href="javascript:void(0);">Tác giả mới</a></li>
+																<li><a href="javascript:void(0);">Thể loại mới</a></li>
+															</ul>
+														</div>
+													</div>
+													
+													<div class="mega-menu-column">
+														<div class="mega-menu-section">
+															<h4>Miễn phí <span class="count">4</span></h4>
+															<ul>
+																<li><a href="javascript:void(0);">Sách miễn phí <span class="badge">Free</span></a></li>
+																<li><a href="javascript:void(0);">Truyện miễn phí</a></li>
+																<li><a href="javascript:void(0);">Tài liệu miễn phí</a></li>
+																<li><a href="javascript:void(0);">Khóa học miễn phí</a></li>
+															</ul>
+														</div>
+													</div>
+												</div>
 											</div>
 										</li>
 										<li class="menu-item-has-children current-menu-item">
@@ -1226,8 +2449,8 @@
 										<li class="menu-item-has-children">
 											<a href="javascript:void(0);">Tác giả</a>
 											<ul class="sub-menu">
-												<li><a href="authors.html"><i class="fa fa-users"></i>Danh sách tác giả</a></li>
-												<li><a href="authordetail.html"><i class="fa fa-user"></i>Chi tiết tác giả</a></li>
+												<li><a href="authors.html">Danh sách tác giả</a></li>
+												<li><a href="authordetail.html">Chi tiết tác giả</a></li>
 											</ul>
 										</li>
 										<li><a href="products.html">Bán chạy nhất</a></li>
@@ -1235,10 +2458,10 @@
 										<li class="menu-item-has-children">
 											<a href="javascript:void(0);">Tin tức mới nhất</a>
 											<ul class="sub-menu">
-												<li><a href="products.html"><i class="fa fa-gift"></i>Khuyến mãi tuần</a></li>
-												<li><a href="newslist.html"><i class="fa fa-list"></i>Danh sách tin tức</a></li>
-												<li><a href="newsgrid.html"><i class="fa fa-th"></i>Lưới tin tức</a></li>
-												<li><a href="newsdetail.html"><i class="fa fa-newspaper-o"></i>Chi tiết tin tức</a></li>
+												<li><a href="products.html">Khuyến mãi tuần</a></li>
+												<li><a href="newslist.html">Danh sách tin tức</a></li>
+												<li><a href="newsgrid.html">Lưới tin tức</a></li>
+												<li><a href="newsdetail.html">Chi tiết tin tức</a></li>
 											</ul>
 										</li>
 										<li><a href="aboutus.html">Về chúng tôi</a></li>
@@ -1268,50 +2491,33 @@
 														<i class="icon-cart"></i>
 													</a>
 													<div class="tg-cart-total">
-														<span class="tg-total-price">850.000₫</span>
+														<span class="tg-total-price"></span>
 													</div>
-													<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
-														<div class="tg-minicartbody">
-															<div class="tg-minicarproduct">
-																<figure>
-																	<img src="images/products/img-01.jpg" alt="image description">
-																	
-																</figure>
-																<div class="tg-minicarproductdata">
-																	<h5><a href="javascript:void(0);">Our State Fair Is A Great Function</a></h5>
-																	<h6><a href="javascript:void(0);">290.000₫</a></h6>
-																</div>
-															</div>
-															<div class="tg-minicarproduct">
-																<figure>
-																	<img src="images/products/img-02.jpg" alt="image description">
-																	
-																</figure>
-																<div class="tg-minicarproductdata">
-																	<h5><a href="javascript:void(0);">Bring Me To Light</a></h5>
-																	<h6><a href="javascript:void(0);">290.000₫</a></h6>
-																</div>
-															</div>
-															<div class="tg-minicarproduct">
-																<figure>
-																	<img src="images/products/img-03.jpg" alt="image description">
-																	
-																</figure>
-																<div class="tg-minicarproductdata">
-																	<h5><a href="javascript:void(0);">Have Faith In Your Soul</a></h5>
-																	<h6><a href="javascript:void(0);">290.000₫</a></h6>
-																</div>
+													<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart" style="width: 350px; padding: 0; border: none; box-shadow: 0 5px 25px rgba(0,0,0,0.15); border-radius: 10px; position: absolute; top: 100%; right: 0; z-index: 1000; margin-top: 5px; transform: none !important; left: auto !important;">
+														<div class="tg-minicartbody" style="max-height: 300px; min-height: 200px; overflow-y: auto; padding: 15px;">
+															<div style="text-align: center; padding: 40px 20px; color: #666;">
+																<i class="fa fa-shopping-cart" style="font-size: 3rem; color: #ddd; margin-bottom: 15px; display: block;"></i>
+																<h4 style="margin: 0 0 10px 0; color: #999; font-size: 16px;">Giỏ hàng trống</h4>
+																<p style="margin: 0; color: #bbb; font-size: 14px;">Hãy thêm sản phẩm vào giỏ hàng</p>
 															</div>
 														</div>
-														<div class="tg-minicartfoot">
-															<a class="tg-btnemptycart" href="javascript:void(0);">
-																<i class="fa fa-trash-o"></i>
-																<span>Xóa giỏ hàng</span>
-															</a>
-															<span class="tg-subtotal">Tổng cộng: <strong>870.000₫</strong></span>
-															<div class="tg-btns">
-																<a class="tg-btn tg-active" href="javascript:void(0);">Xem giỏ hàng</a>
-																<a class="tg-btn" href="javascript:void(0);">Thanh toán</a>
+														<div class="tg-minicartfoot" style="padding: 20px; background: #f8f9fa; border-top: 1px solid #eee;">
+															<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+																<a class="tg-btnemptycart" href="javascript:void(0);" onclick="clearCart()" style="color: #dc3545; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 5px; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+																	<i class="fa fa-trash-o"></i>
+																	<span>Xóa giỏ hàng</span>
+																</a>
+																<span class="tg-subtotal" style="font-weight: 600; color: #333; font-size: 16px;">Tổng cộng: <strong id="cart-total" style="color: #4A6366;">0₫</strong></span>
+															</div>
+															<div class="tg-btns" style="display: flex; gap: 12px;">
+																<a class="tg-btn tg-active" href="javascript:void(0);" style="flex: 1; text-align: center; padding: 12px 16px; background: #4A6366; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600; transition: all 0.3s ease; border: 2px solid #4A6366; display: flex; align-items: center; justify-content: center;">
+																	<i class="fa fa-shopping-cart" style="margin-right: 6px;"></i>
+																	Xem giỏ hàng
+																</a>
+																<a class="tg-btn" href="javascript:void(0);" style="flex: 1; text-align: center; padding: 12px 16px; background: #28a745; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600; transition: all 0.3s ease; border: 2px solid #28a745; display: flex; align-items: center; justify-content: center;">
+																	<i class="fa fa-credit-card" style="margin-right: 6px;"></i>
+																	Thanh toán
+																</a>
 															</div>
 														</div>
 													</div>
@@ -1351,19 +2557,16 @@
 							<div class="tg-bannertext">
 								<h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
 									<span style="display: block; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; opacity: 0.9;">Chào mừng đến với</span>
-									Thư Viện Sách
+									AnBok
 								</h1>
 								<h2 style="font-size: 1.5rem; font-weight: 300; margin-bottom: 2rem; opacity: 0.9; line-height: 1.4;">
-									Khám phá thế giới tri thức qua từng trang sách
+								Nơi tri thức và ước mơ giao nhau
 								</h2>
-								<p style="font-size: 1.1rem; margin-bottom: 2.5rem; opacity: 0.8; line-height: 1.6;">
-									Hơn <strong>10,000+</strong> đầu sách đa dạng thể loại, từ văn học kinh điển đến sách khoa học hiện đại. Tìm kiếm, mua sắm và tận hưởng niềm vui đọc sách cùng chúng tôi.
+								<p style="font-size: 1.5rem; margin-bottom: 2.5rem; opacity: 0.8; line-height: 1.6;">
+									Bắt đầu ngày mới với một câu chuyện, kết thúc đêm dài bằng một bài học. Chúng tôi mang đến cho bạn không gian tri thức và niềm vui bất tận, nơi bạn có thể tìm thấy mọi điều mình cần, từ những trang sách và trang truyện mới nhất.
 								</p>
 								<div class="tg-bannerbtns" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-									<a class="tg-btn tg-active" href="products.html" style="background: #F4A261; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3); display: inline-flex; align-items: center; gap: 10px;">
-										<i class="fa fa-shopping-basket" style="font-size: 1.1rem;"></i>
-										<em>Khám phá ngay</em>
-									</a>
+									
 									<a class="tg-btn" href="aboutus.html" style="background: transparent; color: #fff; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); display: inline-flex; align-items: center; gap: 10px;">
 										<i class="fa fa-info-circle" style="font-size: 1.1rem;"></i>
 										<em>Tìm hiểu thêm</em>
@@ -1442,7 +2645,7 @@
 											</div>
 											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 												<i class="icon-heart"></i>
-												<span>thêm vào yêu thích</span>
+												<span>Thêm vào yêu thích</span>
 											</a>
 										</figure>
 										<div class="tg-postbookcontent">
@@ -1450,7 +2653,7 @@
 												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
 												<li><a href="javascript:void(0);">Giải trí</a></li>
 											</ul>
-											<div class="tg-themetagbox"><span class="tg-themetag">khuyến mãi</span></div>
+											<div class="tg-themetagbox"><span class="tg-themetag">Khuyến mãi</span></div>
 											<div class="tg-booktitle">
 												<h3><a href="javascript:void(0);">Giúp tôi tìm dạ dày của mình</a></h3>
 											</div>
@@ -1476,15 +2679,15 @@
 											</div>
 											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 												<i class="icon-heart"></i>
-												<span>add to wishlist</span>
+												<span>Thêm vào yêu thích</span>
 											</a>
 										</figure>
 										<div class="tg-postbookcontent">
 											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Adventure</a></li>
-												<li><a href="javascript:void(0);">Fun</a></li>
+												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
+												<li><a href="javascript:void(0);">Giải trí</a></li>
 											</ul>
-											<div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
+											<div class="tg-themetagbox"><span class="tg-themetag">Khuyến mãi</span></div>
 											<div class="tg-booktitle">
 												<h3><a href="javascript:void(0);">Lái xe an toàn, không va chạm</a></h3>
 											</div>
@@ -1496,7 +2699,7 @@
 											</span>
 											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 												<i class="fa fa-shopping-basket"></i>
-												<em>Add To Basket</em>
+												<em>Thêm vào giỏ</em>
 											</a>
 										</div>
 									</div>
@@ -1510,13 +2713,13 @@
 											</div>
 											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 												<i class="icon-heart"></i>
-												<span>add to wishlist</span>
+												<span>Thêm vào yêu thích</span>
 											</a>
 										</figure>
 										<div class="tg-postbookcontent">
 											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Adventure</a></li>
-												<li><a href="javascript:void(0);">Fun</a></li>
+												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
+												<li><a href="javascript:void(0);">Giải trí</a></li>
 											</ul>
 											<div class="tg-themetagbox"></div>
 											<div class="tg-booktitle">
@@ -1530,7 +2733,7 @@
 											</span>
 											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 												<i class="fa fa-shopping-basket"></i>
-												<em>Add To Basket</em>
+												<em>Thêm vào giỏ</em>
 											</a>
 										</div>
 									</div>
@@ -1544,19 +2747,19 @@
 											</div>
 											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 												<i class="icon-heart"></i>
-												<span>add to wishlist</span>
+												<span>Thêm vào yêu thích</span>
 											</a>
 										</figure>
 										<div class="tg-postbookcontent">
 											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Adventure</a></li>
-												<li><a href="javascript:void(0);">Fun</a></li>
+												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
+												<li><a href="javascript:void(0);">Giải trí</a></li>
 											</ul>
-											<div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
+											<div class="tg-themetagbox"><span class="tg-themetag">Khuyến mãi</span></div>
 											<div class="tg-booktitle">
 												<h3><a href="javascript:void(0);">Hội chợ của chúng tôi là một hội chợ tuyệt vời</a></h3>
 											</div>
-											<span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
 											<span class="tg-stars"><span></span></span>
 											<span class="tg-bookprice">
 												<ins>600.000₫</ins>
@@ -1564,7 +2767,7 @@
 											</span>
 											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 												<i class="fa fa-shopping-basket"></i>
-												<em>Add To Basket</em>
+												<em>Thêm vào giỏ</em>
 											</a>
 										</div>
 									</div>
@@ -1578,19 +2781,19 @@
 											</div>
 											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 												<i class="icon-heart"></i>
-												<span>add to wishlist</span>
+												<span>Thêm vào yêu thích</span>
 											</a>
 										</figure>
 										<div class="tg-postbookcontent">
 											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Adventure</a></li>
-												<li><a href="javascript:void(0);">Fun</a></li>
+												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
+												<li><a href="javascript:void(0);">Giải trí</a></li>
 											</ul>
 											<div class="tg-themetagbox"></div>
 											<div class="tg-booktitle">
 												<h3><a href="javascript:void(0);">Đặt cánh hoa lên kim loại</a></h3>
 											</div>
-											<span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
 											<span class="tg-stars"><span></span></span>
 											<span class="tg-bookprice">
 												<ins>600.000₫</ins>
@@ -1598,7 +2801,7 @@
 											</span>
 											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 												<i class="fa fa-shopping-basket"></i>
-												<em>Add To Basket</em>
+												<em>Thêm vào giỏ</em>
 											</a>
 										</div>
 									</div>
@@ -1612,19 +2815,19 @@
 											</div>
 											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 												<i class="icon-heart"></i>
-												<span>add to wishlist</span>
+												<span>Thêm vào yêu thích</span>
 											</a>
 										</figure>
 										<div class="tg-postbookcontent">
 											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Adventure</a></li>
-												<li><a href="javascript:void(0);">Fun</a></li>
+												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
+												<li><a href="javascript:void(0);">Giải trí</a></li>
 											</ul>
-											<div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
+											<div class="tg-themetagbox"><span class="tg-themetag">Khuyến mãi</span></div>
 											<div class="tg-booktitle">
 												<h3><a href="javascript:void(0);">Giúp tôi tìm dạ dày của mình</a></h3>
 											</div>
-											<span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
 											<span class="tg-stars"><span></span></span>
 											<span class="tg-bookprice">
 												<ins>600.000₫</ins>
@@ -1632,7 +2835,7 @@
 											</span>
 											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 												<i class="fa fa-shopping-basket"></i>
-												<em>Add To Basket</em>
+												<em>Thêm vào giỏ</em>
 											</a>
 										</div>
 									</div>
@@ -1646,19 +2849,19 @@
 											</div>
 											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 												<i class="icon-heart"></i>
-												<span>add to wishlist</span>
+												<span>Thêm vào yêu thích</span>
 											</a>
 										</figure>
 										<div class="tg-postbookcontent">
 											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Adventure</a></li>
-												<li><a href="javascript:void(0);">Fun</a></li>
+												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
+												<li><a href="javascript:void(0);">Giải trí</a></li>
 											</ul>
 											<div class="tg-themetagbox"></div>
 											<div class="tg-booktitle">
 												<h3><a href="javascript:void(0);">Hãy để những thời khắc tốt đẹp cuộn lên</a></h3>
 											</div>
-											<span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
 											<span class="tg-stars"><span></span></span>
 											<span class="tg-bookprice">
 												<ins>600.000₫</ins>
@@ -1666,7 +2869,7 @@
 											</span>
 											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 												<i class="fa fa-shopping-basket"></i>
-												<em>Add To Basket</em>
+												<em>Thêm vào giỏ</em>
 											</a>
 										</div>
 									</div>
@@ -1685,145 +2888,90 @@
 			<section class="tg-bglight tg-haslayout">
 				<div class="container">
 					<div class="row">
-						<div class="tg-memberbenefits">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<div class="tg-memberbenefitscontent" style="padding: 30px 0;">
-									<div class="tg-themetagbox" style="text-align: center; margin-bottom: 20px;">
-										<span class="tg-themetag" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: 600;">GÓI HỘI VIÊN</span>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="tg-memberbanner" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); border-radius: 20px; padding: 40px; text-align: center; color: white; box-shadow: 0 10px 30px rgba(74, 99, 102, 0.3);">
+								<div class="tg-banner-header" style="margin-bottom: 30px;">
+									<div class="tg-badge" style="background: rgba(255,255,255,0.2); color: white; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; display: inline-block; margin-bottom: 20px;">
+										<i class="fa fa-star" style="margin-right: 8px;"></i>GÓI HỘI VIÊN ĐẶC BIỆT
 									</div>
-									<div class="tg-membertitle" style="margin: 20px 0; text-align: center;">
-										<h3 style="font-size: 2.2rem; font-weight: 700; color: #333; margin-bottom: 15px;">
-											<a href="membership.html" style="color: inherit; text-decoration: none;">Chọn gói hội viên phù hợp</a>
-										</h3>
-									</div>
-									
-									<!-- 3 Gói Hội Viên -->
-									<div class="tg-membershippackages" style="margin: 30px 0;">
-										<div class="row" style="display: flex; align-items: stretch;">
-											<!-- Gói Cơ Bản -->
-											<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="display: flex;">
-												<div class="tg-package-card" style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center; transition: all 0.3s ease; border: 2px solid #e0e0e0; width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-													<div class="tg-package-header" style="margin-bottom: 20px;">
-														<h4 style="font-size: 1.5rem; font-weight: 700; color: #333; margin-bottom: 10px;">Gói Cơ Bản</h4>
-														<div class="tg-package-price" style="margin-bottom: 15px;">
-															<ins style="font-size: 1.8rem; font-weight: 700; color: #667eea;">99K</ins>
-															<span style="font-size: 0.9rem; color: #666;">/tháng</span>
-														</div>
-													</div>
-													<div class="tg-package-benefits" style="margin-bottom: 25px;">
-														<ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #667eea; margin-right: 8px; font-size: 14px;"></i>
-																<span>Giảm giá 5% cho tất cả sách</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #667eea; margin-right: 8px; font-size: 14px;"></i>
-																<span>Giao hàng miễn phí từ 500K</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #667eea; margin-right: 8px; font-size: 14px;"></i>
-																<span>Thông báo sách mới</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #667eea; margin-right: 8px; font-size: 14px;"></i>
-																<span>Hỗ trợ qua email</span>
-															</li>
-														</ul>
-													</div>
-													<a class="tg-btn" href="membership.html?package=basic" style="background: #f8f9fa; color: #4A6366; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; border: 2px solid #4A6366; box-shadow: 0 4px 15px rgba(74, 99, 102, 0.2);">
-														<em>Chọn gói</em>
-													</a>
-												</div>
-											</div>
-											
-											<!-- Gói Premium -->
-											<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="display: flex;">
-												<div class="tg-package-card" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 8px 30px rgba(74, 99, 102, 0.3); text-align: center; transition: all 0.3s ease; border: 2px solid #4A6366; position: relative; transform: scale(1.05); width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-													<div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 15px; font-size: 12px; font-weight: 600;">PHỔ BIẾN</div>
-													<div class="tg-package-header" style="margin-bottom: 20px;">
-														<h4 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 10px;">Gói Premium</h4>
-														<div class="tg-package-price" style="margin-bottom: 15px;">
-															<ins style="font-size: 1.8rem; font-weight: 700; color: white;">199K</ins>
-															<span style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">/tháng</span>
-														</div>
-													</div>
-													<div class="tg-package-benefits" style="margin-bottom: 25px;">
-														<ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
-																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
-																<span>Giảm giá 15% cho tất cả sách</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
-																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
-																<span>Miễn phí giao hàng toàn quốc</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
-																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
-																<span>Ưu tiên đặt sách mới phát hành</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
-																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
-																<span>Tham gia các sự kiện đặc biệt</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.9);">
-																<i class="fa fa-check" style="color: white; margin-right: 8px; font-size: 14px;"></i>
-																<span>Hỗ trợ 24/7 qua chat</span>
-															</li>
-														</ul>
-													</div>
-													<a class="tg-btn" href="membership.html?package=premium" style="background: white; color: #4A6366; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);">
-														<em>Chọn gói</em>
-													</a>
-												</div>
-											</div>
-											
-											<!-- Gói VIP -->
-											<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="display: flex;">
-												<div class="tg-package-card" style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center; transition: all 0.3s ease; border: 2px solid #ffd700; width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-													<div class="tg-package-header" style="margin-bottom: 20px;">
-														<h4 style="font-size: 1.5rem; font-weight: 700; color: #333; margin-bottom: 10px;">Gói VIP</h4>
-														<div class="tg-package-price" style="margin-bottom: 15px;">
-															<ins style="font-size: 1.8rem; font-weight: 700; color: #ffd700;">399K</ins>
-															<span style="font-size: 0.9rem; color: #666;">/tháng</span>
-														</div>
-													</div>
-													<div class="tg-package-benefits" style="margin-bottom: 25px;">
-														<ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
-																<span>Giảm giá 25% cho tất cả sách</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
-																<span>Miễn phí giao hàng toàn quốc</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
-																<span>Đặt trước sách mới phát hành</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
-																<span>Tham gia sự kiện VIP độc quyền</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
-																<span>Hỗ trợ 24/7 qua điện thoại</span>
-															</li>
-															<li style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555;">
-																<i class="fa fa-check" style="color: #ffd700; margin-right: 8px; font-size: 14px;"></i>
-																<span>Tặng quà sinh nhật đặc biệt</span>
-															</li>
-														</ul>
-													</div>
-													<a class="tg-btn" href="membership.html?package=vip" style="background: #F4A261; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);">
-														<em>Chọn gói</em>
-													</a>
-												</div>
-											</div>
+									<h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; color: white;">
+										Chỉ 99K/tháng
+									</h2>
+									<p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 30px;">
+										Trải nghiệm đọc sách tuyệt vời với những quyền lợi độc quyền
+									</p>
+								</div>
+								
+								<div class="tg-benefits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 35px;">
+									<div class="tg-benefit-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; text-align: left;">
+										<div class="tg-benefit-icon" style="margin-bottom: 15px;">
+											<i class="fa fa-gift" style="font-size: 2rem; color: #ffd700;"></i>
 										</div>
+										<h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: white;">Nhận quà từ các sự kiện</h4>
+										<p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.5;">
+											Tham gia các sự kiện đặc biệt và nhận những món quà độc quyền từ thư viện
+										</p>
 									</div>
 									
+									<div class="tg-benefit-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; text-align: left;">
+										<div class="tg-benefit-icon" style="margin-bottom: 15px;">
+											<i class="fa fa-percent" style="font-size: 2rem; color: #ffd700;"></i>
+										</div>
+										<h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: white;">Giảm 15% khi mua sách</h4>
+										<p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.5;">
+											Được giảm giá 15% cho tất cả sách và sách hội viên đặc biệt
+										</p>
+									</div>
 									
+									<div class="tg-benefit-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; text-align: left;">
+										<div class="tg-benefit-icon" style="margin-bottom: 15px;">
+											<i class="fa fa-truck" style="font-size: 2rem; color: #ffd700;"></i>
+										</div>
+										<h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: white;">Miễn phí giao hàng toàn quốc</h4>
+										<p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.5;">
+											Giao hàng miễn phí cho tất cả đơn hàng trên toàn quốc
+										</p>
+									</div>
+									
+									<div class="tg-benefit-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; text-align: left;">
+										<div class="tg-benefit-icon" style="margin-bottom: 15px;">
+											<i class="fa fa-clock-o" style="font-size: 2rem; color: #ffd700;"></i>
+										</div>
+										<h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: white;">Ưu tiên đặt trước sách</h4>
+										<p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.5;">
+											Đặt trước sách/truyện mới trước 1-2 tuần so với người dùng thường
+										</p>
+									</div>
+									
+									<div class="tg-benefit-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; text-align: left;">
+										<div class="tg-benefit-icon" style="margin-bottom: 15px;">
+											<i class="fa fa-tablet" style="font-size: 2rem; color: #ffd700;"></i>
+										</div>
+										<h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: white;">Đọc sách hội viên trên web/app</h4>
+										<p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.5;">
+											Truy cập kho sách hội viên đặc biệt trên website và ứng dụng mobile
+										</p>
+									</div>
+									
+									<div class="tg-benefit-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; text-align: left;">
+										<div class="tg-benefit-icon" style="margin-bottom: 15px;">
+											<i class="fa fa-headphones" style="font-size: 2rem; color: #ffd700;"></i>
+										</div>
+										<h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: white;">Hỗ trợ 24/7</h4>
+										<p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.5;">
+											Đội ngũ hỗ trợ chuyên nghiệp sẵn sàng phục vụ bạn mọi lúc
+										</p>
+									</div>
+								</div>
+								
+								<div class="tg-banner-cta" style="margin-top: 30px;">
+									<a href="membership.html" class="tg-btn" style="background: #ffd700; color: #4A6366; padding: 15px 40px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1.1rem; display: inline-block; box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3); transition: all 0.3s ease;">
+										<i class="fa fa-crown" style="margin-right: 10px;"></i>
+										Đăng ký ngay
+									</a>
+									<p style="margin-top: 15px; font-size: 14px; color: rgba(255,255,255,0.7);">
+										* Áp dụng cho gói hội viên đầu tiên
+									</p>
 								</div>
 							</div>
 						</div>
@@ -2217,6 +3365,164 @@
 					Call to Action End
 			*************************************-->
 			<!--************************************
+					Top Trending Start
+			*************************************-->
+			<section class="tg-sectionspace tg-haslayout">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="trending-container" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; background: #4A6366; color: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(74, 99, 102, 0.3);">
+								<!-- Cột 1: SÔI NỔI NHẤT -->
+								<div class="trending-column" style="flex: 1; min-width: 300px;">
+									<div class="trending-header">
+										<i class="fa fa-film" style="color: #ffd700; margin-right: 10px;"></i>
+										<h3 style="color: white; margin: 0;">SÔI NỔI NHẤT</h3>
+									</div>
+									<div class="trending-list">
+										<div class="trending-item">
+											<span class="trending-number">1</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-01.jpg" alt="Na Tra 2" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Na Tra 2: Ma Đồng Náo Hải</span>
+										</div>
+										<div class="trending-item">
+											<span class="trending-number">2</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-02.jpg" alt="Định Phong Ba" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Định Phong Ba</span>
+										</div>
+										<div class="trending-item">
+											<span class="trending-number">3</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-03.jpg" alt="Chị Đại Học Đường" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Chị Đại Học Đường</span>
+										</div>
+										<div class="trending-item">
+											<span class="trending-number">4</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-04.jpg" alt="Phàm Nhân Tu Tiên Truyện" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Phàm Nhân Tu Tiên Truyện</span>
+										</div>
+										<div class="trending-item">
+											<span class="trending-number">5</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-05.jpg" alt="Triều Tuyết Lục" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Triều Tuyết Lục</span>
+										</div>
+									</div>
+									<div class="trending-footer">
+										<a href="javascript:void(0);" style="color: #ffd700; text-decoration: none;">Xem thêm</a>
+									</div>
+								</div>
+								
+								<!-- Cột 2: YÊU THÍCH NHẤT -->
+								<div class="trending-column" style="flex: 1; min-width: 300px;">
+									<div class="trending-header">
+										<i class="fa fa-heart" style="color: #ffd700; margin-right: 10px;"></i>
+										<h3 style="color: white; margin: 0;">YÊU THÍCH NHẤT</h3>
+									</div>
+									<div class="trending-list">
+										<div class="trending-item">
+											<span class="trending-number">1</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-06.jpg" alt="Na Tra 2" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Na Tra 2: Ma Đồng Náo Hải</span>
+										</div>
+										<div class="trending-item">
+											<span class="trending-number">2</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-07.jpg" alt="Định Phong Ba" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Định Phong Ba</span>
+										</div>
+										<div class="trending-item">
+											<span class="trending-number">3</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-08.jpg" alt="Toàn Trí Độc Giả" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Toàn Trí Độc Giả</span>
+										</div>
+										<div class="trending-item">
+											<span class="trending-number">4</span>
+											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
+											<img src="images/books/img-09.jpg" alt="Chị Đại Học Đường" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Chị Đại Học Đường</span>
+										</div>
+										<div class="trending-item">
+											<span class="trending-number">5</span>
+											<i class="fa fa-minus" style="color: #666; margin: 0 8px;"></i>
+											<img src="images/books/img-10.jpg" alt="Phàm Nhân Tu Tiên Truyện" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
+											<span class="trending-title">Phàm Nhân Tu Tiên Truyện</span>
+										</div>
+									</div>
+									<div class="trending-footer">
+										<a href="javascript:void(0);" style="color: #ffd700; text-decoration: none;">Xem thêm</a>
+									</div>
+								</div>
+								
+								<!-- Cột 3: BÌNH LUẬN MỚI -->
+								<div class="trending-column" style="flex: 1; min-width: 300px;">
+									<div class="trending-header">
+										<i class="fa fa-bolt" style="color: #ffd700; margin-right: 10px;"></i>
+										<h3 style="color: white; margin: 0;">BÌNH LUẬN MỚI</h3>
+									</div>
+									<div class="trending-comments">
+										<div class="comment-card">
+											<img src="images/users/img-01.jpg" alt="User" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+											<div class="comment-content">
+												<div class="comment-user">tao mệt quá!</div>
+												<div class="comment-text">Xem cũng giải trí phết =)))</div>
+												<div class="comment-movie">
+													<i class="fa fa-play" style="color: #ffd700;"></i>
+													<span>Ta Muốn Trở Thành Chúa Tể Bóng Tối</span>
+												</div>
+											</div>
+										</div>
+										<div class="comment-card">
+											<img src="images/users/img-01.jpg" alt="User" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+											<div class="comment-content">
+												<div class="comment-user">sương giá</div>
+												<div class="comment-text">tr ơi cái vibe coi sướng tai sướng mắt bùng nổ thật sự</div>
+												<div class="comment-movie">
+													<i class="fa fa-play" style="color: #ffd700;"></i>
+													<span>Trái Tim Thủy Tinh</span>
+												</div>
+											</div>
+										</div>
+										<div class="comment-card">
+											<img src="images/users/img-01.jpg" alt="User" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+											<div class="comment-content">
+												<div class="comment-user">Tranntruongg</div>
+												<div class="comment-text">nhớ</div>
+												<div class="comment-movie">
+													<i class="fa fa-play" style="color: #ffd700;"></i>
+													<span>Trung Tâm Chăm Sóc Chấn Thương</span>
+												</div>
+											</div>
+										</div>
+										<div class="comment-card">
+											<img src="images/users/img-01.jpg" alt="User" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+											<div class="comment-content">
+												<div class="comment-user">Hùng Tiến Nguyễn</div>
+												<div class="comment-text">Flim cũng hay mà mấy mom</div>
+												<div class="comment-movie">
+													<i class="fa fa-play" style="color: #ffd700;"></i>
+													<span>Định Phong Ba</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="trending-footer">
+										<a href="javascript:void(0);" style="color: #ffd700; text-decoration: none;">Xem thêm</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--************************************
+					Top Trending End
+			*************************************-->
+			<!--************************************
 					Latest News Start
 			*************************************-->
 			<section class="tg-sectionspace tg-haslayout">
@@ -2390,7 +3696,7 @@
 						<div class="tg-threecolumns">
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 								<div class="tg-footercol">
-									<strong class="tg-logo"><a href="javascript:void(0);"><img src="images/flogo.png" alt="image description"></a></strong>
+									<strong class="tg-logo"><a href="javascript:void(0);"><img src="images/logo1-Photoroom.png" alt="image description"></a></strong>
 									                                    <ul class="tg-contactinfo">
                                         <li style="color: rgba(255, 255, 255, 0.9);">
                                             <i class="icon-apartment" style="color: #F4A261;"></i>
@@ -2490,9 +3796,8 @@
 			<div class="tg-footerbar">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<span class="tg-paymenttype"><img src="images/paymenticon.png" alt="image description"></span>
-							                            <span class="tg-copyright" style="color: rgba(255, 255, 255, 0.8);">2017 Bản quyền thuộc về &copy; Thư Viện Sách</span>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+							<span class="tg-copyright" style="color: rgba(255, 255, 255, 0.8);">2017 Bản quyền thuộc về © Thư Viện Sách</span>
 						</div>
 					</div>
 				</div>
@@ -2556,39 +3861,7 @@
 		<div class="tg-progress-bar" id="tg-progress-bar"></div>
 	</div>
 
-	<!-- Back to Top Button -->
-	<div class="tg-back-to-top" id="tg-back-to-top">
-		<i class="fa fa-chevron-up"></i>
-	</div>
 
-	<!-- Quick Actions Floating Menu -->
-	<div class="tg-quick-actions" id="tg-quick-actions">
-		<div class="tg-quick-toggle" id="tg-quick-toggle">
-			<i class="fa fa-plus"></i>
-		</div>
-		<div class="tg-quick-menu">
-			<a href="javascript:void(0);" class="tg-quick-item" data-action="search">
-				<i class="fa fa-search"></i>
-				<span>Tìm sách</span>
-			</a>
-			<a href="javascript:void(0);" class="tg-quick-item" data-action="wishlist">
-				<i class="fa fa-heart"></i>
-				<span>Yêu thích</span>
-			</a>
-			<a href="javascript:void(0);" class="tg-quick-item" data-action="cart">
-				<i class="fa fa-shopping-cart"></i>
-				<span>Giỏ hàng</span>
-			</a>
-			<a href="javascript:void(0);" class="tg-quick-item" data-action="support">
-				<i class="fa fa-headphones"></i>
-				<span>Hỗ trợ</span>
-			</a>
-			<a href="javascript:void(0);" class="tg-quick-item" data-action="timer">
-				<i class="fa fa-clock-o"></i>
-				<span>Đồng hồ đọc</span>
-			</a>
-		</div>
-	</div>
 	
 	<!-- Book Preview Modal -->
 	<div class="tg-book-modal" id="tg-book-modal">
@@ -2631,7 +3904,7 @@
 					</button>
 					<button class="tg-btn tg-btn-wishlist" id="tg-preview-wishlist">
 						<i class="fa fa-heart"></i>
-						<span>Thêm yêu thích</span>
+						
 					</button>
 					<button class="tg-btn tg-btn-cart" id="tg-preview-cart">
 						<i class="fa fa-shopping-cart"></i>
@@ -2684,14 +3957,136 @@
 		</div>
 	</div>
 
+
+
 	<script src="js/vendor/jquery-library.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/jquery.vide.min.js"></script>
 	<script src="js/countdown.js"></script>
 	<script src="js/jquery-ui.js"></script>
+	<script src="js/appear.js"></script>
+	<script src="js/countTo.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/gmap3.js"></script>
 	<script src="js/parallax.js"></script>
+	<script src="js/main.js"></script>
+	
+	<!-- Auth Modal JavaScript -->
+	<script>
+					// Auth Modal Functions
+			function showAuthModal(modalId) {
+				document.getElementById(modalId).style.display = 'block';
+				document.body.style.overflow = 'hidden';
+			}
+			
+			function closeAuthModal(modalId) {
+				document.getElementById(modalId).style.display = 'none';
+				document.body.style.overflow = 'auto';
+			}
+			
+			// Form submission handlers - chỉ giữ lại thông báo thành công
+			$('#loginForm').on('submit', function(e) {
+				e.preventDefault();
+				setTimeout(() => {
+					showNotification('Đăng nhập thành công!', 'success');
+					closeAuthModal('loginModal');
+				}, 1500);
+			});
+			
+			$('#registerForm').on('submit', function(e) {
+				e.preventDefault();
+				setTimeout(() => {
+					showNotification('Đăng ký thành công!', 'success');
+					closeAuthModal('registerModal');
+				}, 1500);
+			});
+			
+			$('#forgotPasswordForm').on('submit', function(e) {
+				e.preventDefault();
+				setTimeout(() => {
+					showNotification('Email đã được gửi! Vui lòng kiểm tra hộp thư.', 'success');
+					closeAuthModal('forgotPasswordModal');
+				}, 1500);
+			});
+			
+			function loginWithGoogle() {
+				setTimeout(() => {
+					showNotification('Đăng nhập bằng Google thành công!', 'success');
+					closeAuthModal('loginModal');
+				}, 2000);
+			}
+		
+		// Close modal when clicking outside
+		window.onclick = function(event) {
+			const modals = document.querySelectorAll('.auth-modal');
+			modals.forEach(modal => {
+				if (event.target === modal) {
+					modal.style.display = 'none';
+					document.body.style.overflow = 'auto';
+				}
+			});
+		}
+		
+		// Login Form Handler
+		document.getElementById('loginForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			const email = document.getElementById('loginEmail').value;
+			const password = document.getElementById('loginPassword').value;
+			
+			// Add your login logic here
+			console.log('Login attempt:', { email, password });
+			
+			// Simulate login success
+			alert('Đăng nhập thành công!');
+			closeAuthModal('loginModal');
+		});
+		
+		// Register Form Handler
+		document.getElementById('registerForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			const name = document.getElementById('registerName').value;
+			const email = document.getElementById('registerEmail').value;
+			const password = document.getElementById('registerPassword').value;
+			const confirmPassword = document.getElementById('confirmPassword').value;
+			
+			if (password !== confirmPassword) {
+				alert('Mật khẩu xác nhận không khớp!');
+				return;
+			}
+			
+			// Add your registration logic here
+			console.log('Register attempt:', { name, email, password });
+			
+			// Simulate registration success
+			alert('Đăng ký thành công!');
+			closeAuthModal('registerModal');
+		});
+		
+		// Forgot Password Form Handler
+		document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			const email = document.getElementById('forgotEmail').value;
+			
+			// Add your forgot password logic here
+			console.log('Forgot password attempt:', { email });
+			
+			// Simulate success
+			alert('Email đặt lại mật khẩu đã được gửi!');
+			closeAuthModal('forgotPasswordModal');
+		});
+		
+		// Google Login Function
+		function loginWithGoogle() {
+			// Add your Google login logic here
+			console.log('Google login attempt');
+			alert('Chức năng đăng nhập Google sẽ được tích hợp sau!');
+		}
+		
+
+
+	</script>
 	<script src="js/countTo.js"></script>
 	<script src="js/appear.js"></script>
 	<script src="js/gmap3.js"></script>
@@ -2935,6 +4330,14 @@
 			$('#tg-chat-toggle').on('click', function() {
 				$('#tg-chat-window').toggleClass('active');
 				$('.tg-chat-badge').hide();
+				
+				// Ensure chat input is visible and focused when chat window is active
+				if ($('#tg-chat-window').hasClass('active')) {
+					setTimeout(() => {
+						$('#tg-chat-input').focus();
+						$('#tg-chat-body').scrollTop($('#tg-chat-body')[0].scrollHeight);
+					}, 100);
+				}
 			});
 			
 			$('#tg-chat-minimize').on('click', function() {
@@ -2986,7 +4389,12 @@
 					</div>
 				`;
 				$('#tg-chat-messages').append(messageHtml);
-				$('#tg-chat-body').scrollTop($('#tg-chat-body')[0].scrollHeight);
+				
+				// Ensure chat input remains visible and scroll to bottom
+				setTimeout(() => {
+					$('#tg-chat-body').scrollTop($('#tg-chat-body')[0].scrollHeight);
+					$('#tg-chat-input').focus();
+				}, 50);
 			}
 			
 			// Reading Progress Bar
@@ -2999,7 +4407,10 @@
 			
 			// Back to Top Button
 			$(window).on('scroll', function() {
-				if ($(window).scrollTop() > 300) {
+				const scrollTop = $(window).scrollTop();
+				const threshold = 300;
+				
+				if (scrollTop > threshold) {
 					$('#tg-back-to-top').addClass('active');
 				} else {
 					$('#tg-back-to-top').removeClass('active');
@@ -3007,7 +4418,18 @@
 			});
 			
 			$('#tg-back-to-top').on('click', function() {
-				$('html, body').animate({scrollTop: 0}, 800);
+				// Add click feedback
+				$(this).addClass('clicked');
+				setTimeout(() => {
+					$(this).removeClass('clicked');
+				}, 150);
+				
+				$('html, body').animate({
+					scrollTop: 0
+				}, {
+					duration: 800,
+					easing: 'easeInOutCubic'
+				});
 			});
 			
 			// Quick Actions Menu
@@ -3070,6 +4492,8 @@
 			$('#tg-preview-cart').on('click', function() {
 				showNotification('Đã thêm vào giỏ hàng!', 'success');
 			});
+			// Chỉ giữ lại thông báo cho các hành động quan trọng
+			// Các thông báo không cần thiết đã được loại bỏ
 			
 			// Reading Timer Functionality
 			let timerInterval;
@@ -3135,6 +4559,517 @@
 					(seconds < 10 ? '0' : '') + seconds;
 				
 				$('#tg-timer-time').text(timeString);
+			}
+			
+			// Notification System Functions
+			function showNotification(message, type = 'info') {
+				// Tạo element thông báo
+				const notification = document.createElement('div');
+				notification.className = `tg-notification tg-notification-${type}`;
+				
+				// Icon tương ứng với loại thông báo
+				let icon = 'fa-info-circle';
+				if (type === 'success') icon = 'fa-check-circle';
+				else if (type === 'error') icon = 'fa-exclamation-circle';
+				
+				// Nội dung thông báo
+				notification.innerHTML = `
+					<div class="tg-notification-content">
+						<i class="fa ${icon}"></i>
+						<span>${message}</span>
+					</div>
+				`;
+				
+				// Thêm vào body
+				document.body.appendChild(notification);
+				
+				// Hiển thị với animation
+				setTimeout(() => {
+					notification.classList.add('show');
+				}, 100);
+				
+				// Tự động ẩn sau 3 giây
+				setTimeout(() => {
+					notification.classList.remove('show');
+					setTimeout(() => {
+						document.body.removeChild(notification);
+					}, 300);
+				}, 3000);
+			}
+			
+			// Các thông báo tiếng Việt không yêu cầu xác nhận
+			function showVietnameseNotifications() {
+				// Chỉ hiển thị thông báo chào mừng khi cần thiết
+				// Các thông báo khác đã được loại bỏ để tránh spam
+			}
+			
+			// Khởi tạo thông báo khi trang load
+			$(document).ready(function() {
+				showVietnameseNotifications();
+			});
+			
+			// Universal Modal Functions
+			let universalModalCallback = null;
+			
+			function showUniversalModal(config) {
+				const modal = document.getElementById('universalModal');
+				const title = document.getElementById('universalModalTitle');
+				const icon = document.getElementById('universalModalIcon');
+				const heading = document.getElementById('universalModalHeading');
+				const description = document.getElementById('universalModalDescription');
+				const infoBox = document.getElementById('universalModalInfoBox');
+				const infoText = document.getElementById('universalModalInfoText');
+				const cancelBtn = document.getElementById('universalModalCancelBtn');
+				const confirmBtn = document.getElementById('universalModalConfirmBtn');
+				
+				// Set title
+				title.textContent = config.title || 'Xác nhận';
+				
+				// Set icon
+				icon.className = `fas ${config.icon || 'fa-question-circle'} tg-universal-icon`;
+				if (config.iconColor) {
+					icon.style.color = config.iconColor;
+				}
+				
+				// Set heading
+				heading.textContent = config.heading || 'Bạn có chắc chắn?';
+				
+				// Set description
+				description.textContent = config.description || 'Mô tả chi tiết về hành động này sẽ được hiển thị ở đây.';
+				
+				// Set info box (optional)
+				if (config.infoText) {
+					infoText.textContent = config.infoText;
+					infoBox.style.display = 'block';
+				} else {
+					infoBox.style.display = 'none';
+				}
+				
+				// Set button texts
+				cancelBtn.textContent = config.cancelText || 'Hủy bỏ';
+				confirmBtn.textContent = config.confirmText || 'Xác nhận';
+				
+				// Set button styles
+				cancelBtn.className = `tg-universal-btn tg-universal-btn-${config.cancelStyle || 'cancel'}`;
+				confirmBtn.className = `tg-universal-btn tg-universal-btn-${config.confirmStyle || 'danger'}`;
+				
+				// Store callback
+				universalModalCallback = config.onConfirm;
+				
+				// Show modal
+				modal.style.display = 'block';
+				document.body.style.overflow = 'hidden';
+			}
+			
+			function closeUniversalModal() {
+				const modal = document.getElementById('universalModal');
+				modal.style.display = 'none';
+				document.body.style.overflow = 'auto';
+				universalModalCallback = null;
+			}
+			
+			function confirmUniversalAction() {
+				if (universalModalCallback) {
+					universalModalCallback();
+				}
+				closeUniversalModal();
+			}
+			
+			// Close universal modal when clicking outside
+			window.addEventListener('click', function(event) {
+				const modal = document.getElementById('universalModal');
+				if (event.target === modal) {
+					closeUniversalModal();
+				}
+			});
+			
+			// Example usage functions
+			function showLogoutAllSessionsModal() {
+				showUniversalModal({
+					title: 'Xác nhận đăng xuất tất cả thiết bị',
+					icon: 'fa-sign-out-alt',
+					iconColor: '#e74c3c',
+					heading: 'Bạn có chắc chắn muốn đăng xuất tất cả các thiết bị?',
+					description: 'Bạn sẽ cần đăng nhập lại trên tất cả thiết bị để tiếp tục sử dụng tài khoản.',
+					infoText: 'Tất cả các phiên đăng nhập trên mọi thiết bị sẽ bị đăng xuất ngay lập tức.',
+					confirmText: 'Đăng xuất tất cả',
+					confirmStyle: 'danger',
+					onConfirm: function() {
+						// Add your logout all sessions logic here
+						console.log('Logging out all sessions...');
+						alert('Đã đăng xuất tất cả thiết bị!');
+					}
+				});
+			}
+			
+			function showDeleteAccountModal() {
+				showUniversalModal({
+					title: 'Xác nhận xóa tài khoản',
+					icon: 'fa-user-times',
+					iconColor: '#e74c3c',
+					heading: 'Bạn có chắc chắn muốn xóa tài khoản?',
+					description: 'Hành động này không thể hoàn tác. Tất cả dữ liệu sẽ bị mất vĩnh viễn.',
+					infoText: 'Tài khoản và tất cả dữ liệu liên quan sẽ bị xóa hoàn toàn.',
+					confirmText: 'Xóa tài khoản',
+					confirmStyle: 'danger',
+					onConfirm: function() {
+						// Add your delete account logic here
+						console.log('Deleting account...');
+						alert('Tài khoản đã được xóa!');
+					}
+				});
+			}
+			
+			function showSuccessModal() {
+				showUniversalModal({
+					title: 'Thành công',
+					icon: 'fa-check-circle',
+					iconColor: '#27ae60',
+					heading: 'Thao tác đã được thực hiện thành công!',
+					description: 'Dữ liệu đã được cập nhật và lưu trữ.',
+					confirmText: 'Đóng',
+					confirmStyle: 'success',
+					onConfirm: function() {
+						// Just close the modal
+					}
+				});
+			}
+			
+			// Add CSS animation for fade out effect
+			const style = document.createElement('style');
+			style.textContent = `
+				@keyframes fadeOut {
+					from { opacity: 1; transform: translateX(0); }
+					to { opacity: 0; transform: translateX(-20px); }
+				}
+				
+				.qty-btn:hover {
+					background: #e9ecef !important;
+				}
+				
+				.qty-btn:active {
+					transform: scale(0.95);
+				}
+				
+				.remove-item:hover {
+					color: #dc3545 !important;
+				}
+				
+				/* Cart footer button styles */
+				.tg-minicartfoot .tg-btn {
+					transition: all 0.3s ease !important;
+				}
+				
+				.tg-minicartfoot .tg-btn:hover {
+					transform: translateY(-2px) !important;
+					box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+				}
+				
+				.tg-minicartfoot .tg-btn.tg-active:hover {
+					background: #3a4f52 !important;
+					border-color: #3a4f52 !important;
+				}
+				
+				.tg-minicartfoot .tg-btn:not(.tg-active):hover {
+					background: #218838 !important;
+					border-color: #218838 !important;
+				}
+				
+				.tg-btnemptycart:hover {
+					background: rgba(220, 53, 69, 0.1) !important;
+				}
+				
+				/* Prevent dropdown from closing when clicking inside */
+				.tg-themedropdownmenu {
+					pointer-events: auto;
+				}
+				
+				.tg-themedropdownmenu * {
+					pointer-events: auto;
+				}
+				
+				/* Ensure dropdown container has relative positioning */
+				.tg-minicartdropdown {
+					position: relative !important;
+				}
+				
+				/* Force dropdown to stay in fixed position */
+				.tg-themedropdownmenu {
+					position: absolute !important;
+					top: 100% !important;
+					right: 0 !important;
+					left: auto !important;
+					transform: none !important;
+					margin-top: 5px !important;
+					z-index: 1000 !important;
+					width: 350px !important;
+				}
+				
+				/* Stabilize cart layout */
+				.tg-minicartbody {
+					position: relative;
+					overflow: hidden;
+				}
+				
+				.tg-minicarproduct {
+					transition: all 0.3s ease;
+					transform-origin: top;
+				}
+				
+				/* Prevent layout shift */
+				.quantity-controls {
+					position: relative;
+					z-index: 1;
+				}
+				
+				.qty-btn {
+					transition: all 0.2s ease;
+					user-select: none;
+				}
+				
+				/* Smooth animations */
+				@keyframes slideIn {
+					from { opacity: 0; transform: translateY(-10px); }
+					to { opacity: 1; transform: translateY(0); }
+				}
+				
+				@keyframes slideOut {
+					from { opacity: 1; transform: translateY(0); }
+					to { opacity: 0; transform: translateY(-10px); }
+				}
+				
+				/* Ensure dropdown doesn't overflow screen */
+				@media (max-width: 768px) {
+					.tg-themedropdownmenu {
+						right: 0 !important;
+						left: auto !important;
+						width: 320px !important;
+					}
+				}
+				
+				/* Override any Bootstrap or other CSS that might move the dropdown */
+				.tg-themedropdownmenu.show,
+				.tg-themedropdownmenu.dropdown-menu {
+					position: absolute !important;
+					top: 100% !important;
+					right: 0 !important;
+					left: auto !important;
+					transform: none !important;
+					margin-top: 5px !important;
+					z-index: 1000 !important;
+					width: 350px !important;
+				}
+			`;
+			document.head.appendChild(style);
+		});
+	</script>
+	
+	<!-- Mini Cart JavaScript Functions -->
+	<script>
+		// Global cart items
+		let cartItems = {
+			1: { quantity: 1, price: 290000, name: 'Our State Fair Is A Great Function' },
+			2: { quantity: 1, price: 290000, name: 'Bring Me To Light' },
+			3: { quantity: 1, price: 290000, name: 'Have Faith In Your Soul' }
+		};
+		
+		function updateQuantity(itemId, change, event) {
+			const quantityElement = document.getElementById(`qty-${itemId}`);
+			if (!quantityElement) return;
+			
+			const currentQty = parseInt(quantityElement.textContent);
+			const newQty = currentQty + change;
+			
+			if (newQty >= 1) {
+				// Smooth update with visual feedback
+				quantityElement.style.transform = 'scale(1.1)';
+				quantityElement.style.transition = 'transform 0.2s ease';
+				
+				setTimeout(() => {
+					quantityElement.textContent = newQty;
+					quantityElement.style.transform = 'scale(1)';
+					cartItems[itemId].quantity = newQty;
+					updateCartTotal();
+					
+					// Update cart icon total
+					const cartTotalElement = document.querySelector('.tg-total-price');
+					if (cartTotalElement) {
+						cartTotalElement.textContent = formatPrice(calculateTotal());
+					}
+				}, 100);
+				
+				// Prevent dropdown from closing
+				if (event) {
+					event.stopPropagation();
+				}
+			} else if (newQty === 0) {
+				// Remove item if quantity reaches 0
+				removeItem(itemId, event);
+			}
+		}
+		
+		function removeItem(itemId, event) {
+			const itemElement = document.querySelector(`[onclick="removeItem(${itemId}, event)"]`);
+			if (!itemElement) return;
+			
+			const productElement = itemElement.closest('.tg-minicarproduct');
+			if (productElement) {
+				// Smooth slide out animation
+				productElement.style.animation = 'slideOut 0.3s ease-out';
+				productElement.style.transform = 'translateY(-10px)';
+				productElement.style.opacity = '0';
+				
+				setTimeout(() => {
+					productElement.remove();
+					delete cartItems[itemId];
+					updateCartTotal();
+					
+					// Update cart icon total
+					const cartTotalElement = document.querySelector('.tg-total-price');
+					if (cartTotalElement) {
+						cartTotalElement.textContent = formatPrice(calculateTotal());
+					}
+					
+					// Check if cart is empty
+					if (Object.keys(cartItems).length === 0) {
+						showEmptyCart();
+					}
+				}, 300);
+			}
+			
+			// Prevent dropdown from closing
+			if (event) {
+				event.stopPropagation();
+			}
+		}
+		
+		function clearCart() {
+			// Check if universal modal exists
+			if (typeof showUniversalModal === 'function') {
+				showUniversalModal({
+					title: 'Xác nhận xóa giỏ hàng',
+					icon: 'fa-trash-o',
+					iconColor: '#dc3545',
+					heading: 'Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?',
+					description: 'Tất cả sản phẩm trong giỏ hàng sẽ bị xóa.',
+					confirmText: 'Xóa giỏ hàng',
+					confirmStyle: 'danger',
+					onConfirm: function() {
+						const cartBody = document.querySelector('.tg-minicartbody');
+						if (cartBody) {
+							cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
+						}
+						cartItems = {};
+						updateCartTotal();
+						
+						// Update cart icon total
+						const cartTotalElement = document.querySelector('.tg-total-price');
+						if (cartTotalElement) {
+							cartTotalElement.textContent = '0₫';
+						}
+					}
+				});
+			} else {
+				// Fallback if modal is not available
+				if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
+					const cartBody = document.querySelector('.tg-minicartbody');
+					if (cartBody) {
+						cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
+					}
+					cartItems = {};
+					updateCartTotal();
+					
+					// Update cart icon total
+					const cartTotalElement = document.querySelector('.tg-total-price');
+					if (cartTotalElement) {
+						cartTotalElement.textContent = '0₫';
+					}
+				}
+			}
+		}
+		
+		function updateCartTotal() {
+			const totalElement = document.getElementById('cart-total');
+			if (totalElement) {
+				totalElement.textContent = formatPrice(calculateTotal());
+			}
+		}
+		
+		function calculateTotal() {
+			let total = 0;
+			for (let itemId in cartItems) {
+				total += cartItems[itemId].quantity * cartItems[itemId].price;
+			}
+			return total;
+		}
+		
+		function formatPrice(price) {
+			return price.toLocaleString('vi-VN') + '₫';
+		}
+		
+		function showEmptyCart() {
+			const cartBody = document.querySelector('.tg-minicartbody');
+			if (cartBody) {
+				cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
+			}
+		}
+		
+		// Prevent dropdown from closing when clicking inside
+		document.addEventListener('DOMContentLoaded', function() {
+			const dropdownMenu = document.querySelector('.tg-themedropdownmenu');
+			if (dropdownMenu) {
+				dropdownMenu.addEventListener('click', function(e) {
+					e.stopPropagation();
+				});
+			}
+			
+			// Prevent quantity buttons from closing dropdown
+			document.addEventListener('click', function(e) {
+				if (e.target.classList.contains('qty-btn') || e.target.classList.contains('remove-item')) {
+					e.stopPropagation();
+				}
+			});
+			
+			// Force dropdown to stay in fixed position
+			const cartButton = document.querySelector('[aria-labelledby="tg-minicart"]');
+			if (cartButton) {
+				cartButton.addEventListener('click', function(e) {
+					const dropdown = document.querySelector('.tg-themedropdownmenu');
+					if (dropdown) {
+						// Force dropdown to stay in position
+						dropdown.style.position = 'absolute';
+						dropdown.style.top = '100%';
+						dropdown.style.right = '0';
+						dropdown.style.left = 'auto';
+						dropdown.style.transform = 'none';
+						dropdown.style.marginTop = '5px';
+						dropdown.style.zIndex = '1000';
+						dropdown.style.width = '350px';
+					}
+				});
+			}
+			
+			// Prevent any CSS from moving the dropdown
+			const observer = new MutationObserver(function(mutations) {
+				mutations.forEach(function(mutation) {
+					if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+						const dropdown = document.querySelector('.tg-themedropdownmenu');
+						if (dropdown && dropdown.style.display !== 'none') {
+							// Force position back if changed
+							dropdown.style.position = 'absolute';
+							dropdown.style.top = '100%';
+							dropdown.style.right = '0';
+							dropdown.style.left = 'auto';
+							dropdown.style.transform = 'none';
+						}
+					}
+				});
+			});
+			
+			// Start observing the dropdown
+			const dropdown = document.querySelector('.tg-themedropdownmenu');
+			if (dropdown) {
+				observer.observe(dropdown, { attributes: true, attributeFilter: ['style'] });
 			}
 		});
 	</script>

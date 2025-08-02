@@ -1329,7 +1329,7 @@ li.menu-item-has-mega-menu { position: static; }
 	top:50%;
 	left:-16px;
 	content:'';
-	width:2px;
+	width:2px;	
 	height:2px;
 	margin:-1px 0 0;
 	position:absolute;
@@ -2821,7 +2821,7 @@ li.menu-item-has-mega-menu { position: static; }
 }
 .tg-copyright{
 	color: #fff;
-	float: left;
+	text-align: center;
 	font-size: 12px;
 	line-height: 21px;
 }
