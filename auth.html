@@ -1,0 +1,876 @@
+<!doctype html>
+<html class="no-js" lang="vi">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Đăng nhập - AnBok</title>
+	<meta name="description" content="Đăng nhập vào thư viện sách AnBok">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/jquery-ui.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
+	<link rel="stylesheet" href="css/transitions.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/color-custom.css">
+	<link rel="stylesheet" href="css/responsive.css">
+	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			overflow-x: hidden;
+		}
+
+		/* Main Layout */
+		.auth-container {
+			display: flex;
+			min-height: 100vh;
+			background: #000;
+		}
+
+		/* Video Section */
+		.auth-video-section {
+			flex: 1;
+			position: relative;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.auth-video-bg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			z-index: 1;
+		}
+
+
+
+		.auth-video-content {
+			position: relative;
+			z-index: 3;
+			text-align: center;
+			color: white;
+			padding: 40px;
+			max-width: 500px;
+		}
+
+		.auth-video-logo {
+			margin-bottom: 30px;
+		}
+
+		.auth-video-logo img {
+			max-height: 80px;
+			width: auto;
+			filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+		}
+
+		.auth-video-title {
+			font-size: 2.5rem;
+			font-weight: 700;
+			margin-bottom: 20px;
+			text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+		}
+
+		.auth-video-subtitle {
+			font-size: 1.2rem;
+			margin-bottom: 30px;
+			opacity: 0.9;
+			line-height: 1.6;
+		}
+
+		.auth-video-features {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+			margin-top: 40px;
+		}
+
+		.auth-video-feature {
+			display: flex;
+			align-items: center;
+			gap: 15px;
+			padding: 15px 20px;
+			background: rgba(255,255,255,0.1);
+			border-radius: 12px;
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255,255,255,0.2);
+		}
+
+		.auth-video-feature i {
+			font-size: 1.5rem;
+			color: #F4A261;
+			width: 30px;
+			text-align: center;
+		}
+
+		.auth-video-feature span {
+			font-size: 1rem;
+			font-weight: 500;
+		}
+
+		/* Form Section */
+		.auth-form-section {
+			flex: 1;
+			background: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 40px;
+			position: relative;
+		}
+
+		.auth-form-container {
+			width: 100%;
+			max-width: 450px;
+		}
+
+		.auth-form-header {
+			text-align: center;
+			margin-bottom: 40px;
+		}
+
+		.auth-form-title {
+			font-size: 2rem;
+			font-weight: 700;
+			color: #333;
+			margin-bottom: 10px;
+		}
+
+		.auth-form-subtitle {
+			color: #666;
+			font-size: 1rem;
+		}
+
+		/* Tabs */
+		.auth-tabs {
+			display: flex;
+			background: #f8f9fa;
+			border-radius: 15px;
+			padding: 6px;
+			margin-bottom: 30px;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		}
+
+		.auth-tab {
+			flex: 1;
+			padding: 12px 20px;
+			text-align: center;
+			border-radius: 10px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-weight: 600;
+			color: #666;
+			font-size: 14px;
+		}
+
+		.auth-tab.active {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			box-shadow: 0 4px 15px rgba(74, 99, 102, 0.3);
+		}
+
+		.auth-tab:hover:not(.active) {
+			background: rgba(74, 99, 102, 0.1);
+			color: #4A6366;
+		}
+
+		/* Form Styles */
+		.auth-form-group {
+			margin-bottom: 25px;
+		}
+
+		.auth-form-group label {
+			display: block;
+			margin-bottom: 8px;
+			font-weight: 600;
+			color: #333;
+			font-size: 14px;
+		}
+
+		.auth-form-group input {
+			width: 100%;
+			padding: 16px 20px;
+			border: 2px solid #e1e5e9;
+			border-radius: 12px;
+			font-size: 16px;
+			transition: all 0.3s ease;
+			background: #f8f9fa;
+		}
+
+		.auth-form-group input:focus {
+			outline: none;
+			border-color: #4A6366;
+			background: white;
+			box-shadow: 0 0 0 3px rgba(74, 99, 102, 0.1);
+		}
+
+		.auth-form-group input::placeholder {
+			color: #999;
+		}
+
+		.auth-password-toggle {
+			position: relative;
+		}
+
+		.auth-password-toggle input {
+			padding-right: 50px;
+		}
+
+		.auth-password-toggle button {
+			position: absolute;
+			right: 11px;
+			top: 71%;
+			transform: translateY(-50%);
+			background: none;
+			border: none;
+			color: #666;
+			cursor: pointer;
+			font-size: 16px;
+			transition: color 0.3s ease;
+			padding: 5px;
+		}
+
+		.auth-password-toggle button:hover {
+			color: #4A6366;
+		}
+
+		.auth-options {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 25px;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+
+		.auth-remember {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.auth-remember input[type="checkbox"] {
+			width: auto;
+			margin: 0;
+		}
+
+		.auth-remember label {
+			margin: 0;
+			font-size: 14px;
+			color: #666;
+		}
+
+		.auth-forgot {
+			color: #4A6366;
+			text-decoration: none;
+			font-size: 14px;
+			font-weight: 500;
+			transition: color 0.3s ease;
+		}
+
+		.auth-forgot:hover {
+			color: #F4A261;
+			text-decoration: underline;
+		}
+
+		.auth-submit {
+			width: 100%;
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			padding: 16px;
+			border: none;
+			border-radius: 12px;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			margin-bottom: 25px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.auth-submit::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+			transition: left 0.5s ease;
+		}
+
+		.auth-submit:hover::before {
+			left: 100%;
+		}
+
+		.auth-submit:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(74, 99, 102, 0.3);
+		}
+
+		.auth-divider {
+			text-align: center;
+			margin: 25px 0;
+			position: relative;
+		}
+
+		.auth-divider::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background: #e1e5e9;
+		}
+
+		.auth-divider span {
+			background: white;
+			padding: 0 20px;
+			color: #666;
+			font-size: 14px;
+		}
+
+		.auth-social {
+			width: 100%;
+			background: white;
+			color: #333;
+			padding: 16px;
+			border: 2px solid #e1e5e9;
+			border-radius: 12px;
+			font-size: 16px;
+			font-weight: 500;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			margin-bottom: 25px;
+		}
+
+		.auth-social:hover {
+			background: #f8f9fa;
+			border-color: #4A6366;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+		}
+
+		.auth-social img {
+			width: 24px;
+			height: 24px;
+		}
+
+		.auth-footer {
+			text-align: center;
+			margin-top: 25px;
+		}
+
+		.auth-footer p {
+			margin: 0;
+			color: #666;
+			font-size: 14px;
+		}
+
+		.auth-footer a {
+			color: #4A6366;
+			text-decoration: none;
+			font-weight: 600;
+			transition: color 0.3s ease;
+		}
+
+		.auth-footer a:hover {
+			color: #F4A261;
+			text-decoration: underline;
+		}
+
+		.auth-content {
+			display: none;
+		}
+
+		.auth-content.active {
+			display: block;
+		}
+
+		/* Messages */
+		.auth-message {
+			padding: 12px 16px;
+			border-radius: 8px;
+			margin-bottom: 20px;
+			font-size: 14px;
+			display: none;
+		}
+
+		.auth-message.success {
+			background: #d4edda;
+			color: #155724;
+			border: 1px solid #c3e6cb;
+		}
+
+		.auth-message.error {
+			background: #f8d7da;
+			color: #721c24;
+			border: 1px solid #f5c6cb;
+		}
+
+		.auth-message.info {
+			background: #d1ecf1;
+			color: #0c5460;
+			border: 1px solid #bee5eb;
+		}
+
+		/* Loading State */
+		.auth-submit.loading {
+			position: relative;
+			color: transparent;
+		}
+
+		.auth-submit.loading::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 20px;
+			height: 20px;
+			border: 2px solid transparent;
+			border-top: 2px solid white;
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+		}
+
+		@keyframes spin {
+			0% { transform: translate(-50%, -50%) rotate(0deg); }
+			100% { transform: translate(-50%, -50%) rotate(360deg); }
+		}
+
+		/* Back Button */
+		.auth-back {
+			position: fixed;
+			top: 20px;
+			left: 20px;
+			background: rgba(255,255,255,0.2);
+			color: white;
+			border: none;
+			padding: 12px 20px;
+			border-radius: 25px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			backdrop-filter: blur(10px);
+			z-index: 1000;
+			font-weight: 500;
+		}
+
+		.auth-back:hover {
+			background: rgba(255,255,255,0.3);
+			transform: translateX(-5px);
+		}
+
+		.auth-back i {
+			margin-right: 8px;
+		}
+
+		/* Mobile Responsive */
+		@media (max-width: 768px) {
+			.auth-container {
+				flex-direction: column;
+			}
+
+			.auth-video-section {
+				min-height: 40vh;
+			}
+
+			.auth-video-title {
+				font-size: 2rem;
+			}
+
+			.auth-video-subtitle {
+				font-size: 1rem;
+			}
+
+			.auth-video-features {
+				display: none;
+			}
+
+			.auth-form-section {
+				padding: 30px 20px;
+			}
+
+			.auth-form-title {
+				font-size: 1.5rem;
+			}
+
+			.auth-back {
+				top: 10px;
+				left: 10px;
+				padding: 8px 15px;
+				font-size: 14px;
+			}
+		}
+
+		/* Animation */
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.auth-form-container {
+			animation: fadeInUp 0.6s ease;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Back to Home Button -->
+	<button class="auth-back" onclick="window.location.href='index.html'">
+		<i class="fa fa-arrow-left"></i>
+		Về trang chủ
+	</button>
+
+	<div class="auth-container">
+		<!-- Video Section -->
+		<div class="auth-video-section">
+			<video class="auth-video-bg" autoplay muted loop>
+				<source src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=139&oauth2_token_id=57447761" type="video/mp4">
+				<!-- Fallback image if video doesn't load -->
+			</video>
+
+			<div class="auth-video-content">
+				<div class="auth-video-logo">
+					<img src="images/logo-Photoroom.png" alt="AnBok">
+				</div>
+				<h1 class="auth-video-title">Chào mừng đến với AnBok</h1>
+				<p class="auth-video-subtitle">
+					Khám phá thế giới tri thức vô tận với kho sách đa dạng và trải nghiệm đọc tuyệt vời
+				</p>
+				<div class="auth-video-features">
+					<div class="auth-video-feature">
+						<i class="fa fa-book"></i>
+						<span>Hơn 10,000 đầu sách đa dạng</span>
+					</div>
+					<div class="auth-video-feature">
+						<i class="fa fa-shipping-fast"></i>
+						<span>Giao hàng miễn phí toàn quốc</span>
+					</div>
+					<div class="auth-video-feature">
+						<i class="fa fa-headphones"></i>
+						<span>Hỗ trợ 24/7 chuyên nghiệp</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Form Section -->
+		<div class="auth-form-section">
+			<div class="auth-form-container">
+				<div class="auth-form-header">
+					<h2 class="auth-form-title" id="authTitle">Đăng nhập</h2>
+					<p class="auth-form-subtitle" id="authSubtitle">Chào mừng bạn trở lại với AnBok</p>
+				</div>
+
+				<!-- Auth Tabs -->
+				<div class="auth-tabs">
+					<div class="auth-tab active" onclick="switchTab('login')">Đăng nhập</div>
+					<div class="auth-tab" onclick="switchTab('register')">Đăng ký</div>
+					<div class="auth-tab" onclick="switchTab('forgot')">Quên mật khẩu</div>
+				</div>
+
+				<!-- Messages -->
+				<div class="auth-message" id="authMessage"></div>
+
+				<!-- Login Form -->
+				<div class="auth-content active" id="loginContent">
+					<form id="loginForm" onsubmit="handleLogin(event)">
+						<div class="auth-form-group">
+							<label for="loginEmail">Email</label>
+							<input type="email" id="loginEmail" placeholder="Nhập email của bạn" required>
+						</div>
+						<div class="auth-form-group auth-password-toggle">
+							<label for="loginPassword">Mật khẩu</label>
+							<input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required>
+							<button type="button" onclick="togglePassword('loginPassword')">
+								<i class="fa fa-eye"></i>
+							</button>
+						</div>
+						<div class="auth-options">
+							<div class="auth-remember">
+								<input type="checkbox" id="rememberMe">
+								<label for="rememberMe">Ghi nhớ đăng nhập</label>
+							</div>
+							<a href="#" class="auth-forgot" onclick="switchTab('forgot')">Quên mật khẩu?</a>
+						</div>
+						<button type="submit" class="auth-submit">
+							Đăng nhập
+						</button>
+						<div class="auth-divider">
+							<span>hoặc</span>
+						</div>
+						<button type="button" class="auth-social" onclick="loginWithGoogle()">
+							<img src="images/Google__G__logo.svg-Photoroom.png" alt="Google">
+							Đăng nhập bằng Google
+						</button>
+						<div class="auth-footer">
+							<p>Chưa có tài khoản? <a href="#" onclick="switchTab('register')">Đăng ký ngay</a></p>
+						</div>
+					</form>
+				</div>
+
+				<!-- Register Form -->
+				<div class="auth-content" id="registerContent">
+					<form id="registerForm" onsubmit="handleRegister(event)">
+						<div class="auth-form-group">
+							<label for="registerName">Họ và tên</label>
+							<input type="text" id="registerName" placeholder="Nhập họ và tên" required>
+						</div>
+						<div class="auth-form-group">
+							<label for="registerEmail">Email</label>
+							<input type="email" id="registerEmail" placeholder="Nhập email của bạn" required>
+						</div>
+						<div class="auth-form-group auth-password-toggle">
+							<label for="registerPassword">Mật khẩu</label>
+							<input type="password" id="registerPassword" placeholder="Nhập mật khẩu" required>
+							<button type="button" onclick="togglePassword('registerPassword')">
+								<i class="fa fa-eye"></i>
+							</button>
+						</div>
+						<div class="auth-form-group auth-password-toggle">
+							<label for="confirmPassword">Xác nhận mật khẩu</label>
+							<input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+							<button type="button" onclick="togglePassword('confirmPassword')">
+								<i class="fa fa-eye"></i>
+							</button>
+						</div>
+						<div class="auth-form-group">
+							<div class="auth-remember">
+								<input type="checkbox" id="agreeTerms" required>
+								<label for="agreeTerms">Tôi đồng ý với <a href="#" style="color: #4A6366;">Điều khoản sử dụng</a></label>
+							</div>
+						</div>
+						<button type="submit" class="auth-submit">
+							Đăng ký
+						</button>
+						<div class="auth-divider">
+							<span>hoặc</span>
+						</div>
+						<button type="button" class="auth-social" onclick="registerWithGoogle()">
+							<img src="images/Google__G__logo.svg-Photoroom.png" alt="Google">
+							Đăng ký bằng Google
+						</button>
+						<div class="auth-footer">
+							<p>Đã có tài khoản? <a href="#" onclick="switchTab('login')">Đăng nhập</a></p>
+						</div>
+					</form>
+				</div>
+
+				<!-- Forgot Password Form -->
+				<div class="auth-content" id="forgotContent">
+					<form id="forgotForm" onsubmit="handleForgotPassword(event)">
+						<div class="auth-form-group">
+							<label for="forgotEmail">Email</label>
+							<input type="email" id="forgotEmail" placeholder="Nhập email của bạn" required>
+						</div>
+						<p style="color: #666; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">
+							Chúng tôi sẽ gửi link đặt lại mật khẩu vào email của bạn.
+						</p>
+						<button type="submit" class="auth-submit">
+							Gửi yêu cầu
+						</button>
+						<div class="auth-footer">
+							<p><a href="#" onclick="switchTab('login')">Quay lại đăng nhập</a></p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/vendor/jquery-library.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script>
+		// Switch between auth tabs
+		function switchTab(tab) {
+			// Update tabs
+			document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+			event.target.classList.add('active');
+
+			// Update content
+			document.querySelectorAll('.auth-content').forEach(c => c.classList.remove('active'));
+			document.getElementById(tab + 'Content').classList.add('active');
+
+			// Update header
+			const titles = {
+				'login': 'Đăng nhập',
+				'register': 'Đăng ký',
+				'forgot': 'Quên mật khẩu'
+			};
+
+			const subtitles = {
+				'login': 'Chào mừng bạn trở lại với AnBok',
+				'register': 'Tạo tài khoản mới để bắt đầu',
+				'forgot': 'Đặt lại mật khẩu của bạn'
+			};
+
+			document.getElementById('authTitle').textContent = titles[tab];
+			document.getElementById('authSubtitle').textContent = subtitles[tab];
+
+			// Clear messages
+			hideMessage();
+		}
+
+		// Toggle password visibility
+		function togglePassword(inputId) {
+			const input = document.getElementById(inputId);
+			const button = input.nextElementSibling;
+			const icon = button.querySelector('i');
+
+			if (input.type === 'password') {
+				input.type = 'text';
+				icon.className = 'fa fa-eye-slash';
+			} else {
+				input.type = 'password';
+				icon.className = 'fa fa-eye';
+			}
+		}
+
+		// Show message
+		function showMessage(message, type = 'info') {
+			const messageEl = document.getElementById('authMessage');
+			messageEl.textContent = message;
+			messageEl.className = `auth-message ${type}`;
+			messageEl.style.display = 'block';
+		}
+
+		// Hide message
+		function hideMessage() {
+			document.getElementById('authMessage').style.display = 'none';
+		}
+
+		// Handle login
+		function handleLogin(event) {
+			event.preventDefault();
+			const email = document.getElementById('loginEmail').value;
+			const password = document.getElementById('loginPassword').value;
+			const rememberMe = document.getElementById('rememberMe').checked;
+
+			// Show loading state
+			const submitBtn = event.target.querySelector('.auth-submit');
+			submitBtn.classList.add('loading');
+			submitBtn.textContent = 'Đang đăng nhập...';
+
+			// Simulate API call
+			setTimeout(() => {
+				submitBtn.classList.remove('loading');
+				submitBtn.textContent = 'Đăng nhập';
+
+				// Demo validation
+				if (email === 'demo@example.com' && password === 'password') {
+					showMessage('Đăng nhập thành công!', 'success');
+					setTimeout(() => {
+						window.location.href = 'index.html';
+					}, 1500);
+				} else {
+					showMessage('Email hoặc mật khẩu không đúng!', 'error');
+				}
+			}, 2000);
+		}
+
+		// Handle register
+		function handleRegister(event) {
+			event.preventDefault();
+			const name = document.getElementById('registerName').value;
+			const email = document.getElementById('registerEmail').value;
+			const password = document.getElementById('registerPassword').value;
+			const confirmPassword = document.getElementById('confirmPassword').value;
+			const agreeTerms = document.getElementById('agreeTerms').checked;
+
+			// Validation
+			if (password !== confirmPassword) {
+				showMessage('Mật khẩu xác nhận không khớp!', 'error');
+				return;
+			}
+
+			if (!agreeTerms) {
+				showMessage('Vui lòng đồng ý với điều khoản sử dụng!', 'error');
+				return;
+			}
+
+			// Show loading state
+			const submitBtn = event.target.querySelector('.auth-submit');
+			submitBtn.classList.add('loading');
+			submitBtn.textContent = 'Đang đăng ký...';
+
+			// Simulate API call
+			setTimeout(() => {
+				submitBtn.classList.remove('loading');
+				submitBtn.textContent = 'Đăng ký';
+
+				showMessage('Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.', 'success');
+				setTimeout(() => {
+					switchTab('login');
+				}, 2000);
+			}, 2000);
+		}
+
+		// Handle forgot password
+		function handleForgotPassword(event) {
+			event.preventDefault();
+			const email = document.getElementById('forgotEmail').value;
+
+			// Show loading state
+			const submitBtn = event.target.querySelector('.auth-submit');
+			submitBtn.classList.add('loading');
+			submitBtn.textContent = 'Đang gửi...';
+
+			// Simulate API call
+			setTimeout(() => {
+				submitBtn.classList.remove('loading');
+				submitBtn.textContent = 'Gửi yêu cầu';
+
+				showMessage('Email đặt lại mật khẩu đã được gửi! Vui lòng kiểm tra hộp thư.', 'success');
+			}, 2000);
+		}
+
+		// Google login
+		function loginWithGoogle() {
+			showMessage('Đang chuyển hướng đến Google...', 'info');
+			// Implement Google OAuth here
+		}
+
+		// Google register
+		function registerWithGoogle() {
+			showMessage('Đang chuyển hướng đến Google...', 'info');
+			// Implement Google OAuth here
+		}
+
+		// Auto-hide messages after 5 seconds
+		setInterval(() => {
+			const message = document.getElementById('authMessage');
+			if (message.style.display === 'block') {
+				hideMessage();
+			}
+		}, 5000);
+	</script>
+</body>
+</html> 
