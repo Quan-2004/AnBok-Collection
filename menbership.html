@@ -15,9 +15,6 @@
 	<link rel="stylesheet" href="css/jquery-ui.css">
 	<link rel="stylesheet" href="css/owl.carousel.css">
 	<link rel="stylesheet" href="css/transitions.css">
-	
-	<!-- SweetAlert2 CSS -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/color-custom.css">
 	<link rel="stylesheet" href="css/responsive.css">
@@ -98,43 +95,7 @@
 			justify-content: center;
 		}
 		
-		/* Auth Buttons */
-		.tg-auth-buttons {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-		
-		.tg-auth-buttons a {
-			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
-			color: white;
-			padding: 8px 20px;
-			border-radius: 25px;
-			text-decoration: none;
-			font-weight: 600;
-			font-size: 14px;
-			transition: all 0.3s ease;
-			display: inline-flex;
-			align-items: center;
-			gap: 8px;
-			box-shadow: 0 4px 15px rgba(74, 99, 102, 0.3);
-		}
-		
-		.tg-auth-buttons a:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 6px 20px rgba(74, 99, 102, 0.4);
-		}
-		
 		/* Mobile User Login */
-		.tg-user-profile {
-			display: none !important;
-		}
-		
-		.tg-auth-buttons {
-			display: block !important;
-			margin-top: 10px;
-		}
-		
 		.tg-middlecontainer .col-xs-12 {
 			flex-direction: column;
 			gap: 15px;
@@ -1473,6 +1434,33 @@
 			z-index: 1000;
 		}
 		
+		/* Auth Buttons Styles */
+		.tg-auth-buttons {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+		
+		.tg-auth-buttons a {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			padding: 8px 20px;
+			border-radius: 25px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 14px;
+			transition: all 0.3s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			box-shadow: 0 4px 15px rgba(74, 99, 102, 0.3);
+		}
+		
+		.tg-auth-buttons a:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(74, 99, 102, 0.4);
+		}
+		
 		/* Modal Styles */
 		.tg-book-modal,
 		.tg-timer-modal {
@@ -2330,6 +2318,192 @@
 			height: 100%;
 			min-height: 120px;
 		}
+
+	/* Enhanced Membership Package Styles */
+	.tg-membership-packages {
+		position: relative;
+	}
+	
+	.tg-package-card:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+	}
+	
+	.tg-benefit-item:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+		background: white !important;
+	}
+	
+	.tg-benefit-item:hover .tg-benefit-icon i {
+		transform: scale(1.1);
+		color: #4A6366 !important;
+	}
+	
+	/* Package Card Button Hover Effects */
+	.tg-package-card .tg-btn:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+	}
+	
+	/* White background packages button hover */
+	.tg-package-card[style*="background: white"] .tg-btn:hover {
+		background: #F4A261 !important;
+		color: white !important;
+	}
+	
+	/* Premium gradient packages button hover */
+	.tg-package-card[style*="4A6366"] .tg-btn:hover {
+		background: white !important;
+		color: #4A6366 !important;
+	}
+	
+	/* Gold packages button hover */
+	.tg-package-card[style*="ffd700"] .tg-btn:hover {
+		background: #333 !important;
+		color: white !important;
+	}
+	
+	/* CTA Section Button Hover */
+	.tg-cta-section .tg-btn:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+	}
+	
+	.tg-cta-section .tg-btn[style*="F4A261"]:hover {
+		background: #E8944A !important;
+	}
+	
+	.tg-cta-section .tg-btn[style*="transparent"]:hover {
+		background: rgba(255,255,255,0.1) !important;
+		border-color: white !important;
+	}
+	
+	/* Banner Button Hover */
+	.tg-membership-banner .tg-btn:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+	}
+	
+	.tg-membership-banner .tg-btn.tg-active:hover {
+		background: #E8944A !important;
+		border-color: #E8944A !important;
+	}
+	
+	.tg-membership-banner .tg-btn:not(.tg-active):hover {
+		background: rgba(255,255,255,0.1) !important;
+		border-color: white !important;
+	}
+	
+	/* Package Price Animation */
+	.tg-package-card:hover .tg-price-amount {
+		animation: priceGlow 2s ease-in-out infinite;
+	}
+	
+	@keyframes priceGlow {
+		0%, 100% { 
+			text-shadow: 0 0 5px rgba(244, 162, 97, 0.5);
+		}
+		50% { 
+			text-shadow: 0 0 20px rgba(244, 162, 97, 0.8), 0 0 30px rgba(244, 162, 97, 0.6);
+		}
+	}
+	
+	/* Package Features List Enhancement */
+	.tg-package-features li {
+		transition: all 0.3s ease;
+		border-radius: 5px;
+		margin: 2px 0;
+		padding-left: 10px !important;
+		padding-right: 10px !important;
+	}
+	
+	.tg-package-features li:hover {
+		background: rgba(244, 162, 97, 0.1) !important;
+		transform: translateX(5px);
+	}
+	
+	/* Premium Package Special Effects */
+	.tg-package-card[style*="4A6366"]:hover {
+		box-shadow: 0 15px 40px rgba(74, 99, 102, 0.3) !important;
+	}
+	
+	.tg-package-card[style*="ffd700"]:hover {
+		box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4) !important;
+	}
+	
+	/* Icon Animations */
+	.tg-package-icon i,
+	.tg-benefit-icon i {
+		transition: all 0.3s ease;
+	}
+	
+	.tg-package-card:hover .tg-package-icon i {
+		transform: scale(1.1) rotate(5deg);
+	}
+	
+	/* Smooth Scroll for Anchor Links */
+	html {
+		scroll-behavior: smooth;
+	}
+	
+	/* Mobile Responsive for Membership */
+	@media (max-width: 768px) {
+		.tg-membership-packages {
+			padding: 50px 0;
+		}
+		
+		.tg-package-card {
+			margin-bottom: 30px;
+		}
+		
+		.tg-sectionhead h2 {
+			font-size: 2rem !important;
+		}
+		
+		.tg-membership-banner h1 {
+			font-size: 2.5rem !important;
+		}
+		
+		.tg-membership-banner h2 {
+			font-size: 1.2rem !important;
+		}
+		
+		.tg-membership-banner .tg-bannerbtns {
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		.tg-membership-banner .tg-bannerbtns .tg-btn {
+			width: 250px;
+			text-align: center;
+			margin-bottom: 15px;
+		}
+		
+		.tg-benefits-section,
+		.tg-cta-section {
+			padding: 50px 0;
+		}
+		
+		.tg-benefit-item {
+			margin-bottom: 30px;
+		}
+		
+		.tg-cta-content h2 {
+			font-size: 1.8rem !important;
+		}
+		
+		.tg-cta-buttons {
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		.tg-cta-buttons .tg-btn {
+			width: 250px;
+			text-align: center;
+			margin-bottom: 15px;
+		}
+	}
 		
 		.tg-clientservices .tg-clientserviceicon {
 			margin-bottom: 15px;
@@ -3488,7 +3662,7 @@
 						</div>
 
 						<!-- User Actions -->
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+												<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 							<div class="tg-user-actions">
 								
 								<!-- Auth Buttons (shown when not logged in) -->
@@ -3519,7 +3693,7 @@
 											<div id="dropdownUserEmail">phamhongquan9117@gmail.com</div>
 										</div>
 										<div class="tg-dropdown-menu">
-											<a href="profile.html" class="tg-dropdown-item">
+											<a href="account/profile.html" class="tg-dropdown-item">
 												<i class="fa fa-user"></i>
 												<span>Hồ sơ cá nhân</span>
 											</a>
@@ -3536,7 +3710,7 @@
 												<span>Cài đặt</span>
 											</a>
 											<div class="tg-dropdown-divider"></div>
-											<a href="javascript:void(0);" class="tg-dropdown-item tg-dropdown-logout logout-btn">
+											<a href="javascript:void(0);" onclick="logout()" class="tg-dropdown-item tg-dropdown-logout">
 												<i class="fa fa-sign-out"></i>
 												<span>Đăng xuất</span>
 											</a>
@@ -3573,25 +3747,31 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="book.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-book" style="margin-right: 8px;"></i>
 													Sách
 													<i class="fa fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
 												</a>
 												<!-- Submenu -->
-												<div class="tg-submenu book-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
-													<!-- Dynamic content will be loaded here -->
+												<div class="tg-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
+													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách mới</a>
+													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách nổi bật</a>
+													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách miễn phí</a>
+													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách hội viên</a>
 												</div>
 											</li>
 											<li style="position: relative;">
-												<a href="story.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Truyện
 													<i class="fa fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
 												</a>
 												<!-- Submenu -->
-												<div class="tg-submenu story-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
-													<!-- Dynamic content will be loaded here -->
+												<div class="tg-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
+													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện mới</a>
+													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện nổi bật</a>
+													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện miễn phí</a>
+													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện hội viên</a>
 												</div>
 											</li>
 											<li style="position: relative;">
@@ -3730,959 +3910,438 @@
 		<!--************************************
 				Main Start
 		*************************************-->
-		<main id="tg-main" class="tg-main tg-haslayout">
-			<!--************************************
-					Best Selling Start
-			*************************************-->
-			<section class="tg-sectionspace tg-haslayout">
+	<main id="tg-main" class="tg-main tg-haslayout">
+		
+		<!-- Header Section -->
+		<header id="tg-header" class="tg-header tg-haslayout">
+			<div class="tg-middlecontainer">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="tg-sectionhead">
-								<h2><span>Lựa chọn của mọi người</span>Sách bán chạy nhất</h2>
-								<a class="tg-btn" href="javascript:void(0);">Xem tất cả</a>
+						<div class="col-xs-12">
+							<div class="tg-logo">
+								<a href="index.html">
+									<img src="images/logo-Photoroom.png" alt="AnBok Collection" 
+										 style="max-height: 60px; width: auto;">
+								</a>
 							</div>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div id="tg-bestsellingbooksslider" class="tg-bestsellingbooksslider tg-bestsellingbooks owl-carousel">
-								<div class="item">
-									<div class="tg-postbook">
-										<figure class="tg-featureimg">
-											<div class="tg-bookimg">
-												<div class="tg-frontcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-												<div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-											</div>
-											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-												<i class="icon-heart"></i>
-												<span>Thêm vào yêu thích</span>
-											</a>
-										</figure>
-										<div class="tg-postbookcontent">
-											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
-												<li><a href="javascript:void(0);">Giải trí</a></li>
-											</ul>
-											<div class="tg-themetagbox"><span class="tg-themetag">Khuyến mãi</span></div>
-											<div class="tg-booktitle">
-												<h3><a href="javascript:void(0);">Giúp tôi tìm dạ dày của mình</a></h3>
-											</div>
-											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
-											<span class="tg-stars"><span></span></span>
-											<span class="tg-bookprice">
-												<ins>600.000₫</ins>
-												<del>650.000₫</del>
-											</span>
-											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-												<i class="fa fa-shopping-basket"></i>
-												<em>Thêm vào giỏ</em>
-											</a>
-										</div>
-									</div>
+							<div class="tg-wishlistandcart tg-action-buttons">
+								<div class="dropdown tg-themedropdown">
+									<a href="#" class="tg-btnthemedropdown" id="tg-minicart" role="button">
+										<span class="tg-themebadge">2</span>
+										<i class="icon-cart"></i>
+									</a>
 								</div>
-								<div class="item">
-									<div class="tg-postbook">
-										<figure class="tg-featureimg">
-											<div class="tg-bookimg">
-												<div class="tg-frontcover"><img src="images/books/img-02.jpg" alt="image description"></div>
-												<div class="tg-backcover"><img src="images/books/img-02.jpg" alt="image description"></div>
+								<div class="dropdown tg-searchdropdown">
+									<a href="#" class="tg-searchbtn" id="tg-searchbtn" role="button">
+										<i class="icon-search"></i>
+									</a>
+									<div class="tg-searchdropdownmenu">
+										<form class="tg-searchform">
+											<div class="tg-inputgroup">
+												<input type="search" name="search" class="form-control" placeholder="Tìm kiếm sách...">
+												<button class="tg-searchsubmit" type="submit">
+													<i class="icon-search"></i>
+												</button>
 											</div>
-											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-												<i class="icon-heart"></i>
-												<span>Thêm vào yêu thích</span>
-											</a>
-										</figure>
-										<div class="tg-postbookcontent">
-											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
-												<li><a href="javascript:void(0);">Giải trí</a></li>
-											</ul>
-											<div class="tg-themetagbox"><span class="tg-themetag">Khuyến mãi</span></div>
-											<div class="tg-booktitle">
-												<h3><a href="javascript:void(0);">Lái xe an toàn, không va chạm</a></h3>
-											</div>
-											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
-											<span class="tg-stars"><span></span></span>
-											<span class="tg-bookprice">
-												<ins>600.000₫</ins>
-												<del>650.000₫</del>
-											</span>
-											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-												<i class="fa fa-shopping-basket"></i>
-												<em>Thêm vào giỏ</em>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="tg-postbook">
-										<figure class="tg-featureimg">
-											<div class="tg-bookimg">
-												<div class="tg-frontcover"><img src="images/books/img-03.jpg" alt="image description"></div>
-												<div class="tg-backcover"><img src="images/books/img-03.jpg" alt="image description"></div>
-											</div>
-											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-												<i class="icon-heart"></i>
-												<span>Thêm vào yêu thích</span>
-											</a>
-										</figure>
-										<div class="tg-postbookcontent">
-											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
-												<li><a href="javascript:void(0);">Giải trí</a></li>
-											</ul>
-											<div class="tg-themetagbox"></div>
-											<div class="tg-booktitle">
-												<h3><a href="javascript:void(0);">Hãy để những thời khắc tốt đẹp cuộn lên</a></h3>
-											</div>
-											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
-											<span class="tg-stars"><span></span></span>
-											<span class="tg-bookprice">
-												<ins>600.000₫</ins>
-												<del>650.000₫</del>
-											</span>
-											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-												<i class="fa fa-shopping-basket"></i>
-												<em>Thêm vào giỏ</em>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="tg-postbook">
-										<figure class="tg-featureimg">
-											<div class="tg-bookimg">
-												<div class="tg-frontcover"><img src="images/books/img-04.jpg" alt="image description"></div>
-												<div class="tg-backcover"><img src="images/books/img-04.jpg" alt="image description"></div>
-											</div>
-											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-												<i class="icon-heart"></i>
-												<span>Thêm vào yêu thích</span>
-											</a>
-										</figure>
-										<div class="tg-postbookcontent">
-											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
-												<li><a href="javascript:void(0);">Giải trí</a></li>
-											</ul>
-											<div class="tg-themetagbox"><span class="tg-themetag">Khuyến mãi</span></div>
-											<div class="tg-booktitle">
-												<h3><a href="javascript:void(0);">Hội chợ của chúng tôi là một hội chợ tuyệt vời</a></h3>
-											</div>
-											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
-											<span class="tg-stars"><span></span></span>
-											<span class="tg-bookprice">
-												<ins>600.000₫</ins>
-												<del>650.000₫</del>
-											</span>
-											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-												<i class="fa fa-shopping-basket"></i>
-												<em>Thêm vào giỏ</em>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="tg-postbook">
-										<figure class="tg-featureimg">
-											<div class="tg-bookimg">
-												<div class="tg-frontcover"><img src="images/books/img-05.jpg" alt="image description"></div>
-												<div class="tg-backcover"><img src="images/books/img-05.jpg" alt="image description"></div>
-											</div>
-											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-												<i class="icon-heart"></i>
-												<span>Thêm vào yêu thích</span>
-											</a>
-										</figure>
-										<div class="tg-postbookcontent">
-											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
-												<li><a href="javascript:void(0);">Giải trí</a></li>
-											</ul>
-											<div class="tg-themetagbox"></div>
-											<div class="tg-booktitle">
-												<h3><a href="javascript:void(0);">Đặt cánh hoa lên kim loại</a></h3>
-											</div>
-											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
-											<span class="tg-stars"><span></span></span>
-											<span class="tg-bookprice">
-												<ins>600.000₫</ins>
-												<del>650.000₫</del>
-											</span>
-											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-												<i class="fa fa-shopping-basket"></i>
-												<em>Thêm vào giỏ</em>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="tg-postbook">
-										<figure class="tg-featureimg">
-											<div class="tg-bookimg">
-												<div class="tg-frontcover"><img src="images/books/img-06.jpg" alt="image description"></div>
-												<div class="tg-backcover"><img src="images/books/img-06.jpg" alt="image description"></div>
-											</div>
-											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-												<i class="icon-heart"></i>
-												<span>Thêm vào yêu thích</span>
-											</a>
-										</figure>
-										<div class="tg-postbookcontent">
-											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
-												<li><a href="javascript:void(0);">Giải trí</a></li>
-											</ul>
-											<div class="tg-themetagbox"><span class="tg-themetag">Khuyến mãi</span></div>
-											<div class="tg-booktitle">
-												<h3><a href="javascript:void(0);">Giúp tôi tìm dạ dày của mình</a></h3>
-											</div>
-											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
-											<span class="tg-stars"><span></span></span>
-											<span class="tg-bookprice">
-												<ins>600.000₫</ins>
-												<del>650.000₫</del>
-											</span>
-											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-												<i class="fa fa-shopping-basket"></i>
-												<em>Thêm vào giỏ</em>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="tg-postbook">
-										<figure class="tg-featureimg">
-											<div class="tg-bookimg">
-												<div class="tg-frontcover"><img src="images/books/img-03.jpg" alt="image description"></div>
-												<div class="tg-backcover"><img src="images/books/img-03.jpg" alt="image description"></div>
-											</div>
-											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-												<i class="icon-heart"></i>
-												<span>Thêm vào yêu thích</span>
-											</a>
-										</figure>
-										<div class="tg-postbookcontent">
-											<ul class="tg-bookscategories">
-												<li><a href="javascript:void(0);">Phiêu lưu</a></li>
-												<li><a href="javascript:void(0);">Giải trí</a></li>
-											</ul>
-											<div class="tg-themetagbox"></div>
-											<div class="tg-booktitle">
-												<h3><a href="javascript:void(0);">Hãy để những thời khắc tốt đẹp cuộn lên</a></h3>
-											</div>
-											<span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">Angela Gunning</a></span>
-											<span class="tg-stars"><span></span></span>
-											<span class="tg-bookprice">
-												<ins>600.000₫</ins>
-												<del>650.000₫</del>
-											</span>
-											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-												<i class="fa fa-shopping-basket"></i>
-												<em>Thêm vào giỏ</em>
-											</a>
-										</div>
+										</form>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-			<!--************************************
-					Best Selling End
-			*************************************-->
+			</div>
+			
+			<!-- Navigation Area -->
+			<div class="tg-navigationarea">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="tg-navigationholder">
+								<nav id="tg-nav" class="tg-nav">
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation">
+											<span class="sr-only">Toggle navigation</span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+										</button>
+									</div>
+									<div id="tg-navigation" class="tg-navigation">
+										<ul>
+											<li><a href="index.html">Trang chủ</a></li>
+											<li><a href="book.html">Sách</a></li>
+											<li><a href="story.html">Truyện</a></li>
+											<li class="current-menu-item"><a href="menbership.html">Hội viên</a></li>
+											<li><a href="about.html">Giới thiệu</a></li>
+											<li><a href="contact.html">Liên hệ</a></li>
+										</ul>
+									</div>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
 
-			<!--************************************
-					Membership Package Section Start
-			*************************************-->
-			<section class="tg-sectionspace tg-haslayout" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 80px 0;">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="tg-membership-package" style="background: white; border-radius: 30px; padding: 60px; box-shadow: 0 25px 60px rgba(0,0,0,0.15); cursor: pointer; transition: all 0.3s ease; overflow: hidden;" onclick="window.location.href='menbership.html';">
-								<div class="row" style="align-items: center;">
-									<!-- Left Side - Information & Benefits -->
-									<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-										<div class="tg-package-content" style="padding-right: 30px;">
-											<!-- Package Header -->
-											<div class="tg-package-header" style="margin-bottom: 30px;">
-												<div style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #4A6366; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3); margin-bottom: 15px;">
-													<i class="fa fa-star" style="margin-right: 6px;"></i>GÓI HỘI VIÊN ĐẶC BIỆT
-												</div>
-												<h2 style="font-size: 2.5rem; font-weight: 800; color: #4A6366; margin-bottom: 10px; line-height: 1.2;">
-													Chỉ <span style="color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">99K</span>/tháng
-												</h2>
-												<p style="font-size: 1rem; color: #666; margin-bottom: 0; line-height: 1.5;">
-													Trải nghiệm đọc sách tuyệt vời với những quyền lợi độc quyền
-												</p>
-											</div>
-											
-											<!-- Benefits List -->
-											<div class="tg-benefits-list" style="margin-bottom: 30px;">
-												<div class="tg-benefit-item" style="display: flex; align-items: center; margin-bottom: 12px;">
-													<div class="tg-benefit-icon" style="width: 35px; height: 35px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0; box-shadow: 0 3px 8px rgba(255, 215, 0, 0.3);">
-														<i class="fa fa-gift" style="color: #4A6366; font-size: 14px; font-weight: bold;"></i>
-													</div>
-													<div class="tg-benefit-text">
-														<span style="color: #333; font-size: 15px; font-weight: 600;">Nhận quà từ các sự kiện</span>
-													</div>
-												</div>
-												
-												<div class="tg-benefit-item" style="display: flex; align-items: center; margin-bottom: 12px;">
-													<div class="tg-benefit-icon" style="width: 35px; height: 35px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0; box-shadow: 0 3px 8px rgba(255, 215, 0, 0.3);">
-														<i class="fa fa-percent" style="color: #4A6366; font-size: 14px; font-weight: bold;"></i>
-													</div>
-													<div class="tg-benefit-text">
-														<span style="color: #333; font-size: 15px; font-weight: 600;">Giảm <strong style="color: #ffd700; font-size: 16px;">15%</strong> khi mua sách</span>
-													</div>
-												</div>
-												
-												<div class="tg-benefit-item" style="display: flex; align-items: center; margin-bottom: 12px;">
-													<div class="tg-benefit-icon" style="width: 35px; height: 35px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0; box-shadow: 0 3px 8px rgba(255, 215, 0, 0.3);">
-														<i class="fa fa-truck" style="color: #4A6366; font-size: 14px; font-weight: bold;"></i>
-													</div>
-													<div class="tg-benefit-text">
-														<span style="color: #333; font-size: 15px; font-weight: 600;">Miễn phí giao hàng toàn quốc</span>
-													</div>
-												</div>
-												
-												<div class="tg-benefit-item" style="display: flex; align-items: center; margin-bottom: 12px;">
-													<div class="tg-benefit-icon" style="width: 35px; height: 35px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0; box-shadow: 0 3px 8px rgba(255, 215, 0, 0.3);">
-														<i class="fa fa-clock-o" style="color: #4A6366; font-size: 14px; font-weight: bold;"></i>
-													</div>
-													<div class="tg-benefit-text">
-														<span style="color: #333; font-size: 15px; font-weight: 600;">Ưu tiên đặt trước sách</span>
-													</div>
-												</div>
-												
-												<div class="tg-benefit-item" style="display: flex; align-items: center; margin-bottom: 12px;">
-													<div class="tg-benefit-icon" style="width: 35px; height: 35px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0; box-shadow: 0 3px 8px rgba(255, 215, 0, 0.3);">
-														<i class="fa fa-tablet" style="color: #4A6366; font-size: 14px; font-weight: bold;"></i>
-													</div>
-													<div class="tg-benefit-text">
-														<span style="color: #333; font-size: 15px; font-weight: 600;">Đọc sách hội viên trên web/app</span>
-													</div>
-												</div>
-												
-												<div class="tg-benefit-item" style="display: flex; align-items: center; margin-bottom: 12px;">
-													<div class="tg-benefit-icon" style="width: 35px; height: 35px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0; box-shadow: 0 3px 8px rgba(255, 215, 0, 0.3);">
-														<i class="fa fa-headphones" style="color: #4A6366; font-size: 14px; font-weight: bold;"></i>
-													</div>
-													<div class="tg-benefit-text">
-														<span style="color: #333; font-size: 15px; font-weight: 600;">Hỗ trợ 24/7</span>
-													</div>
-												</div>
-											</div>
-											
-											<!-- CTA Button -->
-											<div class="tg-package-cta">
-												<a href="menbership.html" class="tg-btn" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 15px 35px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1rem; display: inline-block; box-shadow: 0 6px 20px rgba(74, 99, 102, 0.3); transition: all 0.3s ease;">
-													<i class="fa fa-crown" style="margin-right: 10px;"></i>
-													Đăng ký ngay
-												</a>
-												<p style="margin-top: 12px; font-size: 13px; color: #888;">
-													* Áp dụng cho gói hội viên đầu tiên
-												</p>
-											</div>
-										</div>
-									</div>
-									
-									<!-- Right Side - Unique Interactive Design -->
-									<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-										<div class="tg-package-visual" style="position: relative; height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-											
-											<!-- 3D Book Stack Design -->
-											<div class="tg-book-stack" style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-												
-												<!-- Main Book -->
-												<div class="tg-main-book" style="position: relative; width: 200px; height: 280px; background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); border-radius: 15px; transform: perspective(1000px) rotateY(-20deg) rotateX(10deg); box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 2px 10px rgba(255,255,255,0.1); border: 3px solid rgba(255,255,255,0.2); z-index: 3;">
-													<!-- Book Cover -->
-													<div style="position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%); border-radius: 12px; overflow: hidden;">
-														<!-- VIP Badge -->
-														<div style="position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.95); padding: 8px 12px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-															<div style="font-size: 16px; font-weight: bold; color: #ffd700;">VIP</div>
-															<div style="font-size: 10px; color: #4A6366;">Member</div>
-														</div>
-														
-														<!-- Book Title -->
-														<div style="position: absolute; bottom: 20px; left: 15px; right: 15px;">
-															<div style="font-size: 18px; font-weight: bold; color: #4A6366; margin-bottom: 5px;">ANBOK</div>
-															<div style="font-size: 12px; color: #666;">Premium Library</div>
-														</div>
-														
-														<!-- Decorative Elements -->
-														<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 50%; border: 2px dashed rgba(255,255,255,0.3);"></div>
-													</div>
-												</div>
-												
-												<!-- Floating Benefits Cards -->
-												<div class="tg-floating-card" style="position: absolute; top: 20px; right: 30px; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transform: rotate(5deg); z-index: 2;">
-													<div style="display: flex; align-items: center; margin-bottom: 8px;">
-														<div style="width: 30px; height: 30px; background: #ffd700; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-															<i class="fa fa-gift" style="color: #4A6366; font-size: 12px;"></i>
-														</div>
-														<div style="font-size: 12px; font-weight: bold; color: #4A6366;">Quà tặng</div>
-													</div>
-													<div style="font-size: 10px; color: #666;">Sự kiện đặc biệt</div>
-												</div>
-												
-												<div class="tg-floating-card" style="position: absolute; bottom: 40px; right: 20px; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transform: rotate(-3deg); z-index: 2;">
-													<div style="display: flex; align-items: center; margin-bottom: 8px;">
-														<div style="width: 30px; height: 30px; background: #ffd700; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-															<i class="fa fa-percent" style="color: #4A6366; font-size: 12px;"></i>
-														</div>
-														<div style="font-size: 12px; font-weight: bold; color: #4A6366;">15% OFF</div>
-													</div>
-													<div style="font-size: 10px; color: #666;">Giảm giá</div>
-												</div>
-												
-												<div class="tg-floating-card" style="position: absolute; top: 50%; left: 20px; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transform: rotate(-5deg); z-index: 2;">
-													<div style="display: flex; align-items: center; margin-bottom: 8px;">
-														<div style="width: 30px; height: 30px; background: #ffd700; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-															<i class="fa fa-truck" style="color: #4A6366; font-size: 12px;"></i>
-														</div>
-														<div style="font-size: 12px; font-weight: bold; color: #4A6366;">Miễn phí</div>
-													</div>
-													<div style="font-size: 10px; color: #666;">Giao hàng</div>
-												</div>
-												
-												<!-- Animated Elements -->
-												<div style="position: absolute; top: 30px; left: 50px; width: 8px; height: 8px; background: #ffd700; border-radius: 50%; animation: float 3s ease-in-out infinite; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);"></div>
-												<div style="position: absolute; bottom: 60px; left: 80px; width: 6px; height: 6px; background: #4A6366; border-radius: 50%; animation: float 4s ease-in-out infinite reverse; box-shadow: 0 0 8px rgba(74, 99, 102, 0.4);"></div>
-												<div style="position: absolute; top: 60%; right: 40px; width: 4px; height: 4px; background: #ffd700; border-radius: 50%; animation: float 5s ease-in-out infinite; box-shadow: 0 0 6px rgba(255, 215, 0, 0.3);"></div>
-												
-												<!-- Decorative Lines -->
-												<div style="position: absolute; top: 20px; left: 20px; width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6), transparent); border-radius: 1px;"></div>
-												<div style="position: absolute; bottom: 20px; right: 20px; width: 80px; height: 2px; background: linear-gradient(90deg, transparent, rgba(74, 99, 102, 0.6), transparent); border-radius: 1px;"></div>
-												
-												<!-- Glow Effect -->
-												<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%); border-radius: 50%; animation: pulse 4s ease-in-out infinite;"></div>
-											</div>
-										</div>
-									</div>
-								</div>
+		<!-- Membership Banner Section -->
+		<div class="tg-banner tg-membership-banner">
+			<div class="banner-bg-pattern"></div>
+			<div class="floating-element float-1"></div>
+			<div class="floating-element float-2"></div>
+			<div class="floating-element float-3"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="tg-banner-content">
+							<h1 style="color: white; font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+								Gói Hội Viên AnBok
+							</h1>
+							<h2 style="color: rgba(255,255,255,0.9); font-size: 1.4rem; margin-bottom: 30px; font-weight: 400;">
+								Trải nghiệm đọc sách không giới hạn với những ưu đãi đặc biệt
+							</h2>
+							<div class="tg-bannerbtns" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+								<a class="tg-btn tg-active" href="#membership-packages" style="background: #F4A261; border-color: #F4A261; color: white; padding: 15px 30px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;">
+									Xem Gói Hội Viên
+								</a>
+								<a class="tg-btn" href="#benefits" style="background: transparent; border: 2px solid rgba(255,255,255,0.8); color: white; padding: 15px 30px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;">
+									Quyền Lợi Hội Viên
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-			<!--************************************
-					Membership Package Section End
-			*************************************-->
-			
-			<!--************************************
-					New Release Start
-			*************************************-->
-			<section class="tg-sectionspace tg-haslayout">
-				<div class="container">
-					<div class="row">
-						<div class="tg-newrelease">
-							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-								<div class="tg-sectionhead">
-									<h2><span>Nếm thử gia vị mới</span>Sách mới phát hành</h2>
-								</div>
-								<div class="tg-description">
-									<p>Khám phá những cuốn sách mới nhất với nội dung hấp dẫn và thiết kế độc đáo. Từ những tác phẩm văn học đương đại đến sách khoa học tiên tiến, chúng tôi mang đến cho bạn những trải nghiệm đọc sách tuyệt vời nhất.</p>
-								</div>
-								<div class="tg-btns">
-									<a class="tg-btn tg-active" href="javascript:void(0);">Xem tất cả</a>
-									<a class="tg-btn" href="javascript:void(0);">Đọc thêm</a>
-								</div>
+			</div>
+		</div>
+
+		<!-- Membership Packages Section -->
+		<section id="membership-packages" class="tg-membership-packages" style="padding: 80px 0; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="tg-sectionhead text-center" style="margin-bottom: 60px;">
+							<h2 style="font-size: 2.5rem; color: #4A6366; margin-bottom: 20px; font-weight: 700;">
+								Chọn Gói Hội Viên Phù Hợp
+							</h2>
+							<p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">
+								Tận hưởng thế giới sách với những ưu đãi hấp dẫn và quyền lợi đặc biệt dành riêng cho hội viên AnBok
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<!-- 1 Month Package -->
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-package-card" style="background: white; border-radius: 20px; padding: 40px 30px; margin-bottom: 30px; box-shadow: 0 5px 25px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; text-align: center;">
+							<div class="tg-package-icon" style="margin-bottom: 25px;">
+								<i class="fa fa-calendar" style="font-size: 3rem; color: #4A6366;"></i>
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-								<div class="row">
-									<div class="tg-newreleasebooks">
-										<div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-											<div class="tg-postbook">
-												<figure class="tg-featureimg">
-													<div class="tg-bookimg">
-														<div class="tg-frontcover"><img src="images/books/img-07.jpg" alt="image description"></div>
-														<div class="tg-backcover"><img src="images/books/img-07.jpg" alt="image description"></div>
-													</div>
-													<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-														<i class="icon-heart"></i>
-														<span>add to wishlist</span>
-													</a>
-												</figure>
-												<div class="tg-postbookcontent">
-													<ul class="tg-bookscategories">
-														<li><a href="javascript:void(0);">Adventure</a></li>
-														<li><a href="javascript:void(0);">Fun</a></li>
-													</ul>
-													<div class="tg-booktitle">
-														<h3><a href="javascript:void(0);">Help Me Find My Stomach</a></h3>
-													</div>
-													<span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-													<span class="tg-stars"><span></span></span>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-											<div class="tg-postbook">
-												<figure class="tg-featureimg">
-													<div class="tg-bookimg">
-														<div class="tg-frontcover"><img src="images/books/img-08.jpg" alt="image description"></div>
-														<div class="tg-backcover"><img src="images/books/img-08.jpg" alt="image description"></div>
-													</div>
-													<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-														<i class="icon-heart"></i>
-														<span>add to wishlist</span>
-													</a>
-												</figure>
-												<div class="tg-postbookcontent">
-													<ul class="tg-bookscategories">
-														<li><a href="javascript:void(0);">Adventure</a></li>
-														<li><a href="javascript:void(0);">Fun</a></li>
-													</ul>
-													<div class="tg-booktitle">
-														<h3><a href="javascript:void(0);">Drive Safely, No Bumping</a></h3>
-													</div>
-													<span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
-													<span class="tg-stars"><span></span></span>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-4 col-sm-4 col-md-3 col-lg-4 hidden-md">
-											<div class="tg-postbook">
-												<figure class="tg-featureimg">
-													<div class="tg-bookimg">
-														<div class="tg-frontcover"><img src="images/books/img-09.jpg" alt="image description"></div>
-														<div class="tg-backcover"><img src="images/books/img-09.jpg" alt="image description"></div>
-													</div>
-													<a class="tg-btnaddtowishlist" href="javascript:void(0);">
-														<i class="icon-heart"></i>
-														<span>add to wishlist</span>
-													</a>
-												</figure>
-												<div class="tg-postbookcontent">
-													<ul class="tg-bookscategories">
-														<li><a href="javascript:void(0);">Adventure</a></li>
-														<li><a href="javascript:void(0);">Fun</a></li>
-													</ul>
-													<div class="tg-booktitle">
-														<h3><a href="javascript:void(0);">Let The Good Times Roll Up</a></h3>
-													</div>
-													<span class="tg-bookwriter">By: <a href="javascript:void(0);">Elisabeth Ronning</a></span>
-													<span class="tg-stars"><span></span></span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+							<h3 style="color: #4A6366; font-size: 1.5rem; margin-bottom: 15px; font-weight: 700;">
+								Gói 1 Tháng
+							</h3>
+							<div class="tg-package-price" style="margin-bottom: 25px;">
+								<span class="tg-price-amount" style="font-size: 2.5rem; color: #F4A261; font-weight: 700;">99k</span>
+								<span class="tg-price-period" style="font-size: 1rem; color: #666;">/ tháng</span>
+							</div>
+							<ul class="tg-package-features" style="list-style: none; padding: 0; margin-bottom: 30px;">
+								<li style="padding: 8px 0; color: #666; border-bottom: 1px solid #f0f0f0;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Đọc sách hội viên không giới hạn
+								</li>
+								<li style="padding: 8px 0; color: #666; border-bottom: 1px solid #f0f0f0;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Giảm 15% khi mua sách
+								</li>
+								<li style="padding: 8px 0; color: #666; border-bottom: 1px solid #f0f0f0;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Miễn phí giao hàng toàn quốc
+								</li>
+								<li style="padding: 8px 0; color: #666; border-bottom: 1px solid #f0f0f0;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Ưu tiên đặt trước sách
+								</li>
+								<li style="padding: 8px 0; color: #666;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Nhận quà từ sự kiện
+								</li>
+							</ul>
+							<a href="#" class="tg-btn" style="background: #4A6366; color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block; width: 100%; transition: all 0.3s ease;">
+								Đăng Ký Ngay
+							</a>
+						</div>
+					</div>
+
+					<!-- 3 Months Package -->
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-package-card" style="background: white; border-radius: 20px; padding: 40px 30px; margin-bottom: 30px; box-shadow: 0 5px 25px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; text-align: center;">
+							<div class="tg-package-badge" style="position: absolute; top: -10px; right: 20px; background: #28a745; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">
+								Tiết kiệm 3%
+							</div>
+							<div class="tg-package-icon" style="margin-bottom: 25px;">
+								<i class="fa fa-calendar-check-o" style="font-size: 3rem; color: #4A6366;"></i>
+							</div>
+							<h3 style="color: #4A6366; font-size: 1.5rem; margin-bottom: 15px; font-weight: 700;">
+								Gói 3 Tháng
+							</h3>
+							<div class="tg-package-price" style="margin-bottom: 25px;">
+								<span class="tg-price-amount" style="font-size: 2.5rem; color: #F4A261; font-weight: 700;">288k</span>
+								<span class="tg-price-period" style="font-size: 1rem; color: #666;">/ 3 tháng</span>
+								<div class="tg-price-original" style="font-size: 0.9rem; color: #999; text-decoration: line-through;">297k</div>
+							</div>
+							<ul class="tg-package-features" style="list-style: none; padding: 0; margin-bottom: 30px;">
+								<li style="padding: 8px 0; color: #666; border-bottom: 1px solid #f0f0f0;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Đọc sách hội viên không giới hạn
+								</li>
+								<li style="padding: 8px 0; color: #666; border-bottom: 1px solid #f0f0f0;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Giảm 15% khi mua sách
+								</li>
+								<li style="padding: 8px 0; color: #666; border-bottom: 1px solid #f0f0f0;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Miễn phí giao hàng toàn quốc
+								</li>
+								<li style="padding: 8px 0; color: #666; border-bottom: 1px solid #f0f0f0;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Ưu tiên đặt trước sách
+								</li>
+								<li style="padding: 8px 0; color: #666;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Nhận quà từ sự kiện
+								</li>
+							</ul>
+							<a href="#" class="tg-btn" style="background: #4A6366; color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block; width: 100%; transition: all 0.3s ease;">
+								Đăng Ký Ngay
+							</a>
+						</div>
+					</div>
+
+					<!-- 6 Months Package -->
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-package-card" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); border-radius: 20px; padding: 40px 30px; margin-bottom: 30px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; text-align: center; color: white;">
+							<div class="tg-package-badge" style="position: absolute; top: -10px; right: 20px; background: #F4A261; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">
+								Tiết kiệm 10%
+							</div>
+							<div class="tg-package-popular" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #F4A261; color: white; padding: 8px 20px; border-radius: 20px; font-size: 0.9rem; font-weight: 700;">
+								PHỔ BIẾN
+							</div>
+							<div class="tg-package-icon" style="margin-bottom: 25px; margin-top: 15px;">
+								<i class="fa fa-star" style="font-size: 3rem; color: #F4A261;"></i>
+							</div>
+							<h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px; font-weight: 700;">
+								Gói 6 Tháng
+							</h3>
+							<div class="tg-package-price" style="margin-bottom: 25px;">
+								<span class="tg-price-amount" style="font-size: 2.5rem; color: #F4A261; font-weight: 700;">534k</span>
+								<span class="tg-price-period" style="font-size: 1rem; color: rgba(255,255,255,0.8);">/ 6 tháng</span>
+								<div class="tg-price-original" style="font-size: 0.9rem; color: rgba(255,255,255,0.6); text-decoration: line-through;">594k</div>
+							</div>
+							<ul class="tg-package-features" style="list-style: none; padding: 0; margin-bottom: 30px;">
+								<li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">
+									<i class="fa fa-check" style="color: #F4A261; margin-right: 10px;"></i>
+									Đọc sách hội viên không giới hạn
+								</li>
+								<li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">
+									<i class="fa fa-check" style="color: #F4A261; margin-right: 10px;"></i>
+									Giảm 15% khi mua sách
+								</li>
+								<li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">
+									<i class="fa fa-check" style="color: #F4A261; margin-right: 10px;"></i>
+									Miễn phí giao hàng toàn quốc
+								</li>
+								<li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">
+									<i class="fa fa-check" style="color: #F4A261; margin-right: 10px;"></i>
+									Ưu tiên đặt trước sách 1-2 tuần
+								</li>
+								<li style="padding: 8px 0; color: rgba(255,255,255,0.9);">
+									<i class="fa fa-check" style="color: #F4A261; margin-right: 10px;"></i>
+									Nhận quà từ sự kiện
+								</li>
+							</ul>
+							<a href="#" class="tg-btn" style="background: rgba(255,255,255,0.9); color: #4A6366; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block; width: 100%; transition: all 0.3s ease;">
+								Đăng Ký Ngay
+							</a>
+						</div>
+					</div>
+
+					<!-- 12 Months Package -->
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-package-card" style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 20px; padding: 40px 30px; margin-bottom: 30px; box-shadow: 0 5px 25px rgba(255,215,0,0.3); transition: all 0.3s ease; position: relative; text-align: center; color: #333;">
+							<div class="tg-package-badge" style="position: absolute; top: -10px; right: 20px; background: #E8944A; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">
+								Tiết kiệm 40%
+							</div>
+							<div class="tg-package-premium" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #E8944A; color: white; padding: 8px 20px; border-radius: 20px; font-size: 0.9rem; font-weight: 700;">
+								TIẾT KIỆM NHẤT
+							</div>
+							<div class="tg-package-icon" style="margin-bottom: 25px; margin-top: 15px;">
+								<i class="fa fa-crown" style="font-size: 3rem; color: #E8944A;"></i>
+							</div>
+							<h3 style="color: #333; font-size: 1.5rem; margin-bottom: 15px; font-weight: 700;">
+								Gói 12 Tháng
+							</h3>
+							<div class="tg-package-price" style="margin-bottom: 25px;">
+								<span class="tg-price-amount" style="font-size: 2.5rem; color: #E8944A; font-weight: 700;">712k</span>
+								<span class="tg-price-period" style="font-size: 1rem; color: #666;">/ năm</span>
+								<div class="tg-price-original" style="font-size: 0.9rem; color: #999; text-decoration: line-through;">1,188k</div>
+							</div>
+							<ul class="tg-package-features" style="list-style: none; padding: 0; margin-bottom: 30px;">
+								<li style="padding: 8px 0; color: #333; border-bottom: 1px solid rgba(0,0,0,0.1);">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Đọc sách hội viên không giới hạn
+								</li>
+								<li style="padding: 8px 0; color: #333; border-bottom: 1px solid rgba(0,0,0,0.1);">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Giảm 15% khi mua sách
+								</li>
+								<li style="padding: 8px 0; color: #333; border-bottom: 1px solid rgba(0,0,0,0.1);">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Miễn phí giao hàng toàn quốc
+								</li>
+								<li style="padding: 8px 0; color: #333; border-bottom: 1px solid rgba(0,0,0,0.1);">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Ưu tiên đặt trước sách 1-2 tuần
+								</li>
+								<li style="padding: 8px 0; color: #333;">
+									<i class="fa fa-check" style="color: #28a745; margin-right: 10px;"></i>
+									Nhận quà từ sự kiện
+								</li>
+							</ul>
+							<a href="#" class="tg-btn" style="background: #E8944A; color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block; width: 100%; transition: all 0.3s ease;">
+								Đăng Ký Ngay
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Benefits Section -->
+		<section id="benefits" class="tg-benefits-section" style="padding: 80px 0; background: white;">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="tg-sectionhead text-center" style="margin-bottom: 60px;">
+							<h2 style="font-size: 2.5rem; color: #4A6366; margin-bottom: 20px; font-weight: 700;">
+								Quyền Lợi Hội Viên AnBok
+							</h2>
+							<p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto;">
+								Trở thành hội viên AnBok để nhận được những ưu đãi và quyền lợi đặc biệt
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-benefit-item" style="text-align: center; padding: 30px 20px; margin-bottom: 40px; background: #f8f9fa; border-radius: 15px; transition: all 0.3s ease;">
+							<div class="tg-benefit-icon" style="margin-bottom: 25px;">
+								<i class="fa fa-gift" style="font-size: 3.5rem; color: #F4A261;"></i>
+							</div>
+							<h3 style="color: #4A6366; font-size: 1.3rem; margin-bottom: 15px; font-weight: 600;">
+								Nhận Quà Từ Sự Kiện
+							</h3>
+							<p style="color: #666; line-height: 1.6;">
+								Tham gia các sự kiện đặc biệt và nhận những món quà hấp dẫn từ AnBok Collection
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-benefit-item" style="text-align: center; padding: 30px 20px; margin-bottom: 40px; background: #f8f9fa; border-radius: 15px; transition: all 0.3s ease;">
+							<div class="tg-benefit-icon" style="margin-bottom: 25px;">
+								<i class="fa fa-percent" style="font-size: 3.5rem; color: #F4A261;"></i>
+							</div>
+							<h3 style="color: #4A6366; font-size: 1.3rem; margin-bottom: 15px; font-weight: 600;">
+								Giảm Giá 15%
+							</h3>
+							<p style="color: #666; line-height: 1.6;">
+								Được giảm 15% cho tất cả các đơn hàng mua sách và sách hội viên
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-benefit-item" style="text-align: center; padding: 30px 20px; margin-bottom: 40px; background: #f8f9fa; border-radius: 15px; transition: all 0.3s ease;">
+							<div class="tg-benefit-icon" style="margin-bottom: 25px;">
+								<i class="fa fa-truck" style="font-size: 3.5rem; color: #F4A261;"></i>
+							</div>
+							<h3 style="color: #4A6366; font-size: 1.3rem; margin-bottom: 15px; font-weight: 600;">
+								Miễn Phí Giao Hàng
+							</h3>
+							<p style="color: #666; line-height: 1.6;">
+								Giao hàng miễn phí toàn quốc cho mọi đơn hàng của hội viên
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-benefit-item" style="text-align: center; padding: 30px 20px; margin-bottom: 40px; background: #f8f9fa; border-radius: 15px; transition: all 0.3s ease;">
+							<div class="tg-benefit-icon" style="margin-bottom: 25px;">
+								<i class="fa fa-clock-o" style="font-size: 3.5rem; color: #F4A261;"></i>
+							</div>
+							<h3 style="color: #4A6366; font-size: 1.3rem; margin-bottom: 15px; font-weight: 600;">
+								Ưu Tiên Đặt Trước
+							</h3>
+							<p style="color: #666; line-height: 1.6;">
+								Được ưu tiên đặt trước sách/truyện mới trước 1-2 tuần so với khách hàng thường
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-benefit-item" style="text-align: center; padding: 30px 20px; margin-bottom: 40px; background: #f8f9fa; border-radius: 15px; transition: all 0.3s ease;">
+							<div class="tg-benefit-icon" style="margin-bottom: 25px;">
+								<i class="fa fa-book" style="font-size: 3.5rem; color: #F4A261;"></i>
+							</div>
+							<h3 style="color: #4A6366; font-size: 1.3rem; margin-bottom: 15px; font-weight: 600;">
+								Đọc Sách Hội Viên
+							</h3>
+							<p style="color: #666; line-height: 1.6;">
+								Truy cập không giới hạn vào thư viện sách dành riêng cho hội viên trên web/app
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+						<div class="tg-benefit-item" style="text-align: center; padding: 30px 20px; margin-bottom: 40px; background: #f8f9fa; border-radius: 15px; transition: all 0.3s ease;">
+							<div class="tg-benefit-icon" style="margin-bottom: 25px;">
+								<i class="fa fa-star" style="font-size: 3.5rem; color: #F4A261;"></i>
+							</div>
+							<h3 style="color: #4A6366; font-size: 1.3rem; margin-bottom: 15px; font-weight: 600;">
+								Ưu Đãi Đặc Biệt
+							</h3>
+							<p style="color: #666; line-height: 1.6;">
+								Nhận thông báo sớm về các chương trình khuyến mãi và ưu đãi độc quyền
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action Section -->
+		<section class="tg-cta-section" style="padding: 60px 0; background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white;">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="tg-cta-content text-center">
+							<h2 style="font-size: 2.2rem; margin-bottom: 20px; font-weight: 700;">
+								Sẵn Sàng Trở Thành Hội Viên?
+							</h2>
+							<p style="font-size: 1.1rem; margin-bottom: 30px; color: rgba(255,255,255,0.9);">
+								Tham gia cộng đồng độc giả AnBok ngay hôm nay và tận hưởng những ưu đãi tuyệt vời
+							</p>
+							<div class="tg-cta-buttons" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+								<a href="#membership-packages" class="tg-btn" style="background: #F4A261; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+									Chọn Gói Hội Viên
+								</a>
+								<a href="contact.html" class="tg-btn" style="background: transparent; border: 2px solid rgba(255,255,255,0.8); color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+									Liên Hệ Tư Vấn
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
+		</section>
+
+	</main>
 			<!--************************************
-					New Release End
-			*************************************-->
-			
-			<!--************************************
-					Collection Count Start
-			*************************************-->
-				<!-- <section class="tg-parallax tg-bgcollectioncount tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-04.jpg">
-					<div class="tg-sectionspace tg-collectioncount tg-haslayout">
-						<div class="container">
-							<div class="row">
-								<div id="tg-collectioncounters" class="tg-collectioncounters">
-									<div class="tg-collectioncounter tg-drama">
-										<div class="tg-collectioncountericon">
-											<i class="icon-bubble"></i>
-										</div>
-										<div class="tg-titlepluscounter">
-											<h2>Kịch</h2>
-											<h3 data-from="0" data-to="6179213" data-speed="8000" data-refresh-interval="50">6,179,213</h3>
-										</div>
-									</div>
-									<div class="tg-collectioncounter tg-horror">
-										<div class="tg-collectioncountericon">
-											<i class="icon-heart-pulse"></i>
-										</div>
-										<div class="tg-titlepluscounter">
-											<h2>Kinh dị</h2>
-											<h3 data-from="0" data-to="3121242" data-speed="8000" data-refresh-interval="50">3,121,242</h3>
-										</div>
-									</div>
-									<div class="tg-collectioncounter tg-romance">
-										<div class="tg-collectioncountericon">
-											<i class="icon-heart"></i>
-										</div>
-										<div class="tg-titlepluscounter">
-											<h2>Lãng mạn</h2>
-											<h3 data-from="0" data-to="2101012" data-speed="8000" data-refresh-interval="50">2,101,012</h3>
-										</div>
-									</div>
-									<div class="tg-collectioncounter tg-fashion">
-										<div class="tg-collectioncountericon">
-											<i class="icon-star"></i>
-										</div>
-										<div class="tg-titlepluscounter">
-											<h2>Thời trang</h2>
-											<h3 data-from="0" data-to="1158245" data-speed="8000" data-refresh-interval="50">1,158,245</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section> -->
-			<!--************************************
-					Collection Count End
-			*************************************-->
-				<!--************************************
-					Testimonials Start
-			*************************************-->
-			<section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-05.jpg">
-				<div class="tg-sectionspace tg-haslayout">
-					<div class="container">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-push-2">
-								<div id="tg-testimonialsslider" class="tg-testimonialsslider tg-testimonials owl-carousel">
-									<div class="item tg-testimonial">
-										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-										<blockquote><q>Thư viện sách này thực sự tuyệt vời! Tôi đã tìm thấy rất nhiều cuốn sách hay và bổ ích. Dịch vụ giao hàng nhanh chóng và nhân viên rất nhiệt tình. Chắc chắn sẽ giới thiệu cho bạn bè!</q></blockquote>
-										<div class="tg-testimonialauthor">
-											<h3>Nguyễn Thị Hương</h3>
-											<span>Giáo viên @ Trường THPT Lê Quý Đôn</span>
-										</div>
-									</div>
-									<div class="item tg-testimonial">
-										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-										<blockquote><q>Là một sinh viên, tôi rất hài lòng với chất lượng sách và giá cả hợp lý. Thư viện có đầy đủ các thể loại sách từ văn học đến khoa học. Rất phù hợp cho việc học tập và nghiên cứu.</q></blockquote>
-										<div class="tg-testimonialauthor">
-											<h3>Trần Văn Minh</h3>
-											<span>Sinh viên @ Đại học Quốc gia Hà Nội</span>
-										</div>
-									</div>
-									<div class="item tg-testimonial">
-										<figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
-										<blockquote><q>Đã mua sách ở đây được 2 năm rồi. Chất lượng sách rất tốt, bìa đẹp và nội dung hay. Đặc biệt thích chương trình khuyến mãi và gói hội viên VIP. Rất đáng tin cậy!</q></blockquote>
-										<div class="tg-testimonialauthor">
-											<h3>Lê Thị Lan</h3>
-											<span>Kế toán @ Công ty TNHH ABC</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!--************************************
-					Testimonials End
-			*************************************-->
-			
-			
-			<!--************************************
-					Call to Action Start
-			*************************************-->
-			<!-- <section class="tg-parallax tg-bgcalltoaction tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-06.jpg">
-				<div class="tg-sectionspace tg-haslayout">
-					<div class="container">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<div class="tg-calltoaction">
-									<h2>Giảm giá mở cho tất cả</h2>
-									<h3>Ưu đãi đặc biệt dành cho tất cả khách hàng với nhiều sản phẩm chất lượng cao.</h3>
-									<a class="tg-btn tg-active" href="javascript:void(0);">Đọc thêm</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section> -->
-			<!--************************************
-					Call to Action End
-			*************************************-->
-			<!--************************************
-					Top Trending Start
-			*************************************-->
-			<section class="tg-sectionspace tg-haslayout">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="trending-container" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; background: #4A6366; color: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(74, 99, 102, 0.3);">
-								<!-- Cột 1: SÔI NỔI NHẤT -->
-								<div class="trending-column" style="flex: 1; min-width: 300px;">
-									<div class="trending-header">
-										<i class="fa fa-film" style="color: #ffd700; margin-right: 10px;"></i>
-										<h3 style="color: white; margin: 0;">SÔI NỔI NHẤT</h3>
-									</div>
-									<div class="trending-list">
-										<div class="trending-item">
-											<span class="trending-number">1</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-01.jpg" alt="Na Tra 2" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Na Tra 2: Ma Đồng Náo Hải</span>
-										</div>
-										<div class="trending-item">
-											<span class="trending-number">2</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-02.jpg" alt="Định Phong Ba" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Định Phong Ba</span>
-										</div>
-										<div class="trending-item">
-											<span class="trending-number">3</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-03.jpg" alt="Chị Đại Học Đường" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Chị Đại Học Đường</span>
-										</div>
-										<div class="trending-item">
-											<span class="trending-number">4</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-04.jpg" alt="Phàm Nhân Tu Tiên Truyện" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Phàm Nhân Tu Tiên Truyện</span>
-										</div>
-										<div class="trending-item">
-											<span class="trending-number">5</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-05.jpg" alt="Triều Tuyết Lục" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Triều Tuyết Lục</span>
-										</div>
-									</div>
-									<div class="trending-footer">
-										<a href="javascript:void(0);" style="color: #ffd700; text-decoration: none;">Xem thêm</a>
-									</div>
-								</div>
-								
-								<!-- Cột 2: YÊU THÍCH NHẤT -->
-								<div class="trending-column" style="flex: 1; min-width: 300px;">
-									<div class="trending-header">
-										<i class="fa fa-heart" style="color: #ffd700; margin-right: 10px;"></i>
-										<h3 style="color: white; margin: 0;">YÊU THÍCH NHẤT</h3>
-									</div>
-									<div class="trending-list">
-										<div class="trending-item">
-											<span class="trending-number">1</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-06.jpg" alt="Na Tra 2" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Na Tra 2: Ma Đồng Náo Hải</span>
-										</div>
-										<div class="trending-item">
-											<span class="trending-number">2</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-07.jpg" alt="Định Phong Ba" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Định Phong Ba</span>
-										</div>
-										<div class="trending-item">
-											<span class="trending-number">3</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-08.jpg" alt="Toàn Trí Độc Giả" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Toàn Trí Độc Giả</span>
-										</div>
-										<div class="trending-item">
-											<span class="trending-number">4</span>
-											<i class="fa fa-arrow-up" style="color: #00ff00; margin: 0 8px;"></i>
-											<img src="images/books/img-09.jpg" alt="Chị Đại Học Đường" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Chị Đại Học Đường</span>
-										</div>
-										<div class="trending-item">
-											<span class="trending-number">5</span>
-											<i class="fa fa-minus" style="color: #666; margin: 0 8px;"></i>
-											<img src="images/books/img-10.jpg" alt="Phàm Nhân Tu Tiên Truyện" style="width: 40px; height: 60px; object-fit: cover; margin: 0 8px;">
-											<span class="trending-title">Phàm Nhân Tu Tiên Truyện</span>
-										</div>
-									</div>
-									<div class="trending-footer">
-										<a href="javascript:void(0);" style="color: #ffd700; text-decoration: none;">Xem thêm</a>
-									</div>
-								</div>
-								
-								<!-- Cột 3: BÌNH LUẬN MỚI -->
-								<div class="trending-column" style="flex: 1; min-width: 300px;">
-									<div class="trending-header">
-										<i class="fa fa-bolt" style="color: #ffd700; margin-right: 10px;"></i>
-										<h3 style="color: white; margin: 0;">BÌNH LUẬN MỚI</h3>
-									</div>
-									<div class="trending-comments">
-										<div class="comment-card">
-											<img src="images/users/img-01.jpg" alt="User" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-											<div class="comment-content">
-												<div class="comment-user">tao mệt quá!</div>
-												<div class="comment-text">Xem cũng giải trí phết =)))</div>
-												<div class="comment-movie">
-													<i class="fa fa-play" style="color: #ffd700;"></i>
-													<span>Ta Muốn Trở Thành Chúa Tể Bóng Tối</span>
-												</div>
-											</div>
-										</div>
-										<div class="comment-card">
-											<img src="images/users/img-01.jpg" alt="User" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-											<div class="comment-content">
-												<div class="comment-user">sương giá</div>
-												<div class="comment-text">tr ơi cái vibe coi sướng tai sướng mắt bùng nổ thật sự</div>
-												<div class="comment-movie">
-													<i class="fa fa-play" style="color: #ffd700;"></i>
-													<span>Trái Tim Thủy Tinh</span>
-												</div>
-											</div>
-										</div>
-										<div class="comment-card">
-											<img src="images/users/img-01.jpg" alt="User" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-											<div class="comment-content">
-												<div class="comment-user">Tranntruongg</div>
-												<div class="comment-text">nhớ</div>
-												<div class="comment-movie">
-													<i class="fa fa-play" style="color: #ffd700;"></i>
-													<span>Trung Tâm Chăm Sóc Chấn Thương</span>
-												</div>
-											</div>
-										</div>
-										<div class="comment-card">
-											<img src="images/users/img-01.jpg" alt="User" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-											<div class="comment-content">
-												<div class="comment-user">Hùng Tiến Nguyễn</div>
-												<div class="comment-text">Flim cũng hay mà mấy mom</div>
-												<div class="comment-movie">
-													<i class="fa fa-play" style="color: #ffd700;"></i>
-													<span>Định Phong Ba</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="trending-footer">
-										<a href="javascript:void(0);" style="color: #ffd700; text-decoration: none;">Xem thêm</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!--************************************
-					Top Trending End
-			*************************************-->
-			<!--************************************
-					Latest News Start
-			*************************************-->
-			<section class="tg-sectionspace tg-haslayout">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="tg-sectionhead">
-								<h2><span>Tin tức &amp; Bài viết mới nhất</span>Những gì đang hot trong tin tức</h2>
-								<a class="tg-btn" href="javascript:void(0);">Xem tất cả</a>
-							</div>
-						</div>
-						<div id="tg-postslider" class="tg-postslider tg-blogpost owl-carousel">
-							<article class="item tg-post">
-								<figure><a href="javascript:void(0);"><img src="images/blog/img-01.jpg" alt="image description"></a></figure>
-								<div class="tg-postcontent">
-									<ul class="tg-bookscategories">
-										<li><a href="javascript:void(0);">Adventure</a></li>
-										<li><a href="javascript:void(0);">Fun</a></li>
-									</ul>
-									<div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-									<div class="tg-posttitle">
-										<h3><a href="javascript:void(0);">Nơi những điều hoang dã tồn tại</a></h3>
-									</div>
-									<span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-									<ul class="tg-postmetadata">
-										<li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-										<li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-									</ul>
-								</div>
-							</article>
-							<article class="item tg-post">
-								<figure><a href="javascript:void(0);"><img src="images/blog/img-02.jpg" alt="image description"></a></figure>
-								<div class="tg-postcontent">
-									<ul class="tg-bookscategories">
-										<li><a href="javascript:void(0);">Adventure</a></li>
-										<li><a href="javascript:void(0);">Fun</a></li>
-									</ul>
-									<div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-									<div class="tg-posttitle">
-										<h3><a href="javascript:void(0);">All She Wants To Do Is Dance</a></h3>
-									</div>
-									<span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-									<ul class="tg-postmetadata">
-										<li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-										<li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-									</ul>
-								</div>
-							</article>
-							<article class="item tg-post">
-								<figure><a href="javascript:void(0);"><img src="images/blog/img-03.jpg" alt="image description"></a></figure>
-								<div class="tg-postcontent">
-									<ul class="tg-bookscategories">
-										<li><a href="javascript:void(0);">Adventure</a></li>
-										<li><a href="javascript:void(0);">Fun</a></li>
-									</ul>
-									<div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-									<div class="tg-posttitle">
-										<h3><a href="javascript:void(0);">Why Walk When You Can Climb?</a></h3>
-									</div>
-									<span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-									<ul class="tg-postmetadata">
-										<li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-										<li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-									</ul>
-								</div>
-							</article>
-							<article class="item tg-post">
-								<figure><a href="javascript:void(0);"><img src="images/blog/img-04.jpg" alt="image description"></a></figure>
-								<div class="tg-postcontent">
-									<ul class="tg-bookscategories">
-										<li><a href="javascript:void(0);">Adventure</a></li>
-										<li><a href="javascript:void(0);">Fun</a></li>
-									</ul>
-									<div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-									<div class="tg-posttitle">
-										<h3><a href="javascript:void(0);">Nhảy múa như không ai đang xem</a></h3>
-									</div>
-									<span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-									<ul class="tg-postmetadata">
-										<li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-										<li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-									</ul>
-								</div>
-							</article>
-							<article class="item tg-post">
-								<figure><a href="javascript:void(0);"><img src="images/blog/img-02.jpg" alt="image description"></a></figure>
-								<div class="tg-postcontent">
-									<ul class="tg-bookscategories">
-										<li><a href="javascript:void(0);">Adventure</a></li>
-										<li><a href="javascript:void(0);">Fun</a></li>
-									</ul>
-									<div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-									<div class="tg-posttitle">
-										<h3><a href="javascript:void(0);">All She Wants To Do Is Dance</a></h3>
-									</div>
-									<span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-									<ul class="tg-postmetadata">
-										<li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-										<li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-									</ul>
-								</div>
-							</article>
-							<article class="item tg-post">
-								<figure><a href="javascript:void(0);"><img src="images/blog/img-03.jpg" alt="image description"></a></figure>
-								<div class="tg-postcontent">
-									<ul class="tg-bookscategories">
-										<li><a href="javascript:void(0);">Adventure</a></li>
-										<li><a href="javascript:void(0);">Fun</a></li>
-									</ul>
-									<div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-									<div class="tg-posttitle">
-										<h3><a href="javascript:void(0);">Why Walk When You Can Climb?</a></h3>
-									</div>
-									<span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-									<ul class="tg-postmetadata">
-										<li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415 Comments</i></a></li>
-										<li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565 Views</i></a></li>
-									</ul>
-								</div>
-							</article>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!--************************************
-					Latest News End
-			*************************************-->
-		</main>
-		<!--************************************
 				Main End
 		*************************************-->
 		<!-- Cart Modal -->
@@ -5113,7 +4772,7 @@
 
 	<script src="js/vendor/jquery-library.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en&amp;loading=async"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/jquery.vide.min.js"></script>
 	<script src="js/countdown.js"></script>
@@ -5124,90 +4783,7 @@
 	<script src="js/gmap3.js"></script>
 	<script src="js/parallax.js"></script>
 	<script src="js/auth.js"></script>
-	<script src="js/sync-auth.js"></script>
-	<script src="js/button-fix.js"></script>
 	<script src="js/main.js"></script>
-	
-	<!-- SweetAlert2 JS -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-	
-	<!-- Firebase SDK -->
-	<script type="module">
-		// Import the functions you need from the SDKs you need
-		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-		import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithPopup, GoogleAuthProvider, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-		import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-
-		// Your web app's Firebase configuration
-		const firebaseConfig = {
-			apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
-			authDomain: "anbok-collection.firebaseapp.com",
-			databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
-			projectId: "anbok-collection",
-			storageBucket: "anbok-collection.firebasestorage.app",
-			messagingSenderId: "835844957818",
-			appId: "1:835844957818:web:33fc3d03875d49fc5c3dc3",
-			measurementId: "G-MS5FT355WW"
-		};
-
-		// Initialize Firebase
-		const app = initializeApp(firebaseConfig);
-		const auth = getAuth(app);
-		const analytics = getAnalytics(app);
-		const googleProvider = new GoogleAuthProvider();
-
-		// Make Firebase available globally
-		window.firebaseAuth = auth;
-		window.googleProvider = googleProvider;
-		window.signInWithPopup = signInWithPopup;
-		window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-		window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
-		window.sendPasswordResetEmail = sendPasswordResetEmail;
-		window.updateProfile = updateProfile;
-		
-		// Check Firebase status
-		console.log('Firebase initialized:', app);
-		console.log('Auth initialized:', auth);
-		console.log('Google provider:', googleProvider);
-		
-		// Dispatch Firebase ready event
-		document.dispatchEvent(new CustomEvent('firebase-ready', {
-			detail: { auth, googleProvider }
-		}));
-		
-		// Listen for auth state changes
-		auth.onAuthStateChanged((user) => {
-			if (user) {
-				console.log('User is signed in:', user);
-				// Update user info in localStorage
-				const userData = {
-					isLoggedIn: true,
-					uid: user.uid,
-					email: user.email,
-					displayName: user.displayName || user.email,
-					photoURL: user.photoURL,
-					lastLogin: new Date().toISOString()
-				};
-				localStorage.setItem('user', JSON.stringify(userData));
-				console.log('User data saved to localStorage:', userData);
-				
-				// Update UI
-				if (window.checkAuthStatus) {
-					window.checkAuthStatus();
-				}
-			} else {
-				console.log('User is signed out');
-				// Clear user data from localStorage
-				localStorage.removeItem('user');
-				console.log('User data removed from localStorage');
-				
-				// Update UI
-				if (window.checkAuthStatus) {
-					window.checkAuthStatus();
-				}
-			}
-		});
-	</script>
 	
 	<!-- Auth Modal JavaScript -->
 	<script>
@@ -5266,128 +4842,58 @@
 		}
 		
 		// Login Form Handler
-		const loginForm = document.getElementById('loginForm');
-		if (loginForm) {
-			loginForm.addEventListener('submit', function(e) {
-				e.preventDefault();
-				const email = document.getElementById('loginEmail')?.value;
-				const password = document.getElementById('loginPassword')?.value;
-				
-				// Add your login logic here
-				console.log('Login attempt:', { email, password });
-				
-				// Simulate login success
-				showSuccessAlert('Đăng nhập thành công!');
-				closeAuthModal('loginModal');
-			});
-		}
+		document.getElementById('loginForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			const email = document.getElementById('loginEmail').value;
+			const password = document.getElementById('loginPassword').value;
+			
+			// Add your login logic here
+			console.log('Login attempt:', { email, password });
+			
+			// Simulate login success
+			alert('Đăng nhập thành công!');
+			closeAuthModal('loginModal');
+		});
 		
 		// Register Form Handler
-		const registerForm = document.getElementById('registerForm');
-		if (registerForm) {
-			registerForm.addEventListener('submit', function(e) {
-				e.preventDefault();
-				const name = document.getElementById('registerName')?.value;
-				const email = document.getElementById('registerEmail')?.value;
-				const password = document.getElementById('registerPassword')?.value;
-				const confirmPassword = document.getElementById('confirmPassword')?.value;
-				
-				if (password !== confirmPassword) {
-					showErrorAlert('Mật khẩu xác nhận không khớp!');
-					return;
-				}
-				
-				// Add your registration logic here
-				console.log('Register attempt:', { name, email, password });
-				
-				// Simulate registration success
-				showSuccessAlert('Đăng ký thành công!');
-				closeAuthModal('registerModal');
-			});
-		}
+		document.getElementById('registerForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			const name = document.getElementById('registerName').value;
+			const email = document.getElementById('registerEmail').value;
+			const password = document.getElementById('registerPassword').value;
+			const confirmPassword = document.getElementById('confirmPassword').value;
+			
+			if (password !== confirmPassword) {
+				alert('Mật khẩu xác nhận không khớp!');
+				return;
+			}
+			
+			// Add your registration logic here
+			console.log('Register attempt:', { name, email, password });
+			
+			// Simulate registration success
+			alert('Đăng ký thành công!');
+			closeAuthModal('registerModal');
+		});
 		
 		// Forgot Password Form Handler
-		const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-		if (forgotPasswordForm) {
-			forgotPasswordForm.addEventListener('submit', function(e) {
-				e.preventDefault();
-				const email = document.getElementById('forgotEmail')?.value;
-				
-				// Add your forgot password logic here
-				console.log('Forgot password attempt:', { email });
-				
-				// Simulate success
-				showSuccessAlert('Email đặt lại mật khẩu đã được gửi!');
-				closeAuthModal('forgotPasswordModal');
-			});
-		}
+		document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			const email = document.getElementById('forgotEmail').value;
+			
+			// Add your forgot password logic here
+			console.log('Forgot password attempt:', { email });
+			
+			// Simulate success
+			alert('Email đặt lại mật khẩu đã được gửi!');
+			closeAuthModal('forgotPasswordModal');
+		});
 		
 		// Google Login Function
 		function loginWithGoogle() {
 			// Add your Google login logic here
 			console.log('Google login attempt');
-			Swal.fire({
-				title: 'Thông báo',
-				text: 'Chức năng đăng nhập Google sẽ được tích hợp sau!',
-				icon: 'info',
-				confirmButtonColor: '#4A6366'
-			});
-		}
-		
-		// Utility function for SweetAlert2 notifications
-		function showSweetAlert(title, text, icon = 'info', timer = null) {
-			const options = {
-				title: title,
-				text: text,
-				icon: icon,
-				confirmButtonColor: '#4A6366'
-			};
-			
-			if (timer) {
-				options.timer = timer;
-				options.showConfirmButton = false;
-			}
-			
-			Swal.fire(options);
-		}
-		
-		// Success notification
-		function showSuccessAlert(message, timer = 2000) {
-			showSweetAlert('Thành công!', message, 'success', timer);
-		}
-		
-		// Error notification
-		function showErrorAlert(message) {
-			showSweetAlert('Lỗi!', message, 'error');
-		}
-		
-		// Info notification
-		function showInfoAlert(message) {
-			showSweetAlert('Thông báo', message, 'info');
-		}
-		
-		// Warning notification
-		function showWarningAlert(message) {
-			showSweetAlert('Cảnh báo', message, 'warning');
-		}
-		
-		// Loading notification
-		function showLoadingAlert(title = 'Đang xử lý...', text = 'Vui lòng chờ trong giây lát') {
-			Swal.fire({
-				title: title,
-				text: text,
-				allowOutsideClick: false,
-				allowEscapeKey: false,
-				showConfirmButton: false,
-				didOpen: () => {
-					Swal.showLoading();
-				}
-			});
-		}
-		
-		// Close loading
-		function closeLoadingAlert() {
-			Swal.close();
+			alert('Chức năng đăng nhập Google sẽ được tích hợp sau!');
 		}
 		
 
@@ -5426,7 +4932,7 @@
 			$('.tg-become-member').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
-				showSuccessAlert('Đang chuyển hướng đến trang đăng ký hội viên...');
+				showNotification('Đang chuyển hướng đến trang đăng ký hội viên...', 'success');
 			});
 			
 			// Login functionality for guest users
@@ -6514,81 +6020,10 @@
 		
 		// Logout function
 		function logout() {
-			Swal.fire({
-				title: 'Xác nhận đăng xuất',
-				text: 'Bạn có chắc chắn muốn đăng xuất?',
-				icon: 'question',
-				showCancelButton: true,
-				confirmButtonColor: '#4A6366',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Đăng xuất',
-				cancelButtonText: 'Hủy',
-				reverseButtons: true
-			}).then((result) => {
-				if (result.isConfirmed) {
-					// Show loading
-					Swal.fire({
-						title: 'Đang đăng xuất...',
-						text: 'Vui lòng chờ trong giây lát',
-						allowOutsideClick: false,
-						allowEscapeKey: false,
-						showConfirmButton: false,
-						didOpen: () => {
-							Swal.showLoading();
-						}
-					});
-					
-					// Firebase logout
-					if (window.firebaseAuth) {
-						window.firebaseAuth.signOut().then(() => {
-							console.log('User signed out successfully');
-							// Clear user data from localStorage
-							localStorage.removeItem('user');
-							// Update UI
-							if (window.checkAuthStatus) {
-								window.checkAuthStatus();
-							}
-							// Show success notification
-							Swal.fire({
-								title: 'Thành công!',
-								text: 'Đăng xuất thành công',
-								icon: 'success',
-								timer: 2000,
-								showConfirmButton: false
-							});
-						}).catch((error) => {
-							console.error('Error signing out:', error);
-							// Fallback: clear localStorage and update UI
-							localStorage.removeItem('user');
-							if (window.checkAuthStatus) {
-								window.checkAuthStatus();
-							}
-							// Show success notification even if Firebase fails
-							Swal.fire({
-								title: 'Thành công!',
-								text: 'Đăng xuất thành công',
-								icon: 'success',
-								timer: 2000,
-								showConfirmButton: false
-							});
-						});
-					} else {
-						// Fallback if Firebase is not available
-						localStorage.removeItem('user');
-						if (window.checkAuthStatus) {
-							window.checkAuthStatus();
-						}
-						// Show success notification
-						Swal.fire({
-							title: 'Thành công!',
-							text: 'Đăng xuất thành công',
-							icon: 'success',
-							timer: 2000,
-							showConfirmButton: false
-						});
-					}
-				}
-			});
+			if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+				// Add logout logic here
+				window.location.href = 'auth.html';
+			}
 		}
 		
 		// Search suggestions click handler
@@ -6839,193 +6274,214 @@
 				});
 			}
 		});
-		
-		// Load Categories from Firebase
+	</script>
+	
+	<!-- Membership Page JavaScript -->
+	<script>
+		// Smooth scrolling for anchor links
 		document.addEventListener('DOMContentLoaded', function() {
-			// Check if Firebase is available
-			if (typeof firebase !== 'undefined' && firebase.database) {
-				const db = firebase.database();
-				
-				// Load Book Categories
-				db.ref('BookCategories').once('value')
-					.then((snapshot) => {
-						const bookCategories = snapshot.val();
-						if (bookCategories) {
-							loadBookCategories(bookCategories);
+			const anchors = document.querySelectorAll('a[href*="#"]');
+			
+			for (let anchor of anchors) {
+				anchor.addEventListener('click', function (e) {
+					const href = this.getAttribute('href');
+					if (href.startsWith('#')) {
+						e.preventDefault();
+						const target = document.querySelector(href);
+						if (target) {
+							target.scrollIntoView({
+								behavior: 'smooth',
+								block: 'start'
+							});
 						}
-					})
-					.catch((error) => {
-						console.error('Error loading book categories:', error);
-						// Fallback to static data
-						loadBookCategories({
-							"new_books": {
-								"category_code": "SM001",
-								"category_name": "New Books",
-								"description": "Books that have just been published recently",
-								"quantity": 25
-							},
-							"featured_books": {
-								"category_code": "SNB002", 
-								"category_name": "Featured Books",
-								"description": "Books that are loved and highly rated by many readers",
-								"quantity": 50
-							},
-							"member_books": {
-								"category_code": "SHV003",
-								"category_name": "Member Books", 
-								"description": "Books exclusively for VIP members of the library",
-								"quantity": 40
-							}
-						});
-					});
-				
-				// Load Story Categories
-				db.ref('StoryCategories').once('value')
-					.then((snapshot) => {
-						const storyCategories = snapshot.val();
-						if (storyCategories) {
-							loadStoryCategories(storyCategories);
-						}
-					})
-					.catch((error) => {
-						console.error('Error loading story categories:', error);
-						// Fallback to static data
-						loadStoryCategories({
-							"new_stories": {
-								"category_code": "TM001",
-								"category_name": "New Stories",
-								"description": "Stories that have just been updated or published recently",
-								"quantity": 35
-							},
-							"featured_stories": {
-								"category_code": "TNB002",
-								"category_name": "Featured Stories", 
-								"description": "Stories that are followed and highly rated by many readers",
-								"quantity": 45
-							},
-							"free_stories": {
-								"category_code": "TMF003",
-								"category_name": "Free Stories",
-								"description": "Stories that can be read for free without payment",
-								"quantity": 60
-							},
-							"member_stories": {
-								"category_code": "THV004",
-								"category_name": "Member Stories",
-								"description": "Stories exclusively for VIP members of the library", 
-								"quantity": 25
-							}
-						});
-					});
-			} else {
-				console.log('Firebase not available, using static data');
-				// Load static data if Firebase is not available
-				loadBookCategories({
-					"new_books": {
-						"category_code": "SM001",
-						"category_name": "New Books",
-						"description": "Books that have just been published recently",
-						"quantity": 25
-					},
-					"featured_books": {
-						"category_code": "SNB002", 
-						"category_name": "Featured Books",
-						"description": "Books that are loved and highly rated by many readers",
-						"quantity": 50
-					},
-					"member_books": {
-						"category_code": "SHV003",
-						"category_name": "Member Books", 
-						"description": "Books exclusively for VIP members of the library",
-						"quantity": 40
-					}
-				});
-				
-				loadStoryCategories({
-					"new_stories": {
-						"category_code": "TM001",
-						"category_name": "New Stories",
-						"description": "Stories that have just been updated or published recently",
-						"quantity": 35
-					},
-					"featured_stories": {
-						"category_code": "TNB002",
-						"category_name": "Featured Stories", 
-						"description": "Stories that are followed and highly rated by many readers",
-						"quantity": 45
-					},
-					"free_stories": {
-						"category_code": "TMF003",
-						"category_name": "Free Stories",
-						"description": "Stories that can be read for free without payment",
-						"quantity": 60
-					},
-					"member_stories": {
-						"category_code": "THV004",
-						"category_name": "Member Stories",
-						"description": "Stories exclusively for VIP members of the library", 
-						"quantity": 25
 					}
 				});
 			}
+			
+			// Package card animations on scroll
+			const observerOptions = {
+				threshold: 0.1,
+				rootMargin: '0px 0px -50px 0px'
+			};
+			
+			const observer = new IntersectionObserver(function(entries) {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.style.opacity = '1';
+						entry.target.style.transform = 'translateY(0)';
+					}
+				});
+			}, observerOptions);
+			
+			// Observe package cards
+			const packageCards = document.querySelectorAll('.tg-package-card');
+			packageCards.forEach(card => {
+				card.style.opacity = '0';
+				card.style.transform = 'translateY(30px)';
+				card.style.transition = 'all 0.6s ease';
+				observer.observe(card);
+			});
+			
+			// Observe benefit items
+			const benefitItems = document.querySelectorAll('.tg-benefit-item');
+			benefitItems.forEach((item, index) => {
+				item.style.opacity = '0';
+				item.style.transform = 'translateY(30px)';
+				item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+				observer.observe(item);
+			});
+			
+			// Package selection handlers
+			const packageButtons = document.querySelectorAll('.tg-package-card .tg-btn');
+			packageButtons.forEach(button => {
+				button.addEventListener('click', function(e) {
+					e.preventDefault();
+					
+					// Get package details
+					const card = this.closest('.tg-package-card');
+					const packageName = card.querySelector('h3').textContent;
+					const packagePrice = card.querySelector('.tg-price-amount').textContent;
+					
+					// Show confirmation
+					if (confirm(`Bạn có muốn đăng ký ${packageName} với giá ${packagePrice}?`)) {
+						// Add loading effect
+						this.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Đang xử lý...';
+						this.style.pointerEvents = 'none';
+						
+						// Simulate processing
+						setTimeout(() => {
+							alert('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.');
+							this.innerHTML = 'Đăng Ký Ngay';
+							this.style.pointerEvents = 'auto';
+						}, 2000);
+					}
+				});
+			});
+			
+			// Add floating animation to banner elements
+			const floatingElements = document.querySelectorAll('.floating-element');
+			floatingElements.forEach((element, index) => {
+				element.style.animationDelay = `${index * 0.5}s`;
+			});
+			
+			// Add parallax effect to banner
+			window.addEventListener('scroll', function() {
+				const scrolled = window.pageYOffset;
+				const banner = document.querySelector('.tg-membership-banner');
+				const parallaxSpeed = 0.5;
+				
+				if (banner) {
+					banner.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+				}
+				
+				// Update floating elements
+				floatingElements.forEach((element, index) => {
+					const speed = 0.2 + (index * 0.1);
+					element.style.transform = `translateY(${scrolled * speed}px)`;
+				});
+			});
+			
+			// Package card tilt effect
+			packageCards.forEach(card => {
+				card.addEventListener('mousemove', function(e) {
+					const rect = this.getBoundingClientRect();
+					const x = e.clientX - rect.left;
+					const y = e.clientY - rect.top;
+					const centerX = rect.width / 2;
+					const centerY = rect.height / 2;
+					const rotateX = (y - centerY) / 10;
+					const rotateY = (centerX - x) / 10;
+					
+					this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+				});
+				
+				card.addEventListener('mouseleave', function() {
+					this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+				});
+			});
+			
+			// Add number counter animation for prices
+			const priceElements = document.querySelectorAll('.tg-price-amount');
+			priceElements.forEach(price => {
+				const finalValue = price.textContent;
+				const numericValue = parseInt(finalValue.replace(/\D/g, ''));
+				let currentValue = 0;
+				const increment = numericValue / 50;
+				const suffix = finalValue.replace(/\d/g, '');
+				
+				const timer = setInterval(() => {
+					currentValue += increment;
+					if (currentValue >= numericValue) {
+						currentValue = numericValue;
+						clearInterval(timer);
+					}
+					price.textContent = Math.floor(currentValue) + suffix;
+				}, 30);
+			});
+			
+			// Add hover effect to benefit items
+			benefitItems.forEach(item => {
+				item.addEventListener('mouseenter', function() {
+					this.style.background = 'white';
+					this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+					
+					const icon = this.querySelector('.tg-benefit-icon i');
+					if (icon) {
+						icon.style.color = '#4A6366';
+						icon.style.transform = 'scale(1.1)';
+					}
+				});
+				
+				item.addEventListener('mouseleave', function() {
+					this.style.background = '#f8f9fa';
+					this.style.boxShadow = 'none';
+					
+					const icon = this.querySelector('.tg-benefit-icon i');
+					if (icon) {
+						icon.style.color = '#F4A261';
+						icon.style.transform = 'scale(1)';
+					}
+				});
+			});
 		});
 		
-		// Function to load book categories
-		function loadBookCategories(categories) {
-			const bookSubmenu = document.querySelector('.book-submenu');
-			if (!bookSubmenu) return;
+		// Show notification function
+		function showNotification(message, type = 'success') {
+			const notification = document.createElement('div');
+			notification.className = `notification notification-${type}`;
+			notification.innerHTML = `
+				<div class="notification-content">
+					<i class="fa fa-${type === 'success' ? 'check' : 'info'}-circle"></i>
+					<span>${message}</span>
+				</div>
+			`;
 			
-			bookSubmenu.innerHTML = '';
+			notification.style.cssText = `
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				background: ${type === 'success' ? '#28a745' : '#17a2b8'};
+				color: white;
+				padding: 15px 20px;
+				border-radius: 8px;
+				box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+				z-index: 10000;
+				transform: translateX(100%);
+				transition: transform 0.3s ease;
+			`;
 			
-			Object.keys(categories).forEach(key => {
-				const category = categories[key];
-				const link = document.createElement('a');
-				link.href = `book.html?filter=${key}`;
-				link.style.cssText = 'display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;';
-				link.textContent = category.category_name;
-				
-				// Add hover effect
-				link.addEventListener('mouseenter', function() {
-					this.style.background = 'rgba(74, 99, 102, 0.05)';
-					this.style.color = '#4A6366';
-				});
-				
-				link.addEventListener('mouseleave', function() {
-					this.style.background = 'transparent';
-					this.style.color = '#333';
-				});
-				
-				bookSubmenu.appendChild(link);
-			});
-		}
-		
-		// Function to load story categories
-		function loadStoryCategories(categories) {
-			const storySubmenu = document.querySelector('.story-submenu');
-			if (!storySubmenu) return;
+			document.body.appendChild(notification);
 			
-			storySubmenu.innerHTML = '';
+			setTimeout(() => {
+				notification.style.transform = 'translateX(0)';
+			}, 100);
 			
-			Object.keys(categories).forEach(key => {
-				const category = categories[key];
-				const link = document.createElement('a');
-				link.href = `story.html?filter=${key}`;
-				link.style.cssText = 'display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;';
-				link.textContent = category.category_name;
-				
-				// Add hover effect
-				link.addEventListener('mouseenter', function() {
-					this.style.background = 'rgba(74, 99, 102, 0.05)';
-					this.style.color = '#4A6366';
-				});
-				
-				link.addEventListener('mouseleave', function() {
-					this.style.background = 'transparent';
-					this.style.color = '#333';
-				});
-				
-				storySubmenu.appendChild(link);
-			});
+			setTimeout(() => {
+				notification.style.transform = 'translateX(100%)';
+				setTimeout(() => {
+					document.body.removeChild(notification);
+				}, 300);
+			}, 3000);
 		}
 	</script>
 </body>

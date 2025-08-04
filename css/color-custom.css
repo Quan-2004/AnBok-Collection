@@ -773,9 +773,11 @@ textarea:focus {
 /* User Profile Section */
 .tg-user-profile {
     padding: 20px;
-    background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+    
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+
 
 .tg-user-info {
     display: flex;

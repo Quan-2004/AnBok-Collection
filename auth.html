@@ -732,12 +732,31 @@
 		console.log('Auth initialized:', auth);
 		console.log('Google provider:', googleProvider);
 		
+		// Dispatch Firebase ready event
+		document.dispatchEvent(new CustomEvent('firebase-ready', {
+			detail: { auth, googleProvider }
+		}));
+		
 		// Listen for auth state changes
 		auth.onAuthStateChanged((user) => {
 			if (user) {
 				console.log('User is signed in:', user);
+				// Update user info in localStorage
+				const userData = {
+					isLoggedIn: true,
+					uid: user.uid,
+					email: user.email,
+					displayName: user.displayName || user.email,
+					photoURL: user.photoURL,
+					lastLogin: new Date().toISOString()
+				};
+				localStorage.setItem('user', JSON.stringify(userData));
+				console.log('User data saved to localStorage:', userData);
 			} else {
 				console.log('User is signed out');
+				// Clear user data from localStorage
+				localStorage.removeItem('user');
+				console.log('User data removed from localStorage');
 			}
 		});
 	</script>
@@ -821,6 +840,16 @@
 				submitBtn.classList.remove('loading');
 				submitBtn.textContent = 'Đăng nhập';
 				
+				// Save user data to localStorage
+				const userData = {
+					isLoggedIn: true,
+					uid: user.uid,
+					email: user.email,
+					displayName: user.displayName || user.email.split('@')[0],
+					photoURL: user.photoURL || null
+				};
+				localStorage.setItem('user', JSON.stringify(userData));
+				
 				showMessage('Đăng nhập thành công!', 'success');
 				setTimeout(() => {
 					window.location.href = 'index.html';
@@ -885,9 +914,19 @@
 				submitBtn.classList.remove('loading');
 				submitBtn.textContent = 'Đăng ký';
 				
+				// Save user data to localStorage
+				const userData = {
+					isLoggedIn: true,
+					uid: user.uid,
+					email: user.email,
+					displayName: user.displayName || user.email.split('@')[0],
+					photoURL: user.photoURL || null
+				};
+				localStorage.setItem('user', JSON.stringify(userData));
+				
 				showMessage('Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.', 'success');
 				setTimeout(() => {
-					switchTab('login');
+					window.location.href = 'index.html';
 				}, 2000);
 			} catch (error) {
 				submitBtn.classList.remove('loading');
@@ -953,6 +992,17 @@
 				const user = result.user;
 				
 				console.log('Google login successful:', user);
+				
+				// Save user data to localStorage
+				const userData = {
+					isLoggedIn: true,
+					uid: user.uid,
+					email: user.email,
+					displayName: user.displayName || user.email.split('@')[0],
+					photoURL: user.photoURL || null
+				};
+				localStorage.setItem('user', JSON.stringify(userData));
+				
 				showMessage('Đăng nhập Google thành công!', 'success');
 				setTimeout(() => {
 					window.location.href = 'index.html';
@@ -1016,6 +1066,130 @@
 				hideMessage();
 			}
 		}, 5000);
+		
+		// Check authentication status on page load
+		document.addEventListener('DOMContentLoaded', function() {
+			console.log('Auth page loaded, checking authentication status...');
+			checkAuthStatusOnAuthPage();
+		});
+		
+		// Function to check auth status on auth page
+		function checkAuthStatusOnAuthPage() {
+			const user = JSON.parse(localStorage.getItem('user') || 'null');
+			const authContainer = document.querySelector('.auth-form-container');
+			const videoSection = document.querySelector('.auth-video-section');
+			
+			console.log('Checking auth status on auth page:', user);
+			console.log('Auth container found:', !!authContainer);
+			console.log('Video section found:', !!videoSection);
+			
+			if (user && user.isLoggedIn) {
+				// User is logged in - show user info instead of login form
+				console.log('User is logged in, showing user info');
+				showUserInfoOnAuthPage(user);
+			} else {
+				// User is not logged in - show login form (default)
+				console.log('User is not logged in, showing login form');
+				showLoginFormOnAuthPage();
+			}
+		}
+		
+		// Function to show user info when already logged in
+		function showUserInfoOnAuthPage(user) {
+			const authContainer = document.querySelector('.auth-form-container');
+			const videoSection = document.querySelector('.auth-video-section');
+			
+			if (authContainer) {
+				authContainer.innerHTML = `
+					<div class="auth-form-logo">
+						<img src="images/logo-Photoroom.png" alt="AnBok">
+					</div>
+					<div class="auth-form-header">
+						<h2 class="auth-form-title">Chào mừng trở lại!</h2>
+						<p class="auth-form-subtitle">Bạn đã đăng nhập thành công</p>
+					</div>
+					
+					<div class="auth-user-info" style="text-align: center; padding: 30px 0;">
+						<div class="auth-user-avatar" style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; border: 4px solid #4A6366;">
+							<img src="${user.photoURL || 'images/users/img-01.jpg'}" alt="User Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+						</div>
+						<h3 style="color: #333; margin-bottom: 10px; font-size: 1.5rem;">${user.displayName || user.email || 'Người dùng'}</h3>
+						<p style="color: #666; margin-bottom: 30px;">${user.email || ''}</p>
+						
+						<div class="auth-user-actions" style="display: flex; flex-direction: column; gap: 15px;">
+							<a href="index.html" class="auth-submit" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px;">
+								<i class="fa fa-home"></i>
+								Về trang chủ
+							</a>
+							<a href="account/profile.html" class="auth-submit" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%);">
+								<i class="fa fa-user"></i>
+								Hồ sơ cá nhân
+							</a>
+							<button class="auth-submit auth-logout-btn" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); border: none; cursor: pointer;">
+								<i class="fa fa-sign-out"></i>
+								Đăng xuất
+							</button>
+						</div>
+					</div>
+				`;
+			}
+			
+			// Update video section content
+			if (videoSection) {
+				const videoContent = videoSection.querySelector('.auth-video-content');
+				if (videoContent) {
+					videoContent.innerHTML = `
+						<h1 class="auth-video-title">Chào mừng trở lại!</h1>
+						<p class="auth-video-subtitle">Bạn đã đăng nhập thành công vào AnBok. Hãy khám phá thế giới sách tuyệt vời của chúng tôi.</p>
+						<div class="auth-video-features">
+							<div class="auth-video-feature">
+								<i class="fa fa-book"></i>
+								<span>Hơn 10,000 đầu sách</span>
+							</div>
+							<div class="auth-video-feature">
+								<i class="fa fa-heart"></i>
+								<span>Danh sách yêu thích</span>
+							</div>
+							<div class="auth-video-feature">
+								<i class="fa fa-clock-o"></i>
+								<span>Đọc sách 24/7</span>
+							</div>
+						</div>
+					`;
+				}
+			}
+		}
+		
+		// Function to show login form (default state)
+		function showLoginFormOnAuthPage() {
+			// This is the default state, so no need to change anything
+			console.log('Showing login form (default state)');
+		}
+		
+		// Function to logout from auth page
+		window.logoutFromAuthPage = function() {
+			// Clear user data from localStorage
+			localStorage.removeItem('user');
+			
+			// Firebase logout if available
+			if (window.firebaseAuth) {
+				window.firebaseAuth.signOut().then(() => {
+					console.log('Firebase sign out successful');
+				}).catch((error) => {
+					console.error('Firebase sign out error:', error);
+				});
+			}
+			
+			// Show success message
+			showMessage('Đăng xuất thành công!', 'success');
+			
+			// Reload page to show login form
+			setTimeout(() => {
+				window.location.reload();
+			}, 1500);
+		};
 	</script>
+	<script src="js/sync-auth.js"></script>
+	<script src="js/button-fix.js"></script>
 </body>
 </html> 

@@ -1,0 +1,46 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "orders": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "wishlist": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "BookCategories": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "BookGenres": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "StoryCategories": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "StoryGenres": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "Books": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "Stories": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+} 

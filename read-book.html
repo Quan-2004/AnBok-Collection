@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đọc sách - AnBok Collection</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .reading-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .book-header {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .book-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .book-author {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .book-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .reading-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .control-btn {
+            background: #4A6366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn:hover {
+            background: #3A4F52;
+            transform: translateY(-2px);
+        }
+        
+        .control-btn.secondary {
+            background: #6c757d;
+        }
+        
+        .control-btn.secondary:hover {
+            background: #5a6268;
+        }
+        
+        .book-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            white-space: pre-line;
+        }
+        
+        .chapter-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4A6366;
+            margin: 30px 0 15px 0;
+            border-bottom: 2px solid #4A6366;
+            padding-bottom: 10px;
+        }
+        
+        .chapter-title:first-child {
+            margin-top: 0;
+        }
+        
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e9ecef;
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4A6366 0%, #F4A261 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            color: #4A6366;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
+        
+        .back-button:hover {
+            background: white;
+            transform: translateY(-1px);
+        }
+        
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .error-container {
+            text-align: center;
+            padding: 50px;
+            color: #dc3545;
+        }
+        
+        @media (max-width: 768px) {
+            .reading-container {
+                padding: 10px;
+            }
+            
+            .book-title {
+                font-size: 2rem;
+            }
+            
+            .book-content {
+                padding: 25px;
+                font-size: 1rem;
+            }
+            
+            .reading-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="reading-progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- Back Button -->
+    <button class="back-button" onclick="goBack()">
+        <i class="fa fa-arrow-left"></i>
+        Quay lại
+    </button>
+
+    <!-- Main Content -->
+    <div class="reading-container">
+        <div id="reading-content">
+            <!-- Loading state -->
+            <div class="loading-container">
+                <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #4A6366;"></i>
+                <p style="color: #666; margin: 0;">Đang tải nội dung sách...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvVkR7QqQqQqQqQqQqQqQqQqQqQqQqQqQ",
+            authDomain: "anbok-collection.firebaseapp.com",
+            databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "anbok-collection",
+            storageBucket: "anbok-collection.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdefghijklmnop"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get book ID from URL
+        function getBookIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Load book content
+        async function loadBookContent() {
+            const bookId = getBookIdFromUrl();
+            
+            if (!bookId) {
+                showError('Không tìm thấy ID sách');
+                return;
+            }
+
+            try {
+                console.log('Loading book content for ID:', bookId);
+                
+                // Search for book in all books
+                const snapshot = await firebase.database().ref('Books').once('value');
+                const allBooks = snapshot.val();
+                
+                if (allBooks) {
+                    const bookEntries = Object.entries(allBooks);
+                    const foundBook = bookEntries.find(([key, bookData]) => 
+                        bookData.book_id === bookId
+                    );
+                    
+                    if (foundBook) {
+                        const book = foundBook[1];
+                        console.log('Found book:', book);
+                        displayBookContent(book);
+                    } else {
+                        showError('Không tìm thấy sách');
+                    }
+                } else {
+                    showError('Không có dữ liệu sách');
+                }
+            } catch (error) {
+                console.error('Error loading book content:', error);
+                showError('Lỗi khi tải nội dung sách');
+            }
+        }
+
+        // Display book content
+        function displayBookContent(book) {
+            const container = document.getElementById('reading-content');
+            
+            if (!book.content) {
+                container.innerHTML = `
+                    <div class="error-container">
+                        <i class="fa fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3>Sách chưa có nội dung</h3>
+                        <p>Sách "${book.title}" chưa có nội dung để đọc.</p>
+                        <button class="control-btn secondary" onclick="goBack()">
+                            <i class="fa fa-arrow-left"></i>
+                            Quay lại
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="book-header">
+                    <h1 class="book-title">${book.title}</h1>
+                    <div class="book-author">Tác giả: ${book.author}</div>
+                    <div class="book-meta">
+                        <div class="meta-item">
+                            <i class="fa fa-star" style="color: #f39c12;"></i>
+                            <span>${book.rating} (${book.review_count} đánh giá)</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fa fa-book" style="color: #4A6366;"></i>
+                            <span>${book.pages} trang</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fa fa-tag" style="color: #F4A261;"></i>
+                            <span>${book.genre}</span>
+                        </div>
+                    </div>
+                    <div class="reading-controls">
+                        <button class="control-btn" onclick="toggleFontSize()">
+                            <i class="fa fa-font"></i>
+                            Tăng cỡ chữ
+                        </button>
+                        <button class="control-btn" onclick="toggleTheme()">
+                            <i class="fa fa-moon-o"></i>
+                            Chế độ tối
+                        </button>
+                        <button class="control-btn secondary" onclick="goBack()">
+                            <i class="fa fa-arrow-left"></i>
+                            Quay lại
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="book-content" id="bookContent">
+                    ${book.content}
+                </div>
+            `;
+
+            // Initialize reading progress
+            initializeReadingProgress();
+        }
+
+        // Initialize reading progress
+        function initializeReadingProgress() {
+            const progressBar = document.getElementById('progressBar');
+            const bookContent = document.getElementById('bookContent');
+            
+            if (!progressBar || !bookContent) return;
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.body.offsetHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                progressBar.style.width = scrollPercent + '%';
+            });
+        }
+
+        // Toggle font size
+        function toggleFontSize() {
+            const bookContent = document.getElementById('bookContent');
+            if (!bookContent) return;
+            
+            const currentSize = parseInt(window.getComputedStyle(bookContent).fontSize);
+            const newSize = currentSize >= 20 ? 16 : currentSize + 2;
+            
+            bookContent.style.fontSize = newSize + 'px';
+            
+            Swal.fire({
+                title: 'Cỡ chữ đã thay đổi',
+                text: `Cỡ chữ hiện tại: ${newSize}px`,
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const bookContent = document.getElementById('bookContent');
+            if (!bookContent) return;
+            
+            const isDark = bookContent.style.backgroundColor === 'rgb(44, 62, 80)';
+            
+            if (isDark) {
+                bookContent.style.backgroundColor = 'white';
+                bookContent.style.color = '#2c3e50';
+            } else {
+                bookContent.style.backgroundColor = '#2c3e50';
+                bookContent.style.color = '#ecf0f1';
+            }
+            
+            Swal.fire({
+                title: 'Chế độ đã thay đổi',
+                text: isDark ? 'Đã chuyển về chế độ sáng' : 'Đã chuyển sang chế độ tối',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+
+        // Show error
+        function showError(message) {
+            const container = document.getElementById('reading-content');
+            container.innerHTML = `
+                <div class="error-container">
+                    <i class="fa fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <h3>${message}</h3>
+                    <p>Vui lòng kiểm tra lại hoặc quay về trang chủ.</p>
+                    <button class="control-btn secondary" onclick="goBack()">
+                        <i class="fa fa-arrow-left"></i>
+                        Quay lại
+                    </button>
+                </div>
+            `;
+        }
+
+        // Go back function
+        function goBack() {
+            window.history.back();
+        }
+
+        // Load book content when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBookContent();
+        });
+    </script>
+</body>
+</html> 
