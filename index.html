@@ -1412,7 +1412,8 @@
 		
 		/* Hover Dropdown Styles */
 		.tg-user-info:hover .tg-user-dropdown,
-		.tg-user-dropdown:hover {
+		.tg-user-dropdown:hover,
+		.tg-user-dropdown.show {
 			display: block !important;
 			opacity: 1;
 			visibility: visible;
@@ -3405,6 +3406,55 @@
 			border-left-color: #4A6366;
 			transform: translateX(5px);
 		}
+		
+		/* Fix dropdown hover issue */
+		.tg-user-profile {
+			position: relative;
+			z-index: 1000;
+		}
+
+		.tg-user-dropdown {
+			position: absolute;
+			top: 100%;
+			right: 0;
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+			min-width: 250px;
+			display: none;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-10px);
+			transition: all 0.3s ease;
+			margin-top: 10px;
+			z-index: 1001;
+		}
+
+		.tg-user-dropdown.show,
+		.tg-user-profile:hover .tg-user-dropdown {
+			display: block;
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+
+		/* Ensure dropdown stays open when hovering over it */
+		.tg-user-dropdown:hover {
+			display: block !important;
+			opacity: 1 !important;
+			visibility: visible !important;
+		}
+
+		/* Add a small invisible bridge to prevent gap */
+		.tg-user-dropdown::before {
+			content: '';
+			position: absolute;
+			top: -10px;
+			left: 0;
+			right: 0;
+			height: 10px;
+			background: transparent;
+		}
 	</style>
 </head>
 <body class="tg-home tg-homevtwo">
@@ -3576,23 +3626,13 @@
 												<a href="book.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-book" style="margin-right: 8px;"></i>
 													Sách
-													<i class="fa fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
 												</a>
-												<!-- Submenu -->
-												<div class="tg-submenu book-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
-													<!-- Dynamic content will be loaded here -->
-												</div>
 											</li>
 											<li style="position: relative;">
 												<a href="story.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Truyện
-													<i class="fa fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
 												</a>
-												<!-- Submenu -->
-												<div class="tg-submenu story-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
-													<!-- Dynamic content will be loaded here -->
-												</div>
 											</li>
 											<li style="position: relative;">
 												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
@@ -3601,33 +3641,33 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="news.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Tin tức
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="about.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-info-circle" style="margin-right: 8px;"></i>
-													Về chúng tôi
+													Giới thiệu
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="contact.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-envelope" style="margin-right: 8px;"></i>
-													Liên hệ
+													Liên hệ	
 												</a>
 											</li>
 										</ul>
 									</div>
 
 									<!-- Cart Button -->
-									<div class="tg-cart-btn">
-										<a href="javascript:void(0);" class="tg-cart-link" onclick="toggleCartModal();">
-											<i class="fa fa-shopping-cart"></i>
-											<span class="tg-cart-badge">5</span>
-										</a>
-									</div>
+													<div class="tg-cart-btn">
+					<a href="javascript:void(0);" class="tg-cart-link" onclick="toggleCartModal();">
+						<i class="fa fa-shopping-cart"></i>
+						<span id="cart-badge" class="tg-cart-badge">0</span>
+					</a>
+				</div>
 
 									<!-- Membership Button -->
 									<div class="tg-membership-btn">
@@ -4074,16 +4114,12 @@
 												</div>
 											</div>
 											
-											<!-- CTA Button -->
-											<div class="tg-package-cta">
-												<a href="menbership.html" class="tg-btn" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 15px 35px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1rem; display: inline-block; box-shadow: 0 6px 20px rgba(74, 99, 102, 0.3); transition: all 0.3s ease;">
-													<i class="fa fa-crown" style="margin-right: 10px;"></i>
-													Đăng ký ngay
-												</a>
-												<p style="margin-top: 12px; font-size: 13px; color: #888;">
-													* Áp dụng cho gói hội viên đầu tiên
-												</p>
-											</div>
+												<i class="fa fa-crown" style="margin-right: 10px;"></i>
+												Đăng ký ngay
+											</a>
+											<p style="margin-top: 12px; font-size: 13px; color: #888;">
+												* Áp dụng cho gói hội viên đầu tiên
+											</p>
 										</div>
 									</div>
 									
@@ -4279,58 +4315,6 @@
 			*************************************-->
 			
 			<!--************************************
-					Collection Count Start
-			*************************************-->
-				<!-- <section class="tg-parallax tg-bgcollectioncount tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-04.jpg">
-					<div class="tg-sectionspace tg-collectioncount tg-haslayout">
-						<div class="container">
-							<div class="row">
-								<div id="tg-collectioncounters" class="tg-collectioncounters">
-									<div class="tg-collectioncounter tg-drama">
-										<div class="tg-collectioncountericon">
-											<i class="icon-bubble"></i>
-										</div>
-										<div class="tg-titlepluscounter">
-											<h2>Kịch</h2>
-											<h3 data-from="0" data-to="6179213" data-speed="8000" data-refresh-interval="50">6,179,213</h3>
-										</div>
-									</div>
-									<div class="tg-collectioncounter tg-horror">
-										<div class="tg-collectioncountericon">
-											<i class="icon-heart-pulse"></i>
-										</div>
-										<div class="tg-titlepluscounter">
-											<h2>Kinh dị</h2>
-											<h3 data-from="0" data-to="3121242" data-speed="8000" data-refresh-interval="50">3,121,242</h3>
-										</div>
-									</div>
-									<div class="tg-collectioncounter tg-romance">
-										<div class="tg-collectioncountericon">
-											<i class="icon-heart"></i>
-										</div>
-										<div class="tg-titlepluscounter">
-											<h2>Lãng mạn</h2>
-											<h3 data-from="0" data-to="2101012" data-speed="8000" data-refresh-interval="50">2,101,012</h3>
-										</div>
-									</div>
-									<div class="tg-collectioncounter tg-fashion">
-										<div class="tg-collectioncountericon">
-											<i class="icon-star"></i>
-										</div>
-										<div class="tg-titlepluscounter">
-											<h2>Thời trang</h2>
-											<h3 data-from="0" data-to="1158245" data-speed="8000" data-refresh-interval="50">1,158,245</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section> -->
-			<!--************************************
-					Collection Count End
-			*************************************-->
-				<!--************************************
 					Testimonials Start
 			*************************************-->
 			<section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-05.jpg">
@@ -4374,27 +4358,6 @@
 			*************************************-->
 			
 			
-			<!--************************************
-					Call to Action Start
-			*************************************-->
-			<!-- <section class="tg-parallax tg-bgcalltoaction tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-06.jpg">
-				<div class="tg-sectionspace tg-haslayout">
-					<div class="container">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<div class="tg-calltoaction">
-									<h2>Giảm giá mở cho tất cả</h2>
-									<h3>Ưu đãi đặc biệt dành cho tất cả khách hàng với nhiều sản phẩm chất lượng cao.</h3>
-									<a class="tg-btn tg-active" href="javascript:void(0);">Đọc thêm</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section> -->
-			<!--************************************
-					Call to Action End
-			*************************************-->
 			<!--************************************
 					Top Trending Start
 			*************************************-->
@@ -4696,100 +4659,19 @@
 					</button>
 				</div>
 				<div class="tg-cart-modal-body">
-					<div class="tg-cart-items">
-						<!-- Cart Item 1 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-01.jpg" alt="Book 1">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Harry Potter và Hòn đá Phù thủy</h4>
-								<p class="tg-cart-item-author">J.K. Rowling</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">600.000₫</span>
-									<span class="tg-cart-item-original">650.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(1, -1)">-</button>
-									<span class="tg-quantity-number">1</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(1, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(1)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
-						
-						<!-- Cart Item 2 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-02.jpg" alt="Book 2">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Đắc Nhân Tâm</h4>
-								<p class="tg-cart-item-author">Dale Carnegie</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">450.000₫</span>
-									<span class="tg-cart-item-original">500.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(2, -1)">-</button>
-									<span class="tg-quantity-number">2</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(2, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(2)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
-						
-						<!-- Cart Item 3 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-03.jpg" alt="Book 3">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Nhà Giả Kim</h4>
-								<p class="tg-cart-item-author">Paulo Coelho</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">350.000₫</span>
-									<span class="tg-cart-item-original">400.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(3, -1)">-</button>
-									<span class="tg-quantity-number">1</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(3, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(3)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-					
-					<!-- Empty Cart Message -->
-					<div class="tg-cart-empty" style="display: none;">
-						<i class="fa fa-shopping-cart"></i>
-						<h4>Giỏ hàng trống</h4>
-						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
-						<button class="tg-btn tg-btn-primary" onclick="toggleCartModal();">Tiếp tục mua sắm</button>
+					<div id="cart-items-container" class="tg-cart-items">
+						<!-- Cart items will be loaded dynamically from localStorage -->
 					</div>
 				</div>
 				<div class="tg-cart-modal-footer">
 					<div class="tg-cart-summary">
 						<div class="tg-cart-total">
 							<span>Tổng cộng:</span>
-							<span class="tg-cart-total-price">1.400.000₫</span>
+							<span id="cart-total-price">0₫</span>
 						</div>
 						<div class="tg-cart-savings">
 							<span>Tiết kiệm:</span>
-							<span class="tg-cart-savings-amount">200.000₫</span>
+							<span id="cart-savings-amount">0₫</span>
 						</div>
 					</div>
 					<div class="tg-cart-actions">
@@ -5798,8 +5680,6 @@
 			$('#tg-preview-cart').on('click', function() {
 				showNotification('Đã thêm vào giỏ hàng!', 'success');
 			});
-			// Chỉ giữ lại thông báo cho các hành động quan trọng
-			// Các thông báo không cần thiết đã được loại bỏ
 			
 			// Reading Timer Functionality
 			let timerInterval;
@@ -6172,861 +6052,374 @@
 	
 	<!-- Mini Cart JavaScript Functions -->
 	<script>
-		// Global cart items
-		let cartItems = {
-			1: { quantity: 1, price: 290000, name: 'Our State Fair Is A Great Function' },
-			2: { quantity: 1, price: 290000, name: 'Bring Me To Light' },
-			3: { quantity: 1, price: 290000, name: 'Have Faith In Your Soul' }
-		};
-		
-		function updateQuantity(itemId, change, event) {
-			const quantityElement = document.getElementById(`qty-${itemId}`);
-			if (!quantityElement) return;
-			
-			const currentQty = parseInt(quantityElement.textContent);
-			const newQty = currentQty + change;
-			
-			if (newQty >= 1) {
-				// Smooth update with visual feedback
-				quantityElement.style.transform = 'scale(1.1)';
-				quantityElement.style.transition = 'transform 0.2s ease';
-				
-				setTimeout(() => {
-					quantityElement.textContent = newQty;
-					quantityElement.style.transform = 'scale(1)';
-					cartItems[itemId].quantity = newQty;
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = formatPrice(calculateTotal());
-					}
-				}, 100);
-				
-				// Prevent dropdown from closing
-				if (event) {
-					event.stopPropagation();
-				}
-			} else if (newQty === 0) {
-				// Remove item if quantity reaches 0
-				removeItem(itemId, event);
-			}
-		}
-		
-		function removeItem(itemId, event) {
-			const itemElement = document.querySelector(`[onclick="removeItem(${itemId}, event)"]`);
-			if (!itemElement) return;
-			
-			const productElement = itemElement.closest('.tg-minicarproduct');
-			if (productElement) {
-				// Smooth slide out animation
-				productElement.style.animation = 'slideOut 0.3s ease-out';
-				productElement.style.transform = 'translateY(-10px)';
-				productElement.style.opacity = '0';
-				
-				setTimeout(() => {
-					productElement.remove();
-					delete cartItems[itemId];
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = formatPrice(calculateTotal());
-					}
-					
-					// Check if cart is empty
-					if (Object.keys(cartItems).length === 0) {
-						showEmptyCart();
-					}
-				}, 300);
-			}
-			
-			// Prevent dropdown from closing
-			if (event) {
-				event.stopPropagation();
-			}
-		}
-		
-		function clearCart() {
-			// Check if universal modal exists
-			if (typeof showUniversalModal === 'function') {
-				showUniversalModal({
-					title: 'Xác nhận xóa giỏ hàng',
-					icon: 'fa-trash-o',
-					iconColor: '#dc3545',
-					heading: 'Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?',
-					description: 'Tất cả sản phẩm trong giỏ hàng sẽ bị xóa.',
-					confirmText: 'Xóa giỏ hàng',
-					confirmStyle: 'danger',
-					onConfirm: function() {
-						const cartBody = document.querySelector('.tg-minicartbody');
-						if (cartBody) {
-							cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-						}
-						cartItems = {};
-						updateCartTotal();
-						
-						// Update cart icon total
-						const cartTotalElement = document.querySelector('.tg-total-price');
-						if (cartTotalElement) {
-							cartTotalElement.textContent = '0₫';
-						}
-					}
-				});
-			} else {
-				// Fallback if modal is not available
-				if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
-					const cartBody = document.querySelector('.tg-minicartbody');
-					if (cartBody) {
-						cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-					}
-					cartItems = {};
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = '0₫';
-					}
-				}
-			}
-		}
-		
-		function updateCartTotal() {
-			const totalElement = document.getElementById('cart-total');
-			if (totalElement) {
-				totalElement.textContent = formatPrice(calculateTotal());
-			}
-		}
-		
-		function calculateTotal() {
-			let total = 0;
-			for (let itemId in cartItems) {
-				total += cartItems[itemId].quantity * cartItems[itemId].price;
-			}
-			return total;
-		}
-		
-		function formatPrice(price) {
-			return price.toLocaleString('vi-VN') + '₫';
-		}
-		
-		function showEmptyCart() {
-			const cartBody = document.querySelector('.tg-minicartbody');
-			if (cartBody) {
-				cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-			}
-		}
-		
-		// Prevent dropdown from closing when clicking inside
-		document.addEventListener('DOMContentLoaded', function() {
-			const dropdownMenu = document.querySelector('.tg-themedropdownmenu');
-			if (dropdownMenu) {
-				dropdownMenu.addEventListener('click', function(e) {
-					e.stopPropagation();
-				});
-			}
-			
-			// Prevent quantity buttons from closing dropdown
-			document.addEventListener('click', function(e) {
-				if (e.target.classList.contains('qty-btn') || e.target.classList.contains('remove-item')) {
-					e.stopPropagation();
-				}
-			});
-			
-			// Force dropdown to stay in fixed position
-			const cartButton = document.querySelector('[aria-labelledby="tg-minicart"]');
-			if (cartButton) {
-				cartButton.addEventListener('click', function(e) {
-					const dropdown = document.querySelector('.tg-themedropdownmenu');
-					if (dropdown) {
-						// Force dropdown to stay in position
-						dropdown.style.position = 'absolute';
-						dropdown.style.top = '100%';
-						dropdown.style.right = '0';
-						dropdown.style.left = 'auto';
-						dropdown.style.transform = 'none';
-						dropdown.style.marginTop = '5px';
-						dropdown.style.zIndex = '1000';
-						dropdown.style.width = '350px';
-					}
-				});
-			}
-			
-			// Prevent any CSS from moving the dropdown
-			const observer = new MutationObserver(function(mutations) {
-				mutations.forEach(function(mutation) {
-					if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-						const dropdown = document.querySelector('.tg-themedropdownmenu');
-						if (dropdown && dropdown.style.display !== 'none') {
-							// Force position back if changed
-							dropdown.style.position = 'absolute';
-							dropdown.style.top = '100%';
-							dropdown.style.right = '0';
-							dropdown.style.left = 'auto';
-							dropdown.style.transform = 'none';
-						}
-					}
-				});
-			});
-			
-			// Start observing the dropdown
-			const dropdown = document.querySelector('.tg-themedropdownmenu');
-			if (dropdown) {
-				observer.observe(dropdown, { attributes: true, attributeFilter: ['style'] });
-			}
-		});
-		
-		// Hàm chuyển hướng đến trang profile
-		function goToProfile() {
-			window.location.href = 'account/profile.html';
-		}
-		
-		// Hàm chuyển hướng đến trang đơn hàng
-		function goToOrders() {
-			window.location.href = 'account/orders-list.html';
-		}
-		
-		// Hàm chuyển hướng đến trang cài đặt
-		function goToSettings() {
-			window.location.href = 'account/setting.html';
-		}
-		
-		// Hàm chuyển hướng đến trang yêu thích
-		function goToFavorites() {
-			window.location.href = 'account/bookcase.html?tab=favorites';
-		}
-	</script>
-	<script>
-		// Header JavaScript Functions
-		document.addEventListener('DOMContentLoaded', function() {
-			// Toggle User Dropdown
-			window.toggleUserDropdown = function() {
-				const dropdown = document.getElementById('userDropdown');
-				const chevron = document.querySelector('.tg-user-info .fa-chevron-down');
-				
-				if (dropdown.style.display === 'block') {
-					dropdown.style.display = 'none';
-					chevron.style.transform = 'rotate(0deg)';
-				} else {
-					dropdown.style.display = 'block';
-					chevron.style.transform = 'rotate(180deg)';
-				}
-			};
-			
-			// Close dropdown when clicking outside
-			document.addEventListener('click', function(event) {
-				const userProfile = document.querySelector('.tg-user-profile');
-				const dropdown = document.getElementById('userDropdown');
-				
-				if (!userProfile.contains(event.target)) {
-					dropdown.style.display = 'none';
-					document.querySelector('.tg-user-info .fa-chevron-down').style.transform = 'rotate(0deg)';
-				}
-			});
-			
-			// Search Functionality
-			const searchInput = document.querySelector('.tg-search-box input');
-			const searchSuggestions = document.querySelector('.tg-search-suggestions');
-			
-			if (searchInput) {
-				searchInput.addEventListener('focus', function() {
-					searchSuggestions.style.display = 'block';
-				});
-				
-				searchInput.addEventListener('blur', function() {
-					setTimeout(() => {
-						searchSuggestions.style.display = 'none';
-					}, 200);
-				});
-				
-				searchInput.addEventListener('input', function() {
-					const query = this.value.toLowerCase();
-					const suggestions = searchSuggestions.querySelectorAll('.tg-suggestion-item');
-					
-					suggestions.forEach(item => {
-						const text = item.textContent.toLowerCase();
-						if (text.includes(query)) {
-							item.style.display = 'block';
-						} else {
-							item.style.display = 'none';
-						}
-					});
-				});
-			}
-			
-			// Mobile Menu Toggle
-			const mobileToggle = document.querySelector('.tg-mobile-toggle button');
-			const navMenu = document.querySelector('.tg-nav-menu');
-			
-			if (mobileToggle) {
-				mobileToggle.addEventListener('click', function() {
-					navMenu.classList.toggle('active');
-					const icon = this.querySelector('i');
-					if (navMenu.classList.contains('active')) {
-						icon.className = 'fa fa-times';
-					} else {
-						icon.className = 'fa fa-bars';
-					}
-				});
-			}
-			
-			// Smooth scrolling for navigation links
-			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-				anchor.addEventListener('click', function (e) {
-					e.preventDefault();
-					const target = document.querySelector(this.getAttribute('href'));
-					if (target) {
-						target.scrollIntoView({
-							behavior: 'smooth',
-							block: 'start'
-						});
-					}
-				});
-			});
-			
-			// Header scroll effect
-			let lastScrollTop = 0;
-			const header = document.querySelector('.tg-header');
-			
-			window.addEventListener('scroll', function() {
-				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-				
-				if (scrollTop > lastScrollTop && scrollTop > 100) {
-					// Scrolling down
-					header.style.transform = 'translateY(-100%)';
-				} else {
-					// Scrolling up
-					header.style.transform = 'translateY(0)';
-				}
-				
-				lastScrollTop = scrollTop;
-			});
-			
-			// Add loading animation to header
-			setTimeout(() => {
-				header.style.opacity = '1';
-				header.style.transform = 'translateY(0)';
-			}, 100);
-		});
-		
-		// Logout function
-		function logout() {
-			Swal.fire({
-				title: 'Xác nhận đăng xuất',
-				text: 'Bạn có chắc chắn muốn đăng xuất?',
-				icon: 'question',
-				showCancelButton: true,
-				confirmButtonColor: '#4A6366',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Đăng xuất',
-				cancelButtonText: 'Hủy',
-				reverseButtons: true
-			}).then((result) => {
-				if (result.isConfirmed) {
-					// Show loading
-					Swal.fire({
-						title: 'Đang đăng xuất...',
-						text: 'Vui lòng chờ trong giây lát',
-						allowOutsideClick: false,
-						allowEscapeKey: false,
-						showConfirmButton: false,
-						didOpen: () => {
-							Swal.showLoading();
-						}
-					});
-					
-					// Firebase logout
-					if (window.firebaseAuth) {
-						window.firebaseAuth.signOut().then(() => {
-							console.log('User signed out successfully');
-							// Clear user data from localStorage
-							localStorage.removeItem('user');
-							// Update UI
-							if (window.checkAuthStatus) {
-								window.checkAuthStatus();
-							}
-							// Show success notification
-							Swal.fire({
-								title: 'Thành công!',
-								text: 'Đăng xuất thành công',
-								icon: 'success',
-								timer: 2000,
-								showConfirmButton: false
-							});
-						}).catch((error) => {
-							console.error('Error signing out:', error);
-							// Fallback: clear localStorage and update UI
-							localStorage.removeItem('user');
-							if (window.checkAuthStatus) {
-								window.checkAuthStatus();
-							}
-							// Show success notification even if Firebase fails
-							Swal.fire({
-								title: 'Thành công!',
-								text: 'Đăng xuất thành công',
-								icon: 'success',
-								timer: 2000,
-								showConfirmButton: false
-							});
-						});
-					} else {
-						// Fallback if Firebase is not available
-						localStorage.removeItem('user');
-						if (window.checkAuthStatus) {
-							window.checkAuthStatus();
-						}
-						// Show success notification
-						Swal.fire({
-							title: 'Thành công!',
-							text: 'Đăng xuất thành công',
-							icon: 'success',
-							timer: 2000,
-							showConfirmButton: false
-						});
-					}
-				}
-			});
-		}
-		
-		// Search suggestions click handler
-		document.addEventListener('click', function(event) {
-			if (event.target.closest('.tg-suggestion-item')) {
-				const text = event.target.closest('.tg-suggestion-item').textContent;
-				document.querySelector('.tg-search-box input').value = text;
-				document.querySelector('.tg-search-suggestions').style.display = 'none';
-			}
-		});
-		
-		// Add hover effects for social media links
-		document.querySelectorAll('.tg-topbar-right a').forEach(link => {
-			link.addEventListener('mouseenter', function() {
-				this.style.transform = 'scale(1.2)';
-			});
-			
-			link.addEventListener('mouseleave', function() {
-				this.style.transform = 'scale(1)';
-			});
-		});
-		
-		// Add notification system
-		function showNotification(message, type = 'info') {
-			const notification = document.createElement('div');
-			notification.className = `tg-notification tg-notification-${type}`;
-			notification.innerHTML = `
-				<div class="tg-notification-content">
-					<i class="fa fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-					<span>${message}</span>
-				</div>
-			`;
-			
-			document.body.appendChild(notification);
-			
-			setTimeout(() => {
-				notification.classList.add('show');
-			}, 100);
-			
-			setTimeout(() => {
-				notification.classList.remove('show');
-				setTimeout(() => {
-					document.body.removeChild(notification);
-				}, 300);
-			}, 3000);
-		}
-		
-		// Example usage of notification
-		// showNotification('Đăng nhập thành công!', 'success');
-		// showNotification('Có lỗi xảy ra!', 'error');
-		// showNotification('Thông tin cập nhật!', 'info');
-		
-		// Cart Modal Functions
+		// Cart Modal Functions - localStorage version
 		window.toggleCartModal = function() {
-			const modal = document.getElementById('cartModal');
-			if (modal.classList.contains('active')) {
-				modal.classList.remove('active');
-			} else {
-				modal.classList.add('active');
+			const cartModal = document.getElementById('cartModal');
+			if (cartModal) {
+				cartModal.classList.toggle('active');
+				if (cartModal.classList.contains('active')) {
+					updateCartDisplay();
+				}
 			}
 		};
 		
 		window.updateQuantity = function(itemId, change) {
-			const quantityElement = document.querySelector(`[onclick="updateQuantity(${itemId}, ${change})"]`).parentNode.querySelector('.tg-quantity-number');
-			let currentQuantity = parseInt(quantityElement.textContent);
-			let newQuantity = currentQuantity + change;
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const itemIndex = cart.findIndex(item => (item.story_id === itemId || item.book_id === itemId));
 			
-			if (newQuantity >= 1) {
-				quantityElement.textContent = newQuantity;
-				updateCartTotal();
-			} else if (newQuantity === 0) {
-				removeCartItem(itemId);
+			if (itemIndex !== -1) {
+				const newQuantity = cart[itemIndex].quantity + change;
+				
+				if (newQuantity <= 0) {
+					// Xóa item nếu số lượng <= 0
+					cart.splice(itemIndex, 1);
+					showNotification('Đã xóa sản phẩm khỏi giỏ hàng!', 'success');
+				} else {
+					// Cập nhật số lượng
+					cart[itemIndex].quantity = newQuantity;
+					showNotification('Đã cập nhật số lượng!', 'success');
+				}
+				
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartDisplay();
+				updateCartCount();
 			}
 		};
 		
 		window.removeCartItem = function(itemId) {
-			const cartItem = document.querySelector(`[onclick="removeCartItem(${itemId})"]`).closest('.tg-cart-item');
-			cartItem.style.animation = 'slideOut 0.3s ease';
-			setTimeout(() => {
-				cartItem.remove();
-				updateCartTotal();
-				checkEmptyCart();
-			}, 300);
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const itemIndex = cart.findIndex(item => (item.story_id === itemId || item.book_id === itemId));
+			
+			if (itemIndex !== -1) {
+				const removedItem = cart.splice(itemIndex, 1)[0];
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartDisplay();
+				updateCartCount();
+				showNotification(`Đã xóa "${removedItem.title}" khỏi giỏ hàng!`, 'success');
+			}
 		};
 		
 		window.clearCart = function() {
-			const cartItems = document.querySelectorAll('.tg-cart-item');
-			cartItems.forEach(item => {
-				item.style.animation = 'slideOut 0.3s ease';
-			});
-			setTimeout(() => {
-				document.querySelector('.tg-cart-items').innerHTML = '';
-				updateCartTotal();
-				checkEmptyCart();
-			}, 300);
+			if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
+				localStorage.removeItem('cart');
+				updateCartDisplay();
+				updateCartCount();
+				showNotification('Đã xóa toàn bộ giỏ hàng!', 'success');
+			}
 		};
 		
 		window.checkout = function() {
-			showNotification('Chuyển đến trang thanh toán...', 'info');
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			if (cart.length === 0) {
+				showNotification('Giỏ hàng trống!', 'error');
+				return;
+			}
+			
+			// Chuyển đến trang thanh toán
+			showNotification('Đang chuyển đến trang thanh toán...', 'info');
 			setTimeout(() => {
-				toggleCartModal();
-			}, 1500);
+				window.location.href = 'checkout.html';
+			}, 1000);
 		};
-		
-		function updateCartTotal() {
-			const items = document.querySelectorAll('.tg-cart-item');
-			let total = 0;
-			let savings = 0;
+
+		// Function to update cart display from localStorage
+		window.updateCartDisplay = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const cartItemsContainer = document.getElementById('cart-items-container');
 			
-			items.forEach(item => {
-				const quantity = parseInt(item.querySelector('.tg-quantity-number').textContent);
-				const currentPrice = parseInt(item.querySelector('.tg-cart-item-current').textContent.replace(/[^\d]/g, ''));
-				const originalPrice = parseInt(item.querySelector('.tg-cart-item-original').textContent.replace(/[^\d]/g, ''));
-				
-				total += currentPrice * quantity;
-				savings += (originalPrice - currentPrice) * quantity;
-			});
+			if (!cartItemsContainer) return;
 			
-			document.querySelector('.tg-cart-total-price').textContent = total.toLocaleString() + '₫';
-			document.querySelector('.tg-cart-savings-amount').textContent = savings.toLocaleString() + '₫';
-			
-			// Update cart badge
-			const totalItems = Array.from(items).reduce((sum, item) => {
-				return sum + parseInt(item.querySelector('.tg-quantity-number').textContent);
-			}, 0);
-			
-			document.querySelector('.tg-cart-badge').textContent = totalItems;
-		}
-		
-		function checkEmptyCart() {
-			const cartItems = document.querySelectorAll('.tg-cart-item');
-			const cartItemsContainer = document.querySelector('.tg-cart-items');
-			const emptyCart = document.querySelector('.tg-cart-empty');
-			
-			if (cartItems.length === 0) {
-				cartItemsContainer.style.display = 'none';
-				emptyCart.style.display = 'block';
-				document.querySelector('.tg-cart-modal-footer').style.display = 'none';
+			if (cart.length === 0) {
+				// Hiển thị giỏ hàng trống
+				cartItemsContainer.innerHTML = `
+					<div class="tg-cart-empty" style="display: block;">
+						<i class="fa fa-shopping-cart"></i>
+						<h4>Giỏ hàng trống</h4>
+						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
+						<button class="tg-btn tg-btn-primary" onclick="toggleCartModal();">Tiếp tục mua sắm</button>
+					</div>
+				`;
 			} else {
-				cartItemsContainer.style.display = 'flex';
-				emptyCart.style.display = 'none';
-				document.querySelector('.tg-cart-modal-footer').style.display = 'block';
+				// Hiển thị danh sách sản phẩm với đầy đủ thông tin
+				cartItemsContainer.innerHTML = cart.map(item => `
+					<div class="tg-cart-item" data-item-id="${item.story_id || item.book_id}">
+						<div class="tg-cart-item-image">
+							<img src="${item.cover_image || item.image}" alt="${item.title}" onerror="this.src='images/books/default-book.jpg'">
+						</div>
+						<div class="tg-cart-item-details">
+							<h4>${item.title}</h4>
+							<p class="tg-cart-item-author">${item.author}</p>
+							<div class="tg-cart-item-info">
+								${item.category_name ? `<span class="tg-cart-item-category">${item.category_name}</span>` : ''}
+								${item.rating ? `<span class="tg-cart-item-rating">★ ${item.rating}</span>` : ''}
+								${item.type === 'story' ? `<span class="tg-cart-item-type">📖 Truyện</span>` : '<span class="tg-cart-item-type">📚 Sách</span>'}
+							</div>
+							<div class="tg-cart-item-price">
+								<span class="tg-cart-item-current">${formatPrice(item.price)}</span>
+								${item.original_price > item.price ? `<span class="tg-cart-item-original">${formatPrice(item.original_price)}</span>` : ''}
+							</div>
+							${item.description ? `<p class="tg-cart-item-description">${item.description.substring(0, 100)}${item.description.length > 100 ? '...' : ''}</p>` : ''}
+						</div>
+						<div class="tg-cart-item-actions">
+							<div class="tg-cart-item-quantity">
+								<button class="tg-quantity-btn" onclick="updateQuantity('${item.story_id || item.book_id}', -1)">-</button>
+								<span class="tg-quantity-number">${item.quantity}</span>
+								<button class="tg-quantity-btn" onclick="updateQuantity('${item.story_id || item.book_id}', 1)">+</button>
+							</div>
+							<button class="tg-cart-item-remove" onclick="removeCartItem('${item.story_id || item.book_id}')">
+								<i class="fa fa-trash"></i>
+							</button>
+						</div>
+					</div>
+				`).join('');
+			}
+			
+			// Cập nhật tổng tiền
+			updateCartTotal();
+		}
+
+		// Function to update cart count
+		window.updateCartCount = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+			
+			const cartBadge = document.getElementById('cart-badge');
+			if (cartBadge) {
+				cartBadge.textContent = totalItems;
+				cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
 			}
 		}
-		
-		// Close modal when clicking outside
-		document.addEventListener('click', function(event) {
-			const modal = document.getElementById('cartModal');
-			if (event.target === modal) {
-				toggleCartModal();
+
+		// Function to update cart total
+		window.updateCartTotal = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+			const totalOriginal = cart.reduce((sum, item) => sum + (item.original_price * item.quantity), 0);
+			const savings = totalOriginal - totalPrice;
+			
+			const totalPriceElement = document.getElementById('cart-total-price');
+			const savingsElement = document.getElementById('cart-savings-amount');
+			
+			if (totalPriceElement) {
+				totalPriceElement.textContent = formatPrice(totalPrice);
 			}
-		});
-		
-		// Close modal with Escape key
-		document.addEventListener('keydown', function(event) {
-			if (event.key === 'Escape') {
-				const modal = document.getElementById('cartModal');
-				if (modal.classList.contains('active')) {
-					toggleCartModal();
-				}
+			if (savingsElement) {
+				savingsElement.textContent = formatPrice(savings);
 			}
-		});
-		
-		// Navigation Active State Management
-		document.addEventListener('DOMContentLoaded', function() {
-			// Get current page URL
-			const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+		}
+
+		// Function to format price
+		window.formatPrice = function(price) {
+			return new Intl.NumberFormat('vi-VN', {
+				style: 'currency',
+				currency: 'VND'
+			}).format(price);
+		}
+
+		// Function to update quantity
+		window.updateQuantity = function(itemId, change) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const item = cart.find(item => item.story_id === itemId || item.book_id === itemId);
 			
-			// Find all navigation links
-			const navLinks = document.querySelectorAll('.nav-link');
-			
-			// Remove active class from all links
-			navLinks.forEach(link => {
-				link.classList.remove('active');
-			});
-			
-			// Add active class to current page link
-			navLinks.forEach(link => {
-				const href = link.getAttribute('href');
-				if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-					link.classList.add('active');
+			if (item) {
+				item.quantity += change;
+				if (item.quantity < 1) {
+					item.quantity = 1;
 				}
-			});
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartDisplay();
+				updateCartCount();
+			}
+		}
+
+		// Function to remove cart item
+		window.removeCartItem = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const updatedCart = cart.filter(item => item.story_id !== itemId && item.book_id !== itemId);
+			localStorage.setItem('cart', JSON.stringify(updatedCart));
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to clear cart
+		window.clearCart = function() {
+			localStorage.removeItem('cart');
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to check if item is in cart
+		window.isInCart = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			return cart.some(item => item.story_id === itemId || item.book_id === itemId);
+		}
+
+		// Function to add item to cart
+		window.addToCart = function(item) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const existingItem = cart.find(cartItem => cartItem.story_id === item.story_id || cartItem.book_id === item.book_id);
 			
-			// Handle submenu hover effects
-			const menuItems = document.querySelectorAll('.tg-nav-menu li');
+			if (existingItem) {
+				existingItem.quantity += 1;
+			} else {
+				cart.push({ ...item, quantity: 1 });
+			}
 			
-			menuItems.forEach(item => {
-				const link = item.querySelector('a');
-				const submenu = item.querySelector('.tg-submenu');
-				
-				if (submenu) {
-					item.addEventListener('mouseenter', function() {
-						submenu.style.opacity = '1';
-						submenu.style.visibility = 'visible';
-						submenu.style.transform = 'translateY(0)';
-					});
-					
-					item.addEventListener('mouseleave', function() {
-						submenu.style.opacity = '0';
-						submenu.style.visibility = 'hidden';
-						submenu.style.transform = 'translateY(-10px)';
-					});
-				}
-			});
+			localStorage.setItem('cart', JSON.stringify(cart));
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to get cart items
+		window.getCartItems = function() {
+			return JSON.parse(localStorage.getItem('cart')) || [];
+		}
+
+		// Function to get cart total
+		window.getCartTotal = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+		}
+
+		// Function to get cart savings
+		window.getCartSavings = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+			const totalOriginal = cart.reduce((sum, item) => sum + (item.original_price * item.quantity), 0);
+			return totalOriginal - totalPrice;
+		}
+
+		// Function to get cart item count
+		window.getCartItemCount = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			return cart.reduce((sum, item) => sum + item.quantity, 0);
+		}
+
+		// Function to get cart item by ID
+		window.getCartItemById = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			return cart.find(item => item.story_id === itemId || item.book_id === itemId);
+		}
+
+		// Function to update cart item quantity
+		window.updateCartItemQuantity = function(itemId, quantity) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const item = cart.find(item => item.story_id === itemId || item.book_id === itemId);
 			
-			// Handle submenu item clicks
-			const submenuLinks = document.querySelectorAll('.tg-submenu a');
-			submenuLinks.forEach(link => {
-				link.addEventListener('click', function(e) {
-					e.preventDefault();
-					
-					// Remove active class from all submenu links
-					submenuLinks.forEach(subLink => {
-						subLink.classList.remove('active');
-					});
-					
-					// Add active class to clicked link
-					this.classList.add('active');
-					
-					// Update parent menu item
-					const parentLink = this.closest('li').querySelector('.nav-link');
-					if (parentLink) {
-						parentLink.classList.add('active');
-					}
-				});
-			});
-		});
-		
-		// Mobile menu toggle functionality
-		document.addEventListener('DOMContentLoaded', function() {
-			const mobileToggle = document.querySelector('.tg-mobile-toggle');
-			const navMenu = document.querySelector('.tg-nav-menu');
-			
-			if (mobileToggle && navMenu) {
-				mobileToggle.addEventListener('click', function() {
-					navMenu.classList.toggle('active');
-					
-					// Toggle icon
-					const icon = this.querySelector('i');
-					if (icon) {
-						if (navMenu.classList.contains('active')) {
-							icon.className = 'fa fa-times';
-						} else {
+			if (item) {
+				item.quantity = quantity;
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartDisplay();
+				updateCartCount();
+			}
+		}
+
+		// Function to remove cart item by ID
+		window.removeCartItemById = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const updatedCart = cart.filter(item => item.story_id !== itemId && item.book_id !== itemId);
+			localStorage.setItem('cart', JSON.stringify(updatedCart));
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to clear cart
+		window.clearCart = function() {
+			localStorage.removeItem('cart');
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to check if item is in cart
+		window.isInCart = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
 							icon.className = 'fa fa-bars';
 						}
-					}
-				});
-			}
-		});
-		
+				
 		// Load Categories from Firebase
 		document.addEventListener('DOMContentLoaded', function() {
 			// Check if Firebase is available
 			if (typeof firebase !== 'undefined' && firebase.database) {
 				const db = firebase.database();
 				
-				// Load Book Categories
-				db.ref('BookCategories').once('value')
-					.then((snapshot) => {
-						const bookCategories = snapshot.val();
-						if (bookCategories) {
-							loadBookCategories(bookCategories);
-						}
-					})
-					.catch((error) => {
-						console.error('Error loading book categories:', error);
-						// Fallback to static data
-						loadBookCategories({
-							"new_books": {
-								"category_code": "SM001",
-								"category_name": "New Books",
-								"description": "Books that have just been published recently",
-								"quantity": 25
-							},
-							"featured_books": {
-								"category_code": "SNB002", 
-								"category_name": "Featured Books",
-								"description": "Books that are loved and highly rated by many readers",
-								"quantity": 50
-							},
-							"member_books": {
-								"category_code": "SHV003",
-								"category_name": "Member Books", 
-								"description": "Books exclusively for VIP members of the library",
-								"quantity": 40
-							}
-						});
-					});
+
 				
-				// Load Story Categories
-				db.ref('StoryCategories').once('value')
-					.then((snapshot) => {
-						const storyCategories = snapshot.val();
-						if (storyCategories) {
-							loadStoryCategories(storyCategories);
-						}
-					})
-					.catch((error) => {
-						console.error('Error loading story categories:', error);
-						// Fallback to static data
-						loadStoryCategories({
-							"new_stories": {
-								"category_code": "TM001",
-								"category_name": "New Stories",
-								"description": "Stories that have just been updated or published recently",
-								"quantity": 35
-							},
-							"featured_stories": {
-								"category_code": "TNB002",
-								"category_name": "Featured Stories", 
-								"description": "Stories that are followed and highly rated by many readers",
-								"quantity": 45
-							},
-							"free_stories": {
-								"category_code": "TMF003",
-								"category_name": "Free Stories",
-								"description": "Stories that can be read for free without payment",
-								"quantity": 60
-							},
-							"member_stories": {
-								"category_code": "THV004",
-								"category_name": "Member Stories",
-								"description": "Stories exclusively for VIP members of the library", 
-								"quantity": 25
-							}
-						});
-					});
-			} else {
-				console.log('Firebase not available, using static data');
-				// Load static data if Firebase is not available
-				loadBookCategories({
-					"new_books": {
-						"category_code": "SM001",
-						"category_name": "New Books",
-						"description": "Books that have just been published recently",
-						"quantity": 25
-					},
-					"featured_books": {
-						"category_code": "SNB002", 
-						"category_name": "Featured Books",
-						"description": "Books that are loved and highly rated by many readers",
-						"quantity": 50
-					},
-					"member_books": {
-						"category_code": "SHV003",
-						"category_name": "Member Books", 
-						"description": "Books exclusively for VIP members of the library",
-						"quantity": 40
-					}
-				});
-				
-				loadStoryCategories({
-					"new_stories": {
-						"category_code": "TM001",
-						"category_name": "New Stories",
-						"description": "Stories that have just been updated or published recently",
-						"quantity": 35
-					},
-					"featured_stories": {
-						"category_code": "TNB002",
-						"category_name": "Featured Stories", 
-						"description": "Stories that are followed and highly rated by many readers",
-						"quantity": 45
-					},
-					"free_stories": {
-						"category_code": "TMF003",
-						"category_name": "Free Stories",
-						"description": "Stories that can be read for free without payment",
-						"quantity": 60
-					},
-					"member_stories": {
-						"category_code": "THV004",
-						"category_name": "Member Stories",
-						"description": "Stories exclusively for VIP members of the library", 
-						"quantity": 25
-					}
-				});
+
 			}
 		});
-		
-		// Function to load book categories
-		function loadBookCategories(categories) {
-			const bookSubmenu = document.querySelector('.book-submenu');
-			if (!bookSubmenu) return;
+
+		// User Dropdown Functions
+		window.toggleUserDropdown = function() {
+			const dropdown = document.getElementById('userDropdown');
+			if (dropdown) {
+				dropdown.classList.toggle('show');
+			}
+		};
+
+		// Close dropdown when clicking outside
+		document.addEventListener('click', function(event) {
+			const userProfile = document.querySelector('.tg-user-profile');
+			const dropdown = document.getElementById('userDropdown');
 			
-			bookSubmenu.innerHTML = '';
+			if (dropdown && dropdown.classList.contains('show')) {
+				if (!userProfile.contains(event.target)) {
+					dropdown.classList.remove('show');
+				}
+			}
+		});
+
+		// Prevent dropdown from closing when hovering over it
+		document.addEventListener('mouseenter', function(event) {
+			const userProfile = document.querySelector('.tg-user-profile');
+			const dropdown = document.getElementById('userDropdown');
 			
-			Object.keys(categories).forEach(key => {
-				const category = categories[key];
-				const link = document.createElement('a');
-				link.href = `book.html?filter=${key}`;
-				link.style.cssText = 'display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;';
-				link.textContent = category.category_name;
+			if (userProfile && userProfile.contains(event.target)) {
+				if (dropdown) {
+					dropdown.classList.add('show');
+				}
+			}
+		});
+
+		document.addEventListener('mouseleave', function(event) {
+			const userProfile = document.querySelector('.tg-user-profile');
+			const dropdown = document.getElementById('userDropdown');
+			
+			if (userProfile && !userProfile.contains(event.target)) {
+				if (dropdown) {
+					// Add a small delay to prevent immediate closing
+					setTimeout(() => {
+						if (!userProfile.matches(':hover')) {
+							dropdown.classList.remove('show');
+						}
+					}, 100);
+				}
+			}
+		});
+
+		// Load cart from localStorage on page load
+		function loadCartFromLocalStorage() {
+			try {
+				const cart = JSON.parse(localStorage.getItem('cart')) || [];
+				console.log('Cart loaded from localStorage:', cart);
 				
-				// Add hover effect
-				link.addEventListener('mouseenter', function() {
-					this.style.background = 'rgba(74, 99, 102, 0.05)';
-					this.style.color = '#4A6366';
-				});
+				// Cập nhật hiển thị giỏ hàng
+				updateCartDisplay();
+				updateCartCount();
 				
-				link.addEventListener('mouseleave', function() {
-					this.style.background = 'transparent';
-					this.style.color = '#333';
-				});
-				
-				bookSubmenu.appendChild(link);
-			});
+			} catch (error) {
+				console.error('Error loading cart from localStorage:', error);
+				// Nếu có lỗi, xóa cart cũ và tạo mới
+				localStorage.removeItem('cart');
+				updateCartDisplay();
+				updateCartCount();
+			}
 		}
-		
-		// Function to load story categories
-		function loadStoryCategories(categories) {
-			const storySubmenu = document.querySelector('.story-submenu');
-			if (!storySubmenu) return;
-			
-			storySubmenu.innerHTML = '';
-			
-			Object.keys(categories).forEach(key => {
-				const category = categories[key];
-				const link = document.createElement('a');
-				link.href = `story.html?filter=${key}`;
-				link.style.cssText = 'display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;';
-				link.textContent = category.category_name;
-				
-				// Add hover effect
-				link.addEventListener('mouseenter', function() {
-					this.style.background = 'rgba(74, 99, 102, 0.05)';
-					this.style.color = '#4A6366';
-				});
-				
-				link.addEventListener('mouseleave', function() {
-					this.style.background = 'transparent';
-					this.style.color = '#333';
-				});
-				
-				storySubmenu.appendChild(link);
-			});
-		}
+
+		// Load cart when page loads
+		document.addEventListener('DOMContentLoaded', function() {
+			loadCartFromLocalStorage();
+		});
+
 	</script>
 </body>
 

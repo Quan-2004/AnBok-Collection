@@ -1,0 +1,478 @@
+/* Profile Dashboard Styles */
+.tg-profile-dashboard {
+    display: flex;
+    gap: 30px;
+    min-height: 600px;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+}
+
+/* Left Sidebar Styles */
+.tg-profile-sidebar {
+    width: 280px;
+    background: #f8f9fa;
+    padding: 25px 0;
+    border-right: 1px solid #e0e0e0;
+    flex-shrink: 0;
+}
+
+/* User Profile Header */
+.tg-user-profile-header {
+    padding: 0 25px 25px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 25px;
+}
+
+.tg-user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.tg-user-info h3 {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+}
+
+.tg-user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #4A6366;
+}
+
+.tg-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Action Buttons */
+.tg-action-buttons {
+    padding: 0 25px 25px;
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 25px;
+}
+
+.tg-btn-membership {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #ffd700;
+    color: #333;
+}
+
+.tg-btn-membership:hover {
+    background: #ffed4e;
+    transform: translateY(-2px);
+}
+
+/* Navigation Menu */
+.tg-profile-nav {
+    padding: 0 15px;
+}
+
+.tg-profile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tg-profile-nav li {
+    margin-bottom: 5px;
+}
+
+.tg-profile-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    color: #666666;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tg-profile-nav a:hover {
+    background: rgba(74, 99, 102, 0.1);
+    color: #4A6366;
+}
+
+.tg-profile-nav li.active a {
+    background: #4A6366;
+    color: white;
+}
+
+.tg-profile-nav i {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.tg-profile-nav .fa-chevron-down {
+    margin-left: auto;
+    font-size: 12px;
+}
+
+/* Right Main Content */
+.tg-profile-content {
+    flex: 1;
+    background: #ffffff;
+    padding: 30px;
+}
+
+/* Content Sections */
+.tg-content-section {
+    display: none;
+}
+
+.tg-content-section.active {
+    display: block;
+}
+
+.tg-section-header {
+    margin-bottom: 30px;
+}
+
+.tg-section-header h2 {
+    color: #333333;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Tab Navigation */
+.tg-tab-navigation {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0;
+}
+
+.tg-tab-btn {
+    padding: 15px 25px;
+    background: none;
+    border: none;
+    color: #666666;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    position: relative;
+}
+
+.tg-tab-btn:hover {
+    color: #4A6366;
+}
+
+.tg-tab-btn.active {
+    color: #4A6366;
+    border-bottom-color: #4A6366;
+}
+
+/* Tab Content */
+.tg-tab-content {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    min-height: 400px;
+    border: 1px solid #e0e0e0;
+}
+
+.tg-tab-panel {
+    display: none;
+}
+
+.tg-tab-panel.active {
+    display: block;
+}
+
+/* Form Styles */
+.tg-form-container {
+    display: flex;
+    gap: 40px;
+}
+
+.tg-form-left {
+    flex: 1;
+}
+
+.tg-form-right {
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.tg-form-group {
+    margin-bottom: 25px;
+}
+
+.tg-form-group label {
+    display: block;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.tg-form-group input,
+.tg-form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    color: #333333;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.tg-form-group input:focus,
+.tg-form-group select:focus {
+    outline: none;
+    border-color: #4A6366;
+    box-shadow: 0 0 0 3px rgba(74, 99, 102, 0.1);
+}
+
+.tg-form-group input[readonly] {
+    background: #f8f9fa;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.tg-date-input {
+    position: relative;
+}
+
+.tg-date-input i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4A6366;
+    cursor: pointer;
+}
+
+/* Avatar Section */
+.tg-avatar-section {
+    text-align: center;
+}
+
+.tg-avatar-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    border: 3px solid #4A6366;
+}
+
+.tg-avatar-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tg-btn-change-photo {
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    color: #666666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tg-btn-change-photo:hover {
+    background: #4A6366;
+    color: white;
+    border-color: #4A6366;
+}
+
+/* Form Actions */
+.tg-form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.tg-btn-update,
+.tg-btn-cancel {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tg-btn-update {
+    background: #28a745;
+    color: white;
+}
+
+.tg-btn-update:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.tg-btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+.tg-btn-cancel:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Tab Content Placeholders */
+.tg-address-content,
+.tg-security-content,
+.tg-linked-accounts-content,
+.tg-bookshelf-content,
+.tg-order-content,
+.tg-achievements-content,
+.tg-transaction-content,
+.tg-support-content {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666666;
+}
+
+.tg-address-content h3,
+.tg-security-content h3,
+.tg-linked-accounts-content h3 {
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .tg-profile-dashboard {
+        flex-direction: column;
+    }
+    
+    .tg-profile-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .tg-form-container {
+        flex-direction: column;
+    }
+    
+    .tg-form-right {
+        width: 100%;
+        order: -1;
+    }
+    
+    .tg-avatar-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .tg-avatar-large {
+        width: 80px;
+        height: 80px;
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .tg-profile-content {
+        padding: 20px;
+    }
+    
+    .tg-tab-navigation {
+        flex-wrap: wrap;
+    }
+    
+    .tg-tab-btn {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+    
+    .tg-tab-content {
+        padding: 20px;
+    }
+    
+    .tg-action-buttons {
+        flex-direction: column;
+    }
+}
+
+/* Animation Effects */
+.tg-content-section {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover Effects */
+.tg-profile-nav a:hover i {
+    transform: scale(1.1);
+}
+
+.tg-form-group input:hover,
+.tg-form-group select:hover {
+    border-color: #4A6366;
+}
+
+/* Focus States */
+.tg-tab-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 99, 102, 0.2);
+}
+
+.tg-btn-membership:focus,
+.tg-btn-update:focus,
+.tg-btn-cancel:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 99, 102, 0.3);
+} 

@@ -1,0 +1,1336 @@
+{
+  "BookCategories": {
+    "featured_books": {
+      "category_code": "SNB002",
+      "category_name": "Featured Books",
+      "description": "Books that are loved and highly rated by many readers",
+      "quantity": 50
+    },
+    "member_books": {
+      "category_code": "SHV003",
+      "category_name": "Member Books",
+      "description": "Books exclusively for VIP members of the library",
+      "quantity": 40
+    },
+    "new_books": {
+      "category_code": "SM001",
+      "category_name": "New Books",
+      "description": "Books that have just been published recently",
+      "quantity": 25
+    }
+  },
+  "BookGenres": {
+    "genre_001": {
+      "book_count": 2,
+      "created_date": "2024-01-01",
+      "description": "Tiểu thuyết văn học với cốt truyện phức tạp và nhân vật đa dạng",
+      "genre_code": "TIEN_THUYET",
+      "genre_id": "BG001",
+      "genre_name": "Tiểu thuyết",
+      "genre_name_en": "Novel",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    },
+    "genre_002": {
+      "book_count": 1,
+      "created_date": "2024-01-01",
+      "description": "Sách về phát triển kỹ năng giao tiếp, lãnh đạo và phát triển bản thân",
+      "genre_code": "KY_NANG_SONG",
+      "genre_id": "BG002",
+      "genre_name": "Kỹ năng sống",
+      "genre_name_en": "Life Skills",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    },
+    "genre_003": {
+      "book_count": 1,
+      "created_date": "2024-01-01",
+      "description": "Sách giả tưởng với yếu tố phép thuật và thế giới tưởng tượng",
+      "genre_code": "FANTASY",
+      "genre_id": "BG003",
+      "genre_name": "Fantasy",
+      "genre_name_en": "Fantasy",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    },
+    "genre_004": {
+      "book_count": 1,
+      "created_date": "2024-01-01",
+      "description": "Tác phẩm thơ ca với ngôn ngữ nghệ thuật và cảm xúc sâu sắc",
+      "genre_code": "THO",
+      "genre_id": "BG004",
+      "genre_name": "Thơ",
+      "genre_name_en": "Poetry",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    },
+    "genre_005": {
+      "book_count": 1,
+      "created_date": "2024-01-01",
+      "description": "Sách về công nghệ, khoa học và những tiến bộ mới",
+      "genre_code": "CONG_NGHE",
+      "genre_id": "BG005",
+      "genre_name": "Công nghệ",
+      "genre_name_en": "Technology",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    },
+    "genre_006": {
+      "book_count": 1,
+      "created_date": "2024-01-01",
+      "description": "Sách hướng dẫn nấu ăn và ẩm thực",
+      "genre_code": "NAU_AN",
+      "genre_id": "BG006",
+      "genre_name": "Nấu ăn",
+      "genre_name_en": "Cooking",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    },
+    "genre_007": {
+      "book_count": 1,
+      "created_date": "2024-01-01",
+      "description": "Sách về chiến lược kinh doanh và nghệ thuật quân sự",
+      "genre_code": "CHIEN_LUOC",
+      "genre_id": "BG007",
+      "genre_name": "Chiến lược",
+      "genre_name_en": "Strategy",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    },
+    "genre_008": {
+      "book_count": 1,
+      "created_date": "2024-01-01",
+      "description": "Sách về nguyên tắc thành công và làm giàu",
+      "genre_code": "THANH_CONG",
+      "genre_id": "BG008",
+      "genre_name": "Thành công",
+      "genre_name_en": "Success",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    },
+    "genre_009": {
+      "book_count": 1,
+      "created_date": "2024-01-01",
+      "description": "Sách về khoa học, nghiên cứu và khám phá",
+      "genre_code": "KHOA_HOC",
+      "genre_id": "BG009",
+      "genre_name": "Khoa học",
+      "genre_name_en": "Science",
+      "is_active": true,
+      "updated_date": "2024-01-15"
+    }
+  },
+  "Books": {
+    "book_001": {
+      "author": "Nam Cao",
+      "book_id": "BK001",
+      "category_code": "SM001",
+      "category_name": "New Books",
+      "content": "Chương 1: Lão Hạc\n\nLão Hạc là một người nông dân nghèo khổ, sống cô đơn trong một căn nhà nhỏ ở làng Vũ Đại. Lão có một con chó vàng tên là Vàng, người bạn duy nhất của lão trong những năm tháng cuối đời.\n\nLão Hạc từng có một người con trai, nhưng anh ta đã bỏ làng đi làm ăn xa. Lão sống một mình với con chó Vàng, ngày ngày làm lụng vất vả để kiếm sống. Dù nghèo khổ, lão vẫn giữ được lòng tự trọng và tình yêu thương với con chó của mình.\n\nChương 2: Sự Hy Sinh\n\nKhi lương thực cạn kiệt, lão Hạc phải đối mặt với một quyết định khó khăn. Lão không muốn bán con chó Vàng, nhưng cũng không muốn để nó chết đói. Cuối cùng, lão quyết định bán Vàng để có tiền mua gạo.\n\nSau khi bán Vàng, lão Hạc cảm thấy vô cùng đau khổ và hối hận. Lão không thể ăn được, không thể ngủ được vì nhớ thương con chó. Lão cảm thấy mình đã phản bội người bạn trung thành duy nhất.\n\nChương 3: Kết Thúc\n\nMột ngày nọ, lão Hạc được tin con trai lão đã chết ở xứ người. Lão cảm thấy cuộc đời mình không còn ý nghĩa gì nữa. Lão quyết định kết thúc cuộc đời mình bằng cách ăn bả chó mà lão đã mua để giết Vàng.\n\nTrước khi chết, lão Hạc để lại tất cả tài sản của mình cho ông giáo, người hàng xóm tốt bụng. Lão muốn đảm bảo rằng con chó Vàng sẽ được chăm sóc tốt nếu nó trở về.\n\nTruyện kết thúc với hình ảnh con chó Vàng trở về nhà, tìm kiếm chủ nhân của mình trong vô vọng. Câu chuyện thể hiện tình yêu thương, lòng trung thành và sự hy sinh cao cả của lão Hạc.\n\nChương 4: Hồi Ức\n\nTrong những giây phút cuối cùng, lão Hạc nhớ lại những kỷ niệm đẹp với con chó Vàng. Lão nhớ những buổi chiều cùng Vàng đi dạo quanh làng, những lần Vàng bảo vệ lão khỏi những kẻ xấu, và những đêm đông lạnh lẽo khi Vàng nằm bên cạnh sưởi ấm cho lão.\n\nLão nhận ra rằng tình yêu thương không phải chỉ là cho đi, mà còn là nhận lại. Vàng đã cho lão tình yêu vô điều kiện, sự trung thành tuyệt đối, và niềm vui trong những ngày tháng cô đơn nhất.\n\nChương 5: Bài Học Cuộc Sống\n\nCâu chuyện về lão Hạc và con chó Vàng dạy chúng ta nhiều bài học quý giá về tình yêu thương, lòng trung thành và sự hy sinh. Đôi khi những điều quý giá nhất trong cuộc sống không phải là tiền bạc hay vật chất, mà là tình cảm chân thành giữa con người với nhau, và giữa con người với những sinh vật xung quanh.\n\nLão Hạc đã hy sinh mạng sống của mình để bảo vệ danh dự và lòng tự trọng. Đó là một hành động cao cả, thể hiện phẩm chất đáng quý của người nông dân Việt Nam.",
+      "cover_image": "images/books/img-01.jpg",
+      "description": "Tiểu thuyết ngắn của Nam Cao, kể về cuộc đời của lão Hạc, một người nông dân nghèo khổ với những trăn trở về tình người, lòng tự trọng và sự hy sinh.",
+      "dimensions": "13x19cm",
+      "download_count": 1250,
+      "file_format": "PDF",
+      "file_size": "2.5MB",
+      "format": "Paperback",
+      "genre": "Tiểu thuyết",
+      "genre_code": "TIEN_THUYET",
+      "is_featured": false,
+      "is_free": true,
+      "is_member_only": false,
+      "isbn": "978-604-1-12345-6",
+      "language": "Vietnamese",
+      "original_price": 45000,
+      "pages": 120,
+      "price": 35000,
+      "publish_date": "2024-01-15",
+      "publisher": "NXB Văn Học",
+      "rating": 4.2,
+      "review_count": 156,
+      "stock": 50,
+      "tags": [
+        "tiểu thuyết",
+        "văn học Việt Nam",
+        "Nam Cao",
+        "lão Hạc"
+      ],
+      "title": "Lão Hạc",
+      "view_count": 8900,
+      "weight": 200
+    },
+    "book_002": {
+      "author": "Paulo Coelho",
+      "book_id": "BK002",
+      "category_code": "SNB002",
+      "category_name": "Featured Books",
+      "content": "Chương 1: Hành Trình Tìm Kiếm\n\nSantiago là một cậu bé chăn cừu người Andalusia, Tây Ban Nha. Cậu có một giấc mơ lặp đi lặp lại về một kho báu được chôn giấu dưới chân Kim Tự Tháp ở Ai Cập. Giấc mơ này ám ảnh cậu mỗi đêm, khiến cậu không thể ngủ yên.\n\nMột ngày nọ, Santiago gặp một ông già tự xưng là vua Salem. Ông ta nói với Santiago rằng cậu đang theo đuổi Personal Legend (Huyền thoại cá nhân) của mình. Ông khuyên Santiago nên đi tìm kho báu trong giấc mơ và đưa cho cậu hai viên đá Urim và Thummim để giúp cậu trong hành trình.\n\nChương 2: Quyết Định Lớn\n\nSau nhiều đêm trằn trọc, Santiago quyết định bán tất cả cừu của mình để có tiền đi đến Ai Cập. Đây là một quyết định rất khó khăn vì cừu là tài sản duy nhất của cậu, nhưng cậu tin rằng giấc mơ của mình có ý nghĩa sâu sắc.\n\nKhi chia tay với người cha, Santiago cảm thấy một nỗi buồn sâu sắc. Nhưng cậu biết rằng đôi khi chúng ta phải từ bỏ những gì quen thuộc để khám phá những điều mới mẻ.\n\nChương 3: Hành Trình Đến Ai Cập\n\nSantiago bắt đầu hành trình dài đến Ai Cập. Trên đường đi, cậu gặp nhiều người khác nhau - những người buôn bán, những kẻ lừa đảo, và những người tốt bụng. Mỗi cuộc gặp gỡ đều dạy cậu một bài học quý giá về cuộc sống.\n\nTại thành phố Tangier, Santiago bị lừa mất tất cả tiền bạc. Cậu phải làm việc cho một người bán pha lê để kiếm sống. Trong thời gian này, cậu học được về ngôn ngữ của vũ trụ và cách lắng nghe trái tim mình.\n\nChương 4: Sa Mạc Sahara\n\nSantiago tham gia cùng một đoàn lữ hành băng qua sa mạc Sahara. Đây là một hành trình nguy hiểm và đầy thử thách. Trong sa mạc, cậu gặp Fatima, một cô gái sa mạc xinh đẹp mà cậu yêu thương ngay từ cái nhìn đầu tiên.\n\nFatima dạy Santiago về tình yêu và sự chờ đợi. Cô nói rằng nếu Santiago thực sự yêu cô, cậu sẽ quay lại sau khi hoàn thành hành trình của mình. Điều này khiến Santiago hiểu rằng tình yêu không phải là sở hữu, mà là sự tự do.\n\nChương 5: Ốc Đảo\n\nTrên đường đi, đoàn lữ hành dừng lại tại một ốc đảo. Tại đây, Santiago gặp một nhà giả kim người Anh, người đang tìm kiếm Hòn đá Triết học. Nhà giả kim này dạy Santiago về những nguyên tắc của giả kim thuật và cách biến đổi kim loại thành vàng.\n\nNhà giả kim giải thích rằng mục đích thực sự của giả kim thuật không phải là tạo ra vàng, mà là hiểu được bản chất của vũ trụ và con người. Ông dạy Santiago cách lắng nghe trái tim và tin tưởng vào những dấu hiệu từ vũ trụ.\n\nChương 6: Kim Tự Tháp\n\nCuối cùng, Santiago đến được Kim Tự Tháp. Tại đây, cậu bị đánh cướp bởi những kẻ cướp sa mạc. Chúng đánh đập cậu và bắt cậu phải đào một cái hố lớn để tìm kho báu.\n\nKhi Santiago kể cho chúng nghe về giấc mơ của mình, một trong những kẻ cướp cười nhạo và nói rằng hắn cũng có một giấc mơ tương tự về một kho báu được chôn giấu dưới gốc cây sycamore ở Andalusia. Điều này khiến Santiago nhận ra rằng đôi khi kho báu chúng ta tìm kiếm đã ở ngay trước mắt.\n\nChương 7: Trở Về\n\nSantiago quyết định trở về Andalusia để tìm kho báu thực sự. Khi đến nơi, cậu tìm thấy kho báu được chôn giấu dưới gốc cây sycamore nơi cậu thường ngủ với đàn cừu.\n\nKho báu này không chỉ là vàng bạc, mà còn là những bài học quý giá mà cậu đã học được trong hành trình. Cậu hiểu rằng Personal Legend không phải là đích đến, mà là hành trình khám phá bản thân.\n\nChương 8: Kết Thúc Và Khởi Đầu Mới\n\nSantiago trở về ốc đảo để gặp lại Fatima. Cậu hiểu rằng tình yêu thực sự không phải là sở hữu, mà là sự tự do và tin tưởng. Fatima đã chờ đợi cậu và họ sẽ cùng nhau bắt đầu một hành trình mới.\n\nCâu chuyện dạy chúng ta rằng đôi khi kho báu chúng ta tìm kiếm đã ở ngay trước mắt, và rằng hành trình khám phá bản thân quan trọng hơn đích đến. Personal Legend của mỗi người là khác nhau, nhưng tất cả đều có chung một mục đích - khám phá ý nghĩa thực sự của cuộc sống.",
+      "cover_image": "images/books/img-02.jpg",
+      "description": "Cuốn tiểu thuyết nổi tiếng của Paulo Coelho về hành trình tìm kiếm kho báu và khám phá bản thân của Santiago, một cậu bé chăn cừu.",
+      "dimensions": "14x20cm",
+      "download_count": 2100,
+      "file_format": "PDF",
+      "file_size": "3.2MB",
+      "format": "Paperback",
+      "genre": "Tiểu thuyết",
+      "genre_code": "TIEN_THUYET",
+      "is_featured": true,
+      "is_free": false,
+      "is_member_only": false,
+      "isbn": "978-604-1-12346-7",
+      "language": "Vietnamese",
+      "original_price": 100000,
+      "pages": 208,
+      "price": 85000,
+      "publish_date": "2023-11-20",
+      "publisher": "NXB Trẻ",
+      "rating": 4.5,
+      "review_count": 234,
+      "stock": 75,
+      "tags": [
+        "tiểu thuyết",
+        "Paulo Coelho",
+        "tâm linh",
+        "hành trình"
+      ],
+      "title": "Nhà Giả Kim",
+      "view_count": 15600,
+      "weight": 250
+    },
+    "book_003": {
+      "author": "Dale Carnegie",
+      "book_id": "BK003",
+      "category_code": "SNB002",
+      "category_name": "Featured Books",
+      "content": "Chương 1: Nghệ Thuật Giao Tiếp Cơ Bản\n\nNguyên tắc 1: Không chỉ trích, không lên án, không phàn nàn\n\nCon người thường có xu hướng bảo vệ bản thân và không thích bị chỉ trích. Khi chúng ta chỉ trích người khác, chúng ta thường nhận lại sự phản đối và thù địch thay vì sự hợp tác.\n\nAbraham Lincoln từng nói: 'Không ai thích bị chỉ trích, nhưng mọi người đều thích được khen ngợi.' Thay vì chỉ trích, hãy tìm cách khen ngợi những điểm tốt của người khác.\n\nChương 2: Sáu Cách Tạo Thiện Cảm\n\nNguyên tắc 2: Thành thật quan tâm đến người khác\n\nCon người thường quan tâm đến bản thân hơn bất kỳ ai khác. Nếu bạn muốn có bạn bè, hãy quan tâm thực sự đến họ. Hãy lắng nghe họ, hỏi han về cuộc sống của họ, và thể hiện sự quan tâm chân thành.\n\nNguyên tắc 3: Mỉm cười\n\nNụ cười là ngôn ngữ phổ quát của tình yêu thương. Một nụ cười chân thành có thể mở ra những cánh cửa mà tiền bạc không thể mở được. Hãy mỉm cười với mọi người bạn gặp.\n\nChương 3: Mười Hai Cách Thuyết Phục Người Khác\n\nNguyên tắc 4: Lắng nghe\n\nHầu hết mọi người đều thích nói về bản thân hơn là lắng nghe người khác. Nếu bạn muốn trở thành một người giao tiếp giỏi, hãy học cách lắng nghe. Đặt câu hỏi và để người khác nói.\n\nNguyên tắc 5: Nói về những gì người khác quan tâm\n\nMọi người đều quan tâm đến những gì liên quan đến bản thân họ. Nếu bạn muốn thu hút sự chú ý của ai đó, hãy nói về những gì họ quan tâm.\n\nChương 4: Chín Cách Thay Đổi Người Khác Mà Không Gây Ra Sự Phản Đối\n\nNguyên tắc 6: Bắt đầu bằng lời khen\n\nKhi muốn thay đổi hành vi của ai đó, hãy bắt đầu bằng việc khen ngợi những điểm tốt của họ. Điều này sẽ tạo ra một bầu không khí tích cực và khiến họ dễ tiếp nhận những góp ý của bạn.\n\nNguyên tắc 7: Gọi tên người khác\n\nTên của một người là âm thanh ngọt ngào nhất đối với họ. Hãy nhớ và sử dụng tên của người khác trong cuộc trò chuyện.\n\nChương 5: Bảy Quy Tắc Để Gia Đình Hạnh Phúc\n\nNguyên tắc 8: Không tranh cãi\n\nTranh cãi không bao giờ giải quyết được vấn đề. Thay vào đó, hãy tìm cách thảo luận một cách bình tĩnh và tôn trọng lẫn nhau.\n\nNguyên tắc 9: Thừa nhận sai lầm\n\nKhi bạn sai, hãy thừa nhận điều đó một cách nhanh chóng và rõ ràng. Điều này sẽ giúp bạn duy trì được sự tôn trọng của người khác.\n\nChương 6: Sáu Cách Làm Cho Người Khác Thích Bạn\n\nNguyên tắc 10: Để người khác cảm thấy quan trọng\n\nMọi người đều muốn cảm thấy mình quan trọng. Hãy thể hiện sự tôn trọng và đánh giá cao đối với người khác.\n\nNguyên tắc 11: Khuyến khích người khác nói về bản thân\n\nHãy đặt câu hỏi và để người khác chia sẻ về bản thân họ. Điều này sẽ khiến họ cảm thấy được quan tâm và tôn trọng.\n\nChương 7: Mười Hai Cách Thắng Người Trong Tranh Luận\n\nNguyên tắc 12: Tránh tranh luận\n\nCách tốt nhất để thắng trong một cuộc tranh luận là tránh nó. Hãy tìm cách thỏa hiệp thay vì cố gắng chứng minh mình đúng.\n\nNguyên tắc 13: Tôn trọng ý kiến của người khác\n\nHãy tôn trọng ý kiến của người khác, ngay cả khi bạn không đồng ý với họ. Mọi người đều có quyền có ý kiến riêng.\n\nChương 8: Kết Luận\n\nNhững nguyên tắc trong cuốn sách này không phải là những quy tắc cứng nhắc, mà là những hướng dẫn để cải thiện mối quan hệ với người khác. Hãy áp dụng chúng một cách linh hoạt và phù hợp với hoàn cảnh.\n\nHãy nhớ rằng, mục đích cuối cùng không phải là thao túng người khác, mà là xây dựng những mối quan hệ chân thành và bền vững dựa trên sự tôn trọng và hiểu biết lẫn nhau.",
+      "cover_image": "images/books/img-03.jpg",
+      "description": "Cuốn sách kinh điển về nghệ thuật đối nhân xử thế, giúp độc giả phát triển kỹ năng giao tiếp và xây dựng mối quan hệ tốt đẹp.",
+      "dimensions": "16x24cm",
+      "download_count": 3200,
+      "file_format": "PDF",
+      "file_size": "4.1MB",
+      "format": "Hardcover",
+      "genre": "Kỹ năng sống",
+      "genre_code": "KY_NANG_SONG",
+      "is_featured": true,
+      "is_free": false,
+      "is_member_only": false,
+      "isbn": "978-604-1-12347-8",
+      "language": "Vietnamese",
+      "original_price": 500000,
+      "pages": 320,
+      "price": 450000,
+      "publish_date": "2023-09-10",
+      "publisher": "NXB Tổng Hợp",
+      "rating": 4.8,
+      "review_count": 567,
+      "stock": 30,
+      "tags": [
+        "kỹ năng sống",
+        "giao tiếp",
+        "Dale Carnegie",
+        "phát triển bản thân"
+      ],
+      "title": "Đắc Nhân Tâm",
+      "view_count": 18900,
+      "weight": 400
+    },
+    "book_004": {
+      "author": "J.K. Rowling",
+      "book_id": "BK004",
+      "category_code": "SHV003",
+      "category_name": "Member Books",
+      "content": "Chương 1: Cậu Bé Sống Sót\n\nHarry Potter không biết rằng mình là một phù thủy. Cậu sống với gia đình Dursley - chú Vernon, dì Petunia và anh họ Dudley - trong một ngôi nhà nhỏ ở số 4, Privet Drive. Harry bị đối xử như một người hầu trong chính ngôi nhà của mình.\n\nMười năm trước, cha mẹ Harry - James và Lily Potter - đã bị giết bởi Chúa tể Hắc ám Voldemort. Nhưng khi Voldemort cố gắng giết Harry, cậu bé đã sống sót một cách kỳ lạ, và Voldemort biến mất. Harry chỉ có một vết sẹo hình tia chớp trên trán.\n\nChương 2: Thư Từ Không Ai\n\nVào sinh nhật lần thứ 11 của Harry, những bức thư bí ẩn bắt đầu xuất hiện. Chúng được gửi đến cho Harry, nhưng chú Vernon cố gắng ngăn cản Harry nhận chúng. Thư được gửi từ Trường Phù thủy và Pháp sư Hogwarts.\n\nChú Vernon đưa cả gia đình đến một hòn đảo hoang để tránh thư, nhưng vào đêm sinh nhật Harry, một người khổng lồ tên là Rubeus Hagrid xuất hiện và thông báo cho Harry rằng cậu là một phù thủy.\n\nChương 3: Đường Diagon\n\nHagrid đưa Harry đến Đường Diagon, một con phố ẩn giữa London dành cho phù thủy. Tại đây, Harry mua sắm những vật dụng cần thiết cho năm học đầu tiên tại Hogwarts.\n\nHarry cũng biết được rằng mình nổi tiếng trong thế giới phù thủy vì đã đánh bại Voldemort khi còn là một đứa trẻ. Cậu cũng nhận được một con cú trắng tên là Hedwig làm quà sinh nhật.\n\nChương 4: Ga King's Cross\n\nHarry và gia đình Dursley đến Ga King's Cross để bắt tàu đến Hogwarts. Harry phải tìm Sân ga 9¾, một sân ga ẩn giữa sân ga 9 và 10. Tại đây, cậu gặp gia đình Weasley và trở nên thân thiết với Ron Weasley.\n\nTrên tàu, Harry cũng gặp Hermione Granger, một cô gái thông minh và ham học hỏi. Ba người trở thành bạn thân thiết.\n\nChương 5: Phân Loại\n\nKhi đến Hogwarts, tất cả học sinh năm nhất phải tham gia lễ Phân Loại. Chiếc mũ Phân Loại sẽ quyết định họ thuộc về nhà nào: Gryffindor, Hufflepuff, Ravenclaw hay Slytherin.\n\nHarry, Ron và Hermione đều được phân vào nhà Gryffindor. Harry cũng gặp Draco Malfoy, một học sinh nhà Slytherin và trở thành kẻ thù của cậu.\n\nChương 6: Những Bài Học Đầu Tiên\n\nHarry bắt đầu học những môn học phù thủy: Biến hình với giáo sư McGonagall, Độc dược với giáo sư Snape, và Lịch sử Pháp thuật với giáo sư Binns.\n\nHarry cũng học bay trên chổi và được chọn làm Seeker cho đội Quidditch của nhà Gryffindor, một vinh dự hiếm có đối với học sinh năm nhất.\n\nChương 7: Căn Hầm Bí Mật\n\nHarry, Ron và Hermione phát hiện ra rằng có một căn hầm bí mật trong lâu đài Hogwarts. Họ cũng biết được rằng có một vật gì đó rất quý giá được bảo vệ trong căn hầm đó.\n\nBa người bạn bắt đầu điều tra và phát hiện ra rằng có ai đó đang cố gắng đánh cắp Hòn đá Phù thủy, một vật có thể ban sự bất tử.\n\nChương 8: Trận Đấu Quidditch\n\nHarry tham gia trận đấu Quidditch đầu tiên của mình. Trong trận đấu, chổi bay của Harry bị ai đó nguyền rủa và cậu suýt rơi xuống đất. Hermione phát hiện ra rằng giáo sư Snape đang nguyền rủa chổi của Harry.\n\nChương 9: Rừng Cấm\n\nHarry bị phạt vì vi phạm nội quy và phải đi vào Rừng Cấm cùng với Hagrid. Trong rừng, Harry gặp một sinh vật bí ẩn đang uống máu của một con kỳ lân chết.\n\nHarry nhận ra rằng sinh vật đó chính là Voldemort, người đang cố gắng lấy lại sức mạnh bằng cách uống máu kỳ lân.\n\nChương 10: Bảo Vệ Hòn Đá\n\nHarry, Ron và Hermione quyết định bảo vệ Hòn đá Phù thủy. Họ phải vượt qua nhiều thử thách nguy hiểm để đến được căn hầm nơi Hòn đá được cất giữ.\n\nTrong căn hầm cuối cùng, Harry phải đối mặt với Voldemort, người đang cố gắng lấy lại cơ thể bằng cách sử dụng Hòn đá Phù thủy.\n\nChương 11: Kết Thúc Năm Học\n\nHarry thành công trong việc bảo vệ Hòn đá Phù thủy và ngăn chặn Voldemort. Cậu cũng học được nhiều bài học quý giá về tình bạn, lòng dũng cảm và sự hy sinh.\n\nNăm học đầu tiên tại Hogwarts kết thúc, và Harry trở về nhà Dursley với những kỷ niệm đẹp và những người bạn thân thiết.",
+      "cover_image": "images/books/img-04.jpg",
+      "description": "Cuốn đầu tiên trong series Harry Potter, kể về cậu bé phù thủy Harry Potter và những cuộc phiêu lưu tại trường Hogwarts.",
+      "dimensions": "15x22cm",
+      "download_count": 1800,
+      "file_format": "PDF",
+      "file_size": "5.8MB",
+      "format": "Hardcover",
+      "genre": "Fantasy",
+      "genre_code": "FANTASY",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": true,
+      "isbn": "978-604-1-12348-9",
+      "language": "Vietnamese",
+      "original_price": 650000,
+      "pages": 400,
+      "price": 600000,
+      "publish_date": "2023-12-05",
+      "publisher": "NXB Trẻ",
+      "rating": 4.7,
+      "review_count": 890,
+      "stock": 25,
+      "tags": [
+        "fantasy",
+        "Harry Potter",
+        "J.K. Rowling",
+        "phù thủy"
+      ],
+      "title": "Harry Potter và Hòn đá Phù thủy",
+      "view_count": 12300,
+      "weight": 350
+    },
+    "book_005": {
+      "author": "Tác giả Ẩn danh",
+      "book_id": "BK005",
+      "category_code": "SM001",
+      "category_name": "New Books",
+      "content": "Chương 1: Giới Thiệu Về Sách Đỏ\n\nSách Đỏ Việt Nam là một tài liệu quan trọng ghi chép và đánh giá tình trạng bảo tồn các loài động vật, thực vật hoang dã tại Việt Nam. Cuốn sách này được biên soạn dựa trên các tiêu chuẩn của Liên minh Bảo tồn Thiên nhiên Quốc tế (IUCN).\n\nViệt Nam là một trong những quốc gia có đa dạng sinh học cao nhất thế giới, với nhiều loài động vật và thực vật đặc hữu. Tuy nhiên, do tác động của con người, nhiều loài đang đứng trước nguy cơ tuyệt chủng.\n\nChương 2: Các Loài Động Vật Có Vú\n\n2.1 Voi Châu Á (Elephas maximus)\n\nVoi châu Á là loài động vật có vú lớn nhất ở Việt Nam. Chúng thường sống trong các khu rừng rậm rạp và cần một diện tích sinh sống rộng lớn. Hiện tại, số lượng voi hoang dã ở Việt Nam chỉ còn khoảng 100-150 cá thể.\n\nNguyên nhân chính dẫn đến sự suy giảm số lượng voi là do mất môi trường sống và nạn săn bắn trái phép để lấy ngà voi.\n\n2.2 Hổ Đông Dương (Panthera tigris corbetti)\n\nHổ Đông Dương là một trong những loài mèo lớn quý hiếm nhất thế giới. Chúng thường sống trong các khu rừng rậm rạp và săn mồi vào ban đêm. Hiện tại, số lượng hổ hoang dã ở Việt Nam chỉ còn khoảng 5-10 cá thể.\n\nChương 3: Các Loài Chim\n\n3.1 Sếu Đầu Đỏ (Grus antigone)\n\nSếu đầu đỏ là loài chim cao nhất thế giới, có thể cao đến 1.8m. Chúng thường sống ở các vùng đất ngập nước và đồng cỏ. Sếu đầu đỏ là biểu tượng của sự may mắn và trường thọ trong văn hóa Việt Nam.\n\nHiện tại, số lượng sếu đầu đỏ ở Việt Nam chỉ còn khoảng 10-15 cá thể, chủ yếu tập trung ở Vườn Quốc gia Tràm Chim.\n\n3.2 Gà Lôi Lam Mào Trắng (Lophura edwardsi)\n\nGà lôi lam mào trắng là loài chim đặc hữu của Việt Nam, chỉ được tìm thấy ở các khu rừng rậm rạp thuộc dãy Trường Sơn. Chúng có bộ lông màu xanh lam đẹp mắt và mào trắng nổi bật.\n\nChương 4: Các Loài Bò Sát\n\n4.1 Rùa Núi Vàng (Cuora bourreti)\n\nRùa núi vàng là loài rùa đặc hữu của Việt Nam, chỉ được tìm thấy ở các khu vực núi cao thuộc dãy Hoàng Liên Sơn. Chúng có mai màu vàng đặc trưng và thường sống ở độ cao 1.500-2.000m.\n\n4.2 Rắn Hổ Mang Chúa (Ophiophagus hannah)\n\nRắn hổ mang chúa là loài rắn độc dài nhất thế giới, có thể dài đến 5.5m. Chúng thường sống trong các khu rừng rậm rạp và săn các loài rắn khác làm thức ăn.\n\nChương 5: Các Loài Cá\n\n5.1 Cá Chép Vảy Rồng (Cyprinus carpio)\n\nCá chép vảy rồng là loài cá đặc hữu của Việt Nam, chỉ được tìm thấy ở sông Hồng và các chi lưu của nó. Chúng có vảy lớn và đẹp, thường được nuôi làm cảnh.\n\n5.2 Cá Tra Dầu (Pangasius sanitwongsei)\n\nCá tra dầu là loài cá nước ngọt lớn, có thể dài đến 3m và nặng đến 300kg. Chúng thường sống ở các sông lớn như sông Mekong và sông Đồng Nai.\n\nChương 6: Các Loài Thực Vật\n\n6.1 Thông Đỏ (Taxus chinensis)\n\nThông đỏ là loài cây gỗ quý hiếm, có thể cao đến 20m. Chúng thường mọc ở các khu vực núi cao và có giá trị dược liệu cao. Vỏ cây thông đỏ chứa chất taxol, được sử dụng trong điều trị ung thư.\n\n6.2 Lan Hài (Paphiopedilum spp.)\n\nLan hài là một chi lan đặc hữu của Việt Nam, có hoa đẹp và quý hiếm. Chúng thường mọc ở các khu vực núi cao và rừng rậm rạp. Nhiều loài lan hài đang đứng trước nguy cơ tuyệt chủng do nạn khai thác trái phép.\n\nChương 7: Nguyên Nhân Suy Giảm\n\n7.1 Mất Môi Trường Sống\n\nMột trong những nguyên nhân chính dẫn đến sự suy giảm các loài động vật và thực vật hoang dã là do mất môi trường sống. Việc chặt phá rừng, chuyển đổi đất rừng thành đất nông nghiệp và đô thị hóa đã làm thu hẹp diện tích sinh sống của nhiều loài.\n\n7.2 Nạn Săn Bắn Trái Phép\n\nNạn săn bắn trái phép để lấy thịt, da, xương và các bộ phận khác của động vật hoang dã cũng là một nguyên nhân quan trọng dẫn đến sự suy giảm số lượng các loài.\n\n7.3 Buôn Bán Trái Phép\n\nBuôn bán trái phép các loài động vật và thực vật hoang dã cũng là một vấn đề nghiêm trọng. Nhiều loài được buôn bán để làm thú cưng, làm thuốc hoặc làm đồ trang trí.\n\nChương 8: Biện Pháp Bảo Tồn\n\n8.1 Thiết Lập Các Khu Bảo Tồn\n\nViệc thiết lập các khu bảo tồn thiên nhiên, vườn quốc gia và khu dự trữ sinh quyển là một trong những biện pháp quan trọng để bảo vệ các loài động vật và thực vật hoang dã.\n\n8.2 Tăng Cường Giám Sát\n\nTăng cường giám sát và thực thi pháp luật để ngăn chặn các hoạt động săn bắn và buôn bán trái phép động vật hoang dã.\n\n8.3 Nâng Cao Nhận Thức\n\nNâng cao nhận thức của cộng đồng về tầm quan trọng của việc bảo tồn đa dạng sinh học và các loài động vật, thực vật hoang dã.\n\nChương 9: Kết Luận\n\nViệc bảo tồn đa dạng sinh học và các loài động vật, thực vật hoang dã là trách nhiệm của tất cả mọi người. Chúng ta cần hành động ngay bây giờ để bảo vệ những di sản thiên nhiên quý giá này cho các thế hệ tương lai.\n\nSách Đỏ Việt Nam không chỉ là một tài liệu khoa học, mà còn là một lời cảnh báo về tình trạng đáng báo động của đa dạng sinh học nước ta. Chúng ta cần có những hành động cụ thể và thiết thực để bảo vệ môi trường và các loài sinh vật quý hiếm.",
+      "cover_image": "images/books/img-05.jpg",
+      "description": "Cuốn sách miễn phí về các loài động vật quý hiếm cần được bảo vệ tại Việt Nam.",
+      "dimensions": "14x20cm",
+      "download_count": 3500,
+      "file_format": "PDF",
+      "file_size": "1.8MB",
+      "format": "Paperback",
+      "genre": "Khoa học",
+      "genre_code": "KHOA_HOC",
+      "is_featured": false,
+      "is_free": true,
+      "is_member_only": false,
+      "isbn": "978-604-1-12349-0",
+      "language": "Vietnamese",
+      "original_price": 0,
+      "pages": 150,
+      "price": 0,
+      "publish_date": "2024-02-01",
+      "publisher": "NXB Khoa Học",
+      "rating": 4,
+      "review_count": 45,
+      "stock": 100,
+      "tags": [
+        "miễn phí",
+        "động vật",
+        "bảo tồn",
+        "thiên nhiên"
+      ],
+      "title": "Sách Đỏ",
+      "view_count": 8900,
+      "weight": 180
+    },
+    "book_006": {
+      "author": "Tôn Tử",
+      "book_id": "BK006",
+      "category_code": "SHV003",
+      "category_name": "Member Books",
+      "cover_image": "images/books/img-06.jpg",
+      "description": "Cuốn sách cổ điển về chiến lược và nghệ thuật quân sự, được áp dụng rộng rãi trong kinh doanh và cuộc sống.",
+      "dimensions": "16x24cm",
+      "download_count": 950,
+      "file_format": "PDF",
+      "file_size": "3.5MB",
+      "format": "Hardcover",
+      "genre": "Chiến lược",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": true,
+      "isbn": "978-604-1-12350-1",
+      "language": "Vietnamese",
+      "original_price": 800000,
+      "pages": 280,
+      "price": 750000,
+      "publish_date": "2023-10-15",
+      "publisher": "NXB Quân Đội",
+      "rating": 4.6,
+      "review_count": 234,
+      "stock": 15,
+      "tags": [
+        "chiến lược",
+        "Tôn Tử",
+        "kinh doanh",
+        "leadership"
+      ],
+      "title": "Nghệ Thuật Chiến Tranh",
+      "view_count": 6700,
+      "weight": 380
+    },
+    "book_007": {
+      "author": "Nguyễn Du",
+      "book_id": "BK007",
+      "category_code": "SNB002",
+      "category_name": "Featured Books",
+      "cover_image": "images/books/img-07.jpg",
+      "description": "Tác phẩm thơ Nôm nổi tiếng của đại thi hào Nguyễn Du, kể về cuộc đời của nàng Kiều.",
+      "dimensions": "15x22cm",
+      "download_count": 2800,
+      "file_format": "PDF",
+      "file_size": "2.2MB",
+      "format": "Hardcover",
+      "genre": "Thơ",
+      "is_featured": true,
+      "is_free": false,
+      "is_member_only": false,
+      "isbn": "978-604-1-12351-2",
+      "language": "Vietnamese",
+      "original_price": 150000,
+      "pages": 180,
+      "price": 120000,
+      "publish_date": "2023-08-20",
+      "publisher": "NXB Văn Học",
+      "rating": 4.9,
+      "review_count": 678,
+      "stock": 40,
+      "tags": [
+        "thơ",
+        "Nguyễn Du",
+        "văn học cổ điển",
+        "Truyện Kiều"
+      ],
+      "title": "Truyện Kiều",
+      "view_count": 15600,
+      "weight": 300
+    },
+    "book_008": {
+      "author": "Nhiều tác giả",
+      "book_id": "BK008",
+      "category_code": "SM001",
+      "category_name": "New Books",
+      "cover_image": "images/books/img-08.jpg",
+      "description": "Cuốn sách về cuộc cách mạng công nghiệp lần thứ 4 và những tác động của nó đến thế giới.",
+      "dimensions": "14x20cm",
+      "download_count": 1200,
+      "file_format": "PDF",
+      "file_size": "3.8MB",
+      "format": "Paperback",
+      "genre": "Công nghệ",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": false,
+      "isbn": "978-604-1-12352-3",
+      "language": "Vietnamese",
+      "original_price": 300000,
+      "pages": 250,
+      "price": 250000,
+      "publish_date": "2024-01-20",
+      "publisher": "NXB Khoa Học Kỹ Thuật",
+      "rating": 4.3,
+      "review_count": 89,
+      "stock": 60,
+      "tags": [
+        "công nghệ",
+        "cách mạng 4.0",
+        "tương lai",
+        "khoa học"
+      ],
+      "title": "Cách Mạng Công Nghiệp 4.0",
+      "view_count": 7800,
+      "weight": 220
+    },
+    "book_009": {
+      "author": "Napoleon Hill",
+      "book_id": "BK009",
+      "category_code": "SHV003",
+      "category_name": "Member Books",
+      "cover_image": "images/books/img-09.jpg",
+      "description": "Cuốn sách về những nguyên tắc thành công và cách xây dựng sự giàu có từ những người thành công nhất.",
+      "dimensions": "16x24cm",
+      "download_count": 1100,
+      "file_format": "PDF",
+      "file_size": "4.5MB",
+      "format": "Hardcover",
+      "genre": "Thành công",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": true,
+      "isbn": "978-604-1-12353-4",
+      "language": "Vietnamese",
+      "original_price": 600000,
+      "pages": 320,
+      "price": 550000,
+      "publish_date": "2023-11-05",
+      "publisher": "NXB Tổng Hợp",
+      "rating": 4.4,
+      "review_count": 156,
+      "stock": 20,
+      "tags": [
+        "thành công",
+        "Napoleon Hill",
+        "làm giàu",
+        "motivation"
+      ],
+      "title": "Bí Mật Của Sự Giàu Có",
+      "view_count": 8900,
+      "weight": 350
+    },
+    "book_010": {
+      "author": "Chef Minh",
+      "book_id": "BK010",
+      "category_code": "SNB002",
+      "category_name": "Featured Books",
+      "cover_image": "images/books/img-10.jpg",
+      "description": "Cuốn sách hướng dẫn nấu ăn với 100 công thức món ăn Việt Nam và quốc tế.",
+      "dimensions": "18x26cm",
+      "download_count": 2400,
+      "file_format": "PDF",
+      "file_size": "6.2MB",
+      "format": "Hardcover",
+      "genre": "Nấu ăn",
+      "is_featured": true,
+      "is_free": false,
+      "is_member_only": false,
+      "isbn": "978-604-1-12354-5",
+      "language": "Vietnamese",
+      "original_price": 200000,
+      "pages": 280,
+      "price": 180000,
+      "publish_date": "2023-12-15",
+      "publisher": "NXB Phụ Nữ",
+      "rating": 4.6,
+      "review_count": 345,
+      "stock": 35,
+      "tags": [
+        "nấu ăn",
+        "công thức",
+        "ẩm thực",
+        "hướng dẫn"
+      ],
+      "title": "Sách Hướng Dẫn Nấu Ăn",
+      "view_count": 13400,
+      "weight": 450
+    }
+  },
+  "MembershipPackages": {
+    "package_12_months": {
+      "badge_color": "#E8944A",
+      "badge_text": "Tiết kiệm 40%",
+      "card_style": "gradient_yellow",
+      "created_date": "2024-01-01",
+      "discount_percentage": 40,
+      "duration_months": 12,
+      "features": [
+        "Đọc sách hội viên không giới hạn",
+        "Giảm 15% khi mua sách",
+        "Miễn phí giao hàng toàn quốc",
+        "Ưu tiên đặt trước sách 1-2 tuần",
+        "Nhận quà từ sự kiện"
+      ],
+      "icon": "fa-crown",
+      "is_active": true,
+      "is_best_value": true,
+      "is_new": false,
+      "is_popular": false,
+      "original_price": 1188000,
+      "package_id": "MP004",
+      "package_name": "Gói 12 Tháng",
+      "package_name_en": "12 Months Package",
+      "price": 712000
+    },
+    "package_1_month": {
+      "badge_color": "#4A6366",
+      "badge_text": "Mới",
+      "card_style": "white",
+      "created_date": "2024-01-01",
+      "discount_percentage": 0,
+      "duration_months": 1,
+      "features": [
+        "Đọc sách hội viên không giới hạn",
+        "Giảm 15% khi mua sách",
+        "Miễn phí giao hàng toàn quốc",
+        "Ưu tiên đặt trước sách",
+        "Nhận quà từ sự kiện"
+      ],
+      "icon": "fa-calendar",
+      "is_active": true,
+      "is_best_value": false,
+      "is_new": true,
+      "is_popular": false,
+      "original_price": 99000,
+      "package_id": "MP001",
+      "package_name": "Gói 1 Tháng",
+      "package_name_en": "1 Month Package",
+      "price": 99000
+    },
+    "package_3_months": {
+      "badge_color": "#28a745",
+      "badge_text": "Tiết kiệm 3%",
+      "card_style": "white",
+      "created_date": "2024-01-01",
+      "discount_percentage": 3,
+      "duration_months": 3,
+      "features": [
+        "Đọc sách hội viên không giới hạn",
+        "Giảm 15% khi mua sách",
+        "Miễn phí giao hàng toàn quốc",
+        "Ưu tiên đặt trước sách",
+        "Nhận quà từ sự kiện"
+      ],
+      "icon": "fa-calendar-check-o",
+      "is_active": true,
+      "is_best_value": false,
+      "is_new": false,
+      "is_popular": false,
+      "original_price": 297000,
+      "package_id": "MP002",
+      "package_name": "Gói 3 Tháng",
+      "package_name_en": "3 Months Package",
+      "price": 288000
+    },
+    "package_6_months": {
+      "badge_color": "#F4A261",
+      "badge_text": "Tiết kiệm 10%",
+      "card_style": "gradient_teal",
+      "created_date": "2024-01-01",
+      "discount_percentage": 10,
+      "duration_months": 6,
+      "features": [
+        "Đọc sách hội viên không giới hạn",
+        "Giảm 15% khi mua sách",
+        "Miễn phí giao hàng toàn quốc",
+        "Ưu tiên đặt trước sách 1-2 tuần",
+        "Nhận quà từ sự kiện"
+      ],
+      "icon": "fa-star",
+      "is_active": true,
+      "is_best_value": false,
+      "is_new": false,
+      "is_popular": true,
+      "original_price": 594000,
+      "package_id": "MP003",
+      "package_name": "Gói 6 Tháng",
+      "package_name_en": "6 Months Package",
+      "price": 534000
+    }
+  },
+  "Stories": {
+    "story_001": {
+      "author": "Nguyễn Du",
+      "category_code": "TM001",
+      "category_name": "New Stories",
+      "chapters": 180,
+      "comment_count": 234,
+      "content": {
+        "chapter_1": {
+          "images": [
+            {
+              "description": "Hình ảnh minh họa hai chị em Thúy Kiều và Thúy Vân trong vườn hoa, với nét đẹp thanh tao, trang trọng",
+              "url": "https://example.com/truyen-kieu-chapter1-1.jpg"
+            },
+            {
+              "description": "Minh họa Thúy Kiều đang đàn Hồ cầm trong phòng riêng, thể hiện tài năng âm nhạc",
+              "url": "https://example.com/truyen-kieu-chapter1-2.jpg"
+            }
+          ],
+          "text": "Trăm năm trong cõi người ta,\nChữ tài chữ mệnh khéo là ghét nhau.\nTrải qua một cuộc bể dâu,\nNhững điều trông thấy mà đau đớn lòng.\n\nLạ gì bỉ sắc tư phong,\nTrời xanh quen thói má hồng đánh ghen.\nCảo thơm lần giở trước đèn,\nPhong tình có lục còn truyền sử xanh.\n\nRằng năm Gia Tĩnh triều Minh,\nBốn phương phẳng lặng hai kinh vững vàng.\nCó nhà viên ngoại họ Vương,\nGia tư nghĩ cũng thường thường bậc trung.\n\nMột trai con thứ rốt lòng,\nVương Quan tên rọi nối dòng nho gia.\nĐầu lòng hai ả tố nga,\nThúy Kiều là chị em là Thúy Vân.\n\nMai cốt cách tuyết tinh thần,\nMỗi người một vẻ mười phân vẹn mười.\nVân xem trang trọng khác vời,\nKhuôn trăng đầy đặn nét ngài nở nang.\n\nHoa cười ngọc thốt đoan trang,\nMây thua nước tóc tuyết nhường màu da.\nKiều càng sắc sảo mặn mà,\nSo bề tài sắc lại là phần hơn.\n\nLàn thu thủy nét xuân sơn,\nHoa ghen thua thắm liễu hờn kém xanh.\nMột hai nghiêng nước nghiêng thành,\nSắc đành đòi một tài đành họa hai.\n\nThông minh vốn sẵn tính trời,\nPha nghề thi họa đủ mùi ca ngâm.\nCung thương làu bậc ngũ âm,\nNghề riêng ăn đứt Hồ cầm một trương.\n\nKhúc nhà tay lựa nên chương,\nMột thiên bạc mệnh lại càng não nhân.\nPhong lưu rất mực hồng quần,\nXuân xanh xấp xỉ tới tuần cập kê.\n\nÊm đềm trướng rủ màn che,\nTường đông ong bướm đi về mặc ai.",
+          "title": "Gặp gỡ đưa đường"
+        },
+        "chapter_2": {
+          "images": [
+            {
+              "description": "Cảnh lễ tảo mộ trong tiết thanh minh, với nhiều người đi lại, xe ngựa tấp nập",
+              "url": "https://example.com/truyen-kieu-chapter2-1.jpg"
+            },
+            {
+              "description": "Hình ảnh nấm mộ Đạm Tiên bên đường, với cỏ vàng úa và không khí buồn thảm",
+              "url": "https://example.com/truyen-kieu-chapter2-2.jpg"
+            }
+          ],
+          "text": "Ngày xuân con én đưa thoi,\nThiều quang chín chục đã ngoài sáu mươi.\nCỏ non xanh tận chân trời,\nCành lê trắng điểm một vài bông hoa.\n\nThanh minh trong tiết tháng ba,\nLễ là tảo mộ hội là đạp thanh.\nGần xa nô nức yến oanh,\nChị em sắm sửa bộ hành chơi xuân.\n\nDập dìu tài tử giai nhân,\nNgựa xe như nước áo quần như nêm.\nNgổn ngang gò đống kéo lên,\nThoi vàng vó rắc tro tiền giấy bay.\n\nTà tà bóng ngả về tây,\nChị em thơ thẩn dan tay ra về.\nBước dần theo ngọn tiểu khê,\nLần xem phong cảnh có bề thanh thanh.\n\nNao nao dòng nước uốn quanh,\nNhịp cầu nho nhỏ cuối ghềnh bắc ngang.\nSè sè nấm đất bên đường,\nRầu rầu ngọn cỏ nửa vàng nửa xanh.\n\nRằng: Sao trong tiết thanh minh,\nMà đây hương khói vắng tanh thế mà?\nVương Quan mới dẫn gần xa:\nĐạm Tiên nàng ấy xưa là ca nhi.\n\nNổi danh tài sắc một thì,\nXôn xao ngoài cửa hiếm gì yến anh.\nKiếp hồng nhan có mong manh,\nNửa chừng xuân thoắt gãy cành thiên hương.\n\nCó người khách ở viễn phương,\nXa nghe cũng nức tiếng nàng tìm chơi.\nThuyền tình vừa ghé tới nơi,\nThì đà trâm gãy bình rơi bao giờ.\n\nBuồng không lạnh ngắt như tờ,\nDấu xe ngựa đã rêu lờ mờ xanh.\nKhóc than khôn xiết sự tình,\nKhéo vô duyên bấy là mình với ta.\n\nĐã không duyên trước chăng mà,\nThì chi chút ước gọi là duyên sau.\nSắm xanh bởi tại lòng này,\nHay là hồn của bóng ma bên đường.",
+          "title": "Thề nguyền"
+        }
+      },
+      "cover_image": "https://salt.tikicdn.com/cache/w1200/ts/product/c7/2a/3a/7c7f5122f3eaad410225d941e4845482.jpg",
+      "description": "Tác phẩm thơ Nôm nổi tiếng của đại thi hào Nguyễn Du, kể về cuộc đời của nàng Kiều - một thiếu nữ tài sắc vẹn toàn nhưng gặp nhiều bất hạnh trong cuộc đời. Tác phẩm được coi là kiệt tác văn học Việt Nam với 3.254 câu thơ lục bát.",
+      "favorite_count": 890,
+      "genre": "Thơ",
+      "is_featured": false,
+      "is_free": true,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-01-15",
+      "original_price": 0,
+      "price": 0,
+      "publish_date": "1820",
+      "rating": 4.9,
+      "review_count": 678,
+      "status": "Completed",
+      "story_id": "ST001",
+      "tags": [
+        "thơ",
+        "Nguyễn Du",
+        "văn học cổ điển",
+        "Truyện Kiều",
+        "lục bát"
+      ],
+      "title": "Truyện Kiều",
+      "view_count": 15600,
+      "word_count": 3254
+    },
+    "story_002": {
+      "author": "Nhiều tác giả",
+      "category_code": "TNB002",
+      "category_name": "Featured Stories",
+      "chapters": 50,
+      "comment_count": 123,
+      "content": {
+        "chapter_1": {
+          "images": [
+            {
+              "description": "Hình ảnh Tấm đang bắt tôm tép bên bờ sông, với vẻ mặt chăm chỉ và cần cù",
+              "url": "https://example.com/tam-cam-chapter1-1.jpg"
+            },
+            {
+              "description": "Cảnh Tấm và cá bống đang trò chuyện bên bờ sông, thể hiện tình bạn thân thiết",
+              "url": "https://example.com/tam-cam-chapter1-2.jpg"
+            },
+            {
+              "description": "Hình ảnh cây thị với quả thị vàng thơm, từ đó Tấm bước ra xinh đẹp",
+              "url": "https://example.com/tam-cam-chapter1-3.jpg"
+            }
+          ],
+          "text": "Ngày xưa, có hai chị em cùng cha khác mẹ. Chị tên là Tấm, em tên là Cám. Tấm là con vợ cả, Cám là con vợ lẽ. Mẹ Cám rất ghét Tấm, thường bắt Tấm làm việc vất vả còn Cám thì được nuông chiều.\n\nMột hôm, mẹ Cám đưa cho hai chị em mỗi người một cái giỏ và bảo:\n- Ai bắt được nhiều tôm tép hơn sẽ được thưởng một cái yếm đỏ.\n\nTấm chăm chỉ bắt tôm tép, còn Cám thì ham chơi. Khi thấy Tấm bắt được đầy giỏ, Cám liền nói:\n- Chị Tấm ơi, chị xuống tắm đi, để em giữ giỏ cho.\n\nTấm tin lời em, xuống sông tắm. Cám liền đổ hết tôm tép của chị vào giỏ mình rồi về nhà trước. Khi Tấm lên bờ, thấy giỏ trống không, khóc lóc thảm thiết.\n\nBỗng có một con cá bống nổi lên mặt nước và nói:\n- Tấm ơi, đừng khóc nữa. Ta sẽ giúp chị.\n\nCá bống dạy Tấm cách bắt tôm tép và từ đó trở thành người bạn thân thiết của Tấm. Mỗi khi Tấm gọi 'Bống bống bang bang', cá bống liền nổi lên để chơi với Tấm.\n\nMẹ Cám biết chuyện, liền bắt cá bống về làm thịt. Tấm khóc thương và chôn xương cá bống dưới chân giường. Từ xương cá bống mọc lên một cây thị, đến mùa có quả thị thơm ngon.\n\nMột hôm, nhà vua đi qua, thấy quả thị đẹp liền sai lính hái. Khi lính hái quả thị, Tấm từ trong quả bước ra, xinh đẹp lạ thường. Vua đem lòng yêu Tấm và rước nàng về cung làm hoàng hậu.\n\nTừ đó, Tấm sống hạnh phúc bên nhà vua, còn mẹ con Cám thì phải chịu hậu quả của những việc ác đã làm.",
+          "title": "Tấm Cám"
+        },
+        "chapter_2": {
+          "images": [
+            {
+              "description": "Thạch Sanh đang cứu chim phượng hoàng khỏi con rắn lớn trong rừng",
+              "url": "https://example.com/thach-sanh-chapter2-1.jpg"
+            },
+            {
+              "description": "Thạch Sanh đang đánh đàn thần, tiếng đàn bay xa làm đại bàng mê mẩn",
+              "url": "https://example.com/thach-sanh-chapter2-2.jpg"
+            },
+            {
+              "description": "Cảnh Thạch Sanh và công chúa sum họp sau khi được giải oan",
+              "url": "https://example.com/thach-sanh-chapter2-3.jpg"
+            }
+          ],
+          "text": "Ngày xưa, có một chàng trai tên là Thạch Sanh, mồ côi cha mẹ từ nhỏ, sống trong một túp lều tranh nghèo nàn. Thạch Sanh rất hiền lành, tốt bụng và chăm chỉ làm việc.\n\nMột hôm, Thạch Sanh đi vào rừng kiếm củi, bỗng gặp một con rắn lớn đang quấn chặt một con chim. Thạch Sanh liền dùng rìu chém chết con rắn, cứu được con chim.\n\nCon chim đó chính là chim phượng hoàng, con của vua chim. Để trả ơn, vua chim tặng cho Thạch Sanh một cây đàn thần và dạy chàng cách đánh đàn.\n\nTừ đó, Thạch Sanh thường đánh đàn để giải khuây. Tiếng đàn của chàng vang xa, ai nghe cũng phải mê mẩn.\n\nLúc bấy giờ, trong vùng có một con đại bàng hung ác, thường bắt người và súc vật. Vua nước đó treo giải: ai giết được con đại bàng sẽ được gả công chúa.\n\nThạch Sanh quyết định đi giết đại bàng. Chàng mang theo cây đàn thần và một con dao. Khi gặp đại bàng, Thạch Sanh liền đánh đàn. Tiếng đàn làm đại bàng mê mẩn, không còn hung hăng nữa.\n\nThạch Sanh liền dùng dao chém chết đại bàng. Từ trong hang đại bàng, chàng cứu được công chúa và nhiều người khác bị bắt.\n\nVua rất vui mừng, liền gả công chúa cho Thạch Sanh. Nhưng Lý Thông, một kẻ xấu xa, đã lừa Thạch Sanh và chiếm công lao của chàng.\n\nSau đó, Thạch Sanh bị bắt oan và bị giam trong ngục. Trong ngục, chàng đánh đàn để giải khuây. Tiếng đàn vang xa đến tai công chúa.\n\nCông chúa nhận ra tiếng đàn của người đã cứu mình, liền báo cho vua cha. Vua cho điều tra và phát hiện ra sự thật. Lý Thông bị trừng trị, còn Thạch Sanh được giải oan và sống hạnh phúc bên công chúa.",
+          "title": "Thạch Sanh"
+        }
+      },
+      "cover_image": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
+      "description": "Tuyển tập những câu chuyện cổ tích dân gian Việt Nam được yêu thích nhất như: Tấm Cám, Thạch Sanh, Sọ Dừa, Cây Khế... Những câu chuyện mang đậm bản sắc văn hóa Việt Nam với bài học về đạo đức và nhân cách.",
+      "favorite_count": 567,
+      "genre": "Cổ tích",
+      "is_featured": true,
+      "is_free": false,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-01-10",
+      "original_price": 75000,
+      "price": 50000,
+      "publish_date": "2023-10-15",
+      "rating": 4.7,
+      "review_count": 456,
+      "status": "Completed",
+      "story_id": "ST002",
+      "tags": [
+        "cổ tích",
+        "dân gian",
+        "Việt Nam",
+        "thiếu nhi",
+        "Tấm Cám",
+        "Thạch Sanh"
+      ],
+      "title": "Truyện Cổ Tích Việt Nam",
+      "view_count": 12300,
+      "word_count": 15000
+    },
+    "story_003": {
+      "author": "Nam Cao",
+      "category_code": "TMF003",
+      "category_name": "Free Stories",
+      "chapters": 25,
+      "comment_count": 89,
+      "content": {
+        "chapter_1": {
+          "images": [
+            {
+              "description": "Hình ảnh lão Hạc già nua, nghèo khổ đang ngồi bên con chó Vàng trong căn nhà nhỏ",
+              "url": "https://example.com/lao-hac-chapter1-1.jpg"
+            },
+            {
+              "description": "Cảnh lão Hạc đau khổ sau khi bán con chó Vàng, ngồi một mình trong bóng tối",
+              "url": "https://example.com/lao-hac-chapter1-2.jpg"
+            },
+            {
+              "description": "Con chó Vàng trở về nhà, tìm kiếm chủ nhân đã mất trong vô vọng",
+              "url": "https://example.com/lao-hac-chapter1-3.jpg"
+            }
+          ],
+          "text": "Lão Hạc là một người nông dân nghèo khổ, sống cô đơn trong một căn nhà nhỏ ở làng Vũ Đại. Lão có một con chó vàng tên là Vàng, người bạn duy nhất của lão trong những năm tháng cuối đời.\n\nLão Hạc từng có một người con trai, nhưng anh ta đã bỏ làng đi làm ăn xa. Lão sống một mình với con chó Vàng, ngày ngày làm lụng vất vả để kiếm sống. Dù nghèo khổ, lão vẫn giữ được lòng tự trọng và tình yêu thương với con chó của mình.\n\nKhi lương thực cạn kiệt, lão Hạc phải đối mặt với một quyết định khó khăn. Lão không muốn bán con chó Vàng, nhưng cũng không muốn để nó chết đói. Cuối cùng, lão quyết định bán Vàng để có tiền mua gạo.\n\nSau khi bán Vàng, lão Hạc cảm thấy vô cùng đau khổ và hối hận. Lão không thể ăn được, không thể ngủ được vì nhớ thương con chó. Lão cảm thấy mình đã phản bội người bạn trung thành duy nhất.\n\nMột ngày nọ, lão Hạc được tin con trai lão đã chết ở xứ người. Lão cảm thấy cuộc đời mình không còn ý nghĩa gì nữa. Lão quyết định kết thúc cuộc đời mình bằng cách ăn bả chó mà lão đã mua để giết Vàng.\n\nTrước khi chết, lão Hạc để lại tất cả tài sản của mình cho ông giáo, người hàng xóm tốt bụng. Lão muốn đảm bảo rằng con chó Vàng sẽ được chăm sóc tốt nếu nó trở về.\n\nTruyện kết thúc với hình ảnh con chó Vàng trở về nhà, tìm kiếm chủ nhân của mình trong vô vọng. Câu chuyện thể hiện tình yêu thương, lòng trung thành và sự hy sinh cao cả của lão Hạc.",
+          "title": "Lão Hạc"
+        },
+        "chapter_2": {
+          "images": [
+            {
+              "description": "Chí Phèo với bộ mặt gớm ghiếc, đang say rượu và chửi bới trên đường làng",
+              "url": "https://example.com/chi-pheo-chapter2-1.jpg"
+            },
+            {
+              "description": "Thị Nở đang cho Chí Phèo ăn bát cháo hành, thể hiện tình yêu thương chân thành",
+              "url": "https://example.com/chi-pheo-chapter2-2.jpg"
+            },
+            {
+              "description": "Cảnh Chí Phèo tuyệt vọng, đứng trước câu hỏi 'Ai cho tao lương thiện?'",
+              "url": "https://example.com/chi-pheo-chapter2-3.jpg"
+            }
+          ],
+          "text": "Chí Phèo sinh ra trong một cái lò gạch bỏ hoang, không biết cha mẹ là ai. Từ nhỏ, Chí đã phải sống cuộc đời bơ vơ, không nơi nương tựa. Lớn lên, Chí làm canh điền cho nhà Bá Kiến, một địa chủ giàu có và độc ác trong làng Vũ Đại.\n\nChí Phèo vốn là một thanh niên hiền lành, tốt bụng. Nhưng một lần, vì bịa chuyện, Chí bị Bá Kiến đẩy vào tù. Sau bảy, tám năm ở tù, Chí trở về làng với bộ mặt gớm ghiếc, tính tình hung hăng và trở thành một kẻ say rượu.\n\nTừ đó, Chí Phèo trở thành nỗi khiếp sợ của dân làng. Chí thường xuyên say rượu, chửi bới và đe dọa mọi người. Dân làng coi Chí như một con quỷ dữ, ai cũng tránh xa.\n\nMột đêm, Chí Phèo say rượu đi qua nhà Thị Nở, một người đàn bà xấu xí và ngờ nghệch. Thị Nở đã cho Chí ăn bát cháo hành và chăm sóc Chí khi Chí bị ốm. Tình yêu thương chân thành của Thị Nở đã đánh thức phần người trong Chí.\n\nChí Phèo bắt đầu mơ ước về một cuộc sống bình thường, có vợ có con. Chí muốn làm lại cuộc đời, trở thành một người lương thiện. Nhưng bà cô của Thị Nở không đồng ý cho cháu gái lấy Chí Phèo.\n\nThị Nở nghe lời bà cô, từ chối Chí Phèo. Chí cảm thấy tuyệt vọng và nhận ra rằng mình không thể trở thành người lương thiện được nữa. Chí uống rượu say và đi đến nhà Bá Kiến để trả thù.\n\nChí Phèo đâm chết Bá Kiến và sau đó tự sát. Trước khi chết, Chí kêu lên: 'Ai cho tao lương thiện?' - một câu hỏi đau đớn về số phận con người trong xã hội bất công.",
+          "title": "Chí Phèo"
+        }
+      },
+      "cover_image": "https://conmuamuaha31.wordpress.com/wp-content/uploads/2020/10/1.png?w=809",
+      "description": "Tuyển tập những truyện ngắn hay nhất của nhà văn Nam Cao như: Lão Hạc, Chí Phèo, Đời Thừa... Những tác phẩm phản ánh chân thực cuộc sống người nông dân Việt Nam trước Cách mạng tháng Tám.",
+      "favorite_count": 345,
+      "genre": "Truyện ngắn",
+      "is_featured": false,
+      "is_free": true,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-01-20",
+      "original_price": 0,
+      "price": 0,
+      "publish_date": "1943",
+      "rating": 4.5,
+      "review_count": 234,
+      "status": "Completed",
+      "story_id": "ST003",
+      "tags": [
+        "truyện ngắn",
+        "Nam Cao",
+        "văn học hiện thực",
+        "Lão Hạc",
+        "Chí Phèo",
+        "miễn phí"
+      ],
+      "title": "Truyện Ngắn Nam Cao",
+      "view_count": 8900,
+      "word_count": 8000
+    },
+    "story_004": {
+      "author": "Nguyễn Nhật Ánh",
+      "category_code": "THV004",
+      "category_name": "Member Stories",
+      "chapters": 100,
+      "comment_count": 67,
+      "cover_image": "https://cdn1.fahasa.com/media/catalog/product/b/i/bia1t1_4.jpg?_gl=1*1ekjduk*_ga*ODA5NzA5MTQuMTc0NTQ1NzQ2Ng..*_ga_D3YYPWQ9LN*czE3NDcwNTI5NTAkbzU0JGcxJHQxNzQ3MDU4ODYyJGowJGwwJGgw*_gcl_aw*R0NMLjE3NDU0NzA2NjUuQ2p3S0NBanduNkxBQmhCU0Vpd0FzTkpyam5GRV92Wlc1NVdsNUpuVHgzNVRGanNUd3IxQXNuV0pxUHA0SDNvREZBWS1rR3JMQW1EUXd4b0N2dHNRQXZEX0J3RQ..*_gcl_au*MTkzNzI0NzE2OC4xNzQ1NDU3NDY2*_ga_460L9JMC2G*czE3NDcwNTI5NTAkbzUzJGcxJHQxNzQ3MDU4ODYzJGo1NSRsMCRoMTcwNzE4OTYwOQ..",
+      "description": "Tuyển tập những tác phẩm nổi tiếng của nhà văn Nguyễn Nhật Ánh như: Tôi Thấy Hoa Vàng Trên Cỏ Xanh, Cô Gái Đến Từ Hôm Qua, Mắt Biếc... Những câu chuyện tình yêu tuổi học trò đầy cảm xúc.",
+      "favorite_count": 234,
+      "genre": "Tình cảm",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": true,
+      "language": "Vietnamese",
+      "last_updated": "2024-01-25",
+      "original_price": 150000,
+      "price": 100000,
+      "publish_date": "2023-11-01",
+      "rating": 4.8,
+      "review_count": 123,
+      "status": "Completed",
+      "story_id": "ST004",
+      "tags": [
+        "Nguyễn Nhật Ánh",
+        "tình yêu",
+        "tuổi học trò",
+        "VIP",
+        "độc quyền",
+        "romance"
+      ],
+      "title": "Tuyển Tập Nguyễn Nhật Ánh",
+      "view_count": 5600,
+      "word_count": 25000
+    },
+    "story_005": {
+      "author": "Vũ Trọng Phụng",
+      "category_code": "TM001",
+      "category_name": "New Stories",
+      "chapters": 15,
+      "comment_count": 45,
+      "cover_image": "https://cdn1.fahasa.com/media/catalog/product/b/_/b_a_o_.jpg",
+      "description": "Tuyển tập những tác phẩm nổi tiếng của nhà văn Vũ Trọng Phụng như: Số Đỏ, Giông Tố, Vỡ Đê... Những tác phẩm phê phán xã hội sâu sắc với lối viết hài hước, châm biếm.",
+      "favorite_count": 156,
+      "genre": "Tiểu thuyết",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-01-30",
+      "original_price": 50000,
+      "price": 30000,
+      "publish_date": "1936",
+      "rating": 4.3,
+      "review_count": 89,
+      "status": "Completed",
+      "story_id": "ST005",
+      "tags": [
+        "Vũ Trọng Phụng",
+        "Số Đỏ",
+        "Giông Tố",
+        "phê phán xã hội",
+        "hài hước",
+        "châm biếm"
+      ],
+      "title": "Tuyển Tập Vũ Trọng Phụng",
+      "view_count": 3400,
+      "word_count": 12000
+    },
+    "story_006": {
+      "author": "Thạch Lam",
+      "category_code": "TNB002",
+      "category_name": "Featured Stories",
+      "chapters": 30,
+      "comment_count": 78,
+      "cover_image": "https://www.ioit-hcm.ac.vn/wp-content/uploads/2023/12/hinh-2-khi-nhan-vat-phan-dien-khong-thich-lam-phan-dien.jpg",
+      "description": "Tuyển tập những truyện ngắn tinh tế của nhà văn Thạch Lam như: Hai Đứa Trẻ, Gió Lạnh Đầu Mùa, Nhà Mẹ Lê... Những tác phẩm với lối viết nhẹ nhàng, sâu lắng về cuộc sống con người.",
+      "favorite_count": 289,
+      "genre": "Truyện ngắn",
+      "is_featured": true,
+      "is_free": true,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-02-01",
+      "original_price": 0,
+      "price": 0,
+      "publish_date": "1940",
+      "rating": 4.6,
+      "review_count": 156,
+      "status": "Completed",
+      "story_id": "ST006",
+      "tags": [
+        "Thạch Lam",
+        "Hai Đứa Trẻ",
+        "Gió Lạnh Đầu Mùa",
+        "truyện ngắn",
+        "tinh tế",
+        "miễn phí"
+      ],
+      "title": "Truyện Ngắn Thạch Lam",
+      "view_count": 4200,
+      "word_count": 9000
+    },
+    "story_007": {
+      "author": "Tô Hoài",
+      "category_code": "TMF003",
+      "category_name": "Free Stories",
+      "chapters": 20,
+      "comment_count": 92,
+      "cover_image": "https://qmanga.lat/thumb/to-chuc-rustynail.webp",
+      "description": "Tuyển tập những tác phẩm nổi tiếng của nhà văn Tô Hoài như: Dế Mèn Phiêu Lưu Ký, Vợ Chồng A Phủ, Nhà Nghèo... Những câu chuyện về thiên nhiên và con người miền núi.",
+      "favorite_count": 445,
+      "genre": "Truyện thiếu nhi",
+      "is_featured": false,
+      "is_free": true,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-02-05",
+      "original_price": 0,
+      "price": 0,
+      "publish_date": "1941",
+      "rating": 4.7,
+      "review_count": 234,
+      "status": "Completed",
+      "story_id": "ST007",
+      "tags": [
+        "Tô Hoài",
+        "Dế Mèn Phiêu Lưu Ký",
+        "Vợ Chồng A Phủ",
+        "thiếu nhi",
+        "miền núi",
+        "miễn phí"
+      ],
+      "title": "Tuyển Tập Tô Hoài",
+      "view_count": 7800,
+      "word_count": 11000
+    },
+    "story_008": {
+      "author": "Nguyễn Tuân",
+      "category_code": "THV004",
+      "category_name": "Member Stories",
+      "chapters": 40,
+      "comment_count": 56,
+      "cover_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjiMDOgFFCYEBLJO7lcgBkg-HkSLH7Em8r3g&s",
+      "description": "Tuyển tập những tác phẩm độc đáo của nhà văn Nguyễn Tuân như: Vang Bóng Một Thời, Sông Đà, Chữ Người Tử Tù... Những tác phẩm với lối viết tài hoa, uyên bác.",
+      "favorite_count": 178,
+      "genre": "Tùy bút",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": true,
+      "language": "Vietnamese",
+      "last_updated": "2024-02-10",
+      "original_price": 120000,
+      "price": 80000,
+      "publish_date": "1940",
+      "rating": 4.9,
+      "review_count": 89,
+      "status": "Completed",
+      "story_id": "ST008",
+      "tags": [
+        "Nguyễn Tuân",
+        "Vang Bóng Một Thời",
+        "Sông Đà",
+        "Chữ Người Tử Tù",
+        "tùy bút",
+        "VIP"
+      ],
+      "title": "Tuyển Tập Nguyễn Tuân",
+      "view_count": 3200,
+      "word_count": 18000
+    },
+    "story_009": {
+      "author": "Fujiko F. Fujio",
+      "category_code": "TM001",
+      "category_name": "New Stories",
+      "chapters": 45,
+      "comment_count": 234,
+      "content": {
+        "chapter_1": {
+          "images": [
+            {
+              "description": "Doraemon màu xanh với chiếc túi thần kỳ xuất hiện trong phòng của Nobita",
+              "url": "https://example.com/doraemon-chapter1-1.jpg"
+            },
+            {
+              "description": "Nobita đang sử dụng Cánh cửa thần kỳ để đi thám hiểm",
+              "url": "https://example.com/doraemon-chapter1-2.jpg"
+            },
+            {
+              "description": "Doraemon và Nobita đang trò chuyện vui vẻ, thể hiện tình bạn thân thiết",
+              "url": "https://example.com/doraemon-chapter1-3.jpg"
+            }
+          ],
+          "text": "Nobita là một cậu bé học sinh tiểu học, luôn gặp rắc rối trong cuộc sống và học tập. Cậu thường bị bạn bè bắt nạt, điểm số kém và không có tài năng gì đặc biệt.\n\nMột ngày nọ, khi Nobita đang buồn bã vì bị điểm kém, một chú mèo máy màu xanh từ tương lai xuất hiện. Đó chính là Doraemon, được gửi về từ thế kỷ 22 để giúp đỡ Nobita.\n\nDoraemon có một chiếc túi thần kỳ chứa đầy những bảo bối từ tương lai. Mỗi bảo bối đều có khả năng đặc biệt, giúp Nobita giải quyết các vấn đề trong cuộc sống.\n\nBảo bối đầu tiên mà Doraemon cho Nobita mượn là 'Cánh cửa thần kỳ'. Với bảo bối này, Nobita có thể đi đến bất kỳ đâu mình muốn chỉ bằng cách vẽ một cánh cửa trên tường.\n\nNobita rất vui mừng và ngay lập tức sử dụng bảo bối để đi thám hiểm. Cậu đi đến nhiều nơi thú vị và gặp gỡ những người bạn mới. Từ đó, tình bạn giữa Nobita và Doraemon bắt đầu phát triển.\n\nDoraemon không chỉ giúp Nobita giải quyết các vấn đề, mà còn dạy cậu những bài học quý giá về tình bạn, lòng dũng cảm và sự sáng tạo. Mỗi câu chuyện đều mang tính giáo dục sâu sắc.",
+          "title": "Doraemon xuất hiện"
+        },
+        "chapter_2": {
+          "images": [
+            {
+              "description": "Doraemon đang lấy các bảo bối từ chiếc túi thần kỳ của mình",
+              "url": "https://example.com/doraemon-chapter2-1.jpg"
+            },
+            {
+              "description": "Nobita đang sử dụng Bánh mì ghi nhớ để học bài",
+              "url": "https://example.com/doraemon-chapter2-2.jpg"
+            },
+            {
+              "description": "Cảnh Nobita và các bạn bay trên bầu trời bằng Bóng bay bay",
+              "url": "https://example.com/doraemon-chapter2-3.jpg"
+            }
+          ],
+          "text": "Doraemon có rất nhiều bảo bối thần kỳ trong chiếc túi của mình. Mỗi bảo bối đều có công dụng đặc biệt và được thiết kế để giúp con người trong cuộc sống hàng ngày.\n\n'Bánh mì ghi nhớ' là một bảo bối rất hữu ích. Khi ăn bánh mì này, người ta có thể ghi nhớ tất cả những gì đã học. Nobita thường sử dụng bảo bối này để học bài và đạt điểm cao.\n\n'Gậy thời gian' cho phép người sử dụng đi ngược thời gian hoặc tiến về tương lai. Với bảo bối này, Nobita có thể sửa chữa những lỗi lầm trong quá khứ.\n\n'Bóng bay bay' giúp người ta có thể bay lên trời như chim. Nobita và các bạn thường sử dụng bảo bối này để thám hiểm và khám phá thế giới từ trên cao.\n\n'Cỗ máy thời gian' là bảo bối quan trọng nhất, cho phép Doraemon và Nobita đi du lịch qua các thời đại khác nhau. Họ đã có nhiều cuộc phiêu lưu thú vị trong quá khứ và tương lai.\n\nTuy nhiên, Doraemon luôn nhắc nhở Nobita rằng không nên lạm dụng bảo bối. Mỗi bảo bối đều có mặt trái và có thể gây ra hậu quả không mong muốn nếu sử dụng không đúng cách.\n\nQua những câu chuyện với bảo bối, Nobita học được rằng sức mạnh thực sự không nằm ở những công cụ thần kỳ, mà ở trong chính bản thân mình - lòng dũng cảm, sự kiên nhẫn và tình yêu thương.",
+          "title": "Bảo bối thần kỳ"
+        }
+      },
+      "cover_image": "https://lorangeteam.com/wp-content/uploads/2024/08/Cun-con-ss2-2-copy.webp",
+      "description": "Bộ truyện tranh nổi tiếng về chú mèo máy Doraemon đến từ thế kỷ 22 để giúp đỡ cậu bé Nobita. Với những bảo bối thần kỳ, Doraemon giúp Nobita giải quyết các vấn đề trong cuộc sống và học tập. Truyện mang tính giáo dục cao với những bài học về tình bạn, lòng dũng cảm và sự sáng tạo.",
+      "favorite_count": 1567,
+      "genre": "Truyện tranh",
+      "is_featured": true,
+      "is_free": true,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-02-15",
+      "original_price": 0,
+      "price": 0,
+      "publish_date": "1969",
+      "rating": 4.8,
+      "review_count": 890,
+      "status": "Completed",
+      "story_id": "ST009",
+      "tags": [
+        "Doraemon",
+        "truyện tranh",
+        "thiếu nhi",
+        "Nhật Bản",
+        "mèo máy",
+        "bảo bối",
+        "tình bạn"
+      ],
+      "title": "Doraemon",
+      "view_count": 23400,
+      "word_count": 15000
+    },
+    "story_010": {
+      "author": "Akira Toriyama",
+      "category_code": "TNB002",
+      "category_name": "Featured Stories",
+      "chapters": 519,
+      "comment_count": 567,
+      "cover_image": "https://truyenhdt.com/wp-content/uploads/2020/01/nang-mai-sang-roi-noi-ca-khuc-duoi-cua-chong-moi-ngay-deu-bat-dong.jpg",
+      "description": "Bộ truyện tranh hành động nổi tiếng về cậu bé có đuôi khỉ Son Goku và hành trình tìm kiếm 7 viên ngọc rồng. Từ một cậu bé ngây thơ, Goku trở thành chiến binh mạnh nhất vũ trụ, bảo vệ Trái Đất khỏi những mối đe dọa từ vũ trụ. Truyện kết hợp hoàn hảo giữa võ thuật, khoa học viễn tưởng và tình cảm.",
+      "favorite_count": 2345,
+      "genre": "Truyện tranh",
+      "is_featured": true,
+      "is_free": false,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-02-20",
+      "original_price": 200000,
+      "price": 150000,
+      "publish_date": "1984",
+      "rating": 4.9,
+      "review_count": 1234,
+      "status": "Completed",
+      "story_id": "ST010",
+      "tags": [
+        "Dragon Ball",
+        "truyện tranh",
+        "hành động",
+        "võ thuật",
+        "Son Goku",
+        "ngọc rồng",
+        "Nhật Bản"
+      ],
+      "title": "Dragon Ball",
+      "view_count": 45600,
+      "word_count": 25000
+    },
+    "story_011": {
+      "author": "Eiichiro Oda",
+      "category_code": "TMF003",
+      "category_name": "Free Stories",
+      "chapters": 1080,
+      "comment_count": 789,
+      "cover_image": "https://qmanga.lat/thumb/au-yem-dau-nguc-cua-chang-gau-trong-ky-ngu-dong.jpg",
+      "description": "Bộ truyện tranh phiêu lưu về cậu bé Monkey D. Luffy và băng hải tặc Mũ Rơm trong hành trình tìm kiếm kho báu One Piece. Với khả năng co giãn như cao su, Luffy cùng các đồng đội vượt qua muôn vàn thử thách, đối đầu với những kẻ thù mạnh mẽ để trở thành Vua Hải Tặc. Truyện đề cao tình bạn, lòng dũng cảm và ước mơ.",
+      "favorite_count": 3456,
+      "genre": "Truyện tranh",
+      "is_featured": false,
+      "is_free": true,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-02-25",
+      "original_price": 0,
+      "price": 0,
+      "publish_date": "1997",
+      "rating": 4.9,
+      "review_count": 2345,
+      "status": "Ongoing",
+      "story_id": "ST011",
+      "tags": [
+        "One Piece",
+        "truyện tranh",
+        "phiêu lưu",
+        "hải tặc",
+        "Monkey D. Luffy",
+        "kho báu",
+        "tình bạn"
+      ],
+      "title": "One Piece",
+      "view_count": 67800,
+      "word_count": 35000
+    },
+    "story_012": {
+      "author": "Masashi Kishimoto",
+      "category_code": "THV004",
+      "category_name": "Member Stories",
+      "chapters": 700,
+      "comment_count": 456,
+      "cover_image": "https://qmanga.art/wp-content/uploads/2024/10/muon-khi-nao-thi-muon-thich-bao-nhieu-thi-thich.jpg",
+      "description": "Bộ truyện tranh ninja về cậu bé Naruto Uzumaki, một ninja trẻ tuổi mang trong mình con quỷ chín đuôi. Từ một kẻ bị mọi người xa lánh, Naruto trở thành Hokage - người lãnh đạo làng Lá. Truyện kể về hành trình trưởng thành, tình bạn, tình yêu và sự hy sinh vì hòa bình. Với hệ thống ninjutsu phong phú và cốt truyện sâu sắc.",
+      "favorite_count": 2890,
+      "genre": "Truyện tranh",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": true,
+      "language": "Vietnamese",
+      "last_updated": "2024-03-01",
+      "original_price": 180000,
+      "price": 120000,
+      "publish_date": "1999",
+      "rating": 4.8,
+      "review_count": 1678,
+      "status": "Completed",
+      "story_id": "ST012",
+      "tags": [
+        "Naruto",
+        "truyện tranh",
+        "ninja",
+        "Naruto Uzumaki",
+        "Hokage",
+        "ninjutsu",
+        "VIP"
+      ],
+      "title": "Naruto",
+      "view_count": 54300,
+      "word_count": 28000
+    },
+    "story_013": {
+      "author": "Nguyễn Huy Thiệp",
+      "category_code": "TM001",
+      "category_name": "New Stories",
+      "chapters": 35,
+      "comment_count": 123,
+      "cover_image": "https://bloganchoi.com/wp-content/uploads/2023/02/truyen-ngon-tinh-sung-h-hay-2023-7.jpg",
+      "description": "Tuyển tập những truyện ngắn đặc sắc của nhà văn Nguyễn Huy Thiệp như: Tướng Về Hưu, Không Có Vua, Con Gái Thủy Thần... Những tác phẩm với lối viết sắc sảo, phản ánh chân thực xã hội Việt Nam thời kỳ đổi mới. Truyện mang tính triết lý sâu sắc về con người và cuộc sống.",
+      "favorite_count": 234,
+      "genre": "Truyện ngắn",
+      "is_featured": false,
+      "is_free": false,
+      "is_member_only": false,
+      "language": "Vietnamese",
+      "last_updated": "2024-03-05",
+      "original_price": 60000,
+      "price": 40000,
+      "publish_date": "1987",
+      "rating": 4.6,
+      "review_count": 189,
+      "status": "Completed",
+      "story_id": "ST013",
+      "tags": [
+        "Nguyễn Huy Thiệp",
+        "Tướng Về Hưu",
+        "Không Có Vua",
+        "truyện ngắn",
+        "văn học đổi mới",
+        "triết lý"
+      ],
+      "title": "Truyện Ngắn Nguyễn Huy Thiệp",
+      "view_count": 5600,
+      "word_count": 14000
+    }
+  },
+  "StoryCategories": {
+    "featured_stories": {
+      "category_code": "TNB002",
+      "category_name": "Featured Stories",
+      "description": "Stories that are followed and highly rated by many readers",
+      "quantity": 45
+    },
+    "free_stories": {
+      "category_code": "TMF003",
+      "category_name": "Free Stories",
+      "description": "Stories that can be read for free without payment",
+      "quantity": 60
+    },
+    "member_stories": {
+      "category_code": "THV004",
+      "category_name": "Member Stories",
+      "description": "Stories exclusively for VIP members of the library",
+      "quantity": 25
+    },
+    "new_stories": {
+      "category_code": "TM001",
+      "category_name": "New Stories",
+      "description": "Stories that have just been updated or published recently",
+      "quantity": 35
+    }
+  },
+  "StoryGenres": {
+    "genre_001": {
+      "created_date": "2024-01-01",
+      "description": "Tác phẩm thơ ca với ngôn ngữ nghệ thuật và cảm xúc sâu sắc",
+      "genre_code": "THO",
+      "genre_id": "SG001",
+      "genre_name": "Thơ",
+      "genre_name_en": "Poetry",
+      "is_active": true,
+      "story_count": 1,
+      "updated_date": "2024-01-15"
+    },
+    "genre_002": {
+      "created_date": "2024-01-01",
+      "description": "Truyện cổ tích dân gian với yếu tố thần kỳ và giáo dục",
+      "genre_code": "CO_TICH",
+      "genre_id": "SG002",
+      "genre_name": "Cổ tích",
+      "genre_name_en": "Fairy Tale",
+      "is_active": true,
+      "story_count": 1,
+      "updated_date": "2024-01-15"
+    },
+    "genre_003": {
+      "created_date": "2024-01-01",
+      "description": "Truyện ngắn với cốt truyện gọn gàng và ý nghĩa sâu sắc",
+      "genre_code": "TRUYEN_NGAN",
+      "genre_id": "SG003",
+      "genre_name": "Truyện ngắn",
+      "genre_name_en": "Short Story",
+      "is_active": true,
+      "story_count": 1,
+      "updated_date": "2024-01-15"
+    },
+    "genre_004": {
+      "created_date": "2024-01-01",
+      "description": "Truyện tình cảm lãng mạn với những mối tình đẹp",
+      "genre_code": "TINH_CAM",
+      "genre_id": "SG004",
+      "genre_name": "Tình cảm",
+      "genre_name_en": "Romance",
+      "is_active": true,
+      "story_count": 1,
+      "updated_date": "2024-01-15"
+    },
+    "genre_005": {
+      "created_date": "2024-01-01",
+      "description": "Truyện phiêu lưu với những cuộc hành trình thú vị",
+      "genre_code": "PHIEU_LUU",
+      "genre_id": "SG005",
+      "genre_name": "Phiêu lưu",
+      "genre_name_en": "Adventure",
+      "is_active": true,
+      "story_count": 1,
+      "updated_date": "2024-01-15"
+    },
+    "genre_006": {
+      "created_date": "2024-01-01",
+      "description": "Truyện trinh thám với những vụ án hấp dẫn",
+      "genre_code": "TRINH_THAM",
+      "genre_id": "SG006",
+      "genre_name": "Trinh thám",
+      "genre_name_en": "Mystery",
+      "is_active": true,
+      "story_count": 0,
+      "updated_date": "2024-01-15"
+    },
+    "genre_007": {
+      "created_date": "2024-01-01",
+      "description": "Truyện kinh dị với yếu tố ma quái và hồi hộp",
+      "genre_code": "KINH_DI",
+      "genre_id": "SG007",
+      "genre_name": "Kinh dị",
+      "genre_name_en": "Horror",
+      "is_active": true,
+      "story_count": 0,
+      "updated_date": "2024-01-15"
+    },
+    "genre_008": {
+      "created_date": "2024-01-01",
+      "description": "Truyện hài hước với những tình huống vui nhộn",
+      "genre_code": "HAI_HUOC",
+      "genre_id": "SG008",
+      "genre_name": "Hài hước",
+      "genre_name_en": "Comedy",
+      "is_active": true,
+      "story_count": 0,
+      "updated_date": "2024-01-15"
+    },
+    "genre_009": {
+      "created_date": "2024-01-01",
+      "description": "Truyện lịch sử với bối cảnh thời đại cụ thể",
+      "genre_code": "LICH_SU",
+      "genre_id": "SG009",
+      "genre_name": "Lịch sử",
+      "genre_name_en": "Historical",
+      "is_active": true,
+      "story_count": 0,
+      "updated_date": "2024-01-15"
+    }
+  },
+  "users": {
+    "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
+      "profile": {
+        "createdAt": "2025-08-05T08:19:43.980Z",
+        "displayName": "Quân Phạm",
+        "email": "phamhongquan9117@gmail.com",
+        "lastUpdated": "2025-08-05T09:06:51.815Z",
+        "personalInfo": {
+          "address": "11",
+          "dateOfBirth": "01/01/1900",
+          "fullName": "Quân Phạm",
+          "gender": "Nữ",
+          "phone": "11",
+          "userId": "UVZ8L9EPFO",
+          "username": "phamhongquan9117"
+        },
+        "photoURL": "https://res.cloudinary.com/dvcebine7/image/upload/v1754384811/h58yymy2wotwvrvkvvqr.jpg",
+        "uid": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
+      }
+    }
+  }
+}

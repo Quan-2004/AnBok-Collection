@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sách - AnBok Collection</title>
+    <title>Chi tiết truyện - AnBok Collection</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -683,7 +683,7 @@
                     <span class="material-icons">arrow_back</span>
                                 Quay lại
                             </button>
-                <h1 class="header-title">Chi tiết sách</h1>
+                <h1 class="header-title">Chi tiết truyện</h1>
                         </div>
             <div class="header-right">
                 <img src="images/logo-Photoroom.png" alt="AnBok Collection" class="logo">
@@ -697,7 +697,7 @@
             <!-- Loading State -->
                         <div class="loading-container">
                 <div class="loading-spinner"></div>
-                <div class="loading-text">Đang tải thông tin sách...</div>
+                <div class="loading-text">Đang tải thông tin truyện...</div>
             </div>
         </div>
     </main>
@@ -705,6 +705,7 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
@@ -723,8 +724,18 @@
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+        
+        // Wait for Firebase to be ready
+        firebase.auth().onAuthStateChanged(function(user) {
+            console.log('Firebase Auth state changed:', user ? 'User logged in' : 'No user');
+        });
+        
+        // Test Firebase connection
+        firebase.database().ref('.info/connected').on('value', function(snap) {
+            console.log('Firebase connection status:', snap.val() ? 'Connected' : 'Disconnected');
+        });
 
-        // Get book ID from URL
+        // Get story ID from URL
         function getBookIdFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('id');
@@ -766,6 +777,31 @@
             return Math.round(((original - current) / original) * 100);
         }
 
+        // Get content preview from book content object
+        function getContentPreview(book) {
+            if (!book.content || typeof book.content !== 'object') {
+                return book.description || 'Nội dung chưa có sẵn.';
+            }
+
+            // Get first chapter content
+            const chapters = Object.values(book.content);
+            if (chapters.length === 0) {
+                return book.description || 'Nội dung chưa có sẵn.';
+            }
+
+            const firstChapter = chapters[0];
+            if (firstChapter && firstChapter.text) {
+                const preview = firstChapter.text.substring(0, 300);
+                const hasMore = firstChapter.text.length > 300;
+                return `
+                    ${preview}${hasMore ? '...' : ''}
+                    ${hasMore ? '<div class="content-fade"></div>' : ''}
+                `;
+            }
+
+            return book.description || 'Nội dung chưa có sẵn.';
+        }
+
         // Check user membership status
         async function checkUserMembership() {
             try {
@@ -774,25 +810,30 @@
                     return { hasMembership: false, membershipType: null, expiryDate: null };
                 }
 
-                const snapshot = await firebase.database().ref(`Users/${user.uid}`).once('value');
+                // Try to get user data, but don't fail if permission denied
+                try {
+                    const snapshot = await firebase.database().ref(`Users/${user.uid}`).once('value');
 
-                if (snapshot.exists()) {
-                    const userData = snapshot.val();
-                    const membership = userData.membership || {};
-                    
-                    // Check if user has active membership
-                    if (membership.isActive && membership.expiryDate) {
-                        const expiryDate = new Date(membership.expiryDate);
-                        const now = new Date();
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        const membership = userData.membership || {};
                         
-                        if (expiryDate > now) {
-                            return {
-                                hasMembership: true,
-                                membershipType: membership.type || 'premium',
-                                expiryDate: membership.expiryDate
-                            };
+                        // Check if user has active membership
+                        if (membership.isActive && membership.expiryDate) {
+                            const expiryDate = new Date(membership.expiryDate);
+                            const now = new Date();
+                            
+                            if (expiryDate > now) {
+                                return {
+                                    hasMembership: true,
+                                    membershipType: membership.type || 'premium',
+                                    expiryDate: membership.expiryDate
+                                };
+                            }
                         }
                     }
+                } catch (permissionError) {
+                    console.log('Permission denied for user data, assuming no membership');
                 }
 
                 return { hasMembership: false, membershipType: null, expiryDate: null };
@@ -843,65 +884,74 @@
             };
         }
 
-        // Load book details
+        // Load story details
         async function loadBookDetails() {
             const bookId = getBookIdFromUrl();
             
             if (!bookId) {
-                showError('Không tìm thấy ID sách', 'Vui lòng kiểm tra đường dẫn và thử lại.');
+                showError('Không tìm thấy ID truyện', 'Vui lòng kiểm tra đường dẫn và thử lại.');
+                return;
+            }
+
+            // Check if Firebase is ready
+            if (!firebase.database) {
+                console.log('Firebase not ready, retrying in 2 seconds...');
+                setTimeout(() => {
+                    loadBookDetails();
+                }, 2000);
                 return;
             }
 
             try {
                 console.log('Loading book with ID:', bookId);
                 
-                // First try to get book by ID directly
-                let snapshot = await firebase.database().ref(`Books/${bookId}`).once('value');
-                let book = snapshot.val();
-                console.log('Direct lookup result:', book);
+                // Get all stories from Firebase
+                const snapshot = await firebase.database().ref('Stories').once('value');
+                const allStories = snapshot.val();
+                console.log('All stories from Firebase:', allStories);
                 
-                // If not found, search in all books
-                if (!book) {
-                    console.log('Book not found by ID, searching in all books...');
-                    snapshot = await firebase.database().ref('Books').once('value');
-                    const allBooks = snapshot.val();
-                    console.log('All books from Firebase:', allBooks);
-                    
-                    if (allBooks) {
-                        // Search for book with matching book_id
-                        const bookEntries = Object.entries(allBooks);
-                        console.log('Book entries:', bookEntries);
+                let book = null;
+                
+                if (allStories) {
+                    // First try to find by Firebase key (e.g., story_001)
+                    if (allStories[bookId]) {
+                        book = allStories[bookId];
+                        console.log('Found story by Firebase key:', book);
+                    } else {
+                        // If not found by key, search by story_id field
+                        const storyEntries = Object.entries(allStories);
+                        console.log('Story entries:', storyEntries);
                         
-                        const foundBook = bookEntries.find(([key, bookData]) => {
-                            console.log('Checking:', key, bookData.book_id, 'against', bookId);
-                            return bookData.book_id === bookId;
+                        const foundStory = storyEntries.find(([key, storyData]) => {
+                            console.log('Checking:', key, storyData.story_id, 'against', bookId);
+                            return storyData.story_id === bookId;
                         });
                         
-                        if (foundBook) {
-                            book = foundBook[1];
-                            console.log('Found book:', book);
+                        if (foundStory) {
+                            book = foundStory[1];
+                            console.log('Found story by story_id:', book);
                         } else {
-                            console.log('No book found with ID:', bookId);
-                            // Show available book IDs for debugging
-                            const availableIds = bookEntries.map(([key, bookData]) => bookData.book_id);
-                            console.log('Available book IDs:', availableIds);
+                            console.log('No story found with ID:', bookId);
+                            // Show available story IDs for debugging
+                            const availableIds = storyEntries.map(([key, storyData]) => `${key} (${storyData.story_id})`);
+                            console.log('Available story IDs:', availableIds);
                         }
                     }
                 }
                 
                 if (!book) {
-                    showError('Không tìm thấy sách', 'Cuốn sách bạn đang tìm có thể đã bị xóa hoặc không tồn tại.');
+                    showError('Không tìm thấy truyện', 'Truyện bạn đang tìm có thể đã bị xóa hoặc không tồn tại.');
                     return;
                 }
 
                 await displayBookDetails(book);
             } catch (error) {
-                console.error('Error loading book details:', error);
-                showError('Lỗi kết nối', 'Không thể tải thông tin sách. Vui lòng kiểm tra kết nối mạng và thử lại.');
+                console.error('Error loading story details:', error);
+                showError('Lỗi kết nối', 'Không thể tải thông tin truyện. Vui lòng kiểm tra kết nối mạng và thử lại.');
             }
         }
 
-        // Display book details
+        // Display story details
         async function displayBookDetails(book) {
             const container = document.getElementById('book-detail-content');
             
@@ -983,12 +1033,12 @@
                                 </div>
                                 
                             <div class="action-buttons">
-                                <button class="${buttonClass}" onclick="${buttonInfo.action}('${book.book_id}')" style="${buttonStyle}">
+                                <button class="${buttonClass}" onclick="${buttonInfo.action}('${book.story_id}')" style="${buttonStyle}">
                                     ${buttonInfo.icon ? `<span class="material-icons">${buttonInfo.icon}</span>` : ''}
                                         ${buttonInfo.text}
                                 </button>
                                 ${buttonInfo.style !== 'membership' ? `
-                                <button class="btn-secondary-modern" onclick="addToWishlist('${book.book_id}')">
+                                <button class="btn-secondary-modern" onclick="addToWishlist('${book.story_id}')">
                                     <span class="material-icons">favorite_border</span>
                                         Yêu thích
                                 </button>
@@ -1002,8 +1052,7 @@
                                     Xem trước nội dung
                                 </div>
                                 <div class="content-preview-text">
-                                    ${book.content.substring(0, 300)}${book.content.length > 300 ? '...' : ''}
-                                    ${book.content.length > 300 ? '<div class="content-fade"></div>' : ''}
+                                    ${getContentPreview(book)}
                                 </div>
                                         </div>
                                         ` : ''}
@@ -1027,8 +1076,8 @@
                                         <span class="detail-value">${book.category_name || 'Chưa phân loại'}</span>
                                     </div>
                                     <div class="detail-item">
-                                <span class="detail-label">Số trang</span>
-                                <span class="detail-value">${book.pages || 'N/A'}</span>
+                                <span class="detail-label">Số chương</span>
+                                <span class="detail-value">${book.chapters || 'N/A'}</span>
                                     </div>
                                     <div class="detail-item">
                                 <span class="detail-label">Ngôn ngữ</span>
@@ -1045,24 +1094,24 @@
                                     </div>
                         <div>
                                     <div class="detail-item">
-                                <span class="detail-label">ISBN</span>
-                                <span class="detail-value">${book.isbn || 'N/A'}</span>
+                                <span class="detail-label">Trạng thái</span>
+                                <span class="detail-value">${book.status || 'Đang cập nhật'}</span>
                                     </div>
                                     <div class="detail-item">
-                                <span class="detail-label">Định dạng</span>
-                                <span class="detail-value">${book.format || 'N/A'}</span>
+                                <span class="detail-label">Thể loại</span>
+                                <span class="detail-value">${book.genre || 'N/A'}</span>
                                     </div>
                                     <div class="detail-item">
-                                <span class="detail-label">Kích thước</span>
-                                <span class="detail-value">${book.dimensions || 'N/A'}</span>
+                                <span class="detail-label">Số bình luận</span>
+                                <span class="detail-value">${(book.comment_count || 0).toLocaleString()}</span>
                                     </div>
                                     <div class="detail-item">
-                                <span class="detail-label">Trọng lượng</span>
-                                <span class="detail-value">${book.weight ? book.weight + 'g' : 'N/A'}</span>
+                                <span class="detail-label">Số yêu thích</span>
+                                <span class="detail-value">${(book.favorite_count || 0).toLocaleString()}</span>
                                     </div>
                                     <div class="detail-item">
-                                <span class="detail-label">Tồn kho</span>
-                                <span class="detail-value">${book.stock || '0'} cuốn</span>
+                                <span class="detail-label">Số từ</span>
+                                <span class="detail-value">${(book.word_count || 0).toLocaleString()} từ</span>
                                     </div>
                                     <div class="detail-item">
                                 <span class="detail-label">Lượt xem</span>
@@ -1095,18 +1144,18 @@
             if (window.history.length > 1) {
             window.history.back();
             } else {
-                window.location.href = 'index.html';
+                window.location.href = 'story.html';
             }
         }
 
         // Book action functions
-        function buyMembership(bookId) {
-            console.log('Buying membership for book:', bookId);
+        function buyMembership(storyId) {
+            console.log('Buying membership for story:', storyId);
             
             // Show confirmation dialog
             Swal.fire({
                 title: 'Mua gói hội viên',
-                text: 'Bạn cần mua gói hội viên để truy cập sách này. Bạn có muốn xem các gói hội viên không?',
+                text: 'Bạn cần mua gói hội viên để truy cập truyện này. Bạn có muốn xem các gói hội viên không?',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Xem gói hội viên',
@@ -1115,38 +1164,38 @@
                 cancelButtonColor: '#6c757d'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Store the book ID in localStorage to redirect back after membership purchase
-                    localStorage.setItem('redirectAfterMembership', bookId);
+                    // Store the story ID in localStorage to redirect back after membership purchase
+                    localStorage.setItem('redirectAfterMembership', storyId);
                     window.location.href = 'menbership.html';
                 }
             });
         }
 
-        function readBook(bookId) {
-            console.log('Reading book:', bookId);
+        function readBook(storyId) {
+            console.log('Reading story:', storyId);
             
             // Show modern loading toast
             Swal.fire({
-                title: 'Đang mở sách...',
-                text: 'Chuyển đến trang đọc sách',
+                title: 'Đang mở truyện...',
+                text: 'Chuyển đến trang đọc truyện',
                 icon: 'info',
                 timer: 1500,
                 showConfirmButton: false,
                 toast: true,
                 position: 'top-end'
             }).then(() => {
-                window.location.href = `read-book.html?id=${bookId}`;
+                window.location.href = `read-story.html?id=${storyId}`;
             });
         }
 
-        function addToCart(bookId) {
-            console.log('Adding to cart:', bookId);
+        function addToCart(storyId) {
+            console.log('Adding to cart:', storyId);
             
             // Add to cart logic here
             
             Swal.fire({
                 title: 'Thành công!',
-                text: 'Đã thêm sách vào giỏ hàng',
+                text: 'Đã thêm truyện vào giỏ hàng',
                 icon: 'success',
                 timer: 2000,
                 showConfirmButton: false,
@@ -1155,8 +1204,8 @@
             });
         }
 
-        function addToWishlist(bookId) {
-            console.log('Adding to wishlist:', bookId);
+        function addToWishlist(storyId) {
+            console.log('Adding to wishlist:', storyId);
             
             // Add to wishlist logic here
             
@@ -1173,7 +1222,10 @@
 
         // Load book details when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            loadBookDetails();
+            // Add a small delay to ensure Firebase is ready
+            setTimeout(() => {
+                loadBookDetails();
+            }, 1000);
         });
 
         // Add smooth scroll behavior

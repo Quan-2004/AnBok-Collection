@@ -41,6 +41,10 @@
     "Stories": {
       ".read": true,
       ".write": "auth != null"
+    },
+    "Carts": {
+      ".read": true,
+      ".write": "auth != null"
     }
   }
 } 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đọc sách - AnBok Collection</title>
+    <title>Đọc truyện - AnBok Collection</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -303,6 +303,88 @@
             background: var(--gradient-accent);
         }
 
+        /* Chapter Sections */
+        .chapter-section {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chapter-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .chapter-text {
+            font-size: 1.25rem;
+            line-height: 2;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .chapter-text p {
+            margin-bottom: 1.5em;
+        }
+
+        .chapter-text p:first-letter {
+            font-size: 3.5em;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin: 0.1em 0.1em 0 0;
+            color: var(--accent-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Chapter Images */
+        .chapter-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .image-container {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .image-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .chapter-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 20px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-style: italic;
+            background: var(--bg-primary);
+        }
+
+        /* Dark theme for images */
+        body.dark-theme .image-container {
+            background: #3a3a3a;
+        }
+
+        body.dark-theme .image-caption {
+            background: #2c2c2c;
+            color: #cccccc;
+        }
+
         /* Floating Action Button */
         .fab {
             position: fixed;
@@ -568,6 +650,24 @@
                 padding: 14px 24px;
                 font-size: 14px;
             }
+
+            .chapter-images {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .chapter-image {
+                height: 200px;
+            }
+
+            .image-caption {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+
+            .chapter-text {
+                font-size: 1.1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -589,6 +689,27 @@
             .reading-controls {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .chapter-images {
+                gap: 15px;
+            }
+
+            .chapter-image {
+                height: 180px;
+            }
+
+            .image-caption {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+
+            .chapter-text {
+                font-size: 1rem;
+            }
+
+            .chapter-title {
+                font-size: 1.5rem;
             }
         }
 
@@ -743,37 +864,37 @@
             const bookId = getBookIdFromUrl();
             
             if (!bookId) {
-                showError('Không tìm thấy ID sách');
+                showError('Không tìm thấy ID truyện');
                 return;
             }
 
             try {
-                console.log('Loading book content for ID:', bookId);
+                console.log('Loading story content for ID:', bookId);
                 
-                // Search for book in all books
-                const booksRef = window.firebaseRef(window.firebase.database(), 'Books');
-                const snapshot = await window.firebaseGet(booksRef);
-                const allBooks = snapshot.val();
+                // Search for story in all stories
+                const storiesRef = window.firebaseRef(window.firebase.database(), 'Stories');
+                const snapshot = await window.firebaseGet(storiesRef);
+                const allStories = snapshot.val();
                 
-                if (allBooks) {
-                    const bookEntries = Object.entries(allBooks);
-                    const foundBook = bookEntries.find(([key, bookData]) => 
-                        bookData.book_id === bookId
+                if (allStories) {
+                    const storyEntries = Object.entries(allStories);
+                    const foundStory = storyEntries.find(([key, storyData]) => 
+                        storyData.story_id === bookId || key === bookId
                     );
                     
-                    if (foundBook) {
-                        const book = foundBook[1];
-                        console.log('Found book:', book);
-                        displayBookContent(book);
+                    if (foundStory) {
+                        const story = foundStory[1];
+                        console.log('Found story:', story);
+                        displayBookContent(story);
                     } else {
-                        showError('Không tìm thấy sách');
+                        showError('Không tìm thấy truyện');
                     }
                 } else {
-                    showError('Không có dữ liệu sách');
+                    showError('Không có dữ liệu truyện');
                 }
             } catch (error) {
-                console.error('Error loading book content:', error);
-                showError('Lỗi khi tải nội dung sách');
+                console.error('Error loading story content:', error);
+                showError('Lỗi khi tải nội dung truyện');
             }
         }
 
@@ -784,14 +905,14 @@
             // Store book data globally for other functions
             window.currentBookData = book;
             
-            if (!book.content) {
+            if (!book.content || Object.keys(book.content).length === 0) {
                 container.innerHTML = `
                     <div class="error-container">
                         <div class="error-icon">
                             <span class="material-icons" style="font-size: 4rem; color: #dc3545;">book_outline</span>
                         </div>
-                        <h3 class="error-title">Sách chưa có nội dung</h3>
-                        <p class="error-message">Sách "${book.title}" chưa có nội dung để đọc.</p>
+                        <h3 class="error-title">Truyện chưa có nội dung</h3>
+                        <p class="error-message">Truyện "${book.title}" chưa có nội dung để đọc. Vui lòng quay lại sau.</p>
                         <button class="control-btn secondary" onclick="goBack()">
                             <span class="material-icons">arrow_back</span>
                             Quay lại
@@ -801,8 +922,39 @@
                 return;
             }
 
-            // Calculate word count
-            wordCount = book.content.split(/\s+/).length;
+            // Calculate word count from all chapters
+            let totalWordCount = 0;
+            Object.values(book.content).forEach(chapter => {
+                if (chapter.text) {
+                    totalWordCount += chapter.text.split(/\s+/).length;
+                }
+            });
+            wordCount = totalWordCount;
+
+            // Generate content HTML
+            let contentHTML = '';
+            Object.entries(book.content).forEach(([chapterKey, chapter]) => {
+                contentHTML += `
+                    <div class="chapter-section">
+                        <h2 class="chapter-title">${chapter.title}</h2>
+                        <div class="chapter-text">
+                            ${chapter.text.replace(/\n/g, '<br>')}
+                        </div>
+                        ${chapter.images && chapter.images.length > 0 ? `
+                            <div class="chapter-images">
+                                ${chapter.images.map(image => `
+                                    <div class="image-container">
+                                        <img src="${image.url}" alt="${image.description}" 
+                                             onerror="this.style.display='none'"
+                                             class="chapter-image">
+                                        <div class="image-caption">${image.description}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
 
             container.innerHTML = `
                 <div class="book-header">
@@ -815,7 +967,7 @@
                         </div>
                         <div class="meta-item">
                             <span class="material-icons">menu_book</span>
-                            <span>${book.pages || 'N/A'} trang</span>
+                            <span>${Object.keys(book.content).length} chương</span>
                         </div>
                         <div class="meta-item">
                             <span class="material-icons">category</span>
@@ -839,7 +991,7 @@
                 </div>
                 
                 <div class="book-content" id="bookContent">
-                    ${book.content}
+                    ${contentHTML}
                 </div>
             `;
 
@@ -931,12 +1083,13 @@
 
             try {
                 // Save reading history to Firebase
-                const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/bookReadingHistory/${bookId}`);
+                const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/storyReadingHistory/${bookId}`);
+                
                 const historyData = {
-                    bookId: bookId,
-                    bookTitle: bookData.title,
-                    bookAuthor: bookData.author,
-                    bookCover: bookData.cover_image,
+                    storyId: bookId,
+                    storyTitle: bookData.title,
+                    storyAuthor: bookData.author,
+                    storyCover: bookData.cover_image,
                     startTime: Date.now(),
                     lastReadTime: Date.now(),
                     readingProgress: 0,
@@ -951,7 +1104,7 @@
                 // Show success message
                 Swal.fire({
                     title: 'Bắt đầu đọc',
-                    text: 'Đã lưu lịch sử đọc sách',
+                    text: 'Đã lưu lịch sử đọc truyện',
                     icon: 'success',
                     timer: 2000,
                     showConfirmButton: false,
@@ -1079,7 +1232,7 @@
         // Go back function
         function goBack() {
             saveReadingSession();
-            window.location.href = 'book.html';
+            window.location.href = 'story.html';
         }
 
         // Load saved theme
@@ -1099,7 +1252,7 @@
                 const bookId = getBookIdFromUrl();
                 if (!bookId) return;
 
-                const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/bookReadingHistory/${bookId}`);
+                const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/storyReadingHistory/${bookId}`);
                 
                 await window.firebaseUpdate(readingHistoryRef, {
                     readingProgress: progress,
@@ -1130,7 +1283,7 @@
                     const readingTime = Math.floor((Date.now() - startTime) / 1000);
                     const progress = parseInt(document.getElementById('readingProgress').textContent) || 0;
 
-                    const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/bookReadingHistory/${bookId}`);
+                    const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/storyReadingHistory/${bookId}`);
                     
                     window.firebaseUpdate(readingHistoryRef, {
                         readingProgress: progress,

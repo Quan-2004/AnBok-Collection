@@ -15,650 +15,14 @@
 	<link rel="stylesheet" href="css/jquery-ui.css">
 	<link rel="stylesheet" href="css/owl.carousel.css">
 	<link rel="stylesheet" href="css/transitions.css">
+	
+	<!-- SweetAlert2 CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/color-custom.css">
 	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="css/profile-dashboard.css">
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-	
-	<!-- Firebase SDK -->
-	<script type="module">
-		// Import the functions you need from the SDKs you need
-		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-		import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-		import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-		import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-
-		// Your web app's Firebase configuration
-		const firebaseConfig = {
-			apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
-			authDomain: "anbok-collection.firebaseapp.com",
-			databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
-			projectId: "anbok-collection",
-			storageBucket: "anbok-collection.firebasestorage.app",
-			messagingSenderId: "835844957818",
-			appId: "1:835844957818:web:33fc3d03875d49fc5c3dc3",
-			measurementId: "G-MS5FT355WW"
-		};
-
-		// Initialize Firebase
-		const app = initializeApp(firebaseConfig);
-		const auth = getAuth(app);
-		const database = getDatabase(app);
-		const analytics = getAnalytics(app);
-
-		// Global variables for user data
-		let currentUser = null;
-		let userProfile = null;
-
-		// Check authentication state
-		onAuthStateChanged(auth, async (user) => {
-			if (user) {
-				console.log('User is signed in:', user);
-				currentUser = user;
-				window.currentUser = user; // Update global variable
-				await loadUserProfile(user.uid);
-				updateUIForAuthenticatedUser();
-				window.updateHeaderUserInfo();
-			} else {
-				console.log('User is signed out');
-				currentUser = null;
-				userProfile = null;
-				window.currentUser = null; // Update global variable
-				window.userProfile = null; // Update global variable
-				updateUIForUnauthenticatedUser();
-				// Show loading message before redirect
-				showNotification('Vui lòng đăng nhập để xem hồ sơ cá nhân', 'info');
-				setTimeout(() => {
-					window.location.href = 'auth.html';
-				}, 2000);
-			}
-		});
-
-		// Load user profile data from Firebase
-		async function loadUserProfile(userId) {
-			try {
-				const userRef = window.ref(window.database, 'users/' + userId);
-				const snapshot = await window.get(userRef);
-				
-				if (snapshot.exists()) {
-					userProfile = snapshot.val();
-					window.userProfile = userProfile; // Update global variable
-					console.log('User profile loaded:', userProfile);
-					updateProfileDisplay();
-				} else {
-					console.log('No user profile found, creating default profile');
-					await createDefaultProfile(userId);
-				}
-			} catch (error) {
-				console.error('Error loading user profile:', error);
-				window.showNotification('Lỗi khi tải thông tin người dùng', 'error');
-			}
-		}
-
-		// Create default profile for new user
-		async function createDefaultProfile(userId) {
-			const defaultProfile = {
-				displayName: currentUser.displayName || 'Người dùng',
-				email: currentUser.email,
-				photoURL: currentUser.photoURL || 'images/users/img-01.jpg',
-				phone: '',
-				birthday: '',
-				location: '',
-				bio: '',
-				createdAt: new Date().toISOString(),
-				stats: {
-					booksRead: 0,
-					reviews: 0,
-					points: 0,
-					readingHours: 0
-				},
-				readingGoal: {
-					target: 50,
-					current: 0,
-					year: new Date().getFullYear()
-				},
-				currentlyReading: [],
-				favorites: [],
-				library: [],
-				achievements: [],
-				badges: ['Độc giả mới']
-			};
-
-			try {
-				await set(window.ref(window.database, 'users/' + userId), defaultProfile);
-				userProfile = defaultProfile;
-				window.userProfile = defaultProfile; // Update global variable
-				window.updateProfileDisplay();
-				window.showNotification('Hồ sơ mới đã được tạo', 'success');
-			} catch (error) {
-				console.error('Error creating default profile:', error);
-				window.showNotification('Lỗi khi tạo hồ sơ mới', 'error');
-			}
-		}
-
-		// Update profile display with user data
-		window.updateProfileDisplay = function() {
-			if (!userProfile) return;
-
-			try {
-				// Update profile header
-				const profileAvatar = document.getElementById('profileAvatar');
-				const userName = document.querySelector('.tg-profile-header h1');
-				const userEmail = document.querySelector('.tg-profile-header p');
-				const userStats = document.querySelector('.tg-user-stats');
-
-				if (profileAvatar) {
-					profileAvatar.src = window.userProfile.photoURL || 'images/users/img-01.jpg';
-				}
-
-				if (userName) {
-					userName.textContent = window.userProfile.displayName || 'Người dùng';
-				}
-
-				if (userEmail) {
-					userEmail.textContent = window.userProfile.email || '';
-				}
-
-				// Update additional profile info if available
-				if (window.userProfile.bio) {
-					const bioElement = document.querySelector('.tg-profile-header .user-bio');
-					if (bioElement) {
-						bioElement.textContent = window.userProfile.bio;
-					}
-				}
-
-				// Update user info in header dropdown
-				const dropdownUserName = document.getElementById('dropdownUserName');
-				const headerUserName = document.getElementById('userName');
-				
-				if (dropdownUserName) {
-					dropdownUserName.textContent = window.userProfile.displayName || 'Người dùng';
-				}
-				
-				if (headerUserName) {
-					headerUserName.textContent = window.userProfile.displayName || 'Người dùng';
-				}
-
-				// Update stats with null checks
-				if (userStats) {
-					const statsElements = userStats.querySelectorAll('div');
-					if (statsElements.length >= 3) {
-						const firstStat = statsElements[0].querySelector('div');
-						const secondStat = statsElements[1].querySelector('div');
-						const thirdStat = statsElements[2].querySelector('div');
-						
-						if (firstStat) {
-							firstStat.textContent = window.userProfile.stats?.booksRead || 0;
-						}
-						if (secondStat) {
-							secondStat.textContent = window.userProfile.stats?.reviews || 0;
-						}
-						if (thirdStat) {
-							thirdStat.textContent = window.userProfile.stats?.points || 0;
-						}
-					}
-				}
-
-							// Update reading goal
-			window.updateReadingGoalDisplay();
-
-			// Update currently reading section
-			window.updateCurrentlyReading();
-
-			// Update badges
-			window.updateUserBadges();
-				
-				console.log('Profile display updated successfully');
-			} catch (error) {
-				console.error('Error updating profile display:', error);
-				showNotification('Lỗi khi cập nhật giao diện', 'error');
-			}
-		}
-
-		// Update reading goal display
-		window.updateReadingGoalDisplay = function() {
-			if (!window.userProfile || !window.userProfile.readingGoal) return;
-
-			try {
-				const goalSection = document.querySelector('.tg-reading-goal');
-				if (!goalSection) return;
-
-				const goal = window.userProfile.readingGoal;
-				const progress = goal.current || 0;
-				const target = goal.target || 50;
-				const percentage = Math.round((progress / target) * 100);
-
-				// Update progress text
-				const progressText = goalSection.querySelector('span');
-				if (progressText) {
-					progressText.textContent = `${progress} / ${target} cuốn`;
-				}
-
-				// Update percentage
-				const percentageText = goalSection.querySelector('span:last-child');
-				if (percentageText) {
-					percentageText.textContent = `${percentage}%`;
-				}
-
-				// Update progress bar
-				const progressBar = goalSection.querySelector('.tg-goal-progress div div');
-				if (progressBar) {
-					progressBar.style.width = `${percentage}%`;
-				}
-
-				// Update description
-				const description = goalSection.querySelector('p');
-				if (description) {
-					const remaining = target - progress;
-					description.textContent = `Bạn đã hoàn thành ${percentage}% mục tiêu! Còn ${remaining} cuốn nữa để đạt được.`;
-				}
-			} catch (error) {
-				console.error('Error updating reading goal display:', error);
-			}
-		}
-
-		// Update currently reading section
-		window.updateCurrentlyReading = function() {
-			if (!window.userProfile || !window.userProfile.currentlyReading) return;
-
-			try {
-				const readingSection = document.querySelector('.tg-currently-reading .row');
-				if (!readingSection) return;
-
-				const books = window.userProfile.currentlyReading.slice(0, 3); // Show max 3 books
-				const bookContainers = readingSection.querySelectorAll('.col-md-4');
-
-				bookContainers.forEach((container, index) => {
-					if (index < books.length) {
-						const book = books[index];
-						const bookElement = container.querySelector('.tg-reading-book');
-						
-						if (bookElement) {
-							// Update book image
-							const img = bookElement.querySelector('img');
-							if (img) {
-								img.src = book.coverImage || 'images/books/img-01.jpg';
-								img.alt = book.title || 'Book';
-							}
-
-							// Update book title
-							const title = bookElement.querySelector('h5');
-							if (title) {
-								title.textContent = book.title || 'Unknown Book';
-							}
-
-							// Update progress bar
-							const progressBar = bookElement.querySelector('.tg-goal-progress div div');
-							if (progressBar) {
-								progressBar.style.width = `${book.progress || 0}%`;
-							}
-
-							// Update progress text
-							const progressText = bookElement.querySelector('p');
-							if (progressText) {
-								progressText.textContent = `${book.progress || 0}% hoàn thành`;
-							}
-						}
-					} else {
-						// Hide empty containers
-						container.style.display = 'none';
-					}
-				});
-			} catch (error) {
-				console.error('Error updating currently reading:', error);
-			}
-		}
-
-		// Update user badges
-		window.updateUserBadges = function() {
-			if (!window.userProfile || !window.userProfile.badges) return;
-
-			try {
-				const badgesContainer = document.querySelector('.tg-user-badges');
-				if (!badgesContainer) return;
-
-				// Clear existing badges
-				badgesContainer.innerHTML = '';
-
-				// Add VIP badge if user has it
-				if (window.userProfile.badges.includes('VIP')) {
-					const vipBadge = document.createElement('span');
-					vipBadge.style.cssText = 'background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #4A6366; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px;';
-					vipBadge.innerHTML = '<i class="fa fa-crown"></i> Hội viên VIP';
-					badgesContainer.appendChild(vipBadge);
-				}
-
-				// Add other badges
-				window.userProfile.badges.forEach(badge => {
-					if (badge !== 'VIP') {
-						const badgeElement = document.createElement('span');
-						badgeElement.style.cssText = 'background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px; margin-left: 10px;';
-						badgeElement.innerHTML = `<i class="fa fa-star"></i> ${badge}`;
-						badgesContainer.appendChild(badgeElement);
-					}
-				});
-			} catch (error) {
-				console.error('Error updating user badges:', error);
-			}
-		}
-
-		// Update UI for authenticated user
-		function updateUIForAuthenticatedUser() {
-			// Show user profile section
-			const authButtons = document.querySelector('.tg-auth-buttons');
-			const userProfile = document.querySelector('.tg-user-profile');
-			
-			if (authButtons) authButtons.style.display = 'none';
-			if (userProfile) userProfile.style.display = 'flex';
-		}
-
-		// Update UI for unauthenticated user
-		function updateUIForUnauthenticatedUser() {
-			// Show auth buttons
-			const authButtons = document.querySelector('.tg-auth-buttons');
-			const userProfile = document.querySelector('.tg-user-profile');
-			
-			if (authButtons) authButtons.style.display = 'flex';
-			if (userProfile) userProfile.style.display = 'none';
-		}
-
-		// Logout function
-		window.logout = async function() {
-			try {
-				await signOut(window.auth);
-				window.showNotification('Đăng xuất thành công', 'success');
-				window.location.href = 'index.html';
-			} catch (error) {
-				console.error('Error signing out:', error);
-				window.showNotification('Lỗi khi đăng xuất', 'error');
-			}
-		};
-
-		// Toggle user dropdown
-		window.toggleUserDropdown = function() {
-			const dropdown = document.getElementById('userDropdown');
-			if (dropdown) {
-				dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-			}
-		};
-
-		// Show notification
-		window.showNotification = function(message, type = 'info') {
-			const notification = document.createElement('div');
-			notification.className = `tg-notification tg-notification-${type}`;
-			notification.innerHTML = `
-				<div class="tg-notification-content">
-					<i class="fa fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-					<span>${message}</span>
-				</div>
-			`;
-			
-			document.body.appendChild(notification);
-			
-			// Show notification
-			setTimeout(() => {
-				notification.classList.add('show');
-			}, 100);
-			
-			// Hide notification after 3 seconds
-			setTimeout(() => {
-				notification.classList.remove('show');
-				setTimeout(() => {
-					document.body.removeChild(notification);
-				}, 300);
-			}, 3000);
-		}
-
-		// Update user info in header
-		window.updateHeaderUserInfo = function() {
-			if (!window.currentUser || !window.userProfile) return;
-
-			const userAvatar = document.getElementById('userAvatar');
-			const userName = document.getElementById('userName');
-			const dropdownUserAvatar = document.getElementById('dropdownUserAvatar');
-			const dropdownUserName = document.getElementById('dropdownUserName');
-			const dropdownUserEmail = document.getElementById('dropdownUserEmail');
-
-			if (userAvatar) {
-				userAvatar.src = window.userProfile.photoURL || window.currentUser.photoURL || 'images/users/img-01.jpg';
-			}
-
-			if (userName) {
-				userName.textContent = window.userProfile.displayName || window.currentUser.displayName || 'Người dùng';
-			}
-
-			if (dropdownUserAvatar) {
-				dropdownUserAvatar.src = window.userProfile.photoURL || window.currentUser.photoURL || 'images/users/img-01.jpg';
-			}
-
-			if (dropdownUserName) {
-				dropdownUserName.textContent = window.userProfile.displayName || window.currentUser.displayName || 'Người dùng';
-			}
-
-			if (dropdownUserEmail) {
-				dropdownUserEmail.textContent = window.userProfile.email || window.currentUser.email || '';
-			}
-		}
-
-				// Call updateHeaderUserInfo when profile is loaded
-		document.addEventListener('DOMContentLoaded', function() {
-			if (window.currentUser && window.userProfile) {
-				window.updateHeaderUserInfo();
-			}
-		});
-
-		// Profile management functions
-		window.updateReadingGoal = async function(newTarget) {
-			if (typeof window.currentUser === 'undefined' || !window.currentUser || !window.userProfile) return;
-			
-			// Kiểm tra và ép kiểu giá trị
-			newTarget = Number(newTarget);
-			if (!Number.isFinite(newTarget) || newTarget <= 0) {
-				window.showNotification('Mục tiêu phải là số lớn hơn 0', 'error');
-				return;
-			}
-			
-			try {
-				const updates = {};
-				updates[`users/${window.currentUser.uid}/readingGoal/target`] = newTarget;
-				await window.update(window.ref(window.database), updates);
-				
-				window.userProfile.readingGoal.target = newTarget;
-				window.updateReadingGoalDisplay();
-				window.showNotification('Mục tiêu đọc sách đã được cập nhật', 'success');
-			} catch (error) {
-				console.error('Error updating reading goal:', error);
-				window.showNotification('Lỗi khi cập nhật mục tiêu', 'error');
-			}
-		};
-
-		window.addBookToCurrentlyReading = async function(bookData) {
-			if (typeof window.currentUser === 'undefined' || !window.currentUser || !window.userProfile) return;
-			
-			try {
-				const newBook = {
-					id: bookData.id,
-					title: bookData.title,
-					author: bookData.author,
-					coverImage: bookData.coverImage,
-					progress: 0,
-					addedAt: new Date().toISOString()
-				};
-				
-				const updatedBooks = [...(window.userProfile.currentlyReading || []), newBook];
-				await window.update(window.ref(window.database), {
-					[`users/${window.currentUser.uid}/currentlyReading`]: updatedBooks
-				});
-				
-				window.userProfile.currentlyReading = updatedBooks;
-				window.updateCurrentlyReading();
-				window.showNotification('Sách đã được thêm vào danh sách đang đọc', 'success');
-			} catch (error) {
-				console.error('Error adding book to currently reading:', error);
-				window.showNotification('Lỗi khi thêm sách', 'error');
-			}
-		};
-
-		window.updateBookProgress = async function(bookId, progress) {
-			if (typeof window.currentUser === 'undefined' || !window.currentUser || !window.userProfile) return;
-			
-			try {
-				const updatedBooks = window.userProfile.currentlyReading.map(book => {
-					if (book.id === bookId) {
-						return { ...book, progress: progress };
-					}
-					return book;
-				});
-				
-				await window.update(window.ref(window.database), {
-					[`users/${window.currentUser.uid}/currentlyReading`]: updatedBooks
-				});
-				
-				window.userProfile.currentlyReading = updatedBooks;
-				window.updateCurrentlyReading();
-				window.showNotification('Tiến độ đọc sách đã được cập nhật', 'success');
-			} catch (error) {
-				console.error('Error updating book progress:', error);
-				window.showNotification('Lỗi khi cập nhật tiến độ', 'error');
-			}
-		};
-
-		window.addToFavorites = async function(bookData) {
-			if (typeof window.currentUser === 'undefined' || !window.currentUser || !window.userProfile) return;
-			
-			try {
-				const newFavorite = {
-					id: bookData.id,
-					title: bookData.title,
-					author: bookData.author,
-					coverImage: bookData.coverImage,
-					addedAt: new Date().toISOString()
-				};
-				
-				const updatedFavorites = [...(window.userProfile.favorites || []), newFavorite];
-				await window.update(window.ref(window.database), {
-					[`users/${window.currentUser.uid}/favorites`]: updatedFavorites
-				});
-				
-				window.userProfile.favorites = updatedFavorites;
-				window.showNotification('Sách đã được thêm vào yêu thích', 'success');
-			} catch (error) {
-				console.error('Error adding to favorites:', error);
-				window.showNotification('Lỗi khi thêm vào yêu thích', 'error');
-			}
-		};
-
-		window.completeBook = async function(bookId) {
-			if (typeof window.currentUser === 'undefined' || !window.currentUser || !window.userProfile) return;
-			
-			try {
-				// Remove from currently reading
-				const updatedCurrentlyReading = window.userProfile.currentlyReading.filter(book => book.id !== bookId);
-				
-				// Add to library
-				const completedBook = window.userProfile.currentlyReading.find(book => book.id === bookId);
-				if (completedBook) {
-					const updatedLibrary = [...(window.userProfile.library || []), {
-						...completedBook,
-						completedAt: new Date().toISOString(),
-						progress: 100
-					}];
-					
-					// Update stats
-					const updatedStats = {
-						...window.userProfile.stats,
-						booksRead: (window.userProfile.stats.booksRead || 0) + 1,
-						points: (window.userProfile.stats.points || 0) + 10
-					};
-					
-					// Update reading goal
-					const updatedReadingGoal = {
-						...window.userProfile.readingGoal,
-						current: (window.userProfile.readingGoal.current || 0) + 1
-					};
-					
-					await window.update(window.ref(window.database), {
-						[`users/${window.currentUser.uid}/currentlyReading`]: updatedCurrentlyReading,
-						[`users/${window.currentUser.uid}/library`]: updatedLibrary,
-						[`users/${window.currentUser.uid}/stats`]: updatedStats,
-						[`users/${window.currentUser.uid}/readingGoal`]: updatedReadingGoal
-					});
-					
-					window.userProfile.currentlyReading = updatedCurrentlyReading;
-					window.userProfile.library = updatedLibrary;
-					window.userProfile.stats = updatedStats;
-					window.userProfile.readingGoal = updatedReadingGoal;
-					
-					window.updateProfileDisplay();
-					window.showNotification('Chúc mừng! Bạn đã hoàn thành cuốn sách này', 'success');
-				}
-			} catch (error) {
-				console.error('Error completing book:', error);
-				window.showNotification('Lỗi khi hoàn thành sách', 'error');
-			}
-		};
-
-		// Tab navigation functionality
-		document.addEventListener('DOMContentLoaded', function() {
-			const navItems = document.querySelectorAll('.tg-nav-item');
-			const tabContents = document.querySelectorAll('.tg-tab-content');
-			
-			navItems.forEach(item => {
-				item.addEventListener('click', function(e) {
-					e.preventDefault();
-					
-					// Remove active class from all nav items
-					navItems.forEach(nav => nav.classList.remove('active'));
-					
-					// Add active class to clicked item
-					this.classList.add('active');
-					
-					// Hide all tab contents
-					tabContents.forEach(content => {
-						content.style.display = 'none';
-					});
-					
-					// Show corresponding tab content
-					const targetId = this.getAttribute('href').substring(1);
-					const targetContent = document.getElementById(targetId);
-					if (targetContent) {
-						targetContent.style.display = 'block';
-					}
-				});
-			});
-		});
-		
-
-
-		window.openSettings = function() {
-			window.showNotification('Chức năng cài đặt sẽ được phát triển', 'info');
-		};
-
-		// Export functions for global use
-		window.firebaseProfile = {
-			loadUserProfile: window.loadUserProfile,
-			updateProfileDisplay: window.updateProfileDisplay,
-			logout: window.logout,
-			showNotification: window.showNotification,
-			updateReadingGoal: window.updateReadingGoal,
-			updateReadingGoalDisplay: window.updateReadingGoalDisplay,
-			addBookToCurrentlyReading: window.addBookToCurrentlyReading,
-			updateBookProgress: window.updateBookProgress,
-			addToFavorites: window.addToFavorites,
-			completeBook: window.completeBook,
-			openSettings: window.openSettings
-		};
-
-		// Make Firebase variables available globally
-		window.currentUser = currentUser;
-		window.userProfile = userProfile;
-		window.database = database;
-		window.auth = auth;
-		window.update = update;
-		window.ref = ref;
-		window.set = set;
-		window.get = get;
-	</script>
 	<style>
 	@keyframes float {
 		0%, 100% { transform: translateY(0px); }
@@ -735,7 +99,43 @@
 			justify-content: center;
 		}
 		
+		/* Auth Buttons */
+		.tg-auth-buttons {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+		
+		.tg-auth-buttons a {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			padding: 8px 20px;
+			border-radius: 25px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 14px;
+			transition: all 0.3s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			box-shadow: 0 4px 15px rgba(74, 99, 102, 0.3);
+		}
+		
+		.tg-auth-buttons a:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(74, 99, 102, 0.4);
+		}
+		
 		/* Mobile User Login */
+		.tg-user-profile {
+			display: none !important;
+		}
+		
+		.tg-auth-buttons {
+			display: block !important;
+			margin-top: 10px;
+		}
+		
 		.tg-middlecontainer .col-xs-12 {
 			flex-direction: column;
 			gap: 15px;
@@ -2013,7 +1413,8 @@
 		
 		/* Hover Dropdown Styles */
 		.tg-user-info:hover .tg-user-dropdown,
-		.tg-user-dropdown:hover {
+		.tg-user-dropdown:hover,
+		.tg-user-dropdown.show {
 			display: block !important;
 			opacity: 1;
 			visibility: visible;
@@ -2072,33 +1473,6 @@
 		/* Prevent dropdown from being cut off */
 		.tg-user-profile {
 			z-index: 1000;
-		}
-		
-		/* Auth Buttons Styles */
-		.tg-auth-buttons {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-		
-		.tg-auth-buttons a {
-			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
-			color: white;
-			padding: 8px 20px;
-			border-radius: 25px;
-			text-decoration: none;
-			font-weight: 600;
-			font-size: 14px;
-			transition: all 0.3s ease;
-			display: inline-flex;
-			align-items: center;
-			gap: 8px;
-			box-shadow: 0 4px 15px rgba(74, 99, 102, 0.3);
-		}
-		
-		.tg-auth-buttons a:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 6px 20px rgba(74, 99, 102, 0.4);
 		}
 		
 		/* Modal Styles */
@@ -3148,6 +2522,7 @@
 			align-items: center;
 			gap: 12px;
 			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+
 			color: white;
 			padding: 12px 20px;
 			border-radius: 30px;
@@ -3955,407 +3330,6 @@
 			transform: rotate(180deg);
 		}
 		
-		/* Profile Page Styles */
-		.tg-profile-section {
-			min-height: 100vh;
-		}
-
-		/* Edit Profile Modal Styles */
-		.tg-edit-profile-modal {
-			display: none;
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 10000;
-			background: rgba(0,0,0,0.5);
-			backdrop-filter: blur(5px);
-		}
-
-		.tg-edit-profile-modal.active {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.tg-edit-profile-modal .tg-modal-content {
-			background: white;
-			border-radius: 15px;
-			max-width: 95%;
-			max-height: 95%;
-			width: 800px;
-			overflow: hidden;
-			box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-			animation: modalSlideIn 0.3s ease;
-		}
-
-		.tg-edit-profile-modal .tg-modal-header {
-			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
-			color: white;
-			padding: 20px 25px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-		}
-
-		.tg-edit-profile-modal .tg-modal-header h3 {
-			margin: 0;
-			font-size: 1.3rem;
-			font-weight: 600;
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-
-		.tg-edit-profile-modal .tg-modal-body {
-			padding: 30px;
-			max-height: 70vh;
-			overflow-y: auto;
-		}
-
-		.tg-form-group {
-			margin-bottom: 20px;
-		}
-
-		.tg-form-group label {
-			display: block;
-			margin-bottom: 8px;
-			font-weight: 600;
-			color: #333;
-			font-size: 14px;
-		}
-
-		.tg-form-group input,
-		.tg-form-group textarea {
-			width: 100%;
-			padding: 12px 15px;
-			border: 2px solid #e1e5e9;
-			border-radius: 8px;
-			font-size: 14px;
-			transition: all 0.3s ease;
-			box-sizing: border-box;
-		}
-
-		.tg-form-group input:focus,
-		.tg-form-group textarea:focus {
-			outline: none;
-			border-color: #4A6366;
-			box-shadow: 0 0 0 3px rgba(74, 99, 102, 0.1);
-		}
-
-		.tg-form-group input[readonly] {
-			background: #f8f9fa;
-			color: #666;
-		}
-
-		.tg-form-group small {
-			display: block;
-			margin-top: 5px;
-			font-size: 12px;
-		}
-
-		.tg-interests-tags {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px;
-		}
-
-		.tg-tag-checkbox {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			padding: 8px 12px;
-			background: #f8f9fa;
-			border: 2px solid #e1e5e9;
-			border-radius: 20px;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			font-size: 13px;
-		}
-
-		.tg-tag-checkbox:hover {
-			background: #e9ecef;
-			border-color: #4A6366;
-		}
-
-		.tg-tag-checkbox input[type="checkbox"] {
-			display: none;
-		}
-
-		.tg-tag-checkbox input[type="checkbox"]:checked + span {
-			color: #4A6366;
-			font-weight: 600;
-		}
-
-		.tg-tag-checkbox input[type="checkbox"]:checked {
-			background: #4A6366;
-			border-color: #4A6366;
-		}
-
-		.tg-form-actions {
-			display: flex;
-			gap: 15px;
-			justify-content: flex-end;
-			margin-top: 30px;
-			padding-top: 20px;
-			border-top: 1px solid #e1e5e9;
-		}
-
-		.tg-btn-cancel {
-			background: #6c757d;
-			color: white;
-			border: none;
-			padding: 12px 24px;
-			border-radius: 8px;
-			font-weight: 600;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			display: flex;
-			align-items: center;
-			gap: 8px;
-		}
-
-		.tg-btn-cancel:hover {
-			background: #5a6268;
-			transform: translateY(-2px);
-		}
-
-		.tg-btn-save {
-			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
-			color: white;
-			border: none;
-			padding: 12px 24px;
-			border-radius: 8px;
-			font-weight: 600;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			display: flex;
-			align-items: center;
-			gap: 8px;
-		}
-
-		.tg-btn-save:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 6px 20px rgba(74, 99, 102, 0.3);
-		}
-
-		.tg-btn-save:disabled {
-			background: #ccc;
-			cursor: not-allowed;
-			transform: none;
-		}
-
-		/* Edit button hover effects */
-		.tg-btn-edit:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 6px 20px rgba(244, 162, 97, 0.3);
-		}
-
-		.tg-btn-edit:active {
-			transform: translateY(0);
-		}
-
-		/* Mobile Responsive for Edit Profile Modal */
-		@media (max-width: 768px) {
-			.tg-edit-profile-modal .tg-modal-content {
-				width: 95%;
-				margin: 20px;
-			}
-
-			.tg-edit-profile-modal .tg-modal-body {
-				padding: 20px;
-			}
-
-			.tg-form-actions {
-				flex-direction: column;
-			}
-
-			.tg-interests-tags {
-				gap: 8px;
-			}
-
-			.tg-tag-checkbox {
-				padding: 6px 10px;
-				font-size: 12px;
-			}
-		}
-		
-		/* Disable all animations for profile header */
-		.tg-profile-header,
-		.tg-profile-header *,
-		.tg-profile-avatar,
-		.tg-profile-avatar *,
-		.tg-user-badges,
-		.tg-user-badges *,
-		.tg-user-stats,
-		.tg-user-stats *,
-		.tg-profile-actions,
-		.tg-profile-actions * {
-			animation: none !important;
-			transition: none !important;
-			transform: none !important;
-		}
-		
-		.tg-nav-item.active {
-			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%) !important;
-			color: white !important;
-		}
-		
-		.tg-nav-item:hover {
-			background: rgba(74, 99, 102, 0.1);
-		}
-		
-		.tg-stat-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
-		}
-		
-		.tg-reading-book:hover {
-			transform: translateY(-3px);
-			box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-		}
-		
-		.tg-activity-item:hover {
-			transform: translateX(5px);
-			box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-		}
-		
-		.tg-library-book:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-		}
-		
-		/* Responsive Design */
-		@media (max-width: 768px) {
-			.tg-profile-header {
-				padding: 20px !important;
-			}
-			
-			.tg-profile-header .row {
-				text-align: center;
-			}
-			
-			.tg-profile-header .col-md-6 {
-				margin: 20px 0;
-			}
-			
-			.tg-user-stats {
-				justify-content: center !important;
-				gap: 20px !important;
-			}
-			
-			.tg-profile-actions {
-				margin-top: 20px;
-			}
-			
-			.tg-profile-sidebar {
-				margin-bottom: 20px !important;
-			}
-			
-			.tg-library-grid {
-				grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
-				gap: 15px !important;
-			}
-			
-			.tg-currently-reading .row {
-				flex-direction: column;
-			}
-			
-			.tg-currently-reading .col-md-4 {
-				margin-bottom: 20px;
-			}
-		}
-		
-
-		
-		/* Loading Animation */
-		.tg-loading {
-			display: inline-block;
-			width: 20px;
-			height: 20px;
-			border: 3px solid rgba(74, 99, 102, 0.3);
-			border-radius: 50%;
-			border-top-color: #4A6366;
-			animation: spin 1s ease-in-out infinite;
-		}
-		
-		@keyframes spin {
-			to { transform: rotate(360deg); }
-		}
-		
-		/* Custom Scrollbar */
-		.tg-profile-section::-webkit-scrollbar {
-			width: 8px;
-		}
-		
-		.tg-profile-section::-webkit-scrollbar-track {
-			background: #f1f1f1;
-			border-radius: 4px;
-		}
-		
-		.tg-profile-section::-webkit-scrollbar-thumb {
-			background: #4A6366;
-			border-radius: 4px;
-		}
-		
-		.tg-profile-section::-webkit-scrollbar-thumb:hover {
-			background: #3A4F52;
-		}
-		
-		/* Badge Styles */
-		.tg-badge-completed {
-			background: #28a745 !important;
-		}
-		
-		.tg-badge-reading {
-			background: #F4A261 !important;
-		}
-		
-		.tg-badge-wishlist {
-			background: #dc3545 !important;
-		}
-		
-		/* Progress Bar Animation */
-		@keyframes progressFill {
-			from { width: 0%; }
-		}
-		
-		.tg-goal-progress div {
-			animation: progressFill 2s ease-out;
-		}
-		
-		/* Tooltip Styles */
-		.tg-tooltip {
-			position: relative;
-			cursor: pointer;
-		}
-		
-		.tg-tooltip::after {
-			content: attr(data-tooltip);
-			position: absolute;
-			bottom: 125%;
-			left: 50%;
-			transform: translateX(-50%);
-			background: #333;
-			color: white;
-			padding: 8px 12px;
-			border-radius: 4px;
-			font-size: 12px;
-			white-space: nowrap;
-			opacity: 0;
-			visibility: hidden;
-			transition: all 0.3s ease;
-			z-index: 1000;
-		}
-		
-		.tg-tooltip:hover::after {
-			opacity: 1;
-			visibility: visible;
-		}
-		
-
-
 		/* Navigation Styles */
 		.tg-navigationarea {
 			background: white;
@@ -4433,6 +3407,167 @@
 			color: #4A6366;
 			border-left-color: #4A6366;
 			transform: translateX(5px);
+		}
+		
+		/* Fix dropdown hover issue */
+		.tg-user-profile {
+			position: relative;
+			z-index: 1000;
+		}
+
+		.tg-user-dropdown {
+			position: absolute;
+			top: 100%;
+			right: 0;
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+			min-width: 250px;
+			display: none;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-10px);
+			transition: all 0.3s ease;
+			margin-top: 10px;
+			z-index: 1001;
+		}
+
+		.tg-user-dropdown.show,
+		.tg-user-profile:hover .tg-user-dropdown {
+			display: block;
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+
+		/* Ensure dropdown stays open when hovering over it */
+		.tg-user-dropdown:hover {
+			display: block !important;
+			opacity: 1 !important;
+			visibility: visible !important;
+		}
+
+		/* Add a small invisible bridge to prevent gap */
+		.tg-user-dropdown::before {
+			content: '';
+			position: absolute;
+			top: -10px;
+			left: 0;
+			right: 0;
+			height: 10px;
+			background: transparent;
+		}
+		
+		/* Remove bullet points from profile navigation */
+		.tg-profile-nav ul {
+			list-style: none !important;
+			list-style-type: none !important;
+			padding-left: 0 !important;
+		}
+		
+		.tg-profile-nav li {
+			list-style: none !important;
+			list-style-type: none !important;
+		}
+		
+		.tg-profile-nav li::before {
+			display: none !important;
+		}
+		
+		/* Enhanced Membership Button Styling */
+		.tg-btn-membership {
+			background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%) !important;
+			border: none !important;
+			border-radius: 25px !important;
+			padding: 15px 25px !important;
+			font-size: 16px !important;
+			font-weight: 700 !important;
+			color: #2C3E50 !important;
+			cursor: pointer !important;
+			transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+			gap: 12px !important;
+			box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4) !important;
+			position: relative !important;
+			overflow: hidden !important;
+			text-transform: uppercase !important;
+			letter-spacing: 0.5px !important;
+		}
+		
+		.tg-btn-membership::before {
+			content: '' !important;
+			position: absolute !important;
+			top: 0 !important;
+			left: -100% !important;
+			width: 100% !important;
+			height: 100% !important;
+			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent) !important;
+			transition: left 0.6s ease !important;
+		}
+		
+		.tg-btn-membership:hover {
+			transform: translateY(-3px) scale(1.02) !important;
+			box-shadow: 0 15px 35px rgba(255, 215, 0, 0.6) !important;
+			background: linear-gradient(135deg, #FFA500 0%, #FF8C00 50%, #FF6B35 100%) !important;
+			color: white !important;
+		}
+		
+		.tg-btn-membership:hover::before {
+			left: 100% !important;
+		}
+		
+		.tg-btn-membership:active {
+			transform: translateY(-1px) scale(0.98) !important;
+			box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5) !important;
+		}
+		
+		.tg-btn-membership i {
+			font-size: 18px !important;
+			animation: crownGlow 2s ease-in-out infinite alternate !important;
+		}
+		
+		@keyframes crownGlow {
+			0% {
+				transform: scale(1) rotate(0deg);
+				text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+			}
+			100% {
+				transform: scale(1.1) rotate(5deg);
+				text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.4);
+			}
+		}
+		
+		/* Action buttons container enhancement */
+		.tg-action-buttons {
+			padding: 20px 15px !important;
+			background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 165, 0, 0.05) 100%) !important;
+			border-radius: 15px !important;
+			margin: 15px 0 !important;
+			border: 1px solid rgba(255, 215, 0, 0.1) !important;
+		}
+		
+		/* Update button styling */
+		.tg-btn-update {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%) !important;
+			color: white !important;
+			border: none !important;
+			padding: 12px 25px !important;
+			border-radius: 8px !important;
+			font-weight: 600 !important;
+			transition: all 0.3s ease !important;
+			cursor: pointer !important;
+		}
+		
+		.tg-btn-update:hover {
+			transform: translateY(-2px) !important;
+			box-shadow: 0 8px 20px rgba(74, 99, 102, 0.3) !important;
+		}
+		
+		.tg-btn-update.updating {
+			background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+			transform: scale(0.95) !important;
 		}
 	</style>
 </head>
@@ -4517,7 +3652,7 @@
 						</div>
 
 						<!-- User Actions -->
-												<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 							<div class="tg-user-actions">
 								
 								<!-- Auth Buttons (shown when not logged in) -->
@@ -4548,7 +3683,7 @@
 											<div id="dropdownUserEmail">phamhongquan9117@gmail.com</div>
 										</div>
 										<div class="tg-dropdown-menu">
-											<a href="account/profile.html" class="tg-dropdown-item">
+											<a href="profile.html" class="tg-dropdown-item">
 												<i class="fa fa-user"></i>
 												<span>Hồ sơ cá nhân</span>
 											</a>
@@ -4565,7 +3700,7 @@
 												<span>Cài đặt</span>
 											</a>
 											<div class="tg-dropdown-divider"></div>
-											<a href="javascript:void(0);" onclick="logout()" class="tg-dropdown-item tg-dropdown-logout">
+											<a href="javascript:void(0);" class="tg-dropdown-item tg-dropdown-logout logout-btn">
 												<i class="fa fa-sign-out"></i>
 												<span>Đăng xuất</span>
 											</a>
@@ -4602,32 +3737,16 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="book.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-book" style="margin-right: 8px;"></i>
 													Sách
-													<i class="fa fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
 												</a>
-												<!-- Submenu -->
-												<div class="tg-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách mới</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách nổi bật</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách miễn phí</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách hội viên</a>
-												</div>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="story.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Truyện
-													<i class="fa fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
 												</a>
-												<!-- Submenu -->
-												<div class="tg-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện mới</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện nổi bật</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện miễn phí</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện hội viên</a>
-												</div>
 											</li>
 											<li style="position: relative;">
 												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
@@ -4657,12 +3776,12 @@
 									</div>
 
 									<!-- Cart Button -->
-									<div class="tg-cart-btn">
-										<a href="javascript:void(0);" class="tg-cart-link" onclick="toggleCartModal();">
-											<i class="fa fa-shopping-cart"></i>
-											<span class="tg-cart-badge">5</span>
-										</a>
-									</div>
+													<div class="tg-cart-btn">
+					<a href="javascript:void(0);" class="tg-cart-link" onclick="toggleCartModal();">
+						<i class="fa fa-shopping-cart"></i>
+						<span id="cart-badge" class="tg-cart-badge">0</span>
+					</a>
+				</div>
 
 									<!-- Membership Button -->
 									<div class="tg-membership-btn">
@@ -4678,7 +3797,254 @@
 				</div>
 			</div>
 		</header>
+		
+		<!--************************************
+				Main Start
+		*************************************-->
+		<main id="tg-main" class="tg-main tg-haslayout">
+			<!--************************************
+					Profile Dashboard Start
+			*************************************-->
+			<section class="tg-sectionspace tg-haslayout">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="tg-profile-dashboard">
+								<!-- Left Sidebar -->
+								<div class="tg-profile-sidebar">
+									<!-- User Profile Header -->
+									<div class="tg-user-profile-header">
+										<div class="tg-user-info">
+											<h3>Quân Phạm</h3>
+											<div class="tg-user-avatar">
+												<img src="https://lh3.googleusercontent.com/a/ACg8ocIaoBrElH5rH6G0XHjVCibEBr75qumVwwDXjMWsl2cipGpdeAE=s96-c" alt="User Avatar">
+											</div>
+										</div>
+									</div>
 
+									<!-- Action Buttons -->
+									<div class="tg-action-buttons">
+										<button class="tg-btn-membership">
+											<i class="fa fa-crown"></i>
+											Trở thành hội viên
+										</button>
+									</div>
+
+									<!-- Navigation Menu -->
+									<nav class="tg-profile-nav">
+										<ul>
+											<li class="active">
+												<a href="#account-management" data-tab="account-management">
+													<i class="fa fa-user"></i>
+													<span>Quản lý tài khoản</span>
+												</a>
+											</li>
+											<li>
+												<a href="#personal-bookshelf" data-tab="personal-bookshelf">
+													<i class="fa fa-book"></i>
+													<span>Tủ sách cá nhân</span>
+												</a>
+											</li>
+											<li>
+												<a href="#order-management" data-tab="order-management">
+													<i class="fa fa-file-text"></i>
+													<span>Quản lý đơn hàng</span>
+													<i class="fa fa-chevron-down"></i>
+												</a>
+											</li>
+											<li>
+												<a href="#achievements" data-tab="achievements">
+													<i class="fa fa-trophy"></i>
+													<span>Thành tích</span>
+												</a>
+											</li>
+											<li>
+												<a href="#transaction-history" data-tab="transaction-history">
+													<i class="fa fa-money"></i>
+													<span>Lịch sử giao dịch</span>
+												</a>
+											</li>
+											<li>
+												<a href="#customer-support" data-tab="customer-support">
+													<i class="fa fa-headphones"></i>
+													<span>Hỗ trợ khách hàng</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+
+								<!-- Right Main Content -->
+								<div class="tg-profile-content">
+									<!-- Account Management Section -->
+									<div class="tg-content-section active" id="account-management">
+										<div class="tg-section-header">
+											<h2>Quản lý thông tin</h2>
+										</div>
+
+										<!-- Tab Navigation -->
+										<div class="tg-tab-navigation">
+											<button class="tg-tab-btn active" data-tab="personal-info">
+												Thông tin cá nhân
+											</button>
+											<button class="tg-tab-btn" data-tab="security">
+												Tài khoản và bảo mật
+											</button>
+											<button class="tg-tab-btn" data-tab="linked-accounts">
+												Tài khoản liên kết
+											</button>
+										</div>
+
+										<!-- Tab Content -->
+										<div class="tg-tab-content">
+											<!-- Personal Information Tab -->
+											<div class="tg-tab-panel active" id="personal-info">
+												<div class="tg-form-container">
+													<div class="tg-form-left">
+														<div class="tg-form-group">
+															<label>Tên đăng nhập</label>
+															<input type="text" name="username" value="phamhongquan9117" readonly>
+														</div>
+														<div class="tg-form-group">
+															<label>ID người dùng</label>
+															<input type="text" name="userId" value="9986278" readonly>
+														</div>
+														<div class="tg-form-group">
+															<label>Họ và tên</label>
+															<input type="text" name="fullName" value="Quân Phạm">
+														</div>
+														<div class="tg-form-group">
+															<label>Ngày sinh</label>
+															<div class="tg-date-input">
+																<input type="text" name="dateOfBirth" value="01/01/1900">
+																<i class="fa fa-calendar"></i>
+															</div>
+														</div>
+														<div class="tg-form-group">
+															<label>Giới tính</label>
+															<select name="gender">
+																<option value="Nam">Nam</option>
+																<option value="Nữ">Nữ</option>
+																<option value="Khác" selected>Khác</option>
+															</select>
+														</div>
+														<div class="tg-form-group">
+															<label>Số điện thoại</label>
+															<input type="text" name="phone" value="" placeholder="Nhập số điện thoại">
+														</div>
+														<div class="tg-form-group">
+															<label>Địa chỉ</label>
+															<input type="text" name="address" value="" placeholder="Nhập địa chỉ">
+														</div>
+													</div>
+													<div class="tg-form-right">
+														<div class="tg-avatar-section">
+															<div class="tg-avatar-large">
+																<img src="https://lh3.googleusercontent.com/a/ACg8ocIaoBrElH5rH6G0XHjVCibEBr75qumVwwDXjMWsl2cipGpdeAE=s96-c" alt="User Avatar">
+															</div>
+															<button class="tg-btn-change-photo">
+																<i class="fa fa-camera"></i>
+																Thay ảnh
+															</button>
+														</div>
+													</div>
+												</div>
+												<div class="tg-form-actions">
+													<button class="tg-btn-update">
+														<i class="fa fa-save"></i>
+														Cập nhật
+													</button>
+												</div>
+											</div>
+
+											<!-- Address Tab -->
+											<div class="tg-tab-panel" id="address">
+												<div class="tg-address-content">
+													<h3>Quản lý địa chỉ</h3>
+													<p>Chức năng quản lý địa chỉ sẽ được phát triển sau.</p>
+												</div>
+											</div>
+
+											<!-- Security Tab -->
+											<div class="tg-tab-panel" id="security">
+												<div class="tg-security-content">
+													<h3>Bảo mật tài khoản</h3>
+													<p>Chức năng bảo mật tài khoản sẽ được phát triển sau.</p>
+												</div>
+											</div>
+
+											<!-- Linked Accounts Tab -->
+											<div class="tg-tab-panel" id="linked-accounts">
+												<div class="tg-linked-accounts-content">
+													<h3>Tài khoản liên kết</h3>
+													<p>Chức năng quản lý tài khoản liên kết sẽ được phát triển sau.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- Personal Bookshelf Section -->
+									<div class="tg-content-section" id="personal-bookshelf">
+										<div class="tg-section-header">
+											<h2>Tủ sách cá nhân</h2>
+										</div>
+										<div class="tg-bookshelf-content">
+											<p>Nội dung tủ sách cá nhân sẽ được hiển thị ở đây.</p>
+										</div>
+									</div>
+
+									<!-- Order Management Section -->
+									<div class="tg-content-section" id="order-management">
+										<div class="tg-section-header">
+											<h2>Quản lý đơn hàng</h2>
+										</div>
+										<div class="tg-order-content">
+											<p>Nội dung quản lý đơn hàng sẽ được hiển thị ở đây.</p>
+										</div>
+									</div>
+
+									<!-- Achievements Section -->
+									<div class="tg-content-section" id="achievements">
+										<div class="tg-section-header">
+											<h2>Thành tích</h2>
+										</div>
+										<div class="tg-achievements-content">
+											<p>Nội dung thành tích sẽ được hiển thị ở đây.</p>
+										</div>
+									</div>
+
+									<!-- Transaction History Section -->
+									<div class="tg-content-section" id="transaction-history">
+										<div class="tg-section-header">
+											<h2>Lịch sử giao dịch</h2>
+										</div>
+										<div class="tg-transaction-content">
+											<p>Nội dung lịch sử giao dịch sẽ được hiển thị ở đây.</p>
+										</div>
+									</div>
+
+									<!-- Customer Support Section -->
+									<div class="tg-content-section" id="customer-support">
+										<div class="tg-section-header">
+											<h2>Hỗ trợ khách hàng</h2>
+										</div>
+										<div class="tg-support-content">
+											<p>Nội dung hỗ trợ khách hàng sẽ được hiển thị ở đây.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--************************************
+					Profile Dashboard End
+			*************************************-->
+		</main>
+		<!--************************************
+				Main End
+		*************************************-->
 		<!-- Cart Modal -->
 		<div id="cartModal" class="tg-cart-modal">
 			<div class="tg-cart-modal-overlay" onclick="toggleCartModal();"></div>
@@ -4690,100 +4056,19 @@
 					</button>
 				</div>
 				<div class="tg-cart-modal-body">
-					<div class="tg-cart-items">
-						<!-- Cart Item 1 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-01.jpg" alt="Book 1">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Harry Potter và Hòn đá Phù thủy</h4>
-								<p class="tg-cart-item-author">J.K. Rowling</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">600.000₫</span>
-									<span class="tg-cart-item-original">650.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(1, -1)">-</button>
-									<span class="tg-quantity-number">1</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(1, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(1)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
-						
-						<!-- Cart Item 2 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-02.jpg" alt="Book 2">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Đắc Nhân Tâm</h4>
-								<p class="tg-cart-item-author">Dale Carnegie</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">450.000₫</span>
-									<span class="tg-cart-item-original">500.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(2, -1)">-</button>
-									<span class="tg-quantity-number">2</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(2, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(2)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
-						
-						<!-- Cart Item 3 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-03.jpg" alt="Book 3">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Nhà Giả Kim</h4>
-								<p class="tg-cart-item-author">Paulo Coelho</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">350.000₫</span>
-									<span class="tg-cart-item-original">400.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(3, -1)">-</button>
-									<span class="tg-quantity-number">1</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(3, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(3)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-					
-					<!-- Empty Cart Message -->
-					<div class="tg-cart-empty" style="display: none;">
-						<i class="fa fa-shopping-cart"></i>
-						<h4>Giỏ hàng trống</h4>
-						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
-						<button class="tg-btn tg-btn-primary" onclick="toggleCartModal();">Tiếp tục mua sắm</button>
+					<div id="cart-items-container" class="tg-cart-items">
+						<!-- Cart items will be loaded dynamically from localStorage -->
 					</div>
 				</div>
 				<div class="tg-cart-modal-footer">
 					<div class="tg-cart-summary">
 						<div class="tg-cart-total">
 							<span>Tổng cộng:</span>
-							<span class="tg-cart-total-price">1.400.000₫</span>
+							<span id="cart-total-price">0₫</span>
 						</div>
 						<div class="tg-cart-savings">
 							<span>Tiết kiệm:</span>
-							<span class="tg-cart-savings-amount">200.000₫</span>
+							<span id="cart-savings-amount">0₫</span>
 						</div>
 					</div>
 					<div class="tg-cart-actions">
@@ -4799,280 +4084,7 @@
 				</div>
 			</div>
 		</div>
-<!--************************************
-				Main Start
-		*************************************-->
 
-<section class="tg-profile-section" style="padding: 60px 0; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-	<main>
-		<div class="container">
-			<!-- Profile Header --><br><br><br><br><br><br><br><br><br>
-			<div class="row">
-				<div class="col-12">
-					<div class="tg-profile-header" style="background: white; border-radius: 20px; padding: 40px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); opacity: 1;">
-						<div class="row align-items-center">
-							<div class="col-md-3 text-center">
-								<div class="tg-profile-avatar" style="position: relative; display: inline-block;">
-									<img id="profileAvatar" src="https://lh3.googleusercontent.com/a/ACg8ocIaoBrElH5rH6G0XHjVCibEBr75qumVwwDXjMWsl2cipGpdeAE=s96-c" 
-										 alt="Profile Avatar" 
-										 style="width: 150px; height: 150px; border-radius: 50%; border: 5px solid #4A6366; object-fit: cover; box-shadow: 0 8px 25px rgba(0,0,0,0.15);">
-									<div class="tg-avatar-edit" style="position: absolute; bottom: 10px; right: 10px; background: #4A6366; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(74, 99, 102, 0.3);">
-										<i class="fa fa-camera"></i>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<h1 style="color: #4A6366; font-weight: 700; margin-bottom: 10px; font-size: 2.5rem;">Quân Phạm</h1>
-								<p style="color: #666; font-size: 1.2rem; margin-bottom: 15px;">phamhongquan9117@gmail.com</p>
-								<div class="tg-user-badges" style="display: flex; gap: 10px; margin-bottom: 20px;">
-									<span style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #4A6366; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px;">
-										<i class="fa fa-crown"></i> Hội viên VIP
-									</span>
-									<span style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px;">
-										<i class="fa fa-book"></i> Độc giả tích cực
-									</span>
-								</div>
-								<div class="tg-user-stats" style="display: flex; gap: 30px;">
-									<div style="text-align: center;">
-										<div style="font-size: 2rem; font-weight: 700; color: #4A6366;">127</div>
-										<div style="color: #666; font-size: 0.9rem;">Sách đã đọc</div>
-									</div>
-									<div style="text-align: center;">
-										<div style="font-size: 2rem; font-weight: 700; color: #F4A261;">23</div>
-										<div style="color: #666; font-size: 0.9rem;">Đánh giá</div>
-									</div>
-									<div style="text-align: center;">
-										<div style="font-size: 2rem; font-weight: 700; color: #28a745;">1,850</div>
-										<div style="color: #666; font-size: 0.9rem;">Điểm thưởng</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 text-center">
-								<div class="tg-profile-actions">
-									<button class="tg-btn-edit" onclick="openEditProfile()" style="background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); color: white; padding: 12px 24px; border: none; border-radius: 25px; font-weight: 600; width: 100%; margin-bottom: 10px; transition: all 0.3s ease;">
-										<i class="fa fa-edit"></i> Chỉnh sửa
-									</button>
-									<button class="tg-btn-settings" onclick="openSettings()" style="background: transparent; color: #4A6366; padding: 12px 24px; border: 2px solid #4A6366; border-radius: 25px; font-weight: 600; width: 100%; transition: all 0.3s ease;">
-										<i class="fa fa-cog"></i> Cài đặt
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Profile Content -->
-			<div class="row">
-				<!-- Left Sidebar -->
-				<div class="col-lg-3">
-					<div class="tg-profile-sidebar" style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 30px;">
-						<h3 style="color: #4A6366; font-weight: 600; margin-bottom: 25px; font-size: 1.3rem;">Menu</h3>
-						<nav class="tg-profile-nav">
-							<a href="#overview" class="tg-nav-item active" style="display: flex; align-items: center; padding: 15px 20px; color: #333; text-decoration: none; border-radius: 10px; margin-bottom: 8px; transition: all 0.3s ease;">
-								<i class="fa fa-tachometer" style="margin-right: 12px; width: 20px;"></i>
-								<span>Tổng quan</span>
-							</a>
-							<a href="#library" class="tg-nav-item" style="display: flex; align-items: center; padding: 15px 20px; color: #333; text-decoration: none; border-radius: 10px; margin-bottom: 8px; transition: all 0.3s ease;">
-								<i class="fa fa-book" style="margin-right: 12px; width: 20px;"></i>
-								<span>Tủ sách của tôi</span>
-							</a>
-							<a href="#reading" class="tg-nav-item" style="display: flex; align-items: center; padding: 15px 20px; color: #333; text-decoration: none; border-radius: 10px; margin-bottom: 8px; transition: all 0.3s ease;">
-								<i class="fa fa-bookmark" style="margin-right: 12px; width: 20px;"></i>
-								<span>Đang đọc</span>
-							</a>
-							<a href="#favorites" class="tg-nav-item" style="display: flex; align-items: center; padding: 15px 20px; color: #333; text-decoration: none; border-radius: 10px; margin-bottom: 8px; transition: all 0.3s ease;">
-								<i class="fa fa-heart" style="margin-right: 12px; width: 20px;"></i>
-								<span>Yêu thích</span>
-							</a>
-							<a href="#reviews" class="tg-nav-item" style="display: flex; align-items: center; padding: 15px 20px; color: #333; text-decoration: none; border-radius: 10px; margin-bottom: 8px; transition: all 0.3s ease;">
-								<i class="fa fa-star" style="margin-right: 12px; width: 20px;"></i>
-								<span>Đánh giá của tôi</span>
-							</a>
-							<a href="#achievements" class="tg-nav-item" style="display: flex; align-items: center; padding: 15px 20px; color: #333; text-decoration: none; border-radius: 10px; margin-bottom: 8px; transition: all 0.3s ease;">
-								<i class="fa fa-trophy" style="margin-right: 12px; width: 20px;"></i>
-								<span>Thành tích</span>
-							</a>
-							<a href="#orders" class="tg-nav-item" style="display: flex; align-items: center; padding: 15px 20px; color: #333; text-decoration: none; border-radius: 10px; margin-bottom: 8px; transition: all 0.3s ease;">
-								<i class="fa fa-shopping-cart" style="margin-right: 12px; width: 20px;"></i>
-								<span>Đơn hàng</span>
-							</a>
-						</nav>
-					</div>
-
-					<!-- Reading Goal -->
-					<div class="tg-reading-goal" style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
-						<h4 style="color: #4A6366; font-weight: 600; margin-bottom: 20px;">Mục tiêu đọc sách 2025</h4>
-						<div class="tg-goal-progress" style="margin-bottom: 20px;">
-							<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-								<span style="color: #666;">87 / 100 cuốn</span>
-								<span style="color: #4A6366; font-weight: 600;">87%</span>
-							</div>
-							<div style="background: #e9ecef; height: 10px; border-radius: 5px; overflow: hidden;">
-								<div style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); height: 100%; width: 87%; transition: width 0.3s ease;"></div>
-							</div>
-						</div>
-						<p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Bạn đã hoàn thành 87% mục tiêu! Còn 13 cuốn nữa để đạt được.</p>
-						<button onclick="updateReadingGoal(100)" style="background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 600; width: 100%;">
-							Cập nhật mục tiêu
-						</button>
-					</div>
-				</div>
-
-				<!-- Main Content -->
-				<div class="col-lg-9">
-					<!-- Overview Tab -->
-					<div id="overview" class="tg-tab-content active">
-						<!-- Recent Activity -->
-						<div class="tg-recent-activity" style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 30px;">
-							<h3 style="color: #4A6366; font-weight: 600; margin-bottom: 25px; display: flex; align-items: center;">
-								<i class="fa fa-clock-o" style="margin-right: 10px;"></i>
-								Hoạt động gần đây
-							</h3>
-							<div class="tg-activity-list">
-								<div class="tg-activity-item" style="display: flex; align-items: center; padding: 20px; border-left: 4px solid #4A6366; background: #f8f9fa; border-radius: 10px; margin-bottom: 15px;">
-									<div class="tg-activity-icon" style="background: #4A6366; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
-										<i class="fa fa-book"></i>
-									</div>
-									<div class="tg-activity-content" style="flex: 1;">
-										<h5 style="margin: 0 0 5px 0; color: #333;">Hoàn thành đọc "Đắc Nhân Tâm"</h5>
-										<p style="margin: 0; color: #666; font-size: 0.9rem;">2 giờ trước</p>
-									</div>
-									<div class="tg-activity-rating">
-										<div style="color: #ffd700;">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-								</div>
-
-								<div class="tg-activity-item" style="display: flex; align-items: center; padding: 20px; border-left: 4px solid #F4A261; background: #f8f9fa; border-radius: 10px; margin-bottom: 15px;">
-									<div class="tg-activity-icon" style="background: #F4A261; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
-										<i class="fa fa-heart"></i>
-									</div>
-									<div class="tg-activity-content" style="flex: 1;">
-										<h5 style="margin: 0 0 5px 0; color: #333;">Thêm "Nhà Giả Kim" vào yêu thích</h5>
-										<p style="margin: 0; color: #666; font-size: 0.9rem;">1 ngày trước</p>
-									</div>
-								</div>
-
-								<div class="tg-activity-item" style="display: flex; align-items: center; padding: 20px; border-left: 4px solid #28a745; background: #f8f9fa; border-radius: 10px; margin-bottom: 15px;">
-									<div class="tg-activity-icon" style="background: #28a745; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
-										<i class="fa fa-trophy"></i>
-									</div>
-									<div class="tg-activity-content" style="flex: 1;">
-										<h5 style="margin: 0 0 5px 0; color: #333;">Đạt thành tích "Độc giả tích cực"</h5>
-										<p style="margin: 0; color: #666; font-size: 0.9rem;">3 ngày trước</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Reading Statistics -->
-						<div class="row">
-							<div class="col-md-6">
-								<div class="tg-stat-card" style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 30px; text-align: center;">
-									<div style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem;">
-										<i class="fa fa-book"></i>
-									</div>
-									<h3 style="color: #4A6366; font-weight: 700; margin-bottom: 10px;">127</h3>
-									<p style="color: #666; margin: 0;">Sách đã hoàn thành</p>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="tg-stat-card" style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 30px; text-align: center;">
-									<div style="background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); color: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem;">
-										<i class="fa fa-clock-o"></i>
-									</div>
-									<h3 style="color: #F4A261; font-weight: 700; margin-bottom: 10px;">2,340</h3>
-									<p style="color: #666; margin: 0;">Giờ đọc trong năm</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Currently Reading -->
-						<div class="tg-currently-reading" style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 30px;">
-							<h3 style="color: #4A6366; font-weight: 600; margin-bottom: 25px; display: flex; align-items: center;">
-								<i class="fa fa-bookmark" style="margin-right: 10px;"></i>
-								Đang đọc
-							</h3>
-							<div class="row">
-								<div class="col-md-4">
-									<div class="tg-reading-book" style="text-align: center; padding: 20px; border-radius: 10px; background: #f8f9fa;">
-										<img src="images/books/img-01.jpg" alt="Book" style="width: 120px; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-										<h5 style="color: #333; margin-bottom: 10px;">Harry Potter và Hòn đá Phù thủy</h5>
-										<div style="background: #e9ecef; height: 8px; border-radius: 4px; margin-bottom: 10px;">
-											<div style="background: #4A6366; height: 100%; width: 65%; border-radius: 4px;"></div>
-										</div>
-										<p style="color: #666; margin: 0; font-size: 0.9rem;">65% hoàn thành</p>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="tg-reading-book" style="text-align: center; padding: 20px; border-radius: 10px; background: #f8f9fa;">
-										<img src="images/books/img-02.jpg" alt="Book" style="width: 120px; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-										<h5 style="color: #333; margin-bottom: 10px;">Tôi Tài Giỏi, Bạn Cũng Thế</h5>
-										<div style="background: #e9ecef; height: 8px; border-radius: 4px; margin-bottom: 10px;">
-											<div style="background: #F4A261; height: 100%; width: 32%; border-radius: 4px;"></div>
-										</div>
-										<p style="color: #666; margin: 0; font-size: 0.9rem;">32% hoàn thành</p>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="tg-reading-book" style="text-align: center; padding: 20px; border-radius: 10px; background: #f8f9fa;">
-										<img src="images/books/img-03.jpg" alt="Book" style="width: 120px; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-										<h5 style="color: #333; margin-bottom: 10px;">Nhà Giả Kim</h5>
-										<div style="background: #e9ecef; height: 8px; border-radius: 4px; margin-bottom: 10px;">
-											<div style="background: #28a745; height: 100%; width: 18%; border-radius: 4px;"></div>
-										</div>
-										<p style="color: #666; margin: 0; font-size: 0.9rem;">18% hoàn thành</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Library Tab -->
-					<div id="library" class="tg-tab-content" style="display: none;">
-						<div class="tg-library-section" style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
-							<div class="tg-library-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-								<h3 style="color: #4A6366; font-weight: 600; margin: 0;">Tủ sách của tôi (127 cuốn)</h3>
-								<div class="tg-library-filters" style="display: flex; gap: 10px;">
-									<select style="padding: 8px 15px; border: 1px solid #ddd; border-radius: 5px; background: white;">
-										<option>Tất cả</option>
-										<option>Đã đọc</option>
-										<option>Đang đọc</option>
-										<option>Muốn đọc</option>
-									</select>
-									<select style="padding: 8px 15px; border: 1px solid #ddd; border-radius: 5px; background: white;">
-										<option>Mới nhất</option>
-										<option>Cũ nhất</option>
-										<option>A-Z</option>
-										<option>Z-A</option>
-									</select>
-								</div>
-							</div>
-							<div class="tg-library-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px;">
-								<!-- Book items would be here -->
-								<div class="tg-library-book" style="text-align: center; padding: 20px; border-radius: 10px; background: #f8f9fa; transition: transform 0.3s ease;">
-									<img src="images/books/img-01.jpg" alt="Book" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
-									<h6 style="color: #333; margin-bottom: 8px;">Harry Potter</h6>
-									<p style="color: #666; font-size: 0.8rem; margin-bottom: 10px;">J.K. Rowling</p>
-									<span style="background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.7rem;">Đã đọc</span>
-								</div>
-								<!-- More books... -->
-							</div>
-						</div>
-					</div>
-
-					<!-- Other tabs content would go here -->
-				</div>
-			</div>
-		</div>
-	</main>
-</section>
 		<!--************************************
 				Footer Start
 		*************************************-->
@@ -5280,130 +4292,107 @@
 		<div class="tg-progress-bar" id="tg-progress-bar"></div>
 	</div>
 
-	<!-- Edit Profile Modal -->
-	<div id="editProfileModal" class="tg-edit-profile-modal">
-		<div class="tg-modal-overlay" onclick="closeEditProfileModal()"></div>
+
+	
+	<!-- Book Preview Modal -->
+	<div class="tg-book-modal" id="tg-book-modal">
+		<div class="tg-modal-overlay" id="tg-modal-overlay"></div>
 		<div class="tg-modal-content">
 			<div class="tg-modal-header">
-				<h3><i class="fa fa-user-edit"></i> Chỉnh sửa thông tin cá nhân</h3>
-				<button class="tg-modal-close" onclick="closeEditProfileModal()">
+				<h3>Xem trước sách</h3>
+				<button class="tg-modal-close" id="tg-modal-close">
 					<i class="fa fa-times"></i>
 				</button>
 			</div>
 			<div class="tg-modal-body">
-				<form id="editProfileForm">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="tg-form-group">
-								<label for="editDisplayName">Họ và tên</label>
-								<input type="text" id="editDisplayName" name="displayName" value="Quân Phạm" required>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="tg-form-group">
-								<label for="editEmail">Email</label>
-								<input type="email" id="editEmail" name="email" value="phamhongquan9117@gmail.com" required readonly>
-								<small style="color: #666;">Email không thể thay đổi</small>
-							</div>
-						</div>
+				<div class="tg-book-preview">
+					<div class="tg-book-cover">
+						<img src="images/books/img-01.jpg" alt="Book Cover" id="tg-preview-cover">
 					</div>
-					
-					<div class="row">
-						<div class="col-md-6">
-							<div class="tg-form-group">
-								<label for="editPhone">Số điện thoại</label>
-								<input type="tel" id="editPhone" name="phone" value="0901234567" placeholder="Nhập số điện thoại">
-							</div>
+					<div class="tg-book-info">
+						<h4 id="tg-preview-title">Tên sách</h4>
+						<p class="tg-preview-author" id="tg-preview-author">Tác giả</p>
+						<div class="tg-preview-rating">
+							<span class="tg-stars"><span></span></span>
+							<span class="tg-rating-text">4.5/5 (120 đánh giá)</span>
 						</div>
-						<div class="col-md-6">
-							<div class="tg-form-group">
-								<label for="editBirthday">Ngày sinh</label>
-								<input type="date" id="editBirthday" name="birthday" value="1995-06-15">
-							</div>
+						<div class="tg-preview-details">
+							<p><strong>Thể loại:</strong> <span id="tg-preview-category">Tiểu thuyết</span></p>
+							<p><strong>Số trang:</strong> <span id="tg-preview-pages">320</span></p>
+							<p><strong>Ngôn ngữ:</strong> <span id="tg-preview-language">Tiếng Việt</span></p>
+							<p><strong>Nhà xuất bản:</strong> <span id="tg-preview-publisher">NXB Văn Học</span></p>
+						</div>
+						<div class="tg-preview-description">
+							<h5>Mô tả</h5>
+							<p id="tg-preview-description">Mô tả chi tiết về nội dung sách sẽ được hiển thị ở đây...</p>
 						</div>
 					</div>
-					
-					<div class="row">
-						<div class="col-md-6">
-							<div class="tg-form-group">
-								<label for="editLocation">Địa chỉ</label>
-								<input type="text" id="editLocation" name="location" value="TP.HCM, Việt Nam" placeholder="Nhập địa chỉ">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="tg-form-group">
-								<label for="editFavoriteAuthor">Tác giả yêu thích</label>
-								<input type="text" id="editFavoriteAuthor" name="favoriteAuthor" placeholder="Nhập tên tác giả yêu thích">
-							</div>
-						</div>
+				</div>
+				<div class="tg-preview-actions">
+					<button class="tg-btn tg-btn-preview" id="tg-preview-read">
+						<i class="fa fa-book"></i>
+						<span>Đọc thử</span>
+					</button>
+					<button class="tg-btn tg-btn-wishlist" id="tg-preview-wishlist">
+						<i class="fa fa-heart"></i>
+						
+					</button>
+					<button class="tg-btn tg-btn-cart" id="tg-preview-cart">
+						<i class="fa fa-shopping-cart"></i>
+						<span>Thêm vào giỏ</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Reading Timer Modal -->
+	<div class="tg-timer-modal" id="tg-timer-modal">
+		<div class="tg-modal-overlay" id="tg-timer-overlay"></div>
+		<div class="tg-modal-content tg-timer-content">
+			<div class="tg-modal-header">
+				<h3>Đồng hồ đọc sách</h3>
+				<button class="tg-modal-close" id="tg-timer-close">
+					<i class="fa fa-times"></i>
+				</button>
+			</div>
+			<div class="tg-modal-body">
+				<div class="tg-timer-display">
+					<div class="tg-timer-time" id="tg-timer-time">00:00:00</div>
+					<div class="tg-timer-status" id="tg-timer-status">Sẵn sàng bắt đầu</div>
+				</div>
+				<div class="tg-timer-controls">
+					<button class="tg-btn tg-btn-start" id="tg-timer-start">
+						<i class="fa fa-play"></i>
+						<span>Bắt đầu</span>
+					</button>
+					<button class="tg-btn tg-btn-pause" id="tg-timer-pause" style="display: none;">
+						<i class="fa fa-pause"></i>
+						<span>Tạm dừng</span>
+					</button>
+					<button class="tg-btn tg-btn-reset" id="tg-timer-reset">
+						<i class="fa fa-refresh"></i>
+						<span>Đặt lại</span>
+					</button>
+				</div>
+				<div class="tg-timer-settings">
+					<h5>Cài đặt thời gian</h5>
+					<div class="tg-timer-presets">
+						<button class="tg-timer-preset" data-time="1800">30 phút</button>
+						<button class="tg-timer-preset" data-time="3600">1 giờ</button>
+						<button class="tg-timer-preset" data-time="7200">2 giờ</button>
+						<button class="tg-timer-preset" data-time="0">Tùy chỉnh</button>
 					</div>
-					
-					<div class="tg-form-group">
-						<label for="editBio">Giới thiệu bản thân</label>
-						<textarea id="editBio" name="bio" rows="4" placeholder="Viết một vài dòng giới thiệu về bản thân...">Tôi là một độc giả đam mê sách, đặc biệt thích đọc sách về phát triển bản thân và tiểu thuyết. Tôi đã đọc hơn 100 cuốn sách và luôn tìm kiếm những cuốn sách mới để khám phá.</textarea>
-					</div>
-					
-					<div class="tg-form-group">
-						<label for="editInterests">Sở thích đọc sách</label>
-						<div class="tg-interests-tags">
-							<label class="tg-tag-checkbox">
-								<input type="checkbox" name="interests" value="tieu-thuyet" checked>
-								<span>Tiểu thuyết</span>
-							</label>
-							<label class="tg-tag-checkbox">
-								<input type="checkbox" name="interests" value="phat-trien-ban-than" checked>
-								<span>Phát triển bản thân</span>
-							</label>
-							<label class="tg-tag-checkbox">
-								<input type="checkbox" name="interests" value="kinh-doanh">
-								<span>Kinh doanh</span>
-							</label>
-							<label class="tg-tag-checkbox">
-								<input type="checkbox" name="interests" value="lich-su">
-								<span>Lịch sử</span>
-							</label>
-							<label class="tg-tag-checkbox">
-								<input type="checkbox" name="interests" value="khoa-hoc">
-								<span>Khoa học</span>
-							</label>
-							<label class="tg-tag-checkbox">
-								<input type="checkbox" name="interests" value="van-hoc">
-								<span>Văn học</span>
-							</label>
-						</div>
-					</div>
-					
-					<div class="tg-form-group">
-						<label for="editReadingGoal">Mục tiêu đọc sách năm 2025</label>
-						<input type="number" id="editReadingGoal" name="readingGoal" value="100" min="1" max="365">
-						<small style="color: #666;">Số cuốn sách bạn muốn đọc trong năm</small>
-					</div>
-					
-					<div class="tg-form-actions">
-						<button type="button" class="tg-btn-cancel" onclick="closeEditProfileModal()">
-							<i class="fa fa-times"></i> Hủy bỏ
-						</button>
-						<button type="submit" class="tg-btn-save">
-							<i class="fa fa-save"></i> Lưu thay đổi
-						</button>
-					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
 
 
-	
-	
-
-	
-
-
-
 
 	<script src="js/vendor/jquery-library.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en&amp;loading=async"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/jquery.vide.min.js"></script>
 	<script src="js/countdown.js"></script>
@@ -5414,7 +4403,293 @@
 	<script src="js/gmap3.js"></script>
 	<script src="js/parallax.js"></script>
 	<script src="js/auth.js"></script>
+	<script src="js/sync-auth.js"></script>
+	<script src="js/button-fix.js"></script>
 	<script src="js/main.js"></script>
+	
+	<!-- SweetAlert2 JS -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+	
+	<!-- Cloudinary SDK -->
+	<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+	
+	<!-- Firebase SDK (for auth only) -->
+	<script type="module">
+		// Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+		import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithPopup, GoogleAuthProvider, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+		import { getDatabase, ref, set, update, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+		// Your web app's Firebase configuration
+		const firebaseConfig = {
+			apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
+			authDomain: "anbok-collection.firebaseapp.com",
+			databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
+			projectId: "anbok-collection",
+			storageBucket: "anbok-collection.firebasestorage.app",
+			messagingSenderId: "835844957818",
+			appId: "1:835844957818:web:33fc3d03875d49fc5c3dc3",
+			measurementId: "G-MS5FT355WW"
+		};
+
+		// Initialize Firebase (for auth and database)
+		const app = initializeApp(firebaseConfig);
+		const auth = getAuth(app);
+		const database = getDatabase(app);
+		const analytics = getAnalytics(app);
+		const googleProvider = new GoogleAuthProvider();
+
+		// Cloudinary Configuration
+		const cloudinaryConfig = {
+			cloudName: 'dvcebine7',
+			uploadPreset: 'Noi luu anh cua anbook'
+		};
+
+		// Make services available globally
+		window.firebaseAuth = auth;
+		window.firebaseDatabase = database;
+		window.googleProvider = googleProvider;
+		window.signInWithPopup = signInWithPopup;
+		window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+		window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+		window.sendPasswordResetEmail = sendPasswordResetEmail;
+		window.updateProfile = updateProfile;
+		window.cloudinaryConfig = cloudinaryConfig;
+		
+		// User Profile Management Functions (using Firebase + localStorage)
+		window.loadUserProfile = function(userId) {
+			try {
+				// First try to load from localStorage for fast access
+				const userData = localStorage.getItem('userProfile_' + userId);
+				if (userData) {
+					const profile = JSON.parse(userData);
+					console.log('User profile loaded from localStorage:', profile);
+					return profile;
+				} else {
+					console.log('No user profile found in localStorage');
+					return null;
+				}
+			} catch (error) {
+				console.error('Error loading user profile:', error);
+				return null;
+			}
+		};
+
+		window.saveUserProfile = async function(userId, profileData) {
+			try {
+				const profileToSave = {
+					...profileData,
+					lastUpdated: new Date().toISOString()
+				};
+				
+				// Save to localStorage
+				localStorage.setItem('userProfile_' + userId, JSON.stringify(profileToSave));
+				console.log('User profile saved to localStorage successfully');
+				
+				// Save to Firebase
+				const userRef = ref(database, 'users/' + userId + '/profile');
+				await set(userRef, profileToSave);
+				console.log('User profile saved to Firebase successfully');
+				
+				return true;
+			} catch (error) {
+				console.error('Error saving user profile:', error);
+				return false;
+			}
+		};
+
+		window.updateUserProfile = async function(userId, updates) {
+			try {
+				const existingProfile = window.loadUserProfile(userId) || {};
+				const updatedProfile = {
+					...existingProfile,
+					...updates,
+					lastUpdated: new Date().toISOString()
+				};
+				
+				// Update localStorage
+				localStorage.setItem('userProfile_' + userId, JSON.stringify(updatedProfile));
+				console.log('User profile updated in localStorage successfully');
+				
+				// Update Firebase
+				const userRef = ref(database, 'users/' + userId + '/profile');
+				await update(userRef, updatedProfile);
+				console.log('User profile updated in Firebase successfully');
+				
+				return true;
+			} catch (error) {
+				console.error('Error updating user profile:', error);
+				return false;
+			}
+		};
+
+		window.createDefaultProfile = function(userId, userInfo) {
+			const defaultProfile = {
+				uid: userId,
+				email: userInfo.email,
+				displayName: userInfo.displayName || userInfo.email,
+				photoURL: userInfo.photoURL || '',
+				personalInfo: {
+					username: userInfo.email.split('@')[0],
+					userId: 'U' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+					fullName: userInfo.displayName || '',
+					dateOfBirth: '',
+					gender: 'Khác',
+					phone: '',
+					address: ''
+				},
+				createdAt: new Date().toISOString(),
+				lastUpdated: new Date().toISOString()
+			};
+
+			return window.saveUserProfile(userId, defaultProfile);
+		};
+
+		// Cloudinary Image Upload Function
+		window.uploadImageToCloudinary = function(file, callback) {
+			console.log('Starting Cloudinary upload with preset:', window.cloudinaryConfig.uploadPreset);
+			// Validate file size (3.5MB limit)
+			if (file.size > 3500000) {
+				const error = new Error('File size exceeds 3.5MB limit');
+				console.error('File too large:', file.size);
+				if (callback) callback(null, error);
+				return;
+			}
+
+			// Validate file type
+			const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+			if (!allowedTypes.includes(file.type)) {
+				const error = new Error('Invalid file type');
+				console.error('Invalid file type:', file.type);
+				if (callback) callback(null, error);
+				return;
+			}
+
+			// Upload to Cloudinary
+			const formData = new FormData();
+			formData.append('file', file);
+			formData.append('upload_preset', window.cloudinaryConfig.uploadPreset);
+			formData.append('cloud_name', window.cloudinaryConfig.cloudName);
+			
+			console.log('Uploading to Cloudinary with preset:', window.cloudinaryConfig.uploadPreset);
+
+			fetch('https://api.cloudinary.com/v1_1/dvcebine7/image/upload', {
+				method: 'POST',
+				body: formData
+			})
+			.then(response => {
+				if (!response.ok) {
+					return response.text().then(text => {
+						throw new Error(`Upload failed: ${response.status} - ${text}`);
+					});
+				}
+				return response.json();
+			})
+			.then(data => {
+				console.log('Image uploaded to Cloudinary:', data);
+				// Return the secure URL from Cloudinary
+				if (callback) callback(data.secure_url);
+			})
+			.catch(error => {
+				console.error('Error uploading to Cloudinary:', error);
+				if (callback) callback(null, error);
+			});
+		};
+
+		window.openCloudinaryWidget = function(callback) {
+			const widget = cloudinary.createUploadWidget(
+				{
+					cloudName: window.cloudinaryConfig.cloudName,
+					uploadPreset: window.cloudinaryConfig.uploadPreset,
+					sources: ['local', 'camera'],
+					multiple: false,
+					maxFiles: 1,
+					resourceType: 'image',
+					clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+					maxFileSize: 3500000, // Giảm xuống 3.5MB để an toàn
+					transformation: [
+						{ width: 400, height: 400, crop: 'fill', gravity: 'face' },
+						{ quality: 'auto', fetch_format: 'auto' }
+					]
+				},
+				(error, result) => {
+					if (!error && result && result.event === "success") {
+						console.log('Cloudinary upload successful:', result.info);
+						if (callback) callback(result.info.secure_url);
+					} else if (error) {
+						console.error('Cloudinary upload error:', error);
+						if (callback) callback(null, error);
+					}
+				}
+			);
+			widget.open();
+		};
+		
+		// Check Firebase status
+		console.log('Firebase initialized:', app);
+		console.log('Auth initialized:', auth);
+		console.log('Google provider:', googleProvider);
+		
+		// Dispatch Firebase ready event
+		document.dispatchEvent(new CustomEvent('firebase-ready', {
+			detail: { auth, googleProvider }
+		}));
+		
+		// Listen for auth state changes
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				console.log('User is signed in:', user);
+				
+				// Load user profile from localStorage
+				let userProfile = window.loadUserProfile(user.uid);
+				
+				// If no profile exists, create default profile
+				if (!userProfile) {
+					const userInfo = {
+						email: user.email,
+						displayName: user.displayName || user.email,
+						photoURL: user.photoURL || ''
+					};
+					window.createDefaultProfile(user.uid, userInfo);
+					userProfile = window.loadUserProfile(user.uid);
+				}
+				
+				// Update user info in localStorage
+				const userData = {
+					isLoggedIn: true,
+					uid: user.uid,
+					email: user.email,
+					displayName: userProfile?.personalInfo?.fullName || user.displayName || user.email,
+					photoURL: user.photoURL,
+					lastLogin: new Date().toISOString(),
+					profile: userProfile
+				};
+				localStorage.setItem('user', JSON.stringify(userData));
+				console.log('User data saved to localStorage:', userData);
+				
+				// Update UI with profile data
+				if (window.checkAuthStatus) {
+					window.checkAuthStatus();
+				}
+				
+				// Load profile data into form
+				if (userProfile) {
+					window.loadProfileData(userProfile);
+				}
+			} else {
+				console.log('User is signed out');
+				// Clear user data from localStorage
+				localStorage.removeItem('user');
+				console.log('User data removed from localStorage');
+				
+				// Update UI
+				if (window.checkAuthStatus) {
+					window.checkAuthStatus();
+				}
+			}
+		});
+	</script>
 	
 	<!-- Auth Modal JavaScript -->
 	<script>
@@ -5473,58 +4748,128 @@
 		}
 		
 		// Login Form Handler
-		document.getElementById('loginForm').addEventListener('submit', function(e) {
-			e.preventDefault();
-			const email = document.getElementById('loginEmail').value;
-			const password = document.getElementById('loginPassword').value;
-			
-			// Add your login logic here
-			console.log('Login attempt:', { email, password });
-			
-			// Simulate login success
-			alert('Đăng nhập thành công!');
-			closeAuthModal('loginModal');
-		});
+		const loginForm = document.getElementById('loginForm');
+		if (loginForm) {
+			loginForm.addEventListener('submit', function(e) {
+				e.preventDefault();
+				const email = document.getElementById('loginEmail')?.value;
+				const password = document.getElementById('loginPassword')?.value;
+				
+				// Add your login logic here
+				console.log('Login attempt:', { email, password });
+				
+				// Simulate login success
+				showSuccessAlert('Đăng nhập thành công!');
+				closeAuthModal('loginModal');
+			});
+		}
 		
 		// Register Form Handler
-		document.getElementById('registerForm').addEventListener('submit', function(e) {
-			e.preventDefault();
-			const name = document.getElementById('registerName').value;
-			const email = document.getElementById('registerEmail').value;
-			const password = document.getElementById('registerPassword').value;
-			const confirmPassword = document.getElementById('confirmPassword').value;
-			
-			if (password !== confirmPassword) {
-				alert('Mật khẩu xác nhận không khớp!');
-				return;
-			}
-			
-			// Add your registration logic here
-			console.log('Register attempt:', { name, email, password });
-			
-			// Simulate registration success
-			alert('Đăng ký thành công!');
-			closeAuthModal('registerModal');
-		});
+		const registerForm = document.getElementById('registerForm');
+		if (registerForm) {
+			registerForm.addEventListener('submit', function(e) {
+				e.preventDefault();
+				const name = document.getElementById('registerName')?.value;
+				const email = document.getElementById('registerEmail')?.value;
+				const password = document.getElementById('registerPassword')?.value;
+				const confirmPassword = document.getElementById('confirmPassword')?.value;
+				
+				if (password !== confirmPassword) {
+					showErrorAlert('Mật khẩu xác nhận không khớp!');
+					return;
+				}
+				
+				// Add your registration logic here
+				console.log('Register attempt:', { name, email, password });
+				
+				// Simulate registration success
+				showSuccessAlert('Đăng ký thành công!');
+				closeAuthModal('registerModal');
+			});
+		}
 		
 		// Forgot Password Form Handler
-		document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
-			e.preventDefault();
-			const email = document.getElementById('forgotEmail').value;
-			
-			// Add your forgot password logic here
-			console.log('Forgot password attempt:', { email });
-			
-			// Simulate success
-			alert('Email đặt lại mật khẩu đã được gửi!');
-			closeAuthModal('forgotPasswordModal');
-		});
+		const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+		if (forgotPasswordForm) {
+			forgotPasswordForm.addEventListener('submit', function(e) {
+				e.preventDefault();
+				const email = document.getElementById('forgotEmail')?.value;
+				
+				// Add your forgot password logic here
+				console.log('Forgot password attempt:', { email });
+				
+				// Simulate success
+				showSuccessAlert('Email đặt lại mật khẩu đã được gửi!');
+				closeAuthModal('forgotPasswordModal');
+			});
+		}
 		
 		// Google Login Function
 		function loginWithGoogle() {
 			// Add your Google login logic here
 			console.log('Google login attempt');
-			alert('Chức năng đăng nhập Google sẽ được tích hợp sau!');
+			Swal.fire({
+				title: 'Thông báo',
+				text: 'Chức năng đăng nhập Google sẽ được tích hợp sau!',
+				icon: 'info',
+				confirmButtonColor: '#4A6366'
+			});
+		}
+		
+		// Utility function for SweetAlert2 notifications
+		function showSweetAlert(title, text, icon = 'info', timer = null) {
+			const options = {
+				title: title,
+				text: text,
+				icon: icon,
+				confirmButtonColor: '#4A6366'
+			};
+			
+			if (timer) {
+				options.timer = timer;
+				options.showConfirmButton = false;
+			}
+			
+			Swal.fire(options);
+		}
+		
+		// Success notification
+		function showSuccessAlert(message, timer = 2000) {
+			showSweetAlert('Thành công!', message, 'success', timer);
+		}
+		
+		// Error notification
+		function showErrorAlert(message) {
+			showSweetAlert('Lỗi!', message, 'error');
+		}
+		
+		// Info notification
+		function showInfoAlert(message) {
+			showSweetAlert('Thông báo', message, 'info');
+		}
+		
+		// Warning notification
+		function showWarningAlert(message) {
+			showSweetAlert('Cảnh báo', message, 'warning');
+		}
+		
+		// Loading notification
+		function showLoadingAlert(title = 'Đang xử lý...', text = 'Vui lòng chờ trong giây lát') {
+			Swal.fire({
+				title: title,
+				text: text,
+				allowOutsideClick: false,
+				allowEscapeKey: false,
+				showConfirmButton: false,
+				didOpen: () => {
+					Swal.showLoading();
+				}
+			});
+		}
+		
+		// Close loading
+		function closeLoadingAlert() {
+			Swal.close();
 		}
 		
 
@@ -5563,7 +4908,7 @@
 			$('.tg-become-member').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
-				showNotification('Đang chuyển hướng đến trang đăng ký hội viên...', 'success');
+				showSuccessAlert('Đang chuyển hướng đến trang đăng ký hội viên...');
 			});
 			
 			// Login functionality for guest users
@@ -5935,8 +5280,6 @@
 			$('#tg-preview-cart').on('click', function() {
 				showNotification('Đã thêm vào giỏ hàng!', 'success');
 			});
-			// Chỉ giữ lại thông báo cho các hành động quan trọng
-			// Các thông báo không cần thiết đã được loại bỏ
 			
 			// Reading Timer Functionality
 			let timerInterval;
@@ -6309,1000 +5652,729 @@
 	
 	<!-- Mini Cart JavaScript Functions -->
 	<script>
-		// Global cart items
-		let cartItems = {
-			1: { quantity: 1, price: 290000, name: 'Our State Fair Is A Great Function' },
-			2: { quantity: 1, price: 290000, name: 'Bring Me To Light' },
-			3: { quantity: 1, price: 290000, name: 'Have Faith In Your Soul' }
-		};
-		
-		function updateQuantity(itemId, change, event) {
-			const quantityElement = document.getElementById(`qty-${itemId}`);
-			if (!quantityElement) return;
-			
-			const currentQty = parseInt(quantityElement.textContent);
-			const newQty = currentQty + change;
-			
-			if (newQty >= 1) {
-				// Smooth update with visual feedback
-				quantityElement.style.transform = 'scale(1.1)';
-				quantityElement.style.transition = 'transform 0.2s ease';
-				
-				setTimeout(() => {
-					quantityElement.textContent = newQty;
-					quantityElement.style.transform = 'scale(1)';
-					cartItems[itemId].quantity = newQty;
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = formatPrice(calculateTotal());
-					}
-				}, 100);
-				
-				// Prevent dropdown from closing
-				if (event) {
-					event.stopPropagation();
-				}
-			} else if (newQty === 0) {
-				// Remove item if quantity reaches 0
-				removeItem(itemId, event);
-			}
-		}
-		
-		function removeItem(itemId, event) {
-			const itemElement = document.querySelector(`[onclick="removeItem(${itemId}, event)"]`);
-			if (!itemElement) return;
-			
-			const productElement = itemElement.closest('.tg-minicarproduct');
-			if (productElement) {
-				// Smooth slide out animation
-				productElement.style.animation = 'slideOut 0.3s ease-out';
-				productElement.style.transform = 'translateY(-10px)';
-				productElement.style.opacity = '0';
-				
-				setTimeout(() => {
-					productElement.remove();
-					delete cartItems[itemId];
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = formatPrice(calculateTotal());
-					}
-					
-					// Check if cart is empty
-					if (Object.keys(cartItems).length === 0) {
-						showEmptyCart();
-					}
-				}, 300);
-			}
-			
-			// Prevent dropdown from closing
-			if (event) {
-				event.stopPropagation();
-			}
-		}
-		
-		function clearCart() {
-			// Check if universal modal exists
-			if (typeof showUniversalModal === 'function') {
-				showUniversalModal({
-					title: 'Xác nhận xóa giỏ hàng',
-					icon: 'fa-trash-o',
-					iconColor: '#dc3545',
-					heading: 'Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?',
-					description: 'Tất cả sản phẩm trong giỏ hàng sẽ bị xóa.',
-					confirmText: 'Xóa giỏ hàng',
-					confirmStyle: 'danger',
-					onConfirm: function() {
-						const cartBody = document.querySelector('.tg-minicartbody');
-						if (cartBody) {
-							cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-						}
-						cartItems = {};
-						updateCartTotal();
-						
-						// Update cart icon total
-						const cartTotalElement = document.querySelector('.tg-total-price');
-						if (cartTotalElement) {
-							cartTotalElement.textContent = '0₫';
-						}
-					}
-				});
-			} else {
-				// Fallback if modal is not available
-				if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
-					const cartBody = document.querySelector('.tg-minicartbody');
-					if (cartBody) {
-						cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-					}
-					cartItems = {};
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = '0₫';
-					}
-				}
-			}
-		}
-		
-		function updateCartTotal() {
-			const totalElement = document.getElementById('cart-total');
-			if (totalElement) {
-				totalElement.textContent = formatPrice(calculateTotal());
-			}
-		}
-		
-		function calculateTotal() {
-			let total = 0;
-			for (let itemId in cartItems) {
-				total += cartItems[itemId].quantity * cartItems[itemId].price;
-			}
-			return total;
-		}
-		
-		function formatPrice(price) {
-			return price.toLocaleString('vi-VN') + '₫';
-		}
-		
-		function showEmptyCart() {
-			const cartBody = document.querySelector('.tg-minicartbody');
-			if (cartBody) {
-				cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-			}
-		}
-		
-		// Prevent dropdown from closing when clicking inside
-		document.addEventListener('DOMContentLoaded', function() {
-			const dropdownMenu = document.querySelector('.tg-themedropdownmenu');
-			if (dropdownMenu) {
-				dropdownMenu.addEventListener('click', function(e) {
-					e.stopPropagation();
-				});
-			}
-			
-			// Prevent quantity buttons from closing dropdown
-			document.addEventListener('click', function(e) {
-				if (e.target.classList.contains('qty-btn') || e.target.classList.contains('remove-item')) {
-					e.stopPropagation();
-				}
-			});
-			
-			// Force dropdown to stay in fixed position
-			const cartButton = document.querySelector('[aria-labelledby="tg-minicart"]');
-			if (cartButton) {
-				cartButton.addEventListener('click', function(e) {
-					const dropdown = document.querySelector('.tg-themedropdownmenu');
-					if (dropdown) {
-						// Force dropdown to stay in position
-						dropdown.style.position = 'absolute';
-						dropdown.style.top = '100%';
-						dropdown.style.right = '0';
-						dropdown.style.left = 'auto';
-						dropdown.style.transform = 'none';
-						dropdown.style.marginTop = '5px';
-						dropdown.style.zIndex = '1000';
-						dropdown.style.width = '350px';
-					}
-				});
-			}
-			
-			// Prevent any CSS from moving the dropdown
-			const observer = new MutationObserver(function(mutations) {
-				mutations.forEach(function(mutation) {
-					if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-						const dropdown = document.querySelector('.tg-themedropdownmenu');
-						if (dropdown && dropdown.style.display !== 'none') {
-							// Force position back if changed
-							dropdown.style.position = 'absolute';
-							dropdown.style.top = '100%';
-							dropdown.style.right = '0';
-							dropdown.style.left = 'auto';
-							dropdown.style.transform = 'none';
-						}
-					}
-				});
-			});
-			
-			// Start observing the dropdown
-			const dropdown = document.querySelector('.tg-themedropdownmenu');
-			if (dropdown) {
-				observer.observe(dropdown, { attributes: true, attributeFilter: ['style'] });
-			}
-		});
-		
-		// Hàm chuyển hướng đến trang profile
-		function goToProfile() {
-			window.location.href = 'account/profile.html';
-		}
-		
-		// Hàm chuyển hướng đến trang đơn hàng
-		function goToOrders() {
-			window.location.href = 'account/orders-list.html';
-		}
-		
-		// Hàm chuyển hướng đến trang cài đặt
-		function goToSettings() {
-			window.location.href = 'account/setting.html';
-		}
-		
-		// Hàm chuyển hướng đến trang yêu thích
-		function goToFavorites() {
-			window.location.href = 'account/bookcase.html?tab=favorites';
-		}
-	</script>
-	<script>
-		// Profile Page JavaScript
-		document.addEventListener('DOMContentLoaded', function() {
-			// Edit Profile Modal Functions
-			window.openEditProfile = function() {
-				const modal = document.getElementById('editProfileModal');
-				if (modal) {
-					modal.classList.add('active');
-					document.body.style.overflow = 'hidden';
-					
-					// Load current user data into form
-					loadUserDataToForm();
-				}
-			};
-
-			window.closeEditProfileModal = function() {
-				const modal = document.getElementById('editProfileModal');
-				if (modal) {
-					modal.classList.remove('active');
-					document.body.style.overflow = 'auto';
-				}
-			};
-
-			// Load user data into edit form
-			function loadUserDataToForm() {
-				// Get current user data from Firebase or use default values
-				const currentUser = window.currentUser;
-				const userProfile = window.userProfile;
-				
-				if (userProfile) {
-					document.getElementById('editDisplayName').value = userProfile.displayName || 'Quân Phạm';
-					document.getElementById('editEmail').value = userProfile.email || 'phamhongquan9117@gmail.com';
-					document.getElementById('editPhone').value = userProfile.phone || '';
-					document.getElementById('editBirthday').value = userProfile.birthday || '';
-					document.getElementById('editLocation').value = userProfile.location || 'TP.HCM, Việt Nam';
-					document.getElementById('editFavoriteAuthor').value = userProfile.favoriteAuthor || '';
-					document.getElementById('editBio').value = userProfile.bio || 'Tôi là một độc giả đam mê sách, đặc biệt thích đọc sách về phát triển bản thân và tiểu thuyết. Tôi đã đọc hơn 100 cuốn sách và luôn tìm kiếm những cuốn sách mới để khám phá.';
-					document.getElementById('editReadingGoal').value = userProfile.readingGoal?.target || 100;
-					
-					// Load interests
-					if (userProfile.interests) {
-						userProfile.interests.forEach(interest => {
-							const checkbox = document.querySelector(`input[value="${interest}"]`);
-							if (checkbox) {
-								checkbox.checked = true;
-							}
-						});
-					}
-				}
-			}
-
-			// Handle form submission
-			document.getElementById('editProfileForm').addEventListener('submit', async function(e) {
-				e.preventDefault();
-				
-				const saveBtn = document.querySelector('.tg-btn-save');
-				const originalText = saveBtn.innerHTML;
-				
-				// Show loading state
-				saveBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Đang lưu...';
-				saveBtn.disabled = true;
-				
-				try {
-					// Collect form data
-					const formData = {
-						displayName: document.getElementById('editDisplayName').value,
-						phone: document.getElementById('editPhone').value,
-						birthday: document.getElementById('editBirthday').value,
-						location: document.getElementById('editLocation').value,
-						favoriteAuthor: document.getElementById('editFavoriteAuthor').value,
-						bio: document.getElementById('editBio').value,
-						readingGoal: {
-							target: parseInt(document.getElementById('editReadingGoal').value)
-						},
-						interests: []
-					};
-					
-					// Collect selected interests
-					const interestCheckboxes = document.querySelectorAll('input[name="interests"]:checked');
-					interestCheckboxes.forEach(checkbox => {
-						formData.interests.push(checkbox.value);
-					});
-					
-					// Update user profile in Firebase
-					if (window.currentUser && window.userProfile) {
-						const updates = {};
-						Object.keys(formData).forEach(key => {
-							if (key === 'readingGoal') {
-								updates[`users/${window.currentUser.uid}/readingGoal/target`] = formData[key].target;
-							} else {
-								updates[`users/${window.currentUser.uid}/${key}`] = formData[key];
-							}
-						});
-						
-						await window.update(window.ref(window.database), updates);
-						
-						// Update local user profile
-						Object.assign(window.userProfile, formData);
-						
-						// Update UI
-						updateProfileDisplay();
-						
-						// Show success message
-						showNotification('Thông tin đã được cập nhật thành công!', 'success');
-						
-						// Close modal
-						setTimeout(() => {
-							closeEditProfileModal();
-						}, 1000);
-					}
-				} catch (error) {
-					console.error('Error updating profile:', error);
-					showNotification('Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại!', 'error');
-				} finally {
-					// Reset button state
-					saveBtn.innerHTML = originalText;
-					saveBtn.disabled = false;
-				}
-			});
-
-			// Close modal when clicking outside
-			document.addEventListener('click', function(e) {
-				const modal = document.getElementById('editProfileModal');
-				if (e.target === modal) {
-					closeEditProfileModal();
-				}
-			});
-
-			// Close modal with Escape key
-			document.addEventListener('keydown', function(e) {
-				if (e.key === 'Escape') {
-					const modal = document.getElementById('editProfileModal');
-					if (modal.classList.contains('active')) {
-						closeEditProfileModal();
-					}
-				}
-			});
-
-			// Interest tag click handlers
-			document.querySelectorAll('.tg-tag-checkbox').forEach(tag => {
-				tag.addEventListener('click', function() {
-					const checkbox = this.querySelector('input[type="checkbox"]');
-					checkbox.checked = !checkbox.checked;
-					
-					// Add visual feedback
-					if (checkbox.checked) {
-						this.style.background = '#4A6366';
-						this.style.borderColor = '#4A6366';
-						this.style.color = 'white';
-					} else {
-						this.style.background = '#f8f9fa';
-						this.style.borderColor = '#e1e5e9';
-						this.style.color = '#333';
-					}
-				});
-			});
-
-			// Form validation
-			document.getElementById('editDisplayName').addEventListener('input', function() {
-				if (this.value.trim().length < 2) {
-					this.style.borderColor = '#dc3545';
-				} else {
-					this.style.borderColor = '#4A6366';
-				}
-			});
-
-			document.getElementById('editReadingGoal').addEventListener('input', function() {
-				const value = parseInt(this.value);
-				if (value < 1 || value > 365) {
-					this.style.borderColor = '#dc3545';
-				} else {
-					this.style.borderColor = '#4A6366';
-				}
-			});
-			// Tab Navigation
-			const navItems = document.querySelectorAll('.tg-nav-item');
-			const tabContents = document.querySelectorAll('.tg-tab-content');
-			
-			navItems.forEach(item => {
-				item.addEventListener('click', function(e) {
-					e.preventDefault();
-					
-					// Remove active class from all nav items
-					navItems.forEach(nav => nav.classList.remove('active'));
-					
-					// Hide all tab contents
-					tabContents.forEach(tab => {
-						tab.style.display = 'none';
-						tab.classList.remove('active');
-					});
-					
-					// Add active class to clicked nav item
-					this.classList.add('active');
-					
-					// Show corresponding tab content
-					const targetTab = this.getAttribute('href').substring(1);
-					const targetContent = document.getElementById(targetTab);
-					if (targetContent) {
-						targetContent.style.display = 'block';
-						targetContent.classList.add('active');
-					}
-				});
-			});
-			
-			// Profile Avatar Edit
-			const avatarEdit = document.querySelector('.tg-avatar-edit');
-			if (avatarEdit) {
-				avatarEdit.addEventListener('click', function() {
-					const input = document.createElement('input');
-					input.type = 'file';
-					input.accept = 'image/*';
-					input.onchange = function(e) {
-						const file = e.target.files[0];
-						if (file) {
-							const reader = new FileReader();
-							reader.onload = function(e) {
-								document.getElementById('profileAvatar').src = e.target.result;
-								showNotification('Ảnh đại diện đã được cập nhật!', 'success');
-							};
-							reader.readAsDataURL(file);
-						}
-					};
-					input.click();
-				});
-			}
-			
-
-			
-			// Settings Button
-			const settingsBtn = document.querySelector('.tg-btn-settings');
-			if (settingsBtn) {
-				settingsBtn.addEventListener('click', function() {
-					window.location.href = 'account/setting.html';
-				});
-			}
-			
-			// Nav Item Hover Effects
-			navItems.forEach(item => {
-				item.addEventListener('mouseenter', function() {
-					if (!this.classList.contains('active')) {
-						this.style.background = 'rgba(74, 99, 102, 0.1)';
-						this.style.transform = 'translateX(5px)';
-					}
-				});
-				
-				item.addEventListener('mouseleave', function() {
-					if (!this.classList.contains('active')) {
-						this.style.background = 'transparent';
-						this.style.transform = 'translateX(0)';
-					}
-				});
-			});
-			
-			// Active nav item styling
-			const activeNavItem = document.querySelector('.tg-nav-item.active');
-			if (activeNavItem) {
-				activeNavItem.style.background = 'linear-gradient(135deg, #4A6366 0%, #3A4F52 100%)';
-				activeNavItem.style.color = 'white';
-			}
-			
-			// Library Book Hover Effects
-			const libraryBooks = document.querySelectorAll('.tg-library-book');
-			libraryBooks.forEach(book => {
-				book.addEventListener('mouseenter', function() {
-					this.style.transform = 'translateY(-5px)';
-					this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
-				});
-				
-				book.addEventListener('mouseleave', function() {
-					this.style.transform = 'translateY(0)';
-					this.style.boxShadow = 'none';
-				});
-			});
-			
-			// Reading Progress Animation
-			const progressBars = document.querySelectorAll('[style*="width:"]');
-			progressBars.forEach(bar => {
-				const width = bar.style.width;
-				bar.style.width = '0%';
-				setTimeout(() => {
-					bar.style.transition = 'width 1s ease';
-					bar.style.width = width;
-				}, 500);
-			});
-			
-			// Stats Counter Animation
-			const statNumbers = document.querySelectorAll('.tg-stat-card h3');
-			statNumbers.forEach(stat => {
-				const target = parseInt(stat.textContent);
-				let current = 0;
-				const increment = target / 50;
-				const timer = setInterval(() => {
-					current += increment;
-					if (current >= target) {
-						stat.textContent = target;
-						clearInterval(timer);
-					} else {
-						stat.textContent = Math.floor(current);
-					}
-				}, 30);
-			});
-			
-			// Activity Timeline Animation
-			const activityItems = document.querySelectorAll('.tg-activity-item');
-			activityItems.forEach((item, index) => {
-				item.style.opacity = '0';
-				item.style.transform = 'translateY(20px)';
-				setTimeout(() => {
-					item.style.transition = 'all 0.5s ease';
-					item.style.opacity = '1';
-					item.style.transform = 'translateY(0)';
-				}, index * 200);
-			});
-			
-			// Update Reading Goal
-			const updateGoalBtn = document.querySelector('[style*="background: linear-gradient(135deg, #F4A261"]');
-			if (updateGoalBtn) {
-				updateGoalBtn.addEventListener('click', function() {
-					showUpdateGoalModal();
-				});
-			}
-		});
-		
-
-		
-		// Show Update Goal Modal
-		function showUpdateGoalModal() {
-			const modal = document.createElement('div');
-			modal.className = 'tg-update-goal-modal';
-			modal.style.cssText = `
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: rgba(0,0,0,0.5);
-				z-index: 10000;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			`;
-			
-			modal.innerHTML = `
-				<div style="background: white; border-radius: 15px; width: 90%; max-width: 400px; padding: 30px; text-align: center;">
-					<h3 style="color: #4A6366; margin-bottom: 20px;">Cập nhật mục tiêu đọc sách</h3>
-					<p style="color: #666; margin-bottom: 25px;">Bạn muốn đặt mục tiêu đọc bao nhiêu cuốn sách trong năm 2025?</p>
-					<input type="number" value="100" min="1" max="365" style="width: 100px; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 18px; text-align: center; margin-bottom: 25px;">
-					<div style="display: flex; gap: 15px; justify-content: center;">
-						<button onclick="closeUpdateGoalModal()" style="background: #6c757d; color: white; padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Hủy</button>
-						<button onclick="updateGoal()" style="background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); color: white; padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Cập nhật</button>
-					</div>
-				</div>
-			`;
-			
-			document.body.appendChild(modal);
-		}
-		
-		// Close Update Goal Modal
-		function closeUpdateGoalModal() {
-			const modal = document.querySelector('.tg-update-goal-modal');
-			if (modal) {
-				modal.remove();
-			}
-		}
-		
-		// Update Goal
-		function updateGoal() {
-			const input = document.querySelector('.tg-update-goal-modal input');
-			const newGoal = parseInt(input.value);
-			
-			if (newGoal > 0 && newGoal <= 365) {
-				showNotification(`Mục tiêu đã được cập nhật thành ${newGoal} cuốn!`, 'success');
-				closeUpdateGoalModal();
-				
-				// Update the goal display
-				setTimeout(() => {
-					location.reload();
-				}, 1000);
-			} else {
-				showNotification('Vui lòng nhập số cuốn hợp lệ (1-365)', 'error');
-			}
-		}
-		
-		// Close modals when clicking outside
-		document.addEventListener('click', function(e) {
-			const editModal = document.querySelector('.tg-edit-profile-modal');
-			const goalModal = document.querySelector('.tg-update-goal-modal');
-			
-			if (editModal && e.target === editModal) {
-				closeEditProfileModal();
-			}
-			
-			if (goalModal && e.target === goalModal) {
-				closeUpdateGoalModal();
-			}
-		});
-	</script>
-	
-	<!-- Header JavaScript Functions -->
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			// Toggle User Dropdown
-			window.toggleUserDropdown = function() {
-				const dropdown = document.getElementById('userDropdown');
-				const chevron = document.querySelector('.tg-user-info .fa-chevron-down');
-				
-				if (dropdown.style.display === 'block') {
-					dropdown.style.display = 'none';
-					chevron.style.transform = 'rotate(0deg)';
-				} else {
-					dropdown.style.display = 'block';
-					chevron.style.transform = 'rotate(180deg)';
-				}
-			};
-			
-			// Close dropdown when clicking outside
-			document.addEventListener('click', function(event) {
-				const userProfile = document.querySelector('.tg-user-profile');
-				const dropdown = document.getElementById('userDropdown');
-				
-				if (!userProfile.contains(event.target)) {
-					dropdown.style.display = 'none';
-					document.querySelector('.tg-user-info .fa-chevron-down').style.transform = 'rotate(0deg)';
-				}
-			});
-			
-			// Search Functionality
-			const searchInput = document.querySelector('.tg-search-box input');
-			const searchSuggestions = document.querySelector('.tg-search-suggestions');
-			
-			if (searchInput) {
-				searchInput.addEventListener('focus', function() {
-					searchSuggestions.style.display = 'block';
-				});
-				
-				searchInput.addEventListener('blur', function() {
-					setTimeout(() => {
-						searchSuggestions.style.display = 'none';
-					}, 200);
-				});
-				
-				searchInput.addEventListener('input', function() {
-					const query = this.value.toLowerCase();
-					const suggestions = searchSuggestions.querySelectorAll('.tg-suggestion-item');
-					
-					suggestions.forEach(item => {
-						const text = item.textContent.toLowerCase();
-						if (text.includes(query)) {
-							item.style.display = 'block';
-						} else {
-							item.style.display = 'none';
-						}
-					});
-				});
-			}
-			
-			// Mobile Menu Toggle
-			const mobileToggle = document.querySelector('.tg-mobile-toggle button');
-			const navMenu = document.querySelector('.tg-nav-menu');
-			
-			if (mobileToggle) {
-				mobileToggle.addEventListener('click', function() {
-					navMenu.classList.toggle('active');
-					const icon = this.querySelector('i');
-					if (navMenu.classList.contains('active')) {
-						icon.className = 'fa fa-times';
-					} else {
-						icon.className = 'fa fa-bars';
-					}
-				});
-			}
-			
-			// Smooth scrolling for navigation links
-			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-				anchor.addEventListener('click', function (e) {
-					e.preventDefault();
-					const target = document.querySelector(this.getAttribute('href'));
-					if (target) {
-						target.scrollIntoView({
-							behavior: 'smooth',
-							block: 'start'
-						});
-					}
-				});
-			});
-			
-			// Header scroll effect
-			let lastScrollTop = 0;
-			const header = document.querySelector('.tg-header');
-			
-			window.addEventListener('scroll', function() {
-				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-				
-				if (scrollTop > lastScrollTop && scrollTop > 100) {
-					// Scrolling down
-					header.style.transform = 'translateY(-100%)';
-				} else {
-					// Scrolling up
-					header.style.transform = 'translateY(0)';
-				}
-				
-				lastScrollTop = scrollTop;
-			});
-			
-			// Add loading animation to header
-			setTimeout(() => {
-				header.style.opacity = '1';
-				header.style.transform = 'translateY(0)';
-			}, 100);
-		});
-		
-		// Logout function
-		function logout() {
-			if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-				// Add logout logic here
-				window.location.href = 'auth.html';
-			}
-		}
-		
-		// Search suggestions click handler
-		document.addEventListener('click', function(event) {
-			if (event.target.closest('.tg-suggestion-item')) {
-				const text = event.target.closest('.tg-suggestion-item').textContent;
-				document.querySelector('.tg-search-box input').value = text;
-				document.querySelector('.tg-search-suggestions').style.display = 'none';
-			}
-		});
-		
-		// Add hover effects for social media links
-		document.querySelectorAll('.tg-topbar-right a').forEach(link => {
-			link.addEventListener('mouseenter', function() {
-				this.style.transform = 'scale(1.2)';
-			});
-			
-			link.addEventListener('mouseleave', function() {
-				this.style.transform = 'scale(1)';
-			});
-		});
-		
-		// Add notification system
-		function showNotification(message, type = 'info') {
-			const notification = document.createElement('div');
-			notification.className = `tg-notification tg-notification-${type}`;
-			notification.innerHTML = `
-				<div class="tg-notification-content">
-					<i class="fa fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-					<span>${message}</span>
-				</div>
-			`;
-			
-			document.body.appendChild(notification);
-			
-			setTimeout(() => {
-				notification.classList.add('show');
-			}, 100);
-			
-			setTimeout(() => {
-				notification.classList.remove('show');
-				setTimeout(() => {
-					document.body.removeChild(notification);
-				}, 300);
-			}, 3000);
-		}
-		
-		// Example usage of notification
-		// showNotification('Đăng nhập thành công!', 'success');
-		// showNotification('Có lỗi xảy ra!', 'error');
-		// showNotification('Thông tin cập nhật!', 'info');
-		
-		// Cart Modal Functions
+		// Cart Modal Functions - localStorage version
 		window.toggleCartModal = function() {
-			const modal = document.getElementById('cartModal');
-			if (modal.classList.contains('active')) {
-				modal.classList.remove('active');
-			} else {
-				modal.classList.add('active');
+			const cartModal = document.getElementById('cartModal');
+			if (cartModal) {
+				cartModal.classList.toggle('active');
+				if (cartModal.classList.contains('active')) {
+					updateCartDisplay();
+				}
 			}
 		};
 		
 		window.updateQuantity = function(itemId, change) {
-			const quantityElement = document.querySelector(`[onclick="updateQuantity(${itemId}, ${change})"]`).parentNode.querySelector('.tg-quantity-number');
-			let currentQuantity = parseInt(quantityElement.textContent);
-			let newQuantity = currentQuantity + change;
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const itemIndex = cart.findIndex(item => (item.story_id === itemId || item.book_id === itemId));
 			
-			if (newQuantity >= 1) {
-				quantityElement.textContent = newQuantity;
-				updateCartTotal();
-			} else if (newQuantity === 0) {
-				removeCartItem(itemId);
+			if (itemIndex !== -1) {
+				const newQuantity = cart[itemIndex].quantity + change;
+				
+				if (newQuantity <= 0) {
+					// Xóa item nếu số lượng <= 0
+					cart.splice(itemIndex, 1);
+					showNotification('Đã xóa sản phẩm khỏi giỏ hàng!', 'success');
+				} else {
+					// Cập nhật số lượng
+					cart[itemIndex].quantity = newQuantity;
+					showNotification('Đã cập nhật số lượng!', 'success');
+				}
+				
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartDisplay();
+				updateCartCount();
 			}
 		};
 		
 		window.removeCartItem = function(itemId) {
-			const cartItem = document.querySelector(`[onclick="removeCartItem(${itemId})"]`).closest('.tg-cart-item');
-			cartItem.style.animation = 'slideOut 0.3s ease';
-			setTimeout(() => {
-				cartItem.remove();
-				updateCartTotal();
-				checkEmptyCart();
-			}, 300);
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const itemIndex = cart.findIndex(item => (item.story_id === itemId || item.book_id === itemId));
+			
+			if (itemIndex !== -1) {
+				const removedItem = cart.splice(itemIndex, 1)[0];
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartDisplay();
+				updateCartCount();
+				showNotification(`Đã xóa "${removedItem.title}" khỏi giỏ hàng!`, 'success');
+			}
 		};
 		
 		window.clearCart = function() {
-			const cartItems = document.querySelectorAll('.tg-cart-item');
-			cartItems.forEach(item => {
-				item.style.animation = 'slideOut 0.3s ease';
-			});
-			setTimeout(() => {
-				document.querySelector('.tg-cart-items').innerHTML = '';
-				updateCartTotal();
-				checkEmptyCart();
-			}, 300);
+			if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
+				localStorage.removeItem('cart');
+				updateCartDisplay();
+				updateCartCount();
+				showNotification('Đã xóa toàn bộ giỏ hàng!', 'success');
+			}
 		};
 		
 		window.checkout = function() {
-			showNotification('Chuyển đến trang thanh toán...', 'info');
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			if (cart.length === 0) {
+				showNotification('Giỏ hàng trống!', 'error');
+				return;
+			}
+			
+			// Chuyển đến trang thanh toán
+			showNotification('Đang chuyển đến trang thanh toán...', 'info');
 			setTimeout(() => {
-				toggleCartModal();
-			}, 1500);
+				window.location.href = 'checkout.html';
+			}, 1000);
 		};
-		
-		function updateCartTotal() {
-			const items = document.querySelectorAll('.tg-cart-item');
-			let total = 0;
-			let savings = 0;
+
+		// Function to update cart display from localStorage
+		window.updateCartDisplay = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const cartItemsContainer = document.getElementById('cart-items-container');
 			
-			items.forEach(item => {
-				const quantity = parseInt(item.querySelector('.tg-quantity-number').textContent);
-				const currentPrice = parseInt(item.querySelector('.tg-cart-item-current').textContent.replace(/[^\d]/g, ''));
-				const originalPrice = parseInt(item.querySelector('.tg-cart-item-original').textContent.replace(/[^\d]/g, ''));
-				
-				total += currentPrice * quantity;
-				savings += (originalPrice - currentPrice) * quantity;
-			});
+			if (!cartItemsContainer) return;
 			
-			document.querySelector('.tg-cart-total-price').textContent = total.toLocaleString() + '₫';
-			document.querySelector('.tg-cart-savings-amount').textContent = savings.toLocaleString() + '₫';
-			
-			// Update cart badge
-			const totalItems = Array.from(items).reduce((sum, item) => {
-				return sum + parseInt(item.querySelector('.tg-quantity-number').textContent);
-			}, 0);
-			
-			document.querySelector('.tg-cart-badge').textContent = totalItems;
-		}
-		
-		function checkEmptyCart() {
-			const cartItems = document.querySelectorAll('.tg-cart-item');
-			const cartItemsContainer = document.querySelector('.tg-cart-items');
-			const emptyCart = document.querySelector('.tg-cart-empty');
-			
-			if (cartItems.length === 0) {
-				cartItemsContainer.style.display = 'none';
-				emptyCart.style.display = 'block';
-				document.querySelector('.tg-cart-modal-footer').style.display = 'none';
+			if (cart.length === 0) {
+				// Hiển thị giỏ hàng trống
+				cartItemsContainer.innerHTML = `
+					<div class="tg-cart-empty" style="display: block;">
+						<i class="fa fa-shopping-cart"></i>
+						<h4>Giỏ hàng trống</h4>
+						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
+						<button class="tg-btn tg-btn-primary" onclick="toggleCartModal();">Tiếp tục mua sắm</button>
+					</div>
+				`;
 			} else {
-				cartItemsContainer.style.display = 'flex';
-				emptyCart.style.display = 'none';
-				document.querySelector('.tg-cart-modal-footer').style.display = 'block';
+				// Hiển thị danh sách sản phẩm với đầy đủ thông tin
+				cartItemsContainer.innerHTML = cart.map(item => `
+					<div class="tg-cart-item" data-item-id="${item.story_id || item.book_id}">
+						<div class="tg-cart-item-image">
+							<img src="${item.cover_image || item.image}" alt="${item.title}" onerror="this.src='images/books/default-book.jpg'">
+						</div>
+						<div class="tg-cart-item-details">
+							<h4>${item.title}</h4>
+							<p class="tg-cart-item-author">${item.author}</p>
+							<div class="tg-cart-item-info">
+								${item.category_name ? `<span class="tg-cart-item-category">${item.category_name}</span>` : ''}
+								${item.rating ? `<span class="tg-cart-item-rating">★ ${item.rating}</span>` : ''}
+								${item.type === 'story' ? `<span class="tg-cart-item-type">📖 Truyện</span>` : '<span class="tg-cart-item-type">📚 Sách</span>'}
+							</div>
+							<div class="tg-cart-item-price">
+								<span class="tg-cart-item-current">${formatPrice(item.price)}</span>
+								${item.original_price > item.price ? `<span class="tg-cart-item-original">${formatPrice(item.original_price)}</span>` : ''}
+							</div>
+							${item.description ? `<p class="tg-cart-item-description">${item.description.substring(0, 100)}${item.description.length > 100 ? '...' : ''}</p>` : ''}
+						</div>
+						<div class="tg-cart-item-actions">
+							<div class="tg-cart-item-quantity">
+								<button class="tg-quantity-btn" onclick="updateQuantity('${item.story_id || item.book_id}', -1)">-</button>
+								<span class="tg-quantity-number">${item.quantity}</span>
+								<button class="tg-quantity-btn" onclick="updateQuantity('${item.story_id || item.book_id}', 1)">+</button>
+							</div>
+							<button class="tg-cart-item-remove" onclick="removeCartItem('${item.story_id || item.book_id}')">
+								<i class="fa fa-trash"></i>
+							</button>
+						</div>
+					</div>
+				`).join('');
+			}
+			
+			// Cập nhật tổng tiền
+			updateCartTotal();
+		}
+
+		// Function to update cart count
+		window.updateCartCount = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+			
+			const cartBadge = document.getElementById('cart-badge');
+			if (cartBadge) {
+				cartBadge.textContent = totalItems;
+				cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
 			}
 		}
-		
-		// Close modal when clicking outside
-		document.addEventListener('click', function(event) {
-			const modal = document.getElementById('cartModal');
-			if (event.target === modal) {
-				toggleCartModal();
+
+		// Function to update cart total
+		window.updateCartTotal = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+			const totalOriginal = cart.reduce((sum, item) => sum + (item.original_price * item.quantity), 0);
+			const savings = totalOriginal - totalPrice;
+			
+			const totalPriceElement = document.getElementById('cart-total-price');
+			const savingsElement = document.getElementById('cart-savings-amount');
+			
+			if (totalPriceElement) {
+				totalPriceElement.textContent = formatPrice(totalPrice);
 			}
-		});
-		
-		// Close modal with Escape key
-		document.addEventListener('keydown', function(event) {
-			if (event.key === 'Escape') {
-				const modal = document.getElementById('cartModal');
-				if (modal.classList.contains('active')) {
-					toggleCartModal();
-				}
+			if (savingsElement) {
+				savingsElement.textContent = formatPrice(savings);
 			}
-		});
-		
-		// Navigation Active State Management
-		document.addEventListener('DOMContentLoaded', function() {
-			// Get current page URL
-			const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+		}
+
+		// Function to format price
+		window.formatPrice = function(price) {
+			return new Intl.NumberFormat('vi-VN', {
+				style: 'currency',
+				currency: 'VND'
+			}).format(price);
+		}
+
+		// Function to update quantity
+		window.updateQuantity = function(itemId, change) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const item = cart.find(item => item.story_id === itemId || item.book_id === itemId);
 			
-			// Find all navigation links
-			const navLinks = document.querySelectorAll('.nav-link');
-			
-			// Remove active class from all links
-			navLinks.forEach(link => {
-				link.classList.remove('active');
-			});
-			
-			// Add active class to current page link
-			navLinks.forEach(link => {
-				const href = link.getAttribute('href');
-				if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-					link.classList.add('active');
+			if (item) {
+				item.quantity += change;
+				if (item.quantity < 1) {
+					item.quantity = 1;
 				}
-			});
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartDisplay();
+				updateCartCount();
+			}
+		}
+
+		// Function to remove cart item
+		window.removeCartItem = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const updatedCart = cart.filter(item => item.story_id !== itemId && item.book_id !== itemId);
+			localStorage.setItem('cart', JSON.stringify(updatedCart));
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to clear cart
+		window.clearCart = function() {
+			localStorage.removeItem('cart');
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to check if item is in cart
+		window.isInCart = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			return cart.some(item => item.story_id === itemId || item.book_id === itemId);
+		}
+
+		// Function to add item to cart
+		window.addToCart = function(item) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const existingItem = cart.find(cartItem => cartItem.story_id === item.story_id || cartItem.book_id === item.book_id);
 			
-			// Handle submenu hover effects
-			const menuItems = document.querySelectorAll('.tg-nav-menu li');
+			if (existingItem) {
+				existingItem.quantity += 1;
+			} else {
+				cart.push({ ...item, quantity: 1 });
+			}
 			
-			menuItems.forEach(item => {
-				const link = item.querySelector('a');
-				const submenu = item.querySelector('.tg-submenu');
-				
-				if (submenu) {
-					item.addEventListener('mouseenter', function() {
-						submenu.style.opacity = '1';
-						submenu.style.visibility = 'visible';
-						submenu.style.transform = 'translateY(0)';
-					});
-					
-					item.addEventListener('mouseleave', function() {
-						submenu.style.opacity = '0';
-						submenu.style.visibility = 'hidden';
-						submenu.style.transform = 'translateY(-10px)';
-					});
-				}
-			});
+			localStorage.setItem('cart', JSON.stringify(cart));
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to get cart items
+		window.getCartItems = function() {
+			return JSON.parse(localStorage.getItem('cart')) || [];
+		}
+
+		// Function to get cart total
+		window.getCartTotal = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+		}
+
+		// Function to get cart savings
+		window.getCartSavings = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+			const totalOriginal = cart.reduce((sum, item) => sum + (item.original_price * item.quantity), 0);
+			return totalOriginal - totalPrice;
+		}
+
+		// Function to get cart item count
+		window.getCartItemCount = function() {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			return cart.reduce((sum, item) => sum + item.quantity, 0);
+		}
+
+		// Function to get cart item by ID
+		window.getCartItemById = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			return cart.find(item => item.story_id === itemId || item.book_id === itemId);
+		}
+
+		// Function to update cart item quantity
+		window.updateCartItemQuantity = function(itemId, quantity) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const item = cart.find(item => item.story_id === itemId || item.book_id === itemId);
 			
-			// Handle submenu item clicks
-			const submenuLinks = document.querySelectorAll('.tg-submenu a');
-			submenuLinks.forEach(link => {
-				link.addEventListener('click', function(e) {
-					e.preventDefault();
-					
-					// Remove active class from all submenu links
-					submenuLinks.forEach(subLink => {
-						subLink.classList.remove('active');
-					});
-					
-					// Add active class to clicked link
-					this.classList.add('active');
-					
-					// Update parent menu item
-					const parentLink = this.closest('li').querySelector('.nav-link');
-					if (parentLink) {
-						parentLink.classList.add('active');
-					}
-				});
-			});
-		});
-		
-		// Mobile menu toggle functionality
-		document.addEventListener('DOMContentLoaded', function() {
-			const mobileToggle = document.querySelector('.tg-mobile-toggle');
-			const navMenu = document.querySelector('.tg-nav-menu');
-			
-			if (mobileToggle && navMenu) {
-				mobileToggle.addEventListener('click', function() {
-					navMenu.classList.toggle('active');
-					
-					// Toggle icon
-					const icon = this.querySelector('i');
-					if (icon) {
-						if (navMenu.classList.contains('active')) {
-							icon.className = 'fa fa-times';
-						} else {
+			if (item) {
+				item.quantity = quantity;
+				localStorage.setItem('cart', JSON.stringify(cart));
+				updateCartDisplay();
+				updateCartCount();
+			}
+		}
+
+		// Function to remove cart item by ID
+		window.removeCartItemById = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
+			const updatedCart = cart.filter(item => item.story_id !== itemId && item.book_id !== itemId);
+			localStorage.setItem('cart', JSON.stringify(updatedCart));
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to clear cart
+		window.clearCart = function() {
+			localStorage.removeItem('cart');
+			updateCartDisplay();
+			updateCartCount();
+		}
+
+		// Function to check if item is in cart
+		window.isInCart = function(itemId) {
+			const cart = JSON.parse(localStorage.getItem('cart')) || [];
 							icon.className = 'fa fa-bars';
 						}
-					}
-				});
+				
+		// Load Categories from Firebase
+		document.addEventListener('DOMContentLoaded', function() {
+			// Check if Firebase is available
+			if (typeof firebase !== 'undefined' && firebase.database) {
+				const db = firebase.database();
+				
+
+				
+
 			}
 		});
+
+		// User Dropdown Functions
+		window.toggleUserDropdown = function() {
+			const dropdown = document.getElementById('userDropdown');
+			if (dropdown) {
+				dropdown.classList.toggle('show');
+			}
+		};
+
+		// Close dropdown when clicking outside
+		document.addEventListener('click', function(event) {
+			const userProfile = document.querySelector('.tg-user-profile');
+			const dropdown = document.getElementById('userDropdown');
+			
+			if (dropdown && dropdown.classList.contains('show')) {
+				if (!userProfile.contains(event.target)) {
+					dropdown.classList.remove('show');
+				}
+			}
+		});
+
+		// Prevent dropdown from closing when hovering over it
+		document.addEventListener('mouseenter', function(event) {
+			const userProfile = document.querySelector('.tg-user-profile');
+			const dropdown = document.getElementById('userDropdown');
+			
+			if (userProfile && userProfile.contains(event.target)) {
+				if (dropdown) {
+					dropdown.classList.add('show');
+				}
+			}
+		});
+
+		document.addEventListener('mouseleave', function(event) {
+			const userProfile = document.querySelector('.tg-user-profile');
+			const dropdown = document.getElementById('userDropdown');
+			
+			if (userProfile && !userProfile.contains(event.target)) {
+				if (dropdown) {
+					// Add a small delay to prevent immediate closing
+					setTimeout(() => {
+						if (!userProfile.matches(':hover')) {
+							dropdown.classList.remove('show');
+						}
+					}, 100);
+				}
+			}
+		});
+
+		// Load cart from localStorage on page load
+		function loadCartFromLocalStorage() {
+			try {
+				const cart = JSON.parse(localStorage.getItem('cart')) || [];
+				console.log('Cart loaded from localStorage:', cart);
+				
+				// Cập nhật hiển thị giỏ hàng
+				updateCartDisplay();
+				updateCartCount();
+				
+			} catch (error) {
+				console.error('Error loading cart from localStorage:', error);
+				// Nếu có lỗi, xóa cart cũ và tạo mới
+				localStorage.removeItem('cart');
+				updateCartDisplay();
+				updateCartCount();
+			}
+		}
+
+		// Load cart when page loads
+		document.addEventListener('DOMContentLoaded', function() {
+			loadCartFromLocalStorage();
+		});
+
+	</script>
+
+	<!-- Profile Dashboard JavaScript -->
+	<script>
+		// Profile Dashboard JavaScript
+		$(document).ready(function() {
+			// Clear any old local storage image data on page load
+			const keysToRemove = [];
+			for (let i = 0; i < localStorage.length; i++) {
+				const key = localStorage.key(i);
+				if (key && key.startsWith('profile_image_')) {
+					keysToRemove.push(key);
+				}
+			}
+			keysToRemove.forEach(key => localStorage.removeItem(key));
+			console.log('Cleared old local storage image data on page load');
+			
+			// Load profile data from Firebase
+			window.loadProfileData = function(userProfile) {
+				if (!userProfile) return;
+				
+				// Get personal info from Firebase data
+				const personalInfo = userProfile.personalInfo || {};
+				
+				// Update form fields with real data from Firebase
+				$('input[value*="phamhongquan"]').val(personalInfo.username || userProfile.email?.split('@')[0] || 'phamhongquan9117');
+				$('input[value*="9986278"]').val(personalInfo.userId || '9986278');
+				$('input[value*="Quân"]').val(personalInfo.fullName || userProfile.displayName || 'Quân Phạm');
+				$('input[value*="01/01"]').val(personalInfo.dateOfBirth || '01/01/1900');
+				
+				// Update gender select
+				const genderSelect = $('select option:selected');
+				if (personalInfo.gender) {
+					$('select option').each(function() {
+						if ($(this).text() === personalInfo.gender) {
+							$(this).prop('selected', true);
+						}
+					});
+				}
+				
+				// Update phone and address if they exist
+				if (personalInfo.phone) {
+					$('input[name="phone"]').val(personalInfo.phone);
+				}
+				if (personalInfo.address) {
+					$('input[name="address"]').val(personalInfo.address);
+				}
+				
+				// Update user display name in sidebar
+				const displayName = personalInfo.fullName || userProfile.displayName || 'User';
+				$('.tg-user-info h3').text(displayName);
+				
+				// Update avatar if available
+				if (userProfile.photoURL) {
+					// Check if it's an old local URL and clear it
+					if (userProfile.photoURL.startsWith('local://')) {
+						console.log('Found old local URL, clearing:', userProfile.photoURL);
+						// Clear the old local URL from profile
+						const updatedProfile = { ...userProfile };
+						delete updatedProfile.photoURL;
+						// Update the profile without photoURL
+						if (window.updateUserProfile) {
+							window.updateUserProfile(userProfile.uid || 'temp', updatedProfile);
+						}
+					} else {
+						// It's a valid Cloudinary URL
+						$('.tg-user-avatar img, .tg-avatar-large img').attr('src', userProfile.photoURL);
+					}
+				}
+				
+				console.log('Profile data loaded from Firebase:', userProfile);
+			};
+
+			// Save profile data to localStorage and Firebase
+			window.saveProfileData = async function() {
+				const user = JSON.parse(localStorage.getItem('user'));
+				if (!user || !user.uid) {
+					showNotification('Vui lòng đăng nhập để lưu thông tin!', 'error');
+					return false;
+				}
+
+				// Get current form values
+				const username = $('input[value*="phamhongquan"]').val();
+				const userId = $('input[value*="9986278"]').val();
+				const fullName = $('input[value*="Quân"]').val();
+				const dateOfBirth = $('input[value*="01/01"]').val();
+				const gender = $('select option:selected').text();
+				const phone = $('input[name="phone"]').val() || '';
+				const address = $('input[name="address"]').val() || '';
+
+				const profileData = {
+					personalInfo: {
+						username: username,
+						userId: userId,
+						fullName: fullName,
+						dateOfBirth: dateOfBirth,
+						gender: gender,
+						phone: phone,
+						address: address
+					}
+				};
+
+				try {
+					const success = await window.updateUserProfile(user.uid, profileData);
+					if (success) {
+						// Update localStorage
+						const updatedUser = { ...user, profile: { ...user.profile, ...profileData } };
+						localStorage.setItem('user', JSON.stringify(updatedUser));
+						
+						// Update display name in sidebar
+						$('.tg-user-info h3').text(fullName);
+						
+						showNotification('Thông tin đã được cập nhật thành công!', 'success');
+						console.log('Profile saved to localStorage and Firebase:', profileData);
+						return true;
+					} else {
+						showNotification('Có lỗi xảy ra khi lưu thông tin!', 'error');
+						return false;
+					}
+				} catch (error) {
+					console.error('Error saving profile:', error);
+					showNotification('Có lỗi xảy ra khi lưu thông tin!', 'error');
+					return false;
+				}
+			};
+
+			// Sidebar Navigation
+			$('.tg-profile-nav a').on('click', function(e) {
+				e.preventDefault();
+				
+				const targetSection = $(this).data('tab');
+				
+				// Remove active class from all nav items
+				$('.tg-profile-nav li').removeClass('active');
+				$('.tg-content-section').removeClass('active');
+				
+				// Add active class to clicked item
+				$(this).parent().addClass('active');
+				$('#' + targetSection).addClass('active');
+			});
+			
+			// Tab Navigation
+			$('.tg-tab-btn').on('click', function(e) {
+				e.preventDefault();
+				
+				const targetTab = $(this).data('tab');
+				
+				// Remove active class from all tabs
+				$('.tg-tab-btn').removeClass('active');
+				$('.tg-tab-panel').removeClass('active');
+				
+				// Add active class to clicked tab
+				$(this).addClass('active');
+				$('#' + targetTab).addClass('active');
+			});
+			
+			// Action Buttons
+			$('.tg-btn-membership').on('click', function() {
+				showNotification('Chuyển đến trang đăng ký hội viên...', 'info');
+				// Chuyển hướng đến trang membership sau 1 giây
+				setTimeout(function() {
+					window.location.href = 'menbership.html';
+				}, 1000);
+			});
+			
+			// Form Actions
+			$('.tg-btn-update').on('click', function() {
+				// Add loading state
+				$('.tg-btn-update').addClass('updating');
+				$('.tg-btn-update').html('<i class="fa fa-spinner fa-spin"></i> Đang cập nhật...');
+				
+				try {
+					// Save to localStorage
+					const success = window.saveProfileData();
+					
+					if (success) {
+						// Success - notification already shown in saveProfileData
+						console.log('Profile updated successfully in localStorage');
+					} else {
+						// Error - notification already shown in saveProfileData
+						console.log('Failed to update profile in localStorage');
+					}
+				} catch (error) {
+					console.error('Error updating profile:', error);
+					showNotification('Có lỗi xảy ra khi cập nhật!', 'error');
+				} finally {
+					// Reset button state
+					setTimeout(() => {
+						$('.tg-btn-update').removeClass('updating');
+						$('.tg-btn-update').html('<i class="fa fa-save"></i> Cập nhật');
+					}, 1000);
+				}
+			});
+			
+
+			
+					// Change Photo Button with Simple File Upload
+		$('.tg-btn-change-photo').on('click', function() {
+			// Clear any old local storage image data
+			const keysToRemove = [];
+			for (let i = 0; i < localStorage.length; i++) {
+				const key = localStorage.key(i);
+				if (key && key.startsWith('profile_image_')) {
+					keysToRemove.push(key);
+				}
+			}
+			keysToRemove.forEach(key => localStorage.removeItem(key));
+			console.log('Cleared old local storage image data');
+			
+			// Create file input
+				// Create file input
+				const fileInput = $('<input type="file" accept="image/*" style="display: none;">');
+				$('body').append(fileInput);
+				
+				fileInput.on('change', function() {
+					const file = this.files[0];
+					if (file) {
+						// Show loading state
+						$('.tg-btn-change-photo').html('<i class="fa fa-spinner fa-spin"></i> Đang tải...');
+						
+						// Upload to Cloudinary
+						window.uploadImageToCloudinary(file, async function(imageUrl, error) {
+							if (imageUrl) {
+														// Update avatar images
+						// Update avatar images with Cloudinary URL
+						$('.tg-avatar-large img, .tg-user-avatar img').attr('src', imageUrl);
+								
+								// Update user profile with new photo URL
+								const user = JSON.parse(localStorage.getItem('user'));
+								if (user && user.uid) {
+									const profileData = {
+										photoURL: imageUrl
+									};
+									await window.updateUserProfile(user.uid, profileData);
+									
+									// Update localStorage
+									const updatedUser = { ...user, photoURL: imageUrl };
+									localStorage.setItem('user', JSON.stringify(updatedUser));
+								}
+								
+								showNotification('Ảnh đã được cập nhật thành công!', 'success');
+								console.log('Avatar updated with Cloudinary URL:', imageUrl);
+							} else {
+								// Hiển thị thông báo lỗi chi tiết
+								let errorMessage = 'Có lỗi xảy ra khi tải ảnh!';
+								if (error) {
+									if (error.message && error.message.includes('File size')) {
+										errorMessage = 'Kích thước ảnh quá lớn! Vui lòng chọn ảnh nhỏ hơn 3.5MB.';
+									} else if (error.message && error.message.includes('Invalid file type')) {
+										errorMessage = 'Định dạng ảnh không hợp lệ! Vui lòng chọn JPG, PNG, GIF hoặc WebP.';
+									} else if (error.message && error.message.includes('Upload failed')) {
+										if (error.message.includes('unsigned uploads')) {
+											errorMessage = 'Lỗi cấu hình Cloudinary! Vui lòng kiểm tra upload preset.';
+										} else {
+											errorMessage = 'Lỗi upload ảnh! Vui lòng thử lại sau.';
+										}
+									} else {
+										errorMessage = error.message || 'Có lỗi xảy ra khi upload ảnh!';
+									}
+								}
+								showNotification(errorMessage, 'error');
+								console.error('Cloudinary upload error:', error);
+							}
+							
+							// Reset button state
+							$('.tg-btn-change-photo').html('<i class="fa fa-camera"></i> Thay ảnh');
+						});
+					}
+					fileInput.remove();
+				});
+				
+				fileInput.click();
+			});
+			
+			// Date Input Calendar Icon
+			$('.tg-date-input i').on('click', function() {
+				$(this).siblings('input').focus();
+				showNotification('Vui lòng nhập ngày sinh theo định dạng DD/MM/YYYY', 'info');
+			});
+			
+			// Form Validation
+			$('.tg-form-group input, .tg-form-group select').on('blur', function() {
+				const $input = $(this);
+				const value = $input.val().trim();
+				
+				if ($input.attr('type') === 'text' && !$input.prop('readonly')) {
+					if (value === '') {
+						$input.css('border-color', '#dc3545');
+					} else {
+						$input.css('border-color', '#4A6366');
+					}
+				}
+			});
+			
+			// Hover Effects for Navigation
+			$('.tg-profile-nav a').hover(
+				function() {
+					$(this).find('i').addClass('fa-bounce');
+				},
+				function() {
+					$(this).find('i').removeClass('fa-bounce');
+				}
+			);
+			
+			// Initialize tooltips
+			$('[data-toggle="tooltip"]').tooltip();
+			
+			// Auto-save functionality
+			let autoSaveTimer;
+			$('.tg-form-group input, .tg-form-group select').on('input change', function() {
+				clearTimeout(autoSaveTimer);
+				autoSaveTimer = setTimeout(function() {
+					// Auto-save to localStorage after 3 seconds of inactivity
+					const user = JSON.parse(localStorage.getItem('user'));
+					if (user && user.uid) {
+						window.saveProfileData();
+					}
+				}, 3000);
+			});
+			
+			// Load profile data when page loads
+			$(document).ready(function() {
+				const user = JSON.parse(localStorage.getItem('user'));
+				if (user && user.profile) {
+					window.loadProfileData(user.profile);
+				}
+			});
+		});
+
+		// Enhanced notification function for profile dashboard
+		function showNotification(message, type = 'info') {
+			const notification = $(`
+				<div class="tg-notification tg-notification-${type}">
+					<div class="tg-notification-content">
+						<i class="fa fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+						<span>${message}</span>
+					</div>
+				</div>
+			`);
+			
+			$('body').append(notification);
+			
+			// Animate in
+			setTimeout(() => {
+				notification.addClass('show');
+			}, 100);
+			
+			// Auto remove after 3 seconds
+			setTimeout(() => {
+				notification.removeClass('show');
+				setTimeout(() => {
+					notification.remove();
+				}, 300);
+			}, 3000);
+		}
 	</script>
 </body>
 
