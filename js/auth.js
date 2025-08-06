@@ -6,6 +6,69 @@
     let isInitialized = false;
     let authStateListener = null;
     
+    // Load user profile from Firebase
+    async function loadUserProfileFromFirebase(user) {
+        if (!user || !user.uid) {
+            console.log('No user provided for profile loading');
+            return null;
+        }
+        
+        console.log('Loading user profile from Firebase for:', user.uid);
+        
+        try {
+            // Try to get from Firebase first using dynamic import
+            const { getDatabase, ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+            
+            // Initialize Firebase if not already done
+            if (!window.firebaseDatabase) {
+                const firebaseConfig = {
+                    apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
+                    authDomain: "anbok-collection.firebaseapp.com",
+                    databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
+                    projectId: "anbok-collection",
+                    storageBucket: "anbok-collection.firebasestorage.app",
+                    messagingSenderId: "835844957818",
+                    appId: "1:835844957818:web:33fc3d03875d49fc5c3dc3",
+                    measurementId: "G-MS5FT355WW"
+                };
+                
+                const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js");
+                const app = initializeApp(firebaseConfig);
+                window.firebaseDatabase = getDatabase(app);
+            }
+            
+            const userRef = ref(window.firebaseDatabase, 'users/' + user.uid + '/profile');
+            const snapshot = await get(userRef);
+            
+            if (snapshot.exists()) {
+                const userProfile = snapshot.val();
+                console.log('User profile loaded from Firebase:', userProfile);
+                
+                // Save to localStorage
+                localStorage.setItem('userProfile_' + user.uid, JSON.stringify(userProfile));
+                
+                return userProfile;
+            } else {
+                console.log('No user profile found in Firebase');
+            }
+        } catch (error) {
+            console.error('Error loading user profile from Firebase:', error);
+        }
+        
+        // Fallback to localStorage
+        try {
+            const userProfile = JSON.parse(localStorage.getItem('userProfile_' + user.uid));
+            if (userProfile) {
+                console.log('User profile loaded from localStorage:', userProfile);
+                return userProfile;
+            }
+        } catch (error) {
+            console.error('Error loading user profile from localStorage:', error);
+        }
+        
+        return null;
+    }
+    
     // Initialize authentication system
     function initializeAuth() {
         if (isInitialized) return;
@@ -97,7 +160,9 @@
             
             if (userProfile) {
                 userProfile.style.display = 'block';
-                updateUserInfo(userData);
+                updateUserInfo(userData).catch(error => {
+                    console.error('Error updating user info:', error);
+                });
             }
             
             // Show success notification if this is a fresh login
@@ -149,7 +214,7 @@
     }
     
     // Update user information display
-    function updateUserInfo(user) {
+    async function updateUserInfo(user) {
         const userName = document.getElementById('userName');
         const userAvatar = document.getElementById('userAvatar');
         const dropdownUserName = document.getElementById('dropdownUserName');
@@ -158,27 +223,73 @@
         
         console.log('Updating user info display:', user);
         
+        // Get user profile data from Firebase or localStorage
+        let userProfile = null;
+        if (user && user.uid) {
+            userProfile = await loadUserProfileFromFirebase(user);
+        }
+        
+        // Use profile data if available, otherwise fall back to basic user data
+        const displayName = userProfile?.personalInfo?.fullName || userProfile?.displayName || user.displayName || user.email || 'Người dùng';
+        const email = userProfile?.email || user.email || '';
+        const photoURL = userProfile?.photoURL || user.photoURL || '';
+        
+        console.log('Display data:', { displayName, email, photoURL });
+        
         if (userName) {
-            userName.textContent = user.displayName || user.email || 'Người dùng';
+            userName.textContent = displayName;
+            console.log('Updated userName element');
+        } else {
+            console.log('userName element not found');
         }
         
         if (dropdownUserName) {
-            dropdownUserName.textContent = user.displayName || user.email || 'Người dùng';
+            dropdownUserName.textContent = displayName;
+            console.log('Updated dropdownUserName element');
+        } else {
+            console.log('dropdownUserName element not found');
         }
         
         if (dropdownUserEmail) {
-            dropdownUserEmail.textContent = user.email || '';
+            dropdownUserEmail.textContent = email;
+            console.log('Updated dropdownUserEmail element');
+        } else {
+            console.log('dropdownUserEmail element not found');
         }
         
         // Update avatar if user has one
-        if (user.photoURL) {
-            if (userAvatar) userAvatar.src = user.photoURL;
-            if (dropdownUserAvatar) dropdownUserAvatar.src = user.photoURL;
+        if (photoURL) {
+            console.log('Setting avatar URL:', photoURL);
+            if (userAvatar) {
+                userAvatar.src = photoURL;
+                console.log('Updated userAvatar element');
+            } else {
+                console.log('userAvatar element not found');
+            }
+            if (dropdownUserAvatar) {
+                dropdownUserAvatar.src = photoURL;
+                console.log('Updated dropdownUserAvatar element');
+            } else {
+                console.log('dropdownUserAvatar element not found');
+            }
         } else {
             // Use default avatar
-            const defaultAvatar = '../images/users/img-01.jpg';
-            if (userAvatar) userAvatar.src = defaultAvatar;
-            if (dropdownUserAvatar) dropdownUserAvatar.src = defaultAvatar;
+            const defaultAvatar = 'images/users/img-01.jpg';
+            console.log('Setting default avatar:', defaultAvatar);
+            if (userAvatar) {
+                userAvatar.src = defaultAvatar;
+                console.log('Updated userAvatar with default');
+            }
+            if (dropdownUserAvatar) {
+                dropdownUserAvatar.src = defaultAvatar;
+                console.log('Updated dropdownUserAvatar with default');
+            }
+        }
+        
+        // Also call the profile loader function if it exists
+        if (window.updateUserProfileUI && userProfile) {
+            console.log('Calling updateUserProfileUI from auth.js');
+            window.updateUserProfileUI(userProfile);
         }
     }
     
@@ -308,6 +419,15 @@
         console.log('DOM loaded, initializing auth system...');
         initializeAuth();
         setupUserDropdown();
+        
+        // Try to load user profile if user is already logged in
+        const userData = JSON.parse(localStorage.getItem('user') || 'null');
+        if (userData && userData.isLoggedIn) {
+            console.log('User already logged in, loading profile...');
+            updateUserInfo(userData).catch(error => {
+                console.error('Error loading user profile on page load:', error);
+            });
+        }
     });
     
     // Initialize when Firebase becomes available
@@ -322,6 +442,7 @@
     window.showNotification = showNotification;
     window.checkAuthStatus = checkAuthStatus;
     window.initializeAuth = initializeAuth;
+    window.loadUserProfileFromFirebase = loadUserProfileFromFirebase;
     
     // Export for use in other files
     window.AnBokAuth = {
@@ -330,8 +451,25 @@
         setupUserDropdown,
         logout,
         showNotification,
-        initializeAuth
+        initializeAuth,
+        loadUserProfileFromFirebase
     };
+    
+    // Listen for user login events
+    document.addEventListener('user-logged-in', async function(event) {
+        const { user } = event.detail;
+        console.log('User logged in event received:', user);
+        
+        if (user) {
+            // Load user profile and update UI
+            const userProfile = await loadUserProfileFromFirebase(user);
+            if (userProfile) {
+                updateUserInfo(user).catch(error => {
+                    console.error('Error updating user info after login:', error);
+                });
+            }
+        }
+    });
     
     console.log('Authentication system loaded');
     
