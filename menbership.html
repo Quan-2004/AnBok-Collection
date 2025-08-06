@@ -4037,29 +4037,15 @@
 												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-book" style="margin-right: 8px;"></i>
 													Sách
-													<i class="fa fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
 												</a>
-												<!-- Submenu -->
-												<div class="tg-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách mới</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách nổi bật</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách miễn phí</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Sách hội viên</a>
-												</div>
+												
 											</li>
 											<li style="position: relative;">
 												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Truyện
-													<i class="fa fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
 												</a>
-												<!-- Submenu -->
-												<div class="tg-submenu" style="position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000;">
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện mới</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện nổi bật</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện miễn phí</a>
-													<a href="javascript:void(0);" style="display: block; padding: 12px 20px; color: #333; text-decoration: none; transition: background 0.3s ease;">Truyện hội viên</a>
-												</div>
+											
 											</li>
 											<li style="position: relative;">
 												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
@@ -4092,7 +4078,7 @@
 									<div class="tg-cart-btn">
 										<a href="javascript:void(0);" class="tg-cart-link" onclick="toggleCartModal();">
 											<i class="fa fa-shopping-cart"></i>
-											<span class="tg-cart-badge">5</span>
+											<span id="cart-badge" class="tg-cart-badge">0</span>
 										</a>
 									</div>
 
@@ -4313,81 +4299,9 @@
 					</button>
 				</div>
 				<div class="tg-cart-modal-body">
-					<div class="tg-cart-items">
-						<!-- Cart Item 1 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-01.jpg" alt="Book 1">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Harry Potter và Hòn đá Phù thủy</h4>
-								<p class="tg-cart-item-author">J.K. Rowling</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">600.000₫</span>
-									<span class="tg-cart-item-original">650.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(1, -1)">-</button>
-									<span class="tg-quantity-number">1</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(1, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(1)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
-						
-						<!-- Cart Item 2 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-02.jpg" alt="Book 2">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Đắc Nhân Tâm</h4>
-								<p class="tg-cart-item-author">Dale Carnegie</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">450.000₫</span>
-									<span class="tg-cart-item-original">500.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(2, -1)">-</button>
-									<span class="tg-quantity-number">2</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(2, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(2)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
-						
-						<!-- Cart Item 3 -->
-						<div class="tg-cart-item">
-							<div class="tg-cart-item-image">
-								<img src="images/books/img-03.jpg" alt="Book 3">
-							</div>
-							<div class="tg-cart-item-details">
-								<h4>Nhà Giả Kim</h4>
-								<p class="tg-cart-item-author">Paulo Coelho</p>
-								<div class="tg-cart-item-price">
-									<span class="tg-cart-item-current">350.000₫</span>
-									<span class="tg-cart-item-original">400.000₫</span>
-								</div>
-							</div>
-							<div class="tg-cart-item-actions">
-								<div class="tg-cart-item-quantity">
-									<button class="tg-quantity-btn" onclick="updateQuantity(3, -1)">-</button>
-									<span class="tg-quantity-number">1</span>
-									<button class="tg-quantity-btn" onclick="updateQuantity(3, 1)">+</button>
-								</div>
-								<button class="tg-cart-item-remove" onclick="removeCartItem(3)">
-									<i class="fa fa-trash"></i>
-								</button>
-							</div>
-						</div>
+					<!-- Cart Items Container - Sẽ được cập nhật động từ localStorage -->
+					<div id="cart-items-container" class="tg-cart-items">
+						<!-- Nội dung sẽ được cập nhật bởi JavaScript -->
 					</div>
 					
 					<!-- Empty Cart Message -->
@@ -4402,11 +4316,11 @@
 					<div class="tg-cart-summary">
 						<div class="tg-cart-total">
 							<span>Tổng cộng:</span>
-							<span class="tg-cart-total-price">1.400.000₫</span>
+							<span id="cart-total-price">0₫</span>
 						</div>
 						<div class="tg-cart-savings">
 							<span>Tiết kiệm:</span>
-							<span class="tg-cart-savings-amount">200.000₫</span>
+							<span id="cart-savings-amount">0₫</span>
 						</div>
 					</div>
 					<div class="tg-cart-actions">
@@ -5026,32 +4940,7 @@
 				}
 			});
 			
-			// Notification system
-			function showNotification(message, type = 'info') {
-				const notification = $(`
-					<div class="tg-notification tg-notification-${type}">
-						<div class="tg-notification-content">
-							<i class="fa fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-							<span>${message}</span>
-						</div>
-					</div>
-				`);
-				
-				$('body').append(notification);
-				
-				// Animate in
-				setTimeout(() => {
-					notification.addClass('show');
-				}, 100);
-				
-				// Auto remove after 3 seconds
-				setTimeout(() => {
-					notification.removeClass('show');
-					setTimeout(() => {
-						notification.remove();
-					}, 300);
-				}, 3000);
-			}
+			// Function showNotification đã được chuyển sang checkout-utils.js
 			
 			// Simple notification styles
 			$('<style>')
@@ -5331,41 +5220,7 @@
 				$('#tg-timer-time').text(timeString);
 			}
 			
-			// Notification System Functions
-			function showNotification(message, type = 'info') {
-				// Tạo element thông báo
-				const notification = document.createElement('div');
-				notification.className = `tg-notification tg-notification-${type}`;
-				
-				// Icon tương ứng với loại thông báo
-				let icon = 'fa-info-circle';
-				if (type === 'success') icon = 'fa-check-circle';
-				else if (type === 'error') icon = 'fa-exclamation-circle';
-				
-				// Nội dung thông báo
-				notification.innerHTML = `
-					<div class="tg-notification-content">
-						<i class="fa ${icon}"></i>
-						<span>${message}</span>
-					</div>
-				`;
-				
-				// Thêm vào body
-				document.body.appendChild(notification);
-				
-				// Hiển thị với animation
-				setTimeout(() => {
-					notification.classList.add('show');
-				}, 100);
-				
-				// Tự động ẩn sau 3 giây
-				setTimeout(() => {
-					notification.classList.remove('show');
-					setTimeout(() => {
-						document.body.removeChild(notification);
-					}, 300);
-				}, 3000);
-			}
+			// Function showNotification đã được chuyển sang checkout-utils.js
 			
 			// Các thông báo tiếng Việt không yêu cầu xác nhận
 			function showVietnameseNotifications() {
@@ -5634,155 +5489,7 @@
 		});
 	</script>
 	
-	<!-- Mini Cart JavaScript Functions -->
-	<script>
-		// Global cart items
-		let cartItems = {
-			1: { quantity: 1, price: 290000, name: 'Our State Fair Is A Great Function' },
-			2: { quantity: 1, price: 290000, name: 'Bring Me To Light' },
-			3: { quantity: 1, price: 290000, name: 'Have Faith In Your Soul' }
-		};
-		
-		function updateQuantity(itemId, change, event) {
-			const quantityElement = document.getElementById(`qty-${itemId}`);
-			if (!quantityElement) return;
-			
-			const currentQty = parseInt(quantityElement.textContent);
-			const newQty = currentQty + change;
-			
-			if (newQty >= 1) {
-				// Smooth update with visual feedback
-				quantityElement.style.transform = 'scale(1.1)';
-				quantityElement.style.transition = 'transform 0.2s ease';
-				
-				setTimeout(() => {
-					quantityElement.textContent = newQty;
-					quantityElement.style.transform = 'scale(1)';
-					cartItems[itemId].quantity = newQty;
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = formatPrice(calculateTotal());
-					}
-				}, 100);
-				
-				// Prevent dropdown from closing
-				if (event) {
-					event.stopPropagation();
-				}
-			} else if (newQty === 0) {
-				// Remove item if quantity reaches 0
-				removeItem(itemId, event);
-			}
-		}
-		
-		function removeItem(itemId, event) {
-			const itemElement = document.querySelector(`[onclick="removeItem(${itemId}, event)"]`);
-			if (!itemElement) return;
-			
-			const productElement = itemElement.closest('.tg-minicarproduct');
-			if (productElement) {
-				// Smooth slide out animation
-				productElement.style.animation = 'slideOut 0.3s ease-out';
-				productElement.style.transform = 'translateY(-10px)';
-				productElement.style.opacity = '0';
-				
-				setTimeout(() => {
-					productElement.remove();
-					delete cartItems[itemId];
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = formatPrice(calculateTotal());
-					}
-					
-					// Check if cart is empty
-					if (Object.keys(cartItems).length === 0) {
-						showEmptyCart();
-					}
-				}, 300);
-			}
-			
-			// Prevent dropdown from closing
-			if (event) {
-				event.stopPropagation();
-			}
-		}
-		
-		function clearCart() {
-			// Check if universal modal exists
-			if (typeof showUniversalModal === 'function') {
-				showUniversalModal({
-					title: 'Xác nhận xóa giỏ hàng',
-					icon: 'fa-trash-o',
-					iconColor: '#dc3545',
-					heading: 'Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?',
-					description: 'Tất cả sản phẩm trong giỏ hàng sẽ bị xóa.',
-					confirmText: 'Xóa giỏ hàng',
-					confirmStyle: 'danger',
-					onConfirm: function() {
-						const cartBody = document.querySelector('.tg-minicartbody');
-						if (cartBody) {
-							cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-						}
-						cartItems = {};
-						updateCartTotal();
-						
-						// Update cart icon total
-						const cartTotalElement = document.querySelector('.tg-total-price');
-						if (cartTotalElement) {
-							cartTotalElement.textContent = '0₫';
-						}
-					}
-				});
-			} else {
-				// Fallback if modal is not available
-				if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
-					const cartBody = document.querySelector('.tg-minicartbody');
-					if (cartBody) {
-						cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-					}
-					cartItems = {};
-					updateCartTotal();
-					
-					// Update cart icon total
-					const cartTotalElement = document.querySelector('.tg-total-price');
-					if (cartTotalElement) {
-						cartTotalElement.textContent = '0₫';
-					}
-				}
-			}
-		}
-		
-		function updateCartTotal() {
-			const totalElement = document.getElementById('cart-total');
-			if (totalElement) {
-				totalElement.textContent = formatPrice(calculateTotal());
-			}
-		}
-		
-		function calculateTotal() {
-			let total = 0;
-			for (let itemId in cartItems) {
-				total += cartItems[itemId].quantity * cartItems[itemId].price;
-			}
-			return total;
-		}
-		
-		function formatPrice(price) {
-			return price.toLocaleString('vi-VN') + '₫';
-		}
-		
-		function showEmptyCart() {
-			const cartBody = document.querySelector('.tg-minicartbody');
-			if (cartBody) {
-				cartBody.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Giỏ hàng trống</div>';
-			}
-		}
+	<!-- Cart functions đã được chuyển sang checkout-utils.js -->
 		
 		// Prevent dropdown from closing when clicking inside
 		document.addEventListener('DOMContentLoaded', function() {
@@ -6004,35 +5711,7 @@
 			});
 		});
 		
-		// Add notification system
-		function showNotification(message, type = 'info') {
-			const notification = document.createElement('div');
-			notification.className = `tg-notification tg-notification-${type}`;
-			notification.innerHTML = `
-				<div class="tg-notification-content">
-					<i class="fa fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-					<span>${message}</span>
-				</div>
-			`;
-			
-			document.body.appendChild(notification);
-			
-			setTimeout(() => {
-				notification.classList.add('show');
-			}, 100);
-			
-			setTimeout(() => {
-				notification.classList.remove('show');
-				setTimeout(() => {
-					document.body.removeChild(notification);
-				}, 300);
-			}, 3000);
-		}
-		
-		// Example usage of notification
-		// showNotification('Đăng nhập thành công!', 'success');
-		// showNotification('Có lỗi xảy ra!', 'error');
-		// showNotification('Thông tin cập nhật!', 'info');
+		// Function showNotification đã được chuyển sang checkout-utils.js
 		
 		// Cart Modal Functions
 		window.toggleCartModal = function() {
@@ -6044,88 +5723,9 @@
 			}
 		};
 		
-		window.updateQuantity = function(itemId, change) {
-			const quantityElement = document.querySelector(`[onclick="updateQuantity(${itemId}, ${change})"]`).parentNode.querySelector('.tg-quantity-number');
-			let currentQuantity = parseInt(quantityElement.textContent);
-			let newQuantity = currentQuantity + change;
-			
-			if (newQuantity >= 1) {
-				quantityElement.textContent = newQuantity;
-				updateCartTotal();
-			} else if (newQuantity === 0) {
-				removeCartItem(itemId);
-			}
-		};
+		// Cart functions đã được chuyển sang checkout-utils.js
 		
-		window.removeCartItem = function(itemId) {
-			const cartItem = document.querySelector(`[onclick="removeCartItem(${itemId})"]`).closest('.tg-cart-item');
-			cartItem.style.animation = 'slideOut 0.3s ease';
-			setTimeout(() => {
-				cartItem.remove();
-				updateCartTotal();
-				checkEmptyCart();
-			}, 300);
-		};
-		
-		window.clearCart = function() {
-			const cartItems = document.querySelectorAll('.tg-cart-item');
-			cartItems.forEach(item => {
-				item.style.animation = 'slideOut 0.3s ease';
-			});
-			setTimeout(() => {
-				document.querySelector('.tg-cart-items').innerHTML = '';
-				updateCartTotal();
-				checkEmptyCart();
-			}, 300);
-		};
-		
-		window.checkout = function() {
-			showNotification('Chuyển đến trang thanh toán...', 'info');
-			setTimeout(() => {
-				toggleCartModal();
-			}, 1500);
-		};
-		
-		function updateCartTotal() {
-			const items = document.querySelectorAll('.tg-cart-item');
-			let total = 0;
-			let savings = 0;
-			
-			items.forEach(item => {
-				const quantity = parseInt(item.querySelector('.tg-quantity-number').textContent);
-				const currentPrice = parseInt(item.querySelector('.tg-cart-item-current').textContent.replace(/[^\d]/g, ''));
-				const originalPrice = parseInt(item.querySelector('.tg-cart-item-original').textContent.replace(/[^\d]/g, ''));
-				
-				total += currentPrice * quantity;
-				savings += (originalPrice - currentPrice) * quantity;
-			});
-			
-			document.querySelector('.tg-cart-total-price').textContent = total.toLocaleString() + '₫';
-			document.querySelector('.tg-cart-savings-amount').textContent = savings.toLocaleString() + '₫';
-			
-			// Update cart badge
-			const totalItems = Array.from(items).reduce((sum, item) => {
-				return sum + parseInt(item.querySelector('.tg-quantity-number').textContent);
-			}, 0);
-			
-			document.querySelector('.tg-cart-badge').textContent = totalItems;
-		}
-		
-		function checkEmptyCart() {
-			const cartItems = document.querySelectorAll('.tg-cart-item');
-			const cartItemsContainer = document.querySelector('.tg-cart-items');
-			const emptyCart = document.querySelector('.tg-cart-empty');
-			
-			if (cartItems.length === 0) {
-				cartItemsContainer.style.display = 'none';
-				emptyCart.style.display = 'block';
-				document.querySelector('.tg-cart-modal-footer').style.display = 'none';
-			} else {
-				cartItemsContainer.style.display = 'flex';
-				emptyCart.style.display = 'none';
-				document.querySelector('.tg-cart-modal-footer').style.display = 'block';
-			}
-		}
+		// Function loadCartFromLocalStorage đã được chuyển sang checkout-utils.js
 		
 		// Close modal when clicking outside
 		document.addEventListener('click', function(event) {
@@ -6403,44 +6003,17 @@
 			});
 		});
 		
-		// Show notification function
-		function showNotification(message, type = 'success') {
-			const notification = document.createElement('div');
-			notification.className = `notification notification-${type}`;
-			notification.innerHTML = `
-				<div class="notification-content">
-					<i class="fa fa-${type === 'success' ? 'check' : 'info'}-circle"></i>
-					<span>${message}</span>
-				</div>
-			`;
-			
-			notification.style.cssText = `
-				position: fixed;
-				top: 20px;
-				right: 20px;
-				background: ${type === 'success' ? '#28a745' : '#17a2b8'};
-				color: white;
-				padding: 15px 20px;
-				border-radius: 8px;
-				box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-				z-index: 10000;
-				transform: translateX(100%);
-				transition: transform 0.3s ease;
-			`;
-			
-			document.body.appendChild(notification);
-			
-			setTimeout(() => {
-				notification.style.transform = 'translateX(0)';
-			}, 100);
-			
-			setTimeout(() => {
-				notification.style.transform = 'translateX(100%)';
-				setTimeout(() => {
-					document.body.removeChild(notification);
-				}, 300);
-			}, 3000);
-		}
+		// Function showNotification đã được chuyển sang checkout-utils.js
+	</script>
+	
+	<!-- Checkout Utilities - Đảm bảo tính nhất quán cho nút thanh toán -->
+	<script src="js/checkout-utils.js"></script>
+	
+	<!-- Load cart when page loads -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			loadCartFromLocalStorage();
+		});
 	</script>
 </body>
 

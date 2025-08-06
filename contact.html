@@ -5344,10 +5344,26 @@
 				return;
 			}
 			
+			// Tính tổng tiền giỏ hàng
+			const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+			const totalOriginal = cart.reduce((sum, item) => sum + (item.original_price * item.quantity), 0);
+			
+			// Tạo dữ liệu giỏ hàng để truyền
+			const cartData = {
+				items: cart,
+				totalPrice: totalPrice,
+				totalOriginal: totalOriginal,
+				totalItems: cart.reduce((sum, item) => sum + item.quantity, 0),
+				timestamp: new Date().toISOString()
+			};
+			
+			// Lưu dữ liệu giỏ hàng vào sessionStorage để truyền sang checkout.html
+			sessionStorage.setItem('checkoutCart', JSON.stringify(cartData));
+			
 			// Chuyển đến trang thanh toán
 			showNotification('Đang chuyển đến trang thanh toán...', 'info');
 			setTimeout(() => {
-				window.location.href = 'checkout.html';
+				window.location.href = 'checkout.html?source=cart';
 			}, 1000);
 		};
 
@@ -5850,6 +5866,9 @@
 		};
 
 	</script>
+	
+	<!-- Checkout Utilities - Đảm bảo tính nhất quán cho nút thanh toán -->
+	<script src="js/checkout-utils.js"></script>
 </body>
 
 </html>
