@@ -3546,6 +3546,9 @@
 			border-radius: 15px !important;
 			margin: 15px 0 !important;
 			border: 1px solid rgba(255, 215, 0, 0.1) !important;
+			display: flex !important;
+			justify-content: center !important;
+			align-items: center !important;
 		}
 		
 		/* Update button styling */
@@ -3568,6 +3571,613 @@
 		.tg-btn-update.updating {
 			background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
 			transform: scale(0.95) !important;
+		}
+
+		/* Membership info styling - Professional Design */
+		.tg-membership-info * {
+			writing-mode: horizontal-tb !important;
+			text-orientation: mixed !important;
+		}
+
+		.tg-membership-info {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+			border-radius: 16px !important;
+			padding: 20px !important;
+			border: none !important;
+			box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3) !important;
+			position: relative !important;
+			overflow: hidden !important;
+			transition: all 0.3s ease !important;
+			display: flex !important;
+			flex-direction: column !important;
+			gap: 10px !important;
+			align-items: center !important;
+			text-align: center !important;
+			width: 100% !important;
+			max-width: 280px !important;
+			margin: 0 auto !important;
+		}
+
+		.tg-membership-info::before {
+			content: '' !important;
+			position: absolute !important;
+			top: 0 !important;
+			left: 0 !important;
+			right: 0 !important;
+			bottom: 0 !important;
+			background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%) !important;
+			pointer-events: none !important;
+		}
+
+		.tg-membership-info:hover {
+			transform: translateY(-2px) !important;
+			box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4) !important;
+		}
+
+		.tg-membership-badge {
+			display: flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+			margin-bottom: 10px !important;
+			position: relative !important;
+			z-index: 1 !important;
+		}
+
+		.tg-membership-badge-left {
+			display: flex !important;
+			align-items: center !important;
+			gap: 10px !important;
+			flex-direction: row !important;
+		}
+
+		.tg-membership-badge i {
+			color: #FFD700 !important;
+			font-size: 24px !important;
+			text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+			animation: crown-glow 2s ease-in-out infinite alternate !important;
+		}
+
+		@keyframes crown-glow {
+			from { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
+			to { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+		}
+
+		.tg-membership-type {
+			font-weight: 800 !important;
+			color: #FFFFFF !important;
+			font-size: 18px !important;
+			text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+			letter-spacing: 0.5px !important;
+			writing-mode: horizontal-tb !important;
+			text-orientation: mixed !important;
+			white-space: nowrap !important;
+		}
+
+
+
+		.tg-membership-status {
+			display: flex !important;
+			align-items: center !important;
+			gap: 8px !important;
+			background: rgba(40, 167, 69, 0.2) !important;
+			padding: 8px 12px !important;
+			border-radius: 20px !important;
+			border: 1px solid rgba(40, 167, 69, 0.3) !important;
+			flex-direction: row !important;
+			flex-wrap: nowrap !important;
+			width: 100% !important;
+			justify-content: flex-start !important;
+		}
+
+		.tg-membership-status i {
+			color: #28a745 !important;
+			font-size: 14px !important;
+			flex-shrink: 0 !important;
+		}
+
+		.tg-membership-status span {
+			color: #FFFFFF !important;
+			font-size: 13px !important;
+			font-weight: 600 !important;
+			white-space: nowrap !important;
+			writing-mode: horizontal-tb !important;
+			text-orientation: mixed !important;
+			display: inline-block !important;
+			transform: none !important;
+		}
+
+		.tg-membership-expiry {
+			display: flex !important;
+			align-items: center !important;
+			gap: 8px !important;
+			background: rgba(255, 193, 7, 0.2) !important;
+			padding: 8px 12px !important;
+			border-radius: 20px !important;
+			border: 1px solid rgba(255, 193, 7, 0.3) !important;
+			flex-direction: row !important;
+			flex-wrap: nowrap !important;
+			width: 100% !important;
+			justify-content: center !important;
+		}
+
+		.tg-membership-expiry i {
+			color: #FFD700 !important;
+			font-size: 14px !important;
+			flex-shrink: 0 !important;
+		}
+
+		.tg-membership-expiry span {
+			color: #FFFFFF !important;
+			font-size: 13px !important;
+			font-weight: 600 !important;
+			white-space: nowrap !important;
+			writing-mode: horizontal-tb !important;
+			text-orientation: mixed !important;
+			display: inline-block !important;
+			transform: none !important;
+		}
+
+		/* Membership button styling */
+		.tg-btn-membership {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+			color: white !important;
+			border: none !important;
+			padding: 15px 25px !important;
+			border-radius: 12px !important;
+			font-weight: 600 !important;
+			font-size: 14px !important;
+			transition: all 0.3s ease !important;
+			cursor: pointer !important;
+			box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+			display: flex !important;
+			align-items: center !important;
+			gap: 8px !important;
+			width: 100% !important;
+			justify-content: center !important;
+		}
+
+		.tg-btn-membership:hover {
+			transform: translateY(-2px) !important;
+			box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+			background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+		}
+
+		.tg-btn-membership i {
+			font-size: 16px !important;
+			color: #FFD700 !important;
+		}
+
+		/* Debug button styling */
+		.tg-btn-debug {
+			background: #f8f9fa !important;
+			color: #6c757d !important;
+			border: 1px solid #dee2e6 !important;
+			padding: 8px 12px !important;
+			border-radius: 8px !important;
+			font-size: 11px !important;
+			font-weight: 500 !important;
+			transition: all 0.2s ease !important;
+			cursor: pointer !important;
+			margin-top: 10px !important;
+			width: 100% !important;
+		}
+
+		.tg-btn-debug:hover {
+			background: #e9ecef !important;
+			border-color: #adb5bd !important;
+			color: #495057 !important;
+		}
+
+		/* Debug CSS - Force horizontal text */
+		.tg-membership-info .tg-membership-status,
+		.tg-membership-info .tg-membership-expiry {
+			writing-mode: horizontal-tb !important;
+			text-orientation: mixed !important;
+			direction: ltr !important;
+		}
+
+		.tg-membership-info .tg-membership-status span,
+		.tg-membership-info .tg-membership-expiry span {
+			writing-mode: horizontal-tb !important;
+			text-orientation: mixed !important;
+			direction: ltr !important;
+			display: inline !important;
+			white-space: normal !important;
+		}
+
+		/* Transaction History Styling */
+		.tg-transaction-list {
+			display: flex !important;
+			flex-direction: column !important;
+			gap: 15px !important;
+		}
+
+		.tg-transaction-item {
+			background: #ffffff !important;
+			border: 1px solid #e9ecef !important;
+			border-radius: 12px !important;
+			padding: 20px !important;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+			transition: all 0.3s ease !important;
+		}
+
+		.tg-transaction-item:hover {
+			transform: translateY(-2px) !important;
+			box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important;
+		}
+
+		.tg-transaction-header {
+			display: flex !important;
+			justify-content: space-between !important;
+			align-items: center !important;
+			margin-bottom: 15px !important;
+		}
+
+		.tg-transaction-id {
+			font-weight: 600 !important;
+			color: #495057 !important;
+			font-size: 14px !important;
+		}
+
+		.tg-transaction-status {
+			padding: 4px 12px !important;
+			border-radius: 20px !important;
+			font-size: 12px !important;
+			font-weight: 600 !important;
+		}
+
+		.tg-transaction-status.success {
+			background: rgba(40, 167, 69, 0.1) !important;
+			color: #28a745 !important;
+			border: 1px solid rgba(40, 167, 69, 0.2) !important;
+		}
+
+		.tg-transaction-status.pending {
+			background: rgba(255, 193, 7, 0.1) !important;
+			color: #ffc107 !important;
+			border: 1px solid rgba(255, 193, 7, 0.2) !important;
+		}
+
+		.tg-transaction-status.failed {
+			background: rgba(220, 53, 69, 0.1) !important;
+			color: #dc3545 !important;
+			border: 1px solid rgba(220, 53, 69, 0.2) !important;
+		}
+
+		.tg-transaction-details {
+			display: grid !important;
+			grid-template-columns: 1fr 1fr !important;
+			gap: 15px !important;
+			margin-bottom: 15px !important;
+		}
+
+		.tg-transaction-detail {
+			display: flex !important;
+			flex-direction: column !important;
+			gap: 5px !important;
+		}
+
+		.tg-transaction-label {
+			font-size: 12px !important;
+			color: #6c757d !important;
+			font-weight: 500 !important;
+		}
+
+		.tg-transaction-value {
+			font-size: 14px !important;
+			color: #495057 !important;
+			font-weight: 600 !important;
+		}
+
+		.tg-transaction-footer {
+			display: flex !important;
+			justify-content: space-between !important;
+			align-items: center !important;
+			padding-top: 15px !important;
+			border-top: 1px solid #e9ecef !important;
+		}
+
+		.tg-transaction-date {
+			font-size: 12px !important;
+			color: #6c757d !important;
+		}
+
+		.tg-transaction-amount {
+			font-size: 16px !important;
+			font-weight: 700 !important;
+			color: #28a745 !important;
+		}
+
+		.tg-transaction-loading,
+		.tg-transaction-empty {
+			display: flex !important;
+			flex-direction: column !important;
+			align-items: center !important;
+			justify-content: center !important;
+			padding: 40px 20px !important;
+			color: #6c757d !important;
+			gap: 15px !important;
+		}
+
+		.tg-transaction-loading i,
+		.tg-transaction-empty i {
+			font-size: 48px !important;
+			color: #dee2e6 !important;
+		}
+
+		.tg-transaction-empty p {
+			font-size: 16px !important;
+			color: #6c757d !important;
+			margin: 0 !important;
+		}
+
+		/* Hide empty state when transactions are loaded */
+		.tg-transaction-list:not(:empty) + .tg-transaction-empty {
+			display: none !important;
+		}
+
+		/* Bookshelf Styling */
+		.tg-bookshelf-grid {
+			display: grid !important;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+			gap: 20px !important;
+			padding: 20px 0 !important;
+		}
+
+		.tg-book-item {
+			background: #ffffff !important;
+			border: 1px solid #e9ecef !important;
+			border-radius: 12px !important;
+			padding: 15px !important;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+			transition: all 0.3s ease !important;
+			cursor: pointer !important;
+			position: relative !important;
+		}
+
+		.tg-book-item:hover {
+			transform: translateY(-2px) !important;
+			box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important;
+		}
+
+		.tg-book-cover {
+			width: 100% !important;
+			height: 200px !important;
+			object-fit: cover !important;
+			border-radius: 8px !important;
+			margin-bottom: 10px !important;
+		}
+
+		.tg-book-title {
+			font-size: 16px !important;
+			font-weight: 600 !important;
+			color: #495057 !important;
+			margin-bottom: 5px !important;
+			line-height: 1.3 !important;
+		}
+
+		.tg-book-author {
+			font-size: 14px !important;
+			color: #6c757d !important;
+			margin-bottom: 8px !important;
+		}
+
+		.tg-book-meta {
+			display: flex !important;
+			justify-content: space-between !important;
+			align-items: center !important;
+			margin-bottom: 10px !important;
+		}
+
+		.tg-book-genre {
+			background: rgba(102, 126, 234, 0.1) !important;
+			color: #667eea !important;
+			padding: 2px 8px !important;
+			border-radius: 12px !important;
+			font-size: 11px !important;
+			font-weight: 500 !important;
+		}
+
+		.tg-book-rating {
+			display: flex !important;
+			align-items: center !important;
+			gap: 4px !important;
+		}
+
+		.tg-book-rating i {
+			color: #ffc107 !important;
+			font-size: 12px !important;
+		}
+
+		.tg-book-rating span {
+			font-size: 12px !important;
+			color: #6c757d !important;
+		}
+
+		.tg-book-price {
+			display: flex !important;
+			justify-content: space-between !important;
+			align-items: center !important;
+		}
+
+		.tg-book-price .current {
+			font-size: 16px !important;
+			font-weight: 700 !important;
+			color: #28a745 !important;
+		}
+
+		.tg-book-price .original {
+			font-size: 12px !important;
+			color: #6c757d !important;
+			text-decoration: line-through !important;
+		}
+
+		.tg-book-free {
+			background: #28a745 !important;
+			color: white !important;
+			padding: 4px 8px !important;
+			border-radius: 12px !important;
+			font-size: 11px !important;
+			font-weight: 600 !important;
+		}
+
+		.tg-book-member {
+			background: #ffc107 !important;
+			color: #212529 !important;
+			padding: 4px 8px !important;
+			border-radius: 12px !important;
+			font-size: 11px !important;
+			font-weight: 600 !important;
+		}
+
+		/* Content type badges */
+		.tg-content-type-overlay {
+			position: absolute !important;
+			top: 10px !important;
+			right: 10px !important;
+			z-index: 2 !important;
+		}
+
+		.tg-content-type-badge {
+			padding: 4px 8px !important;
+			border-radius: 12px !important;
+			font-size: 10px !important;
+			font-weight: 600 !important;
+			color: white !important;
+			text-transform: uppercase !important;
+			letter-spacing: 0.5px !important;
+		}
+
+		.tg-book-badge {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+		}
+
+		.tg-story-badge {
+			background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+		}
+
+
+
+		/* Filter Styles */
+		.tg-bookshelf-filters {
+			background: #f8f9fa !important;
+			border: 1px solid #e9ecef !important;
+			border-radius: 12px !important;
+			padding: 20px !important;
+			margin-bottom: 20px !important;
+		}
+
+		.tg-filter-row {
+			display: grid !important;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+			gap: 15px !important;
+			margin-bottom: 15px !important;
+		}
+
+		/* Responsive filter design */
+		@media (max-width: 768px) {
+			.tg-filter-row {
+				grid-template-columns: 1fr !important;
+				gap: 10px !important;
+			}
+			
+			.tg-filter-actions {
+				flex-direction: column !important;
+				gap: 10px !important;
+				align-items: stretch !important;
+			}
+			
+			.tg-btn-secondary {
+				justify-content: center !important;
+			}
+		}
+
+		.tg-filter-group {
+			display: flex !important;
+			flex-direction: column !important;
+			gap: 5px !important;
+		}
+
+		.tg-filter-group label {
+			font-size: 12px !important;
+			font-weight: 600 !important;
+			color: #495057 !important;
+			margin: 0 !important;
+		}
+
+		.tg-filter-select {
+			padding: 8px 12px !important;
+			border: 1px solid #ced4da !important;
+			border-radius: 8px !important;
+			font-size: 14px !important;
+			background: white !important;
+			color: #495057 !important;
+			transition: border-color 0.3s ease !important;
+		}
+
+		.tg-filter-select:focus {
+			outline: none !important;
+			border-color: #667eea !important;
+			box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1) !important;
+		}
+
+		.tg-filter-actions {
+			display: flex !important;
+			justify-content: space-between !important;
+			align-items: center !important;
+			padding-top: 15px !important;
+			border-top: 1px solid #e9ecef !important;
+		}
+
+		.tg-btn-secondary {
+			background: #6c757d !important;
+			color: white !important;
+			border: none !important;
+			padding: 8px 16px !important;
+			border-radius: 8px !important;
+			font-size: 14px !important;
+			cursor: pointer !important;
+			transition: background 0.3s ease !important;
+			display: flex !important;
+			align-items: center !important;
+			gap: 5px !important;
+		}
+
+		.tg-btn-secondary:hover {
+			background: #5a6268 !important;
+		}
+
+		.tg-filter-count {
+			font-size: 14px !important;
+			color: #6c757d !important;
+		}
+
+		.tg-filter-count span {
+			font-weight: 600 !important;
+			color: #495057 !important;
+		}
+
+		.tg-bookshelf-loading,
+		.tg-bookshelf-empty {
+			display: flex !important;
+			flex-direction: column !important;
+			align-items: center !important;
+			justify-content: center !important;
+			padding: 40px 20px !important;
+			color: #6c757d !important;
+			gap: 15px !important;
+		}
+
+		.tg-bookshelf-loading i,
+		.tg-bookshelf-empty i {
+			font-size: 48px !important;
+			color: #dee2e6 !important;
+		}
+
+		.tg-bookshelf-empty p {
+			font-size: 16px !important;
+			color: #6c757d !important;
+			margin: 0 !important;
 		}
 	</style>
 </head>
@@ -3823,11 +4433,8 @@
 									</div>
 
 									<!-- Action Buttons -->
-									<div class="tg-action-buttons">
-										<button class="tg-btn-membership">
-											<i class="fa fa-crown"></i>
-											Trở thành hội viên
-										</button>
+									<div class="tg-action-buttons" id="membership-section">
+										<!-- Membership status will be loaded dynamically -->
 									</div>
 
 									<!-- Navigation Menu -->
@@ -3842,16 +4449,10 @@
 											<li>
 												<a href="#personal-bookshelf" data-tab="personal-bookshelf">
 													<i class="fa fa-book"></i>
-													<span>Tủ sách cá nhân</span>
+													<span>Tủ sách & truyện</span>
 												</a>
 											</li>
-											<li>
-												<a href="#order-management" data-tab="order-management">
-													<i class="fa fa-file-text"></i>
-													<span>Quản lý đơn hàng</span>
-													<i class="fa fa-chevron-down"></i>
-												</a>
-											</li>
+
 											<li>
 												<a href="#achievements" data-tab="achievements">
 													<i class="fa fa-trophy"></i>
@@ -3986,22 +4587,65 @@
 									<!-- Personal Bookshelf Section -->
 									<div class="tg-content-section" id="personal-bookshelf">
 										<div class="tg-section-header">
-											<h2>Tủ sách cá nhân</h2>
+											<h2>Tủ sách & truyện</h2>
 										</div>
 										<div class="tg-bookshelf-content">
-											<p>Nội dung tủ sách cá nhân sẽ được hiển thị ở đây.</p>
+											<!-- Filter Section -->
+											<div class="tg-bookshelf-filters">
+												<div class="tg-filter-row">
+													<div class="tg-filter-group">
+														<label>Loại nội dung:</label>
+														<select id="content-type-filter" class="tg-filter-select">
+															<option value="all">Tất cả</option>
+															<option value="book">Sách</option>
+															<option value="story">Truyện</option>
+														</select>
+													</div>
+													<div class="tg-filter-group">
+														<label>Thể loại:</label>
+														<select id="genre-filter" class="tg-filter-select">
+															<option value="all">Tất cả thể loại</option>
+														</select>
+													</div>
+													<div class="tg-filter-group">
+														<label>Giá:</label>
+														<select id="price-filter" class="tg-filter-select">
+															<option value="all">Tất cả</option>
+															<option value="free">Miễn phí</option>
+															<option value="member">Thành viên</option>
+															<option value="paid">Có phí</option>
+														</select>
+													</div>
+													<div class="tg-filter-group">
+														<label>Sắp xếp:</label>
+														<select id="sort-filter" class="tg-filter-select">
+															<option value="newest">Mới nhất</option>
+															<option value="oldest">Cũ nhất</option>
+															<option value="rating">Đánh giá cao</option>
+															<option value="title">Tên A-Z</option>
+															<option value="author">Tác giả A-Z</option>
+														</select>
+													</div>
+												</div>
+												<div class="tg-filter-actions">
+													<button id="clear-filters" class="tg-btn tg-btn-secondary">
+														<i class="fa fa-refresh"></i> Xóa bộ lọc
+													</button>
+													<span id="filter-results-count" class="tg-filter-count">
+														Hiển thị <span id="results-count">0</span> kết quả
+													</span>
+												</div>
+											</div>
+											
+										
+											
+											<div class="tg-bookshelf-grid" id="bookshelf-grid">
+												<!-- Books and stories will be loaded dynamically -->
+											</div>
 										</div>
 									</div>
 
-									<!-- Order Management Section -->
-									<div class="tg-content-section" id="order-management">
-										<div class="tg-section-header">
-											<h2>Quản lý đơn hàng</h2>
-										</div>
-										<div class="tg-order-content">
-											<p>Nội dung quản lý đơn hàng sẽ được hiển thị ở đây.</p>
-										</div>
-									</div>
+
 
 									<!-- Achievements Section -->
 									<div class="tg-content-section" id="achievements">
@@ -4017,9 +4661,18 @@
 									<div class="tg-content-section" id="transaction-history">
 										<div class="tg-section-header">
 											<h2>Lịch sử giao dịch</h2>
+											
 										</div>
 										<div class="tg-transaction-content">
-											<p>Nội dung lịch sử giao dịch sẽ được hiển thị ở đây.</p>
+											<div class="tg-transaction-list" id="transaction-list">
+												<!-- Orders will be loaded dynamically -->
+											</div>
+											
+											<div class="tg-transaction-empty" id="transaction-empty" style="display: none;">
+												<i class="fa fa-inbox"></i>
+												<p>Chưa có giao dịch nào</p>
+												
+											</div>
 										</div>
 									</div>
 
@@ -6037,6 +6690,22 @@
 			keysToRemove.forEach(key => localStorage.removeItem(key));
 			console.log('Cleared old local storage image data on page load');
 			
+			// Check membership status and update display
+			// Wait for Firebase to be ready
+			setTimeout(() => {
+				checkMembershipStatus();
+			}, 1000);
+			
+			// Listen for auth state changes to check membership
+			window.firebaseAuth.onAuthStateChanged(function(user) {
+				if (user) {
+					console.log('User authenticated, checking membership...');
+					checkMembershipStatus();
+					loadTransactionHistory();
+					loadBookshelf();
+				}
+			});
+
 			// Load profile data from Firebase
 			window.loadProfileData = function(userProfile) {
 				if (!userProfile) return;
@@ -6176,14 +6845,322 @@
 				$('#' + targetTab).addClass('active');
 			});
 			
-			// Action Buttons
-			$('.tg-btn-membership').on('click', function() {
-				showNotification('Chuyển đến trang đăng ký hội viên...', 'info');
-				// Chuyển hướng đến trang membership sau 1 giây
-				setTimeout(function() {
-					window.location.href = 'menbership.html';
-				}, 1000);
-			});
+			// Check membership status and update display
+			window.checkMembershipStatus = async function() {
+				try {
+					const user = JSON.parse(localStorage.getItem('user'));
+					if (!user || !user.uid) {
+						showMembershipButton();
+						return;
+					}
+
+					console.log('Checking membership for user:', user.uid);
+
+					// Try to get membership from user profile first (faster)
+					const userProfile = window.loadUserProfile(user.uid);
+					if (userProfile && userProfile.membership && userProfile.membership.isActive) {
+						console.log('Found membership in user profile:', userProfile.membership);
+						const membership = userProfile.membership;
+						const endDate = new Date(membership.endDate);
+						const now = new Date();
+						
+						if (endDate > now) {
+							showMembershipInfo(membership);
+							return;
+						}
+					}
+
+					// Fallback: Get membership data from Firebase Membership table
+					const database = window.firebaseDatabase;
+					const { ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+					const membershipRef = ref(database, `Membership/${user.uid}`);
+					const membershipSnapshot = await get(membershipRef);
+					
+					if (membershipSnapshot.exists()) {
+						const membership = membershipSnapshot.val();
+						console.log('Found membership data:', membership);
+						
+						if (membership && membership.status === 'active') {
+							// Check if membership is still valid
+							const endDate = new Date(membership.endDate);
+							const now = new Date();
+							
+							if (endDate > now) {
+								// Membership is active and valid
+								showMembershipInfo(membership);
+							} else {
+								// Membership expired
+								console.log('Membership expired:', endDate, 'vs', now);
+								showMembershipButton();
+							}
+						} else {
+							// No active membership
+							console.log('No active membership found:', membership);
+							showMembershipButton();
+						}
+					} else {
+						// No membership found
+						console.log('No membership found for user:', user.uid);
+						showMembershipButton();
+					}
+				} catch (error) {
+					console.error('Error checking membership status:', error);
+					showMembershipButton();
+				}
+			}
+
+			// Show membership button for non-members
+			function showMembershipButton() {
+				const membershipSection = $('#membership-section');
+				membershipSection.html(`
+					<button class="tg-btn-membership">
+						<i class="fa fa-crown"></i>
+						Trở thành hội viên
+					</button>
+					<button class="tg-btn-debug" onclick="checkMembershipStatus()">
+						Debug: Kiểm tra membership
+					</button>
+				`);
+				
+				// Add click event
+				$('.tg-btn-membership').on('click', function() {
+					showNotification('Chuyển đến trang đăng ký hội viên...', 'info');
+					setTimeout(function() {
+						window.location.href = 'menbership.html';
+					}, 1000);
+				});
+			}
+
+			// Load transaction history from Firebase
+			async function loadTransactionHistory() {
+				try {
+					const user = JSON.parse(localStorage.getItem('user'));
+					if (!user || !user.uid) {
+						showTransactionEmpty();
+						return;
+					}
+
+					// Show loading
+					$('#transaction-loading').show();
+					$('#transaction-list').hide();
+					$('#transaction-empty').hide();
+
+					// Get orders from Firebase
+					const database = window.firebaseDatabase;
+					const { ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+					const ordersRef = ref(database, `orders/${user.uid}`);
+					const ordersSnapshot = await get(ordersRef);
+
+					if (ordersSnapshot.exists()) {
+						const ordersData = ordersSnapshot.val();
+						const orders = Object.values(ordersData);
+						
+						if (orders.length > 0) {
+							displayTransactions(orders);
+						} else {
+							showTransactionEmpty();
+						}
+					} else {
+						showTransactionEmpty();
+					}
+				} catch (error) {
+					console.error('Error loading transaction history:', error);
+					showTransactionEmpty();
+				}
+			}
+
+			// Display transactions
+			function displayTransactions(orders) {
+				const transactionList = $('#transaction-list');
+				transactionList.empty();
+
+				orders.forEach(order => {
+					const orderDate = new Date(order.createdAt).toLocaleDateString('vi-VN');
+					const orderTime = new Date(order.createdAt).toLocaleTimeString('vi-VN');
+					const statusClass = order.status === 'success' ? 'success' : 
+									  order.status === 'pending' ? 'pending' : 'failed';
+					const statusText = order.status === 'success' ? 'Thành công' : 
+									  order.status === 'pending' ? 'Đang xử lý' : 'Thất bại';
+
+					const transactionHtml = `
+						<div class="tg-transaction-item">
+							<div class="tg-transaction-header">
+								<div class="tg-transaction-id">${order.orderId}</div>
+								<div class="tg-transaction-status ${statusClass}">${statusText}</div>
+							</div>
+							<div class="tg-transaction-details">
+								<div class="tg-transaction-detail">
+									<div class="tg-transaction-label">Gói</div>
+									<div class="tg-transaction-value">${order.packageName}</div>
+								</div>
+								<div class="tg-transaction-detail">
+									<div class="tg-transaction-label">Phương thức</div>
+									<div class="tg-transaction-value">${order.paymentMethod.toUpperCase()}</div>
+								</div>
+								<div class="tg-transaction-detail">
+									<div class="tg-transaction-label">Thời hạn</div>
+									<div class="tg-transaction-value">${order.packageDuration} tháng</div>
+								</div>
+								<div class="tg-transaction-detail">
+									<div class="tg-transaction-label">Trạng thái</div>
+									<div class="tg-transaction-value">${statusText}</div>
+								</div>
+							</div>
+							<div class="tg-transaction-footer">
+								<div class="tg-transaction-date">${orderDate} ${orderTime}</div>
+								<div class="tg-transaction-amount">${formatPrice(order.packagePrice)}</div>
+							</div>
+						</div>
+					`;
+					transactionList.append(transactionHtml);
+				});
+
+				$('#transaction-loading').hide();
+				$('#transaction-list').show();
+			}
+
+			// Show empty state
+			function showTransactionEmpty() {
+				$('#transaction-loading').hide();
+				$('#transaction-list').hide();
+				$('#transaction-empty').show();
+			}
+
+			// Format price function
+			function formatPrice(price) {
+				return new Intl.NumberFormat('vi-VN', {
+					style: 'currency',
+					currency: 'VND'
+				}).format(price);
+			}
+
+			// Load transaction history from Firebase
+			async function loadTransactionHistory() {
+				try {
+					const user = JSON.parse(localStorage.getItem('user'));
+					if (!user || !user.uid) {
+						showTransactionEmpty();
+						return;
+					}
+
+					// Show loading
+					$('#transaction-loading').show();
+					$('#transaction-list').hide();
+					$('#transaction-empty').hide();
+
+					// Get orders from Firebase
+					const database = window.firebaseDatabase;
+					const { ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+					const ordersRef = ref(database, `orders/${user.uid}`);
+					const ordersSnapshot = await get(ordersRef);
+
+					if (ordersSnapshot.exists()) {
+						const ordersData = ordersSnapshot.val();
+						const orders = Object.values(ordersData);
+						
+						if (orders.length > 0) {
+							displayTransactions(orders);
+						} else {
+							showTransactionEmpty();
+						}
+					} else {
+						showTransactionEmpty();
+					}
+				} catch (error) {
+					console.error('Error loading transaction history:', error);
+					showTransactionEmpty();
+				}
+			}
+
+			// Display transactions
+			function displayTransactions(orders) {
+				const transactionList = $('#transaction-list');
+				transactionList.empty();
+
+				orders.forEach(order => {
+					const orderDate = new Date(order.createdAt).toLocaleDateString('vi-VN');
+					const orderTime = new Date(order.createdAt).toLocaleTimeString('vi-VN');
+					const statusClass = order.status === 'success' ? 'success' : 
+									  order.status === 'pending' ? 'pending' : 'failed';
+					const statusText = order.status === 'success' ? 'Thành công' : 
+									  order.status === 'pending' ? 'Đang xử lý' : 'Thất bại';
+
+					const transactionHtml = `
+						<div class="tg-transaction-item">
+							<div class="tg-transaction-header">
+								<div class="tg-transaction-id">${order.orderId}</div>
+								<div class="tg-transaction-status ${statusClass}">${statusText}</div>
+							</div>
+							<div class="tg-transaction-details">
+								<div class="tg-transaction-detail">
+									<div class="tg-transaction-label">Gói</div>
+									<div class="tg-transaction-value">${order.packageName}</div>
+								</div>
+								<div class="tg-transaction-detail">
+									<div class="tg-transaction-label">Phương thức</div>
+									<div class="tg-transaction-value">${order.paymentMethod.toUpperCase()}</div>
+								</div>
+								<div class="tg-transaction-detail">
+									<div class="tg-transaction-label">Thời hạn</div>
+									<div class="tg-transaction-value">${order.packageDuration} tháng</div>
+								</div>
+								<div class="tg-transaction-detail">
+									<div class="tg-transaction-label">Trạng thái</div>
+									<div class="tg-transaction-value">${statusText}</div>
+								</div>
+							</div>
+							<div class="tg-transaction-footer">
+								<div class="tg-transaction-date">${orderDate} ${orderTime}</div>
+								<div class="tg-transaction-amount">${formatPrice(order.packagePrice)}</div>
+							</div>
+						</div>
+					`;
+					transactionList.append(transactionHtml);
+				});
+
+				$('#transaction-loading').hide();
+				$('#transaction-list').show();
+			}
+
+			// Show empty state
+			function showTransactionEmpty() {
+				$('#transaction-loading').hide();
+				$('#transaction-list').hide();
+				$('#transaction-empty').show();
+			}
+
+			// Format price function
+			function formatPrice(price) {
+				return new Intl.NumberFormat('vi-VN', {
+					style: 'currency',
+					currency: 'VND'
+				}).format(price);
+			}
+
+			// Show membership info for active members
+			function showMembershipInfo(membership) {
+				const endDate = new Date(membership.endDate);
+				const now = new Date();
+				const timeLeft = endDate - now;
+				const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+				
+				console.log('Showing membership info:', membership);
+				console.log('Days left:', daysLeft);
+				
+				const membershipSection = $('#membership-section');
+				membershipSection.html(`
+					<div class="tg-membership-info">
+						<div class="tg-membership-badge">
+							<i class="fa fa-crown"></i>
+							<span class="tg-membership-type">${membership.packageName || 'Gói Hội Viên'}</span>
+						</div>
+						<div class="tg-membership-expiry">
+							<i class="fa fa-clock-o"></i>
+							<span>Còn lại: ${daysLeft} ngày</span>
+						</div>
+					</div>
+				`);
+			}
 			
 			// Form Actions
 			$('.tg-btn-update').on('click', function() {
@@ -6213,10 +7190,295 @@
 					}, 1000);
 				}
 			});
-			
 
-			
-					// Change Photo Button with Simple File Upload
+			// Global variable to store all content for filtering
+			let allBookshelfContent = [];
+
+			// Load bookshelf for members
+			async function loadBookshelf() {
+				try {
+					const user = JSON.parse(localStorage.getItem('user'));
+					if (!user || !user.uid) {
+						showBookshelfEmpty();
+						return;
+					}
+
+					// Check if user has active membership
+					const userProfile = window.loadUserProfile(user.uid);
+					const hasMembership = userProfile && userProfile.membership && userProfile.membership.isActive;
+					
+					if (!hasMembership) {
+						// Check Firebase membership
+						const database = window.firebaseDatabase;
+						const { ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+						const membershipRef = ref(database, `Membership/${user.uid}`);
+						const membershipSnapshot = await get(membershipRef);
+						
+						if (!membershipSnapshot.exists()) {
+							showBookshelfEmpty();
+							return;
+						}
+						
+						const membership = membershipSnapshot.val();
+						if (membership.status !== 'active') {
+							showBookshelfEmpty();
+							return;
+						}
+					}
+
+					// Show loading
+					$('#bookshelf-loading').show();
+					$('#bookshelf-grid').hide();
+					$('#bookshelf-empty').hide();
+
+					// Load books and stories from Firebase
+					const database = window.firebaseDatabase;
+					const { ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+					
+					// Load books
+					const booksRef = ref(database, 'Books');
+					const booksSnapshot = await get(booksRef);
+					
+					// Load stories
+					const storiesRef = ref(database, 'Stories');
+					const storiesSnapshot = await get(storiesRef);
+
+					allBookshelfContent = [];
+
+					// Process books
+					if (booksSnapshot.exists()) {
+						const booksData = booksSnapshot.val();
+						const books = Object.values(booksData);
+						
+						// Filter books for members (member_only books and featured books)
+						const memberBooks = books.filter(book => 
+							book.is_member_only === true || 
+							book.is_featured === true ||
+							book.is_free === true
+						);
+						
+						// Add type identifier to books
+						memberBooks.forEach(book => {
+							book.contentType = 'book';
+						});
+						
+						allBookshelfContent = allBookshelfContent.concat(memberBooks);
+					}
+
+					// Process stories
+					if (storiesSnapshot.exists()) {
+						const storiesData = storiesSnapshot.val();
+						const stories = Object.values(storiesData);
+						
+						// Filter stories for members (member_only stories and featured stories)
+						const memberStories = stories.filter(story => 
+							story.is_member_only === true || 
+							story.is_featured === true ||
+							story.is_free === true
+						);
+						
+						// Add type identifier to stories
+						memberStories.forEach(story => {
+							story.contentType = 'story';
+						});
+						
+						allBookshelfContent = allBookshelfContent.concat(memberStories);
+					}
+					
+					if (allBookshelfContent.length > 0) {
+						// Populate genre filter
+						populateGenreFilter(allBookshelfContent);
+						// Display all content initially
+						applyFilters();
+					} else {
+						showBookshelfEmpty();
+					}
+				} catch (error) {
+					console.error('Error loading bookshelf:', error);
+					showBookshelfEmpty();
+				}
+			}
+
+			// Populate genre filter with unique genres from content
+			function populateGenreFilter(content) {
+				const genreFilter = $('#genre-filter');
+				const genres = [...new Set(content.map(item => item.genre).filter(genre => genre))];
+				
+				// Clear existing options except "Tất cả thể loại"
+				genreFilter.find('option:not(:first)').remove();
+				
+				// Add genre options
+				genres.sort().forEach(genre => {
+					genreFilter.append(`<option value="${genre}">${genre}</option>`);
+				});
+			}
+
+			// Apply filters to content
+			function applyFilters() {
+				if (allBookshelfContent.length === 0) {
+					showBookshelfEmpty();
+					return;
+				}
+
+				const contentTypeFilter = $('#content-type-filter').val();
+				const genreFilter = $('#genre-filter').val();
+				const priceFilter = $('#price-filter').val();
+				const sortFilter = $('#sort-filter').val();
+
+				console.log('Applying filters:', {
+					contentType: contentTypeFilter,
+					genre: genreFilter,
+					price: priceFilter,
+					sort: sortFilter,
+					totalContent: allBookshelfContent.length
+				});
+
+				let filteredContent = [...allBookshelfContent];
+
+				// Apply content type filter
+				if (contentTypeFilter !== 'all') {
+					filteredContent = filteredContent.filter(item => item.contentType === contentTypeFilter);
+				}
+
+				// Apply genre filter
+				if (genreFilter !== 'all') {
+					filteredContent = filteredContent.filter(item => item.genre === genreFilter);
+				}
+
+				// Apply price filter
+				if (priceFilter !== 'all') {
+					switch (priceFilter) {
+						case 'free':
+							filteredContent = filteredContent.filter(item => item.is_free === true);
+							break;
+						case 'member':
+							filteredContent = filteredContent.filter(item => item.is_member_only === true);
+							break;
+						case 'paid':
+							filteredContent = filteredContent.filter(item => 
+								!item.is_free && !item.is_member_only && item.price > 0
+							);
+							break;
+					}
+				}
+
+				// Apply sorting
+				switch (sortFilter) {
+					case 'newest':
+						filteredContent.sort((a, b) => new Date(b.publish_date || b.last_updated) - new Date(a.publish_date || a.last_updated));
+						break;
+					case 'oldest':
+						filteredContent.sort((a, b) => new Date(a.publish_date || a.last_updated) - new Date(b.publish_date || b.last_updated));
+						break;
+					case 'rating':
+						filteredContent.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+						break;
+					case 'title':
+						filteredContent.sort((a, b) => a.title.localeCompare(b.title, 'vi'));
+						break;
+					case 'author':
+						filteredContent.sort((a, b) => a.author.localeCompare(b.author, 'vi'));
+						break;
+				}
+
+				// Update results count
+				$('#results-count').text(filteredContent.length);
+
+				console.log('Filter results:', {
+					filteredCount: filteredContent.length,
+					books: filteredContent.filter(item => item.contentType === 'book').length,
+					stories: filteredContent.filter(item => item.contentType === 'story').length
+				});
+
+				// Display filtered content
+				if (filteredContent.length > 0) {
+					displayContent(filteredContent);
+				} else {
+					showBookshelfEmpty();
+				}
+			}
+
+			// Clear all filters
+			function clearFilters() {
+				$('#content-type-filter').val('all');
+				$('#genre-filter').val('all');
+				$('#price-filter').val('all');
+				$('#sort-filter').val('newest');
+				applyFilters();
+			}
+
+			// Display books and stories
+			function displayContent(content) {
+				const bookshelfGrid = $('#bookshelf-grid');
+				bookshelfGrid.empty();
+
+				content.forEach(item => {
+					const isBook = item.contentType === 'book';
+					const itemId = isBook ? item.book_id : item.story_id;
+					const itemType = isBook ? 'book' : 'story';
+					
+					const priceDisplay = item.is_free ? 
+						'<span class="tg-book-free">Miễn phí</span>' :
+						item.is_member_only ? 
+						'<span class="tg-book-member">Thành viên</span>' :
+						`<span class="tg-book-price">
+							<span class="current">${formatPrice(item.price)}</span>
+							${item.original_price > item.price ? `<span class="original">${formatPrice(item.original_price)}</span>` : ''}
+						</span>`;
+
+					const typeBadge = isBook ? 
+						'<span class="tg-content-type-badge tg-book-badge">Sách</span>' :
+						'<span class="tg-content-type-badge tg-story-badge">Truyện</span>';
+
+					const itemHtml = `
+						<div class="tg-book-item" onclick="openContent('${itemId}', '${itemType}')">
+							<div class="tg-content-type-overlay">
+								${typeBadge}
+							</div>
+							<img src="${item.cover_image}" alt="${item.title}" class="tg-book-cover">
+							<div class="tg-book-title">${item.title}</div>
+							<div class="tg-book-author">${item.author}</div>
+							<div class="tg-book-meta">
+								<div class="tg-book-genre">${item.genre}</div>
+								<div class="tg-book-rating">
+									<i class="fa fa-star"></i>
+									<span>${item.rating}</span>
+								</div>
+							</div>
+							<div class="tg-book-price">
+								${priceDisplay}
+							</div>
+						</div>
+					`;
+					bookshelfGrid.append(itemHtml);
+				});
+
+				$('#bookshelf-loading').hide();
+				$('#bookshelf-grid').show();
+				
+				const bookCount = content.filter(item => item.contentType === 'book').length;
+				const storyCount = content.filter(item => item.contentType === 'story').length;
+				console.log(`Displayed ${bookCount} books and ${storyCount} stories for member`);
+			}
+
+			// Show empty state
+			function showBookshelfEmpty() {
+				$('#bookshelf-loading').hide();
+				$('#bookshelf-grid').hide();
+				$('#bookshelf-empty').show();
+			}
+
+			// Open content function (books or stories)
+			window.openContent = function(contentId, contentType) {
+				// Navigate to appropriate detail page
+				if (contentType === 'book') {
+					window.location.href = `book-detail.html?id=${contentId}`;
+				} else if (contentType === 'story') {
+					window.location.href = `story-detail.html?id=${contentId}`;
+				}
+			}
+
+			// Change Photo Button with Simple File Upload
 		$('.tg-btn-change-photo').on('click', function() {
 			// Clear any old local storage image data
 			const keysToRemove = [];
@@ -6340,6 +7602,18 @@
 				}, 3000);
 			});
 			
+			// Filter event listeners
+			$('#content-type-filter, #genre-filter, #price-filter, #sort-filter').on('change', function() {
+				applyFilters();
+				const filterName = $(this).find('option:selected').text();
+				showNotification(`Đã áp dụng bộ lọc: ${filterName}`, 'info');
+			});
+
+			$('#clear-filters').on('click', function() {
+				clearFilters();
+				showNotification('Đã xóa tất cả bộ lọc', 'success');
+			});
+
 			// Load profile data when page loads
 			$(document).ready(function() {
 				const user = JSON.parse(localStorage.getItem('user'));

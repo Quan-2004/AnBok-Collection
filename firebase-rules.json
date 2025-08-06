@@ -45,6 +45,20 @@
     "Carts": {
       ".read": true,
       ".write": "auth != null"
+    },
+    "Membership": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "MembershipPackages": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "vnpay_transactions": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
   }
 } 

@@ -492,6 +492,46 @@
       "weight": 450
     }
   },
+  "Membership": {
+    "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
+      "autoRenew": false,
+      "createdAt": "2025-08-06T06:34:34.354Z",
+      "endDate": "2025-11-06T06:34:34.354Z",
+      "features": [
+        "unlimited_books"
+      ],
+      "membershipId": "MEM_1754462074354_NNLNS92Y4",
+      "membershipType": "basic",
+      "notes": "Gói hội viên Gói 3 Tháng - Thanh toán qua VNPAY",
+      "orderId": "ORDER_1754461848362_fu2n6hwgp",
+      "packageDuration": 3,
+      "packageId": "package_3_months",
+      "packageName": "Gói 3 Tháng",
+      "packagePrice": 288000,
+      "paymentDate": "2025-08-06T06:34:34.354Z",
+      "paymentMethod": "vnpay",
+      "paymentStatus": "completed",
+      "startDate": "2025-08-06T06:34:34.354Z",
+      "status": "active",
+      "transactionId": "15118875",
+      "updatedAt": "2025-08-06T06:34:34.354Z",
+      "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3",
+      "vnpayResponse": {
+        "vnp_Amount": "28800000",
+        "vnp_BankCode": "NCB",
+        "vnp_BankTranNo": "VNP15118875",
+        "vnp_CardType": "ATM",
+        "vnp_OrderInfo": "Thanh toan goi hoi vien Gói 3 Tháng",
+        "vnp_PayDate": "20250806133253",
+        "vnp_ResponseCode": "00",
+        "vnp_SecureHash": "a89201eba030c2dd45faa02bcbfd772db02a11e00882de898dfbbcc337e58fe1cc3421716220080e8d1587f03ff4385a1a8707a3ee6d300af37149ee78605ebd",
+        "vnp_TmnCode": "2Q01AVYB",
+        "vnp_TransactionNo": "15118875",
+        "vnp_TransactionStatus": "00",
+        "vnp_TxnRef": "U2N6HWGP"
+      }
+    }
+  },
   "MembershipPackages": {
     "package_12_months": {
       "badge_color": "#E8944A",
@@ -1312,13 +1352,58 @@
       "updated_date": "2024-01-15"
     }
   },
+  "orders": {
+    "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
+      "ORDER_1754461848362_fu2n6hwgp": {
+        "activatedAt": "2025-08-06T06:34:34.354Z",
+        "createdAt": "2025-08-06T06:30:48.362Z",
+        "customerAddress": "11",
+        "customerEmail": "phamhongquan9117@gmail.com",
+        "customerName": "Quân Phạm",
+        "customerPhone": "111111111",
+        "orderId": "ORDER_1754461848362_fu2n6hwgp",
+        "packageDuration": 3,
+        "packageId": "package_3_months",
+        "packageName": "Gói 3 Tháng",
+        "packagePrice": 288000,
+        "paymentMethod": "vnpay",
+        "status": "success",
+        "updatedAt": "2025-08-06T06:34:34.354Z",
+        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3",
+        "vnpayResponse": {
+          "vnp_Amount": "28800000",
+          "vnp_BankCode": "NCB",
+          "vnp_BankTranNo": "VNP15118875",
+          "vnp_CardType": "ATM",
+          "vnp_OrderInfo": "Thanh toan goi hoi vien Gói 3 Tháng",
+          "vnp_PayDate": "20250806133253",
+          "vnp_ResponseCode": "00",
+          "vnp_SecureHash": "a89201eba030c2dd45faa02bcbfd772db02a11e00882de898dfbbcc337e58fe1cc3421716220080e8d1587f03ff4385a1a8707a3ee6d300af37149ee78605ebd",
+          "vnp_TmnCode": "2Q01AVYB",
+          "vnp_TransactionNo": "15118875",
+          "vnp_TransactionStatus": "00",
+          "vnp_TxnRef": "U2N6HWGP"
+        }
+      }
+    }
+  },
   "users": {
     "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
       "profile": {
         "createdAt": "2025-08-05T08:19:43.980Z",
         "displayName": "Quân Phạm",
         "email": "phamhongquan9117@gmail.com",
-        "lastUpdated": "2025-08-05T09:06:51.815Z",
+        "lastUpdated": "2025-08-06T06:34:34.450Z",
+        "membership": {
+          "endDate": "2025-11-06T06:34:34.354Z",
+          "features": [
+            "unlimited_books"
+          ],
+          "isActive": true,
+          "packageName": "Gói 3 Tháng",
+          "startDate": "2025-08-06T06:34:34.354Z",
+          "type": "basic"
+        },
         "personalInfo": {
           "address": "11",
           "dateOfBirth": "01/01/1900",
@@ -1330,6 +1415,25 @@
         },
         "photoURL": "https://res.cloudinary.com/dvcebine7/image/upload/v1754384811/h58yymy2wotwvrvkvvqr.jpg",
         "uid": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
+      }
+    },
+    "YpWN3bXOouP7bqiBxhCd9yxs1Xc2": {
+      "profile": {
+        "createdAt": "2025-08-06T04:27:27.953Z",
+        "displayName": "jim",
+        "email": "quanpham4298@gmail.com",
+        "lastUpdated": "2025-08-06T04:27:27.953Z",
+        "personalInfo": {
+          "address": "",
+          "dateOfBirth": "",
+          "fullName": "jim",
+          "gender": "Khác",
+          "phone": "",
+          "userId": "UPLFL5CHJN",
+          "username": "quanpham4298"
+        },
+        "photoURL": "",
+        "uid": "YpWN3bXOouP7bqiBxhCd9yxs1Xc2"
       }
     }
   }
