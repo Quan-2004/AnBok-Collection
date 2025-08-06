@@ -3859,13 +3859,7 @@
 										</a>
 									</div>
 
-									<!-- Membership Button -->
-									<div class="tg-membership-btn">
-										<a href="menbership.html" style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #4A6366; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);">
-											<i class="fa fa-crown"></i>
-											<span>Hội viên VIP</span>
-										</a>
-									</div>
+
 								</div>
 							</nav>
 						</div>
@@ -5795,10 +5789,26 @@
 				return;
 			}
 			
+			// Tính tổng tiền giỏ hàng
+			const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+			const totalOriginal = cart.reduce((sum, item) => sum + (item.original_price * item.quantity), 0);
+			
+			// Tạo dữ liệu giỏ hàng để truyền
+			const cartData = {
+				items: cart,
+				totalPrice: totalPrice,
+				totalOriginal: totalOriginal,
+				totalItems: cart.reduce((sum, item) => sum + item.quantity, 0),
+				timestamp: new Date().toISOString()
+			};
+			
+			// Lưu dữ liệu giỏ hàng vào sessionStorage để truyền sang checkout.html
+			sessionStorage.setItem('checkoutCart', JSON.stringify(cartData));
+			
 			// Chuyển đến trang thanh toán
 			showNotification('Đang chuyển đến trang thanh toán...', 'info');
 			setTimeout(() => {
-				window.location.href = 'checkout.html';
+				window.location.href = 'checkout.html?source=cart';
 			}, 1000);
 		};
 		
@@ -6362,43 +6372,115 @@
 
 		// Function to get button text and action for book
 		async function getBookButtonInfo(book) {
-			// Check if book is member-only
-			if (book.is_member_only) {
-				const userMembership = await checkUserMembership();
-				if (userMembership.hasMembership) {
+			try {
+				const user = JSON.parse(localStorage.getItem('user'));
+				if (!user || !user.uid) {
+					// Not logged in - show login button
 					return {
-						text: 'Thêm vào giỏ',
-						action: 'addBookToCart',
-						icon: 'shopping-cart',
-						style: 'primary'
-					};
-				} else {
-					return {
-						text: 'Mua gói hội viên',
-						action: 'buyMembership',
-						icon: 'crown',
-						style: 'membership'
+						text: 'Đăng nhập để mua',
+						action: 'login',
+						icon: 'sign-in',
+						style: 'login'
 					};
 				}
-			}
-			
-			// For free books
-			if (book.is_free) {
+
+				// Check if user has purchased this book
+				const hasPurchased = await checkIfUserPurchasedBook(user.uid, book.book_id);
+				if (hasPurchased) {
+					return {
+						text: 'Đọc ngay',
+						action: 'readBook',
+						icon: 'book',
+						style: 'purchased'
+					};
+				}
+
+				// Check if book is member-only
+				if (book.is_member_only) {
+					const userMembership = await checkUserMembership();
+					if (userMembership.hasMembership) {
+						return {
+							text: 'Thêm vào giỏ',
+							action: 'addBookToCart',
+							icon: 'shopping-cart',
+							style: 'primary'
+						};
+					} else {
+						return {
+							text: 'Mua gói hội viên',
+							action: 'buyMembership',
+							icon: 'crown',
+							style: 'membership'
+						};
+					}
+				}
+				
+				// For free books
+				if (book.is_free) {
+					return {
+						text: 'Đọc ngay',
+						action: 'readBook',
+						icon: 'play',
+						style: 'primary'
+					};
+				}
+				
+				// For regular books
 				return {
-					text: 'Đọc ngay',
-					action: 'readBook',
-					icon: 'play',
+					text: 'Thêm vào giỏ',
+					action: 'addBookToCart',
+					icon: 'shopping-cart',
+					style: 'primary'
+				};
+			} catch (error) {
+				console.error('Error getting book button info:', error);
+				// Fallback to default
+				return {
+					text: 'Thêm vào giỏ',
+					action: 'addBookToCart',
+					icon: 'shopping-cart',
 					style: 'primary'
 				};
 			}
-			
-			// For regular books
-			return {
-				text: 'Thêm vào giỏ',
-				action: 'addBookToCart',
-				icon: 'shopping-cart',
-				style: 'primary'
-			};
+		}
+
+		// Check if user has purchased a specific book
+		async function checkIfUserPurchasedBook(userId, bookId) {
+			try {
+				const ordersRef = window.firebaseRef(window.firebase.database(), `orders/${userId}`);
+				const ordersSnapshot = await window.firebaseGet(ordersRef);
+				
+				if (!ordersSnapshot.exists()) {
+					return false;
+				}
+
+				const orders = ordersSnapshot.val();
+				
+				// Check all orders for this user
+				for (const orderKey in orders) {
+					const order = orders[orderKey];
+					
+					// Check if order is successful
+					if (order.status === 'success' && order.paymentStatus === 'completed') {
+						
+						// Check cart items in the order
+						if (order.cartItems && Array.isArray(order.cartItems)) {
+							for (const item of order.cartItems) {
+								// Check if this book is in the purchased items
+								if (item.book_id === bookId || item.id === bookId) {
+									console.log(`User has purchased book ${bookId} in order ${orderKey}`);
+									return true;
+								}
+							}
+						}
+					}
+				}
+				
+				return false;
+			} catch (error) {
+				console.error('Error checking if user purchased book:', error);
+				return false;
+			}
 		}
 
 
@@ -6811,38 +6893,6 @@
 		// Function to add to wishlist
 		function addToWishlist(bookId) {
 			// This would typically update Firebase wishlist
-			console.log('Adding to wishlist:', bookId);
-			showNotification('Đã thêm vào danh sách yêu thích!', 'success');
-		}
-		
-		// Function to add to cart - static version
-		function addToCart(bookId) {
-			// Static cart - just show notification
-			showNotification('Chức năng giỏ hàng đang được bảo trì!', 'info');
-		}
-
-		// Function to read book (for free books)
-		function readBook(bookId) {
-			console.log('Reading book:', bookId);
-			showNotification('Đang mở sách để đọc...', 'info');
-			// Redirect to reading page
-			setTimeout(() => {
-				window.location.href = `read-book.html?id=${bookId}`;
-			}, 1000);
-		}
-
-		// Function to view book details
-		function viewBook(bookId) {
-			console.log('Viewing book details:', bookId);
-			showNotification('Đang mở chi tiết sách...', 'info');
-			// Redirect to book detail page
-			setTimeout(() => {
-				window.location.href = `book-detail.html?id=${bookId}`;
-			}, 500);
-		}
-
-		// Function to add to wishlist
-		function addToWishlist(bookId) {
 			console.log('Adding to wishlist:', bookId);
 			showNotification('Đã thêm vào danh sách yêu thích!', 'success');
 		}

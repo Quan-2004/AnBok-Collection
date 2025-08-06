@@ -303,6 +303,88 @@
             background: var(--gradient-accent);
         }
 
+        /* Chapter Sections */
+        .chapter-section {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chapter-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .chapter-text {
+            font-size: 1.25rem;
+            line-height: 2;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .chapter-text p {
+            margin-bottom: 1.5em;
+        }
+
+        .chapter-text p:first-letter {
+            font-size: 3.5em;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin: 0.1em 0.1em 0 0;
+            color: var(--accent-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Chapter Images */
+        .chapter-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .image-container {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .image-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .chapter-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 20px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-style: italic;
+            background: var(--bg-primary);
+        }
+
+        /* Dark theme for images */
+        body.dark-theme .image-container {
+            background: #3a3a3a;
+        }
+
+        body.dark-theme .image-caption {
+            background: #2c2c2c;
+            color: #cccccc;
+        }
+
         /* Floating Action Button */
         .fab {
             position: fixed;
@@ -568,6 +650,24 @@
                 padding: 14px 24px;
                 font-size: 14px;
             }
+
+            .chapter-images {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .chapter-image {
+                height: 200px;
+            }
+
+            .image-caption {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+
+            .chapter-text {
+                font-size: 1.1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -589,6 +689,27 @@
             .reading-controls {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .chapter-images {
+                gap: 15px;
+            }
+
+            .chapter-image {
+                height: 180px;
+            }
+
+            .image-caption {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+
+            .chapter-text {
+                font-size: 1rem;
+            }
+
+            .chapter-title {
+                font-size: 1.5rem;
             }
         }
 
@@ -758,13 +879,16 @@
                 if (allBooks) {
                     const bookEntries = Object.entries(allBooks);
                     const foundBook = bookEntries.find(([key, bookData]) => 
-                        bookData.book_id === bookId
+                        bookData.book_id === bookId || key === bookId
                     );
                     
                     if (foundBook) {
                         const book = foundBook[1];
                         console.log('Found book:', book);
                         displayBookContent(book);
+                        
+                        // Load reading progress and scroll to position
+                        await loadReadingProgressAndScroll(bookId);
                     } else {
                         showError('Không tìm thấy sách');
                     }
@@ -784,7 +908,13 @@
             // Store book data globally for other functions
             window.currentBookData = book;
             
-            if (!book.content) {
+            // Check if content exists and determine content type
+            const hasContent = book.content && (
+                typeof book.content === 'string' || 
+                (typeof book.content === 'object' && Object.keys(book.content).length > 0)
+            );
+            
+            if (!hasContent) {
                 container.innerHTML = `
                     <div class="error-container">
                         <div class="error-icon">
@@ -801,8 +931,50 @@
                 return;
             }
 
-            // Calculate word count
-            wordCount = book.content.split(/\s+/).length;
+            // Calculate word count based on content type
+            if (typeof book.content === 'string') {
+                // Book content is a single string
+                wordCount = book.content.split(/\s+/).length;
+            } else {
+                // Story content with chapters
+                wordCount = 0;
+                Object.values(book.content).forEach(chapter => {
+                    if (chapter.text) {
+                        wordCount += chapter.text.split(/\s+/).length;
+                    }
+                });
+            }
+
+            // Generate content HTML based on content type
+            let contentHTML = '';
+            if (typeof book.content === 'string') {
+                // Book content is a single string
+                contentHTML = book.content;
+            } else {
+                // Story content with chapters
+                Object.entries(book.content).forEach(([chapterKey, chapter]) => {
+                    contentHTML += `
+                        <div class="chapter-section">
+                            <h2 class="chapter-title">${chapter.title}</h2>
+                            <div class="chapter-text">
+                                ${chapter.text.replace(/\n/g, '<br>')}
+                            </div>
+                            ${chapter.images && chapter.images.length > 0 ? `
+                                <div class="chapter-images">
+                                    ${chapter.images.map(image => `
+                                        <div class="image-container">
+                                            <img src="${image.url}" alt="${image.description}" 
+                                                 onerror="this.style.display='none'"
+                                                 class="chapter-image">
+                                            <div class="image-caption">${image.description}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+            }
 
             container.innerHTML = `
                 <div class="book-header">
@@ -815,7 +987,7 @@
                         </div>
                         <div class="meta-item">
                             <span class="material-icons">menu_book</span>
-                            <span>${book.pages || 'N/A'} trang</span>
+                            <span>${typeof book.content === 'object' ? Object.keys(book.content).length + ' chương' : (book.pages || 'N/A') + ' trang'}</span>
                         </div>
                         <div class="meta-item">
                             <span class="material-icons">category</span>
@@ -839,7 +1011,7 @@
                 </div>
                 
                 <div class="book-content" id="bookContent">
-                    ${book.content}
+                    ${contentHTML}
                 </div>
             `;
 
@@ -1087,6 +1259,133 @@
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 document.body.classList.add('dark-theme');
+            }
+        }
+
+        // Load reading progress and scroll to saved position
+        async function loadReadingProgressAndScroll(bookId) {
+            try {
+                const user = window.firebase.auth().currentUser;
+                if (!user) return;
+
+                const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/bookReadingHistory/${bookId}`);
+                const snapshot = await window.firebaseGet(readingHistoryRef);
+                
+                if (snapshot.exists()) {
+                    const readingData = snapshot.val();
+                    console.log('Found reading history:', readingData);
+                    
+                    // Check if this is a "read again" action (completed book)
+                    const isReadAgain = readingData.readingProgress === 100;
+                    
+                    if (isReadAgain) {
+                        // Reset progress for completed books
+                        await resetReadingProgress(bookId);
+                        
+                        // Show notification for read again
+                        Swal.fire({
+                            title: 'Đọc lại',
+                            text: 'Bắt đầu đọc lại từ đầu',
+                            icon: 'info',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end'
+                        });
+                        
+                        return;
+                    }
+                    
+                    // Update progress bar and stats for incomplete books
+                    if (readingData.readingProgress) {
+                        const progressBar = document.getElementById('progressBar');
+                        const progressText = document.getElementById('readingProgress');
+                        
+                        if (progressBar) {
+                            progressBar.style.width = readingData.readingProgress + '%';
+                        }
+                        if (progressText) {
+                            progressText.textContent = readingData.readingProgress + '%';
+                        }
+                    }
+                    
+                    // Calculate scroll position based on progress
+                    if (readingData.readingProgress && readingData.readingProgress > 0) {
+                        setTimeout(() => {
+                            const docHeight = document.body.offsetHeight - window.innerHeight;
+                            const scrollPosition = (readingData.readingProgress / 100) * docHeight;
+                            
+                            window.scrollTo({
+                                top: scrollPosition,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Show notification
+                            Swal.fire({
+                                title: 'Tiếp tục đọc',
+                                text: `Đã khôi phục tiến độ ${readingData.readingProgress}%`,
+                                icon: 'info',
+                                timer: 2000,
+                                showConfirmButton: false,
+                                toast: true,
+                                position: 'top-end'
+                            });
+                        }, 1000); // Wait for content to render
+                    }
+                    
+                    // Restore reading time if available
+                    if (readingData.readingTime) {
+                        startTime = Date.now() - (readingData.readingTime * 1000);
+                        isReading = true;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading reading progress:', error);
+            }
+        }
+
+        // Reset reading progress for completed books
+        async function resetReadingProgress(bookId) {
+            try {
+                const user = window.firebase.auth().currentUser;
+                if (!user) return;
+
+                const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/bookReadingHistory/${bookId}`);
+                const bookData = window.currentBookData;
+                
+                // Reset to initial state
+                const resetData = {
+                    bookId: bookId,
+                    bookTitle: bookData.title,
+                    bookAuthor: bookData.author,
+                    bookCover: bookData.cover_image,
+                    startTime: Date.now(),
+                    lastReadTime: Date.now(),
+                    readingProgress: 0,
+                    totalWords: wordCount,
+                    readingTime: 0,
+                    isCurrentlyReading: true
+                };
+
+                await window.firebaseSet(readingHistoryRef, resetData);
+                
+                // Reset UI
+                const progressBar = document.getElementById('progressBar');
+                const progressText = document.getElementById('readingProgress');
+                const readingTimeText = document.getElementById('readingTime');
+                
+                if (progressBar) progressBar.style.width = '0%';
+                if (progressText) progressText.textContent = '0%';
+                if (readingTimeText) readingTimeText.textContent = '0:00';
+                
+                // Reset reading variables
+                startTime = Date.now();
+                isReading = true;
+                
+                console.log('Reading progress reset successfully');
+                
+            } catch (error) {
+                console.error('Error resetting reading progress:', error);
             }
         }
 

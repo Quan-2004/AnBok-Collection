@@ -137,8 +137,8 @@
       "genre": "Tiểu thuyết",
       "genre_code": "TIEN_THUYET",
       "is_featured": false,
-      "is_free": true,
-      "is_member_only": false,
+      "is_free": false,
+      "is_member_only": true,
       "isbn": "978-604-1-12345-6",
       "language": "Vietnamese",
       "original_price": 45000,
@@ -1352,6 +1352,78 @@
       "updated_date": "2024-01-15"
     }
   },
+  "Wishlist": {
+    "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
+      "book_004": {
+        "addedAt": "2025-08-06T14:30:03.407Z",
+        "author": "J.K. Rowling",
+        "coverImage": "images/books/img-04.jpg",
+        "genre": "Fantasy",
+        "id": "book_004",
+        "price": 600000,
+        "rating": 4.7,
+        "title": "Harry Potter và Hòn đá Phù thủy",
+        "type": "book",
+        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
+      },
+      "book_006": {
+        "addedAt": "2025-08-06T14:27:19.473Z",
+        "author": "Tôn Tử",
+        "coverImage": "images/books/img-06.jpg",
+        "genre": "Chiến lược",
+        "id": "book_006",
+        "price": 750000,
+        "rating": 4.6,
+        "title": "Nghệ Thuật Chiến Tranh",
+        "type": "book",
+        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
+      },
+      "story_004": {
+        "addedAt": "2025-08-06T14:24:41.957Z",
+        "author": "Nguyễn Nhật Ánh",
+        "coverImage": "https://cdn1.fahasa.com/media/catalog/product/b/i/bia1t1_4.jpg?_gl=1*1ekjduk*_ga*ODA5NzA5MTQuMTc0NTQ1NzQ2Ng..*_ga_D3YYPWQ9LN*czE3NDcwNTI5NTAkbzU0JGcxJHQxNzQ3MDU4ODYyJGowJGwwJGgw*_gcl_aw*R0NMLjE3NDU0NzA2NjUuQ2p3S0NBanduNkxBQmhCU0Vpd0FzTkpyam5GRV92Wlc1NVdsNUpuVHgzNVRGanNUd3IxQXNuV0pxUHA0SDNvREZBWS1rR3JMQW1EUXd4b0N2dHNRQXZEX0J3RQ..*_gcl_au*MTkzNzI0NzE2OC4xNzQ1NDU3NDY2*_ga_460L9JMC2G*czE3NDcwNTI5NTAkbzUzJGcxJHQxNzQ3MDU4ODYzJGo1NSRsMCRoMTcwNzE4OTYwOQ..",
+        "genre": "Tình cảm",
+        "id": "story_004",
+        "price": 100000,
+        "rating": 4.8,
+        "title": "Tuyển Tập Nguyễn Nhật Ánh",
+        "type": "story",
+        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
+      },
+      "story_012": {
+        "addedAt": "2025-08-06T14:30:02.349Z",
+        "author": "Masashi Kishimoto",
+        "coverImage": "https://qmanga.art/wp-content/uploads/2024/10/muon-khi-nao-thi-muon-thich-bao-nhieu-thi-thich.jpg",
+        "genre": "Truyện tranh",
+        "id": "story_012",
+        "price": 120000,
+        "rating": 4.8,
+        "title": "Naruto",
+        "type": "story",
+        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
+      }
+    }
+  },
+  "coupons": {
+    "WELCOME10": {
+      "applicableProducts": [
+        "all"
+      ],
+      "code": "WELCOME10",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "currentUses": 1,
+      "description": "Giảm 10% cho đơn hàng từ 100k",
+      "discount": 10,
+      "isActive": true,
+      "maxDiscount": 50000,
+      "maxUses": 1000,
+      "minAmount": 100000,
+      "type": "percentage",
+      "updatedAt": "2025-08-06T12:13:09.112Z",
+      "validFrom": "2024-01-01",
+      "validTo": "2027-12-31"
+    }
+  },
   "orders": {
     "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
       "ORDER_1754461848362_fu2n6hwgp": {
@@ -1384,16 +1456,240 @@
           "vnp_TransactionStatus": "00",
           "vnp_TxnRef": "U2N6HWGP"
         }
+      },
+      "ORDER_1754482368044_fweeolqk5": {
+        "activatedAt": "2025-08-06T12:13:09.061Z",
+        "cartItems": [
+          {
+            "added_at": "2025-08-06T12:12:03.016Z",
+            "author": "Nhiều tác giả",
+            "category_code": "TNB002",
+            "category_name": "Featured Stories",
+            "cover_image": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
+            "description": "Tuyển tập những câu chuyện cổ tích dân gian Việt Nam được yêu thích nhất như: Tấm Cám, Thạch Sanh, Sọ Dừa, Cây Khế... Những câu chuyện mang đậm bản sắc văn hóa Việt Nam với bài học về đạo đức và nhân cách.",
+            "genre": "Cổ tích",
+            "image": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
+            "is_featured": true,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "",
+            "language": "Vietnamese",
+            "original_price": 75000,
+            "pages": 0,
+            "price": 50000,
+            "publish_date": "2023-10-15",
+            "publisher": "Chưa có thông tin",
+            "quantity": 1,
+            "rating": 4.7,
+            "story_id": "story_002",
+            "tags": [
+              "cổ tích",
+              "dân gian",
+              "Việt Nam",
+              "thiếu nhi",
+              "Tấm Cám",
+              "Thạch Sanh"
+            ],
+            "title": "Truyện Cổ Tích Việt Nam",
+            "type": "story"
+          },
+          {
+            "added_at": "2025-08-06T12:12:06.098Z",
+            "author": "Vũ Trọng Phụng",
+            "category_code": "TM001",
+            "category_name": "New Stories",
+            "cover_image": "https://cdn1.fahasa.com/media/catalog/product/b/_/b_a_o_.jpg",
+            "description": "Tuyển tập những tác phẩm nổi tiếng của nhà văn Vũ Trọng Phụng như: Số Đỏ, Giông Tố, Vỡ Đê... Những tác phẩm phê phán xã hội sâu sắc với lối viết hài hước, châm biếm.",
+            "genre": "Tiểu thuyết",
+            "image": "https://cdn1.fahasa.com/media/catalog/product/b/_/b_a_o_.jpg",
+            "is_featured": false,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "",
+            "language": "Vietnamese",
+            "original_price": 50000,
+            "pages": 0,
+            "price": 30000,
+            "publish_date": "1936",
+            "publisher": "Chưa có thông tin",
+            "quantity": 1,
+            "rating": 4.3,
+            "story_id": "story_005",
+            "tags": [
+              "Vũ Trọng Phụng",
+              "Số Đỏ",
+              "Giông Tố",
+              "phê phán xã hội",
+              "hài hước",
+              "châm biếm"
+            ],
+            "title": "Tuyển Tập Vũ Trọng Phụng",
+            "type": "story"
+          },
+          {
+            "added_at": "2025-08-06T12:12:15.901Z",
+            "author": "Nguyễn Huy Thiệp",
+            "category_code": "TM001",
+            "category_name": "New Stories",
+            "cover_image": "https://bloganchoi.com/wp-content/uploads/2023/02/truyen-ngon-tinh-sung-h-hay-2023-7.jpg",
+            "description": "Tuyển tập những truyện ngắn đặc sắc của nhà văn Nguyễn Huy Thiệp như: Tướng Về Hưu, Không Có Vua, Con Gái Thủy Thần... Những tác phẩm với lối viết sắc sảo, phản ánh chân thực xã hội Việt Nam thời kỳ đổi mới. Truyện mang tính triết lý sâu sắc về con người và cuộc sống.",
+            "genre": "Truyện ngắn",
+            "image": "https://bloganchoi.com/wp-content/uploads/2023/02/truyen-ngon-tinh-sung-h-hay-2023-7.jpg",
+            "is_featured": false,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "",
+            "language": "Vietnamese",
+            "original_price": 60000,
+            "pages": 0,
+            "price": 40000,
+            "publish_date": "1987",
+            "publisher": "Chưa có thông tin",
+            "quantity": 1,
+            "rating": 4.6,
+            "story_id": "story_013",
+            "tags": [
+              "Nguyễn Huy Thiệp",
+              "Tướng Về Hưu",
+              "Không Có Vua",
+              "truyện ngắn",
+              "văn học đổi mới",
+              "triết lý"
+            ],
+            "title": "Truyện Ngắn Nguyễn Huy Thiệp",
+            "type": "story"
+          }
+        ],
+        "couponCode": "WELCOME10",
+        "couponDiscount": 12000,
+        "couponType": "percentage",
+        "createdAt": "2025-08-06T12:12:48.044Z",
+        "customerAddress": "111111111",
+        "customerEmail": "phamhongquan9117@gmail.com",
+        "customerName": "Quân Phạm",
+        "customerPhone": "111111111",
+        "finalPrice": 108000,
+        "orderId": "ORDER_1754482368044_fweeolqk5",
+        "orderStatus": "confirmed",
+        "orderType": "cart",
+        "paymentDate": "2025-08-06T12:13:09.061Z",
+        "paymentMethod": "vnpay",
+        "paymentStatus": "completed",
+        "status": "success",
+        "totalItems": 3,
+        "totalOriginal": 185000,
+        "totalPrice": 120000,
+        "transactionId": "15119590",
+        "updatedAt": "2025-08-06T12:13:09.061Z",
+        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3",
+        "vnpayResponse": {
+          "vnp_Amount": "10800000",
+          "vnp_BankCode": "NCB",
+          "vnp_BankTranNo": "VNP15119590",
+          "vnp_CardType": "ATM",
+          "vnp_OrderInfo": "Thanh toan gio hang 3 san pham",
+          "vnp_PayDate": "20250806191410",
+          "vnp_ResponseCode": "00",
+          "vnp_SecureHash": "9e0717c888df019045a01ea1548da74fbc394a0b868b6508daeaeab4ace1481e4f75c8cc0c759539621eba7649deb14d7036d134b275bcdbd7cef4d61ae77e0c",
+          "vnp_TmnCode": "2Q01AVYB",
+          "vnp_TransactionNo": "15119590",
+          "vnp_TransactionStatus": "00",
+          "vnp_TxnRef": "WEEOLQK5"
+        }
+      },
+      "ORDER_1754482419947_xb891ge4w": {
+        "activatedAt": "2025-08-06T12:14:05.340Z",
+        "cartItems": [
+          {
+            "added_at": "2025-08-06T12:13:34.084Z",
+            "author": "Nhiều tác giả",
+            "category_code": "TNB002",
+            "category_name": "Featured Stories",
+            "cover_image": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
+            "description": "Tuyển tập những câu chuyện cổ tích dân gian Việt Nam được yêu thích nhất như: Tấm Cám, Thạch Sanh, Sọ Dừa, Cây Khế... Những câu chuyện mang đậm bản sắc văn hóa Việt Nam với bài học về đạo đức và nhân cách.",
+            "genre": "Cổ tích",
+            "image": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
+            "is_featured": true,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "",
+            "language": "Vietnamese",
+            "original_price": 75000,
+            "pages": 0,
+            "price": 50000,
+            "publish_date": "2023-10-15",
+            "publisher": "Chưa có thông tin",
+            "quantity": 1,
+            "rating": 4.7,
+            "story_id": "story_002",
+            "tags": [
+              "cổ tích",
+              "dân gian",
+              "Việt Nam",
+              "thiếu nhi",
+              "Tấm Cám",
+              "Thạch Sanh"
+            ],
+            "title": "Truyện Cổ Tích Việt Nam",
+            "type": "story"
+          }
+        ],
+        "createdAt": "2025-08-06T12:13:39.947Z",
+        "customerAddress": "111111111",
+        "customerEmail": "phamhongquan9117@gmail.com",
+        "customerName": "Quân Phạm",
+        "customerPhone": "111111111",
+        "orderId": "ORDER_1754482419947_xb891ge4w",
+        "orderStatus": "confirmed",
+        "orderType": "cart",
+        "paymentDate": "2025-08-06T12:14:05.340Z",
+        "paymentMethod": "vnpay",
+        "paymentStatus": "completed",
+        "status": "success",
+        "totalItems": 1,
+        "totalOriginal": 75000,
+        "totalPrice": 50000,
+        "transactionId": "15119591",
+        "updatedAt": "2025-08-06T12:14:05.340Z",
+        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3",
+        "vnpayResponse": {
+          "vnp_Amount": "5000000",
+          "vnp_BankCode": "NCB",
+          "vnp_BankTranNo": "VNP15119591",
+          "vnp_CardType": "ATM",
+          "vnp_OrderInfo": "Thanh toan gio hang 1 san pham",
+          "vnp_PayDate": "20250806191506",
+          "vnp_ResponseCode": "00",
+          "vnp_SecureHash": "f684485ee3765cbe50859d7690fd40b69584424dbe8b86d9d806de0005751bb29ddeaa6fa8f6ed5b84bd964956e1fe547f6f52f2ccbf9410a6f07da099972c8f",
+          "vnp_TmnCode": "2Q01AVYB",
+          "vnp_TransactionNo": "15119591",
+          "vnp_TransactionStatus": "00",
+          "vnp_TxnRef": "B891GE4W"
+        }
       }
     }
   },
   "users": {
     "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
+      "bookReadingHistory": {
+        "book_004": {
+          "bookAuthor": "J.K. Rowling",
+          "bookCover": "images/books/img-04.jpg",
+          "bookId": "book_004",
+          "bookTitle": "Harry Potter và Hòn đá Phù thủy",
+          "isCurrentlyReading": false,
+          "lastReadTime": 1754493694384,
+          "readingProgress": 51,
+          "readingTime": 4,
+          "startTime": 1754493689743,
+          "totalWords": 792
+        }
+      },
       "profile": {
         "createdAt": "2025-08-05T08:19:43.980Z",
         "displayName": "Quân Phạm",
         "email": "phamhongquan9117@gmail.com",
-        "lastUpdated": "2025-08-06T06:34:34.450Z",
+        "lastUpdated": "2025-08-06T12:06:56.402Z",
         "membership": {
           "endDate": "2025-11-06T06:34:34.354Z",
           "features": [
@@ -1404,36 +1700,41 @@
           "startDate": "2025-08-06T06:34:34.354Z",
           "type": "basic"
         },
+        "orders": {
+          "lastOrderDate": "2025-08-06T12:06:56.310Z",
+          "lastOrderId": "ORD_1754482016310_GI83FO977",
+          "orderHistory": [
+            "ORD_1754481644793_GXDW15H2K",
+            "ORD_1754481804780_M709L31LK",
+            "ORD_1754482016310_GI83FO977"
+          ],
+          "totalOrders": 3
+        },
         "personalInfo": {
-          "address": "11",
+          "address": "111111111",
           "dateOfBirth": "01/01/1900",
           "fullName": "Quân Phạm",
-          "gender": "Nữ",
-          "phone": "11",
+          "gender": "KhácTất cảTất cảTất cảTất cảTất cảTất cả",
+          "phone": "111111111",
           "userId": "UVZ8L9EPFO",
           "username": "phamhongquan9117"
         },
         "photoURL": "https://res.cloudinary.com/dvcebine7/image/upload/v1754384811/h58yymy2wotwvrvkvvqr.jpg",
         "uid": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
-      }
-    },
-    "YpWN3bXOouP7bqiBxhCd9yxs1Xc2": {
-      "profile": {
-        "createdAt": "2025-08-06T04:27:27.953Z",
-        "displayName": "jim",
-        "email": "quanpham4298@gmail.com",
-        "lastUpdated": "2025-08-06T04:27:27.953Z",
-        "personalInfo": {
-          "address": "",
-          "dateOfBirth": "",
-          "fullName": "jim",
-          "gender": "Khác",
-          "phone": "",
-          "userId": "UPLFL5CHJN",
-          "username": "quanpham4298"
-        },
-        "photoURL": "",
-        "uid": "YpWN3bXOouP7bqiBxhCd9yxs1Xc2"
+      },
+      "storyReadingHistory": {
+        "story_002": {
+          "isCurrentlyReading": false,
+          "lastReadTime": 1754493695700,
+          "readingProgress": 12,
+          "readingTime": 61,
+          "startTime": 1754493634071,
+          "storyAuthor": "Nhiều tác giả",
+          "storyCover": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
+          "storyId": "story_002",
+          "storyTitle": "Truyện Cổ Tích Việt Nam",
+          "totalWords": 628
+        }
       }
     }
   }

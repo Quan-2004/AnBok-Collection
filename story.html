@@ -7092,13 +7092,7 @@
 										</a>
 									</div>
 
-									<!-- Membership Button -->
-									<div class="tg-membership-btn">
-										<a href="menbership.html" style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #4A6366; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);">
-											<i class="fa fa-crown"></i>
-											<span>Hội viên VIP</span>
-										</a>
-									</div>
+
 								</div>
 							</nav>
 						</div>
@@ -9851,42 +9845,114 @@
 
 		// Function to get button text and action for story
 		async function getStoryButtonInfo(story) {
-    // Check if story is member-only
-    if (story.is_member_only) {
-        const userMembership = await checkUserMembership();
-        if (userMembership.hasMembership) {
-            return {
-                text: 'Thêm vào giỏ',
-                action: 'addToCart',
-                icon: 'shopping-cart',
-                style: 'primary'
-            };
-        } else {
-            return {
-                text: 'Mua gói hội viên',
-                action: 'buyMembership',
-                icon: 'crown',
-                style: 'membership'
-            };
-        }
-    }
-    // For free stories
-    if (story.is_free) {
-        return {
-            text: 'Đọc ngay',
-            action: 'readBook',
-            icon: 'play',
-            style: 'primary'
-        };
-    }
-    // For regular stories
-    return {
-        text: 'Thêm vào giỏ',
-        action: 'addToCart',
-        icon: 'shopping-cart',
-        style: 'primary'
-    };
-}
+			try {
+				const user = JSON.parse(localStorage.getItem('user'));
+				if (!user || !user.uid) {
+					// Not logged in - show login button
+					return {
+						text: 'Đăng nhập để mua',
+						action: 'login',
+						icon: 'sign-in',
+						style: 'login'
+					};
+				}
+
+				// Check if user has purchased this story
+				const hasPurchased = await checkIfUserPurchasedStory(user.uid, story.story_id);
+				if (hasPurchased) {
+					return {
+						text: 'Đọc ngay',
+						action: 'readBook',
+						icon: 'book',
+						style: 'purchased'
+					};
+				}
+
+				// Check if story is member-only
+				if (story.is_member_only) {
+					const userMembership = await checkUserMembership();
+					if (userMembership.hasMembership) {
+						return {
+							text: 'Thêm vào giỏ',
+							action: 'addToCart',
+							icon: 'shopping-cart',
+							style: 'primary'
+						};
+					} else {
+						return {
+							text: 'Mua gói hội viên',
+							action: 'buyMembership',
+							icon: 'crown',
+							style: 'membership'
+						};
+					}
+				}
+				// For free stories
+				if (story.is_free) {
+					return {
+						text: 'Đọc ngay',
+						action: 'readBook',
+						icon: 'play',
+						style: 'primary'
+					};
+				}
+				// For regular stories
+				return {
+					text: 'Thêm vào giỏ',
+					action: 'addToCart',
+					icon: 'shopping-cart',
+					style: 'primary'
+				};
+			} catch (error) {
+				console.error('Error getting story button info:', error);
+				// Fallback to default
+				return {
+					text: 'Thêm vào giỏ',
+					action: 'addToCart',
+					icon: 'shopping-cart',
+					style: 'primary'
+				};
+			}
+		}
+
+		// Check if user has purchased a specific story
+		async function checkIfUserPurchasedStory(userId, storyId) {
+			try {
+				const ordersRef = window.firebaseRef(window.firebase.database(), `orders/${userId}`);
+				const ordersSnapshot = await window.firebaseGet(ordersRef);
+				
+				if (!ordersSnapshot.exists()) {
+					return false;
+				}
+
+				const orders = ordersSnapshot.val();
+				
+				// Check all orders for this user
+				for (const orderKey in orders) {
+					const order = orders[orderKey];
+					
+					// Check if order is successful
+					if (order.status === 'success' && order.paymentStatus === 'completed') {
+						
+						// Check cart items in the order
+						if (order.cartItems && Array.isArray(order.cartItems)) {
+							for (const item of order.cartItems) {
+								// Check if this story is in the purchased items
+								if (item.story_id === storyId || item.id === storyId) {
+									console.log(`User has purchased story ${storyId} in order ${orderKey}`);
+									return true;
+								}
+							}
+						}
+					}
+				}
+				
+				return false;
+			} catch (error) {
+				console.error('Error checking if user purchased story:', error);
+				return false;
+			}
+		}
 
 		// Function to get stories by filter with membership check
 		async function getStoriesByFilter(filter) {
@@ -11235,10 +11301,26 @@
 				return;
 			}
 			
+			// Tính tổng tiền giỏ hàng
+			const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+			const totalOriginal = cart.reduce((sum, item) => sum + (item.original_price * item.quantity), 0);
+			
+			// Tạo dữ liệu giỏ hàng để truyền
+			const cartData = {
+				items: cart,
+				totalPrice: totalPrice,
+				totalOriginal: totalOriginal,
+				totalItems: cart.reduce((sum, item) => sum + item.quantity, 0),
+				timestamp: new Date().toISOString()
+			};
+			
+			// Lưu dữ liệu giỏ hàng vào sessionStorage để truyền sang checkout.html
+			sessionStorage.setItem('checkoutCart', JSON.stringify(cartData));
+			
 			// Chuyển đến trang thanh toán
 			showNotification('Đang chuyển đến trang thanh toán...', 'info');
 			setTimeout(() => {
-				window.location.href = 'checkout.html';
+				window.location.href = 'checkout.html?source=cart';
 			}, 1000);
 		};
 

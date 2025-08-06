@@ -871,10 +871,10 @@
             try {
                 console.log('Loading story content for ID:', bookId);
                 
-                // Search for story in all stories
+                // First search in Stories collection
                 const storiesRef = window.firebaseRef(window.firebase.database(), 'Stories');
-                const snapshot = await window.firebaseGet(storiesRef);
-                const allStories = snapshot.val();
+                const storiesSnapshot = await window.firebaseGet(storiesRef);
+                const allStories = storiesSnapshot.val();
                 
                 if (allStories) {
                     const storyEntries = Object.entries(allStories);
@@ -886,12 +886,37 @@
                         const story = foundStory[1];
                         console.log('Found story:', story);
                         displayBookContent(story);
-                    } else {
-                        showError('Không tìm thấy truyện');
+                        
+                        // Load reading progress and scroll to position
+                        await loadReadingProgressAndScroll(bookId);
+                        return;
                     }
-                } else {
-                    showError('Không có dữ liệu truyện');
                 }
+                
+                // If not found in Stories, search in Books collection
+                const booksRef = window.firebaseRef(window.firebase.database(), 'Books');
+                const booksSnapshot = await window.firebaseGet(booksRef);
+                const allBooks = booksSnapshot.val();
+                
+                if (allBooks) {
+                    const bookEntries = Object.entries(allBooks);
+                    const foundBook = bookEntries.find(([key, bookData]) => 
+                        bookData.book_id === bookId || key === bookId
+                    );
+                    
+                    if (foundBook) {
+                        const book = foundBook[1];
+                        console.log('Found book in Books collection:', book);
+                        displayBookContent(book);
+                        
+                        // Load reading progress and scroll to position
+                        await loadReadingProgressAndScroll(bookId);
+                        return;
+                    }
+                }
+                
+                showError('Không tìm thấy truyện');
+                
             } catch (error) {
                 console.error('Error loading story content:', error);
                 showError('Lỗi khi tải nội dung truyện');
@@ -1240,6 +1265,133 @@
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 document.body.classList.add('dark-theme');
+            }
+        }
+
+        // Load reading progress and scroll to saved position
+        async function loadReadingProgressAndScroll(bookId) {
+            try {
+                const user = window.firebase.auth().currentUser;
+                if (!user) return;
+
+                const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/storyReadingHistory/${bookId}`);
+                const snapshot = await window.firebaseGet(readingHistoryRef);
+                
+                if (snapshot.exists()) {
+                    const readingData = snapshot.val();
+                    console.log('Found reading history:', readingData);
+                    
+                    // Check if this is a "read again" action (completed story)
+                    const isReadAgain = readingData.readingProgress === 100;
+                    
+                    if (isReadAgain) {
+                        // Reset progress for completed stories
+                        await resetReadingProgress(bookId);
+                        
+                        // Show notification for read again
+                        Swal.fire({
+                            title: 'Đọc lại',
+                            text: 'Bắt đầu đọc lại từ đầu',
+                            icon: 'info',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end'
+                        });
+                        
+                        return;
+                    }
+                    
+                    // Update progress bar and stats for incomplete stories
+                    if (readingData.readingProgress) {
+                        const progressBar = document.getElementById('progressBar');
+                        const progressText = document.getElementById('readingProgress');
+                        
+                        if (progressBar) {
+                            progressBar.style.width = readingData.readingProgress + '%';
+                        }
+                        if (progressText) {
+                            progressText.textContent = readingData.readingProgress + '%';
+                        }
+                    }
+                    
+                    // Calculate scroll position based on progress
+                    if (readingData.readingProgress && readingData.readingProgress > 0) {
+                        setTimeout(() => {
+                            const docHeight = document.body.offsetHeight - window.innerHeight;
+                            const scrollPosition = (readingData.readingProgress / 100) * docHeight;
+                            
+                            window.scrollTo({
+                                top: scrollPosition,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Show notification
+                            Swal.fire({
+                                title: 'Tiếp tục đọc',
+                                text: `Đã khôi phục tiến độ ${readingData.readingProgress}%`,
+                                icon: 'info',
+                                timer: 2000,
+                                showConfirmButton: false,
+                                toast: true,
+                                position: 'top-end'
+                            });
+                        }, 1000); // Wait for content to render
+                    }
+                    
+                    // Restore reading time if available
+                    if (readingData.readingTime) {
+                        startTime = Date.now() - (readingData.readingTime * 1000);
+                        isReading = true;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading reading progress:', error);
+            }
+        }
+
+        // Reset reading progress for completed stories
+        async function resetReadingProgress(bookId) {
+            try {
+                const user = window.firebase.auth().currentUser;
+                if (!user) return;
+
+                const readingHistoryRef = window.firebaseRef(window.firebase.database(), `users/${user.uid}/storyReadingHistory/${bookId}`);
+                const bookData = window.currentBookData;
+                
+                // Reset to initial state
+                const resetData = {
+                    storyId: bookId,
+                    storyTitle: bookData.title,
+                    storyAuthor: bookData.author,
+                    storyCover: bookData.cover_image,
+                    startTime: Date.now(),
+                    lastReadTime: Date.now(),
+                    readingProgress: 0,
+                    totalWords: wordCount,
+                    readingTime: 0,
+                    isCurrentlyReading: true
+                };
+
+                await window.firebaseSet(readingHistoryRef, resetData);
+                
+                // Reset UI
+                const progressBar = document.getElementById('progressBar');
+                const progressText = document.getElementById('readingProgress');
+                const readingTimeText = document.getElementById('readingTime');
+                
+                if (progressBar) progressBar.style.width = '0%';
+                if (progressText) progressText.textContent = '0%';
+                if (readingTimeText) readingTimeText.textContent = '0:00';
+                
+                // Reset reading variables
+                startTime = Date.now();
+                isReading = true;
+                
+                console.log('Reading progress reset successfully');
+                
+            } catch (error) {
+                console.error('Error resetting reading progress:', error);
             }
         }
 

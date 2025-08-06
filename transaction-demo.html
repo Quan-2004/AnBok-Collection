@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .demo-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .demo-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .transaction-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .transaction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .transaction-id {
+            font-weight: bold;
+            color: #495057;
+        }
+        .transaction-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-success {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.2);
+        }
+        .transaction-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .transaction-detail {
+            display: flex;
+            flex-direction: column;
+        }
+        .transaction-label {
+            font-size: 12px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        .transaction-value {
+            font-size: 14px;
+            color: #495057;
+            font-weight: 600;
+        }
+        .transaction-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+        .transaction-date {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        .transaction-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #28a745;
+        }
+        .transaction-items {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        .cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .cart-item-summary {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+        .cart-item-summary img {
+            width: 50px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .cart-item-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cart-item-author {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .cart-item-price {
+            color: #4A6366;
+            font-weight: 600;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transaction History Demo</h1>
+        
+        <div class="demo-section">
+            <div class="demo-title">Membership Order</div>
+            <div class="transaction-item">
+                <div class="transaction-header">
+                    <div class="transaction-id">ORDER_1754461848362_fu2n6hwgp</div>
+                    <div class="transaction-status status-success">Thành công</div>
+                </div>
+                <div class="transaction-details">
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Loại đơn hàng</div>
+                        <div class="transaction-value">🎯 Gói hội viên</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Gói</div>
+                        <div class="transaction-value">Gói 3 Tháng</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Phương thức</div>
+                        <div class="transaction-value">VNPAY</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Thời hạn</div>
+                        <div class="transaction-value">3 tháng</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Trạng thái</div>
+                        <div class="transaction-value">Thành công</div>
+                    </div>
+                </div>
+                <div class="transaction-footer">
+                    <div class="transaction-date">06/08/2025 13:30:48</div>
+                    <div class="transaction-amount">288.000₫</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-title">Cart Order with Multiple Items</div>
+            <div class="transaction-item">
+                <div class="transaction-header">
+                    <div class="transaction-id">ORDER_1754482368044_fweeolqk5</div>
+                    <div class="transaction-status status-success">Thành công</div>
+                </div>
+                <div class="transaction-details">
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Loại đơn hàng</div>
+                        <div class="transaction-value">🛒 Đơn hàng sách/truyện</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Sản phẩm</div>
+                        <div class="transaction-value">Đơn hàng 3 sản phẩm</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Phương thức</div>
+                        <div class="transaction-value">VNPAY</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Số lượng</div>
+                        <div class="transaction-value">3 sản phẩm</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Trạng thái</div>
+                        <div class="transaction-value">Thành công</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Mã giảm giá</div>
+                        <div class="transaction-value">WELCOME10 (-12.000₫)</div>
+                    </div>
+                </div>
+                <div class="transaction-items">
+                    <div class="transaction-label">Chi tiết sản phẩm:</div>
+                    <div class="cart-items-list">
+                        <div class="cart-item-summary">
+                            <img src="https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png" alt="Truyện Cổ Tích Việt Nam">
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">Truyện Cổ Tích Việt Nam</div>
+                                <div class="cart-item-author">Nhiều tác giả</div>
+                                <div class="cart-item-price">50.000₫ x 1</div>
+                            </div>
+                        </div>
+                        <div class="cart-item-summary">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/b/_/b_a_o_.jpg" alt="Tuyển Tập Vũ Trọng Phụng">
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">Tuyển Tập Vũ Trọng Phụng</div>
+                                <div class="cart-item-author">Vũ Trọng Phụng</div>
+                                <div class="cart-item-price">30.000₫ x 1</div>
+                            </div>
+                        </div>
+                        <div class="cart-item-summary">
+                            <img src="https://bloganchoi.com/wp-content/uploads/2023/02/truyen-ngon-tinh-sung-h-hay-2023-7.jpg" alt="Truyện Ngắn Nguyễn Huy Thiệp">
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">Truyện Ngắn Nguyễn Huy Thiệp</div>
+                                <div class="cart-item-author">Nguyễn Huy Thiệp</div>
+                                <div class="cart-item-price">40.000₫ x 1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction-footer">
+                    <div class="transaction-date">06/08/2025 19:12:48</div>
+                    <div class="transaction-amount">108.000₫</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-title">Single Item Cart Order</div>
+            <div class="transaction-item">
+                <div class="transaction-header">
+                    <div class="transaction-id">ORDER_1754482419947_xb891ge4w</div>
+                    <div class="transaction-status status-success">Thành công</div>
+                </div>
+                <div class="transaction-details">
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Loại đơn hàng</div>
+                        <div class="transaction-value">🛒 Đơn hàng sách/truyện</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Sản phẩm</div>
+                        <div class="transaction-value">Đơn hàng 1 sản phẩm</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Phương thức</div>
+                        <div class="transaction-value">VNPAY</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Số lượng</div>
+                        <div class="transaction-value">1 sản phẩm</div>
+                    </div>
+                    <div class="transaction-detail">
+                        <div class="transaction-label">Trạng thái</div>
+                        <div class="transaction-value">Thành công</div>
+                    </div>
+                </div>
+                <div class="transaction-items">
+                    <div class="transaction-label">Chi tiết sản phẩm:</div>
+                    <div class="cart-items-list">
+                        <div class="cart-item-summary">
+                            <img src="https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png" alt="Truyện Cổ Tích Việt Nam">
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">Truyện Cổ Tích Việt Nam</div>
+                                <div class="cart-item-author">Nhiều tác giả</div>
+                                <div class="cart-item-price">50.000₫ x 1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction-footer">
+                    <div class="transaction-date">06/08/2025 19:13:39</div>
+                    <div class="transaction-amount">50.000₫</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

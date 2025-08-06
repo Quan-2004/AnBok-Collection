@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh Toán Gói Hội Viên - AnBok Collection</title>
+    <title>Thanh Toán Sách và Truyện - AnBok Collection</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -270,6 +270,343 @@
             padding: 1.5rem;
             border: 1px solid var(--border-color);
             margin-bottom: 1.5rem;
+        }
+
+        /* Cart Items Display */
+        .cart-items-container {
+            margin-top: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-primary);
+        }
+
+        /* Coupon Code Section */
+        .coupon-section {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .coupon-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .coupon-input-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .coupon-input {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .coupon-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .coupon-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .apply-coupon-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .apply-coupon-btn:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .apply-coupon-btn:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .coupon-message {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+
+        .coupon-success {
+            background: #f0fdf4;
+            color: var(--success-color);
+            border: 1px solid #bbf7d0;
+        }
+
+        .coupon-error {
+            background: #fef2f2;
+            color: var(--error-color);
+            border: 1px solid #fecaca;
+        }
+
+        .coupon-info {
+            background: #eff6ff;
+            color: var(--primary-color);
+            border: 1px solid #bfdbfe;
+        }
+
+        .applied-coupon {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background: var(--success-color);
+            color: white;
+            border-radius: var(--radius-sm);
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .applied-coupon .coupon-details {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remove-coupon-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+            transition: background-color 0.2s ease;
+        }
+
+        .remove-coupon-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Available Coupons */
+        .available-coupons {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .available-coupon-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.5rem;
+            background: var(--bg-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .available-coupon-item:hover {
+            border-color: var(--primary-color);
+            background: var(--bg-primary);
+        }
+
+        .available-coupon-info {
+            flex: 1;
+        }
+
+        .available-coupon-code {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .available-coupon-description {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .available-coupon-conditions {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .available-coupon-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.25rem;
+        }
+
+        .coupon-status-active {
+            color: var(--success-color);
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .coupon-status-usage {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 80px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 0.25rem 0;
+            line-height: 1.3;
+        }
+
+        .cart-item-author {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .cart-item-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-category,
+        .cart-item-rating,
+        .cart-item-type {
+            font-size: 0.7rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: var(--radius-sm);
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .cart-item-type {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .cart-item-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-current {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .cart-item-original {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .cart-item-quantity span {
+            background: var(--bg-tertiary);
+            padding: 0.125rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+        }
+
+        .cart-item-subtotal {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 0.25rem;
+        }
+
+        .cart-items-header {
+            background: var(--bg-tertiary);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .cart-items-empty {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .cart-items-empty i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
         }
 
         .package-header {
@@ -697,6 +1034,35 @@
                 text-align: center;
                 gap: 0.75rem;
             }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .cart-item-image {
+                width: 100%;
+                height: 120px;
+                align-self: center;
+            }
+
+            .cart-item-details {
+                width: 100%;
+            }
+
+            .cart-items-container {
+                max-height: 300px;
+            }
+
+            .coupon-input-group {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .apply-coupon-btn {
+                width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -796,7 +1162,7 @@
                     </div>
                     <div class="logo-text">
                         <h1>AnBok Collection</h1>
-                        <p>Thanh toán gói hội viên</p>
+                        <p>Thanh toán sách và truyện</p>
                     </div>
                 </a>
             </div>
@@ -840,8 +1206,8 @@
                                 <img src="images/LogoMember.png" alt="AnBok Collection Logo" style="width: 100%; height: 100%; object-fit: contain;">
                             </div>
                             <div class="package-info">
-                                <h3 id="packageName">Gói Hội Viên</h3>
-                                <p id="packageDuration">Thời hạn gói</p>
+                                <h3 id="packageName">Sách và Truyện</h3>
+                                <p id="packageDuration">Sản phẩm đã chọn</p>
                             </div>
                         </div>
                         
@@ -854,9 +1220,58 @@
                                 <span>Giảm giá:</span>
                                 <span id="discountAmount">0₫</span>
                             </div>
+                            <div class="price-row coupon-discount" id="couponDiscountRow" style="display: none;">
+                                <span>Mã giảm giá:</span>
+                                <span id="couponDiscountAmount">0₫</span>
+                            </div>
                             <div class="price-row total">
                                 <span>Tổng thanh toán:</span>
                                 <span id="packageTotalPrice">0₫</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Coupon Code Section -->
+                        <div class="coupon-section">
+                            <div class="coupon-header">
+                                <i class="fa fa-tag"></i>
+                                <span>Mã giảm giá</span>
+                                <button type="button" id="showAvailableCoupons" style="margin-left: auto; background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.75rem;">
+                                    <i class="fa fa-info-circle"></i> Xem mã có sẵn
+                                </button>
+                            </div>
+                            <div class="coupon-input-group">
+                                <input type="text" id="couponCode" class="coupon-input" placeholder="Nhập mã giảm giá" maxlength="20">
+                                <button type="button" id="applyCouponBtn" class="apply-coupon-btn">
+                                    Áp dụng
+                                </button>
+                            </div>
+                            <div id="couponMessage" class="coupon-message"></div>
+                            <div id="appliedCoupon" class="applied-coupon" style="display: none;">
+                                <div class="coupon-details">
+                                    <i class="fa fa-check-circle"></i>
+                                    <span id="appliedCouponCode"></span>
+                                    <span id="appliedCouponDiscount"></span>
+                                </div>
+                                <button type="button" class="remove-coupon-btn" id="removeCouponBtn">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                            <div id="availableCoupons" class="available-coupons" style="display: none; margin-top: 1rem; padding: 1rem; background: var(--bg-primary); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                <h5 style="margin-bottom: 0.75rem; color: var(--text-primary); font-size: 0.875rem;">Mã giảm giá có sẵn:</h5>
+                                <div id="availableCouponsList"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Cart Items Display -->
+                        <div class="cart-items-container" id="cartItemsContainer" style="display: none;">
+                            <div class="cart-items-header">
+                                <i class="fa fa-shopping-cart"></i> Chi tiết sản phẩm
+                                <button type="button" id="toggleCartDetails" style="float: right; background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.75rem;">
+                                    <i class="fa fa-chevron-up"></i> Ẩn
+                                </button>
+                            </div>
+                            <div id="cartItemsList">
+                                <!-- Cart items will be populated here -->
                             </div>
                         </div>
                     </div>
@@ -933,6 +1348,9 @@
                                     <span class="loading-spinner" style="display: none;"></span>
                                 </div>
                             </button>
+                            <button type="button" class="btn-secondary" id="backToCart" style="display: none; margin-top: 1rem; width: 100%; background: var(--secondary-color); color: white; border: none; padding: 0.75rem; border-radius: var(--radius-md); font-weight: 500; cursor: pointer;">
+                                <i class="fa fa-arrow-left"></i> Quay lại giỏ hàng
+                            </button>
                         </div>
                     </form>
                     
@@ -1005,17 +1423,44 @@
         const auth = getAuth(app);
         const db = database; // Add this line to match checkout.html
 
-        // Get package details from URL parameters
-        function getPackageDetails() {
+        // Get product details from URL parameters or cart
+        function getProductDetails() {
             const urlParams = new URLSearchParams(window.location.search);
-            const packageId = urlParams.get('package');
+            const source = urlParams.get('source');
             
-            if (!packageId) {
-                showError('Không tìm thấy thông tin gói hội viên');
+            // Nếu đến từ giỏ hàng
+            if (source === 'cart') {
+                const cartData = sessionStorage.getItem('checkoutCart');
+                if (cartData) {
+                    try {
+                        const cart = JSON.parse(cartData);
+                        return { 
+                            type: 'cart', 
+                            cartData: cart,
+                            productId: 'cart_' + Date.now(),
+                            productType: 'cart'
+                        };
+                    } catch (error) {
+                        console.error('Error parsing cart data:', error);
+                        showError('Dữ liệu giỏ hàng không hợp lệ');
+                        return null;
+                    }
+                } else {
+                    showError('Không tìm thấy dữ liệu giỏ hàng');
+                    return null;
+                }
+            }
+            
+            // Nếu đến từ sản phẩm đơn lẻ
+            const productId = urlParams.get('product') || urlParams.get('package');
+            const productType = urlParams.get('type') || 'book'; // book or story
+            
+            if (!productId) {
+                showError('Không tìm thấy thông tin sản phẩm');
                 return null;
             }
             
-            return packageId;
+            return { productId, productType, type: 'single' };
         }
 
         // Load user information
@@ -1083,44 +1528,124 @@
             }
         }
 
-        // Load package information
-        async function loadPackageInfo() {
-            const packageId = getPackageDetails();
-            if (!packageId) return;
+        // Load product information
+        async function loadProductInfo() {
+            const productDetails = getProductDetails();
+            if (!productDetails) return;
 
             try {
-                const packagesRef = ref(database, 'MembershipPackages');
-                const snapshot = await get(packagesRef);
+                // Nếu là giỏ hàng
+                if (productDetails.type === 'cart') {
+                    displayCartInfo(productDetails.cartData);
+                    return productDetails.cartData;
+                }
+                
+                // Nếu là sản phẩm đơn lẻ
+                const { productId, productType } = productDetails;
+                const collectionRef = ref(database, productType === 'story' ? 'Stories' : 'Books');
+                const snapshot = await get(collectionRef);
                 
                 if (snapshot.exists()) {
-                    const packages = snapshot.val();
-                    let pkg = null;
+                    const products = snapshot.val();
+                    let product = null;
                     
-                    // Find package by package_id or by key
-                    for (const key in packages) {
-                        if (packages[key].package_id === packageId || key === packageId) {
-                            pkg = packages[key];
+                    // Find product by book_id/story_id or by key
+                    for (const key in products) {
+                        const currentProduct = products[key];
+                        const idField = productType === 'story' ? 'story_id' : 'book_id';
+                        if (currentProduct[idField] === productId || key === productId) {
+                            product = currentProduct;
                             break;
                         }
                     }
                     
-                    if (pkg && pkg.is_active) {
-                        displayPackageInfo(pkg);
-                        return pkg;
+                    if (product) {
+                        displayProductInfo(product, productType);
+                        return product;
                     } else {
-                        showError('Gói hội viên không tồn tại hoặc đã bị vô hiệu hóa');
+                        showError('Sản phẩm không tồn tại');
                     }
                 } else {
-                    showError('Không thể tải thông tin gói hội viên');
+                    showError('Không thể tải thông tin sản phẩm');
                 }
             } catch (error) {
-                console.error('Error loading package:', error);
-                showError('Có lỗi xảy ra khi tải thông tin gói hội viên');
+                console.error('Error loading product:', error);
+                showError('Có lỗi xảy ra khi tải thông tin sản phẩm');
             }
         }
 
-        // Display package information
-        function displayPackageInfo(pkg) {
+        // Display cart information
+        function displayCartInfo(cartData) {
+            const packageNameEl = document.getElementById('packageName');
+            const packageDurationEl = document.getElementById('packageDuration');
+            const originalPriceEl = document.getElementById('originalPrice');
+            const totalPriceEl = document.getElementById('packageTotalPrice');
+            const discountAmountEl = document.getElementById('discountAmount');
+            const discountRowEl = document.getElementById('discountRow');
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartItemsList = document.getElementById('cartItemsList');
+            
+            if (packageNameEl) packageNameEl.textContent = `Giỏ hàng (${cartData.totalItems} sản phẩm)`;
+            if (packageDurationEl) packageDurationEl.textContent = `${cartData.items.length} loại sản phẩm khác nhau`;
+            
+            // Store original total price for coupon calculations
+            originalTotalPrice = cartData.totalPrice;
+            
+            // Display prices
+            if (originalPriceEl) originalPriceEl.textContent = formatPrice(cartData.totalOriginal);
+            if (totalPriceEl) totalPriceEl.textContent = formatPrice(cartData.totalPrice);
+            
+            // Show discount if applicable
+            if (cartData.totalOriginal > cartData.totalPrice) {
+                const discountAmount = cartData.totalOriginal - cartData.totalPrice;
+                if (discountAmountEl) discountAmountEl.textContent = formatPrice(discountAmount);
+                if (discountRowEl) discountRowEl.style.display = 'flex';
+            }
+            
+            // Display cart items
+            if (cartItemsContainer && cartItemsList && cartData.items && cartData.items.length > 0) {
+                cartItemsContainer.style.display = 'block';
+                
+                cartItemsList.innerHTML = cartData.items.map(item => {
+                    const itemSubtotal = item.price * item.quantity;
+                    const itemOriginalSubtotal = item.original_price * item.quantity;
+                    
+                    return `
+                        <div class="cart-item">
+                            <div class="cart-item-image">
+                                <img src="${item.cover_image || item.image}" alt="${item.title}" 
+                                     onerror="this.src='${item.type === 'story' ? 'images/stories/default-story.jpg' : 'images/books/default-book.jpg'}'">
+                            </div>
+                            <div class="cart-item-details">
+                                <h4 class="cart-item-title">${item.title}</h4>
+                                <p class="cart-item-author">${item.author}</p>
+                                <div class="cart-item-info">
+                                    ${item.category_name ? `<span class="cart-item-category">${item.category_name}</span>` : ''}
+                                    ${item.rating ? `<span class="cart-item-rating">★ ${item.rating}</span>` : ''}
+                                    <span class="cart-item-type">${item.type === 'story' ? '📖 Truyện' : '📚 Sách'}</span>
+                                </div>
+                                <div class="cart-item-price">
+                                    <span class="cart-item-current">${formatPrice(item.price)}</span>
+                                    ${item.original_price > item.price ? `<span class="cart-item-original">${formatPrice(item.original_price)}</span>` : ''}
+                                </div>
+                                <div class="cart-item-quantity">
+                                    Số lượng: <span>${item.quantity}</span>
+                                </div>
+                                <div class="cart-item-subtotal">
+                                    Tổng: ${formatPrice(itemSubtotal)}
+                                    ${itemOriginalSubtotal > itemSubtotal ? `<span style="color: var(--text-muted); text-decoration: line-through; margin-left: 0.5rem;">${formatPrice(itemOriginalSubtotal)}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else if (cartItemsContainer) {
+                cartItemsContainer.style.display = 'none';
+            }
+        }
+
+        // Display product information
+        function displayProductInfo(product, productType) {
             const packageNameEl = document.getElementById('packageName');
             const packageDurationEl = document.getElementById('packageDuration');
             const packageIconEl = document.getElementById('packageIcon');
@@ -1129,22 +1654,26 @@
             const discountAmountEl = document.getElementById('discountAmount');
             const discountRowEl = document.getElementById('discountRow');
             
-            if (packageNameEl) packageNameEl.textContent = pkg.package_name;
+            if (packageNameEl) packageNameEl.textContent = product.title;
             if (packageDurationEl) packageDurationEl.textContent = 
-                pkg.duration_months === 1 ? '1 tháng' : 
-                pkg.duration_months === 12 ? '1 năm' : 
-                pkg.duration_months + ' tháng';
+                productType === 'story' ? `${product.chapters} chương` : 
+                `${product.pages} trang`;
             
-            // Set icon based on package
-            if (packageIconEl) packageIconEl.className = 'fa ' + pkg.icon;
+            // Set icon based on product type
+            if (packageIconEl) {
+                packageIconEl.className = productType === 'story' ? 'fa fa-book-open' : 'fa fa-book';
+            }
+            
+            // Store original total price for coupon calculations
+            originalTotalPrice = product.price || 0;
             
             // Display prices
-            if (originalPriceEl) originalPriceEl.textContent = formatPrice(pkg.original_price);
-            if (totalPriceEl) totalPriceEl.textContent = formatPrice(pkg.price);
+            if (originalPriceEl) originalPriceEl.textContent = formatPrice(product.original_price || 0);
+            if (totalPriceEl) totalPriceEl.textContent = formatPrice(product.price || 0);
             
             // Show discount if applicable
-            if (pkg.discount_percentage > 0) {
-                const discountAmount = pkg.original_price - pkg.price;
+            if (product.original_price && product.price && product.original_price > product.price) {
+                const discountAmount = product.original_price - product.price;
                 if (discountAmountEl) discountAmountEl.textContent = formatPrice(discountAmount);
                 if (discountRowEl) discountRowEl.style.display = 'flex';
             }
@@ -1153,6 +1682,295 @@
         // Format price
         function formatPrice(price) {
             return price.toLocaleString('vi-VN') + '₫';
+        }
+
+        // Coupon management
+        let appliedCoupon = null;
+        let originalTotalPrice = 0;
+
+        // Coupon codes will be loaded dynamically from Firebase - NO STATIC DATA
+        let validCoupons = {};
+
+        // Load coupons from Firebase
+        async function loadCouponsFromFirebase() {
+            try {
+                const couponsRef = ref(database, 'coupons');
+                const snapshot = await get(couponsRef);
+                
+                if (snapshot.exists()) {
+                    validCoupons = snapshot.val();
+                    console.log('✅ Coupons loaded from Firebase:', validCoupons);
+                    
+                    // Log active coupons for debugging
+                    const activeCoupons = Object.keys(validCoupons).filter(code => 
+                        validCoupons[code].isActive && 
+                        new Date() >= new Date(validCoupons[code].validFrom) &&
+                        new Date() <= new Date(validCoupons[code].validTo)
+                    );
+                    console.log('🎯 Active coupons:', activeCoupons);
+                    
+                } else {
+                    console.log('⚠️ No coupons found in Firebase - no coupons available');
+                    validCoupons = {}; // Empty object - no static fallback
+                }
+            } catch (error) {
+                console.error('❌ Error loading coupons from Firebase:', error);
+                validCoupons = {}; // Empty object - no static fallback
+            }
+        }
+
+        // Apply coupon function
+        window.applyCoupon = function() {
+            const couponCode = document.getElementById('couponCode').value.trim().toUpperCase();
+            const couponMessage = document.getElementById('couponMessage');
+            const appliedCouponDiv = document.getElementById('appliedCoupon');
+            const couponDiscountRow = document.getElementById('couponDiscountRow');
+            const couponDiscountAmount = document.getElementById('couponDiscountAmount');
+            const appliedCouponCode = document.getElementById('appliedCouponCode');
+            const appliedCouponDiscount = document.getElementById('appliedCouponDiscount');
+
+            // Clear previous message
+            couponMessage.style.display = 'none';
+            couponMessage.className = 'coupon-message';
+
+            if (!couponCode) {
+                showCouponMessage('Vui lòng nhập mã giảm giá', 'error');
+                return;
+            }
+
+            // Check if coupon is valid
+            const coupon = validCoupons[couponCode];
+            if (!coupon) {
+                if (Object.keys(validCoupons).length === 0) {
+                    showCouponMessage('Chưa có mã giảm giá nào được cấu hình', 'error');
+                } else {
+                    showCouponMessage('Mã giảm giá không hợp lệ', 'error');
+                }
+                return;
+            }
+
+            // Check if coupon is active
+            if (!coupon.isActive) {
+                showCouponMessage('Mã giảm giá đã bị vô hiệu hóa', 'error');
+                return;
+            }
+
+            // Check validity period
+            const now = new Date();
+            const validFrom = new Date(coupon.validFrom);
+            const validTo = new Date(coupon.validTo);
+            
+            if (now < validFrom || now > validTo) {
+                showCouponMessage('Mã giảm giá không còn hiệu lực', 'error');
+                return;
+            }
+
+            // Check usage limit
+            if (coupon.currentUses >= coupon.maxUses) {
+                showCouponMessage('Mã giảm giá đã hết lượt sử dụng', 'error');
+                return;
+            }
+
+            // Check minimum amount
+            if (originalTotalPrice < coupon.minAmount) {
+                showCouponMessage(`Mã giảm giá chỉ áp dụng cho đơn hàng từ ${formatPrice(coupon.minAmount)}`, 'error');
+                return;
+            }
+
+            // Check if coupon already applied
+            if (appliedCoupon && appliedCoupon.code === couponCode) {
+                showCouponMessage('Mã giảm giá đã được áp dụng', 'info');
+                return;
+            }
+
+            // Check applicable products (if cart)
+            const productDetails = getProductDetails();
+            if (productDetails.type === 'cart' && coupon.applicableProducts && coupon.applicableProducts.length > 0) {
+                const cartItems = productDetails.cartData.items;
+                const hasApplicableProduct = cartItems.some(item => {
+                    if (coupon.applicableProducts.includes('all')) return true;
+                    if (coupon.applicableProducts.includes('book') && item.type === 'book') return true;
+                    if (coupon.applicableProducts.includes('story') && item.type === 'story') return true;
+                    return coupon.applicableProducts.includes(item.category_code);
+                });
+                
+                if (!hasApplicableProduct) {
+                    showCouponMessage('Mã giảm giá không áp dụng cho sản phẩm trong giỏ hàng', 'error');
+                    return;
+                }
+            }
+
+            // Calculate discount
+            let discountAmount = 0;
+            if (coupon.type === 'percentage') {
+                discountAmount = Math.round(originalTotalPrice * coupon.discount / 100);
+                // Apply max discount limit for percentage coupons
+                if (coupon.maxDiscount) {
+                    discountAmount = Math.min(discountAmount, coupon.maxDiscount);
+                }
+            } else {
+                discountAmount = Math.min(coupon.discount, originalTotalPrice);
+            }
+
+            // Apply coupon
+            appliedCoupon = {
+                code: couponCode,
+                discount: discountAmount,
+                type: coupon.type,
+                description: coupon.description,
+                originalDiscount: coupon.discount,
+                maxDiscount: coupon.maxDiscount
+            };
+
+            // Update display
+            appliedCouponDiv.style.display = 'flex';
+            appliedCouponCode.textContent = couponCode;
+            appliedCouponDiscount.textContent = `-${formatPrice(discountAmount)}`;
+            
+            couponDiscountRow.style.display = 'flex';
+            couponDiscountAmount.textContent = `-${formatPrice(discountAmount)}`;
+
+            // Update total price
+            updateTotalPrice();
+
+            // Clear input
+            document.getElementById('couponCode').value = '';
+
+            showCouponMessage(`Áp dụng thành công mã ${couponCode}! ${coupon.description}`, 'success');
+        };
+
+        // Remove coupon function
+        window.removeCoupon = function() {
+            appliedCoupon = null;
+            
+            // Hide applied coupon display
+            document.getElementById('appliedCoupon').style.display = 'none';
+            document.getElementById('couponDiscountRow').style.display = 'none';
+            
+            // Update total price
+            updateTotalPrice();
+            
+            showCouponMessage('Đã xóa mã giảm giá', 'info');
+        };
+
+        // Show coupon message
+        function showCouponMessage(message, type) {
+            const couponMessage = document.getElementById('couponMessage');
+            couponMessage.textContent = message;
+            couponMessage.className = `coupon-message coupon-${type}`;
+            couponMessage.style.display = 'block';
+            
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+                couponMessage.style.display = 'none';
+            }, 3000);
+        }
+
+        // Update total price with coupon
+        function updateTotalPrice() {
+            const totalPriceEl = document.getElementById('packageTotalPrice');
+            if (!totalPriceEl) return;
+
+            let finalPrice = originalTotalPrice;
+            
+            // Apply coupon discount if exists
+            if (appliedCoupon) {
+                finalPrice -= appliedCoupon.discount;
+            }
+            
+            // Ensure price doesn't go below 0
+            finalPrice = Math.max(0, finalPrice);
+            
+            totalPriceEl.textContent = formatPrice(finalPrice);
+        }
+
+        // Show available coupons
+        window.showAvailableCoupons = function() {
+            const availableCouponsDiv = document.getElementById('availableCoupons');
+            const availableCouponsList = document.getElementById('availableCouponsList');
+            const showButton = document.getElementById('showAvailableCoupons');
+            
+            if (!availableCouponsDiv || !availableCouponsList) return;
+            
+            const isVisible = availableCouponsDiv.style.display !== 'none';
+            
+            if (isVisible) {
+                // Hide available coupons
+                availableCouponsDiv.style.display = 'none';
+                showButton.innerHTML = '<i class="fa fa-info-circle"></i> Xem mã có sẵn';
+            } else {
+                // Show available coupons
+                const now = new Date();
+                const activeCoupons = Object.keys(validCoupons).filter(code => {
+                    const coupon = validCoupons[code];
+                    return coupon.isActive && 
+                           now >= new Date(coupon.validFrom) &&
+                           now <= new Date(coupon.validTo) &&
+                           coupon.currentUses < coupon.maxUses;
+                });
+                
+                if (activeCoupons.length === 0) {
+                    availableCouponsList.innerHTML = '<p style="color: var(--text-muted); font-size: 0.875rem; text-align: center;">Hiện tại không có mã giảm giá nào khả dụng</p>';
+                } else if (Object.keys(validCoupons).length === 0) {
+                    availableCouponsList.innerHTML = '<p style="color: var(--text-muted); font-size: 0.875rem; text-align: center;">Chưa có mã giảm giá nào được cấu hình</p>';
+                } else {
+                    availableCouponsList.innerHTML = activeCoupons.map(code => {
+                        const coupon = validCoupons[code];
+                        const usagePercentage = Math.round((coupon.currentUses / coupon.maxUses) * 100);
+                        
+                        return `
+                            <div class="available-coupon-item">
+                                <div class="available-coupon-info">
+                                    <div class="available-coupon-code">${coupon.code}</div>
+                                    <div class="available-coupon-description">${coupon.description}</div>
+                                    <div class="available-coupon-conditions">
+                                        Tối thiểu: ${formatPrice(coupon.minAmount)} | 
+                                        ${coupon.type === 'percentage' ? `Giảm ${coupon.discount}%` : `Giảm ${formatPrice(coupon.discount)}`}
+                                        ${coupon.maxDiscount ? ` | Tối đa: ${formatPrice(coupon.maxDiscount)}` : ''}
+                                    </div>
+                                </div>
+                                <div class="available-coupon-status">
+                                    <div class="coupon-status-active">✅ Khả dụng</div>
+                                    <div class="coupon-status-usage">${coupon.currentUses}/${coupon.maxUses} (${usagePercentage}%)</div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+                
+                availableCouponsDiv.style.display = 'block';
+                showButton.innerHTML = '<i class="fa fa-eye-slash"></i> Ẩn mã có sẵn';
+            }
+        };
+
+        // Update coupon usage count in Firebase
+        async function updateCouponUsage(couponCode) {
+            try {
+                const couponRef = ref(database, `coupons/${couponCode}`);
+                const snapshot = await get(couponRef);
+                
+                if (snapshot.exists()) {
+                    const coupon = snapshot.val();
+                    const updatedUses = (coupon.currentUses || 0) + 1;
+                    
+                    await set(couponRef, {
+                        ...coupon,
+                        currentUses: updatedUses,
+                        updatedAt: new Date().toISOString()
+                    });
+                    
+                    console.log(`✅ Coupon ${couponCode} usage updated to ${updatedUses}`);
+                    
+                    // Update local cache
+                    if (validCoupons[couponCode]) {
+                        validCoupons[couponCode].currentUses = updatedUses;
+                    }
+                } else {
+                    console.warn(`⚠️ Coupon ${couponCode} not found in Firebase`);
+                }
+            } catch (error) {
+                console.error('❌ Error updating coupon usage:', error);
+            }
         }
 
         // Select payment method
@@ -1186,7 +2004,7 @@
         }
 
         // Create order in database
-        async function createOrder(pkg, customerInfo) {
+        async function createOrder(productData, customerInfo) {
             try {
                 const user = auth.currentUser;
                 if (!user) {
@@ -1194,23 +2012,57 @@
                 }
 
                 const orderId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                const productDetails = getProductDetails();
                 
-                const orderData = {
-                    orderId: orderId,
-                    packageId: getPackageDetails(),
-                    packageName: pkg.package_name,
-                    packagePrice: pkg.price,
-                    packageDuration: pkg.duration_months,
-                    customerName: customerInfo.name,
-                    customerEmail: customerInfo.email,
-                    customerPhone: customerInfo.phone,
-                    customerAddress: customerInfo.address,
-                    paymentMethod: 'vnpay',
-                    status: 'pending',
-                    userId: user.uid,
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString()
-                };
+                let orderData;
+                
+                // Nếu là giỏ hàng
+                if (productDetails.type === 'cart') {
+                    orderData = {
+                        orderId: orderId,
+                        orderType: 'cart',
+                        cartItems: productData.items,
+                        totalItems: productData.totalItems,
+                        totalPrice: productData.totalPrice,
+                        totalOriginal: productData.totalOriginal,
+                        customerName: customerInfo.name,
+                        customerEmail: customerInfo.email,
+                        customerPhone: customerInfo.phone,
+                        customerAddress: customerInfo.address,
+                        paymentMethod: 'vnpay',
+                        status: 'pending',
+                        userId: user.uid,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    };
+                } else {
+                    // Nếu là sản phẩm đơn lẻ
+                    orderData = {
+                        orderId: orderId,
+                        orderType: 'single',
+                        productId: productDetails.productId,
+                        productName: productData.title,
+                        productPrice: productData.price,
+                        productType: productDetails.productType,
+                        customerName: customerInfo.name,
+                        customerEmail: customerInfo.email,
+                        customerPhone: customerInfo.phone,
+                        customerAddress: customerInfo.address,
+                        paymentMethod: 'vnpay',
+                        status: 'pending',
+                        userId: user.uid,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    };
+                }
+                
+                // Add coupon information if applied
+                if (appliedCoupon) {
+                    orderData.couponCode = appliedCoupon.code;
+                    orderData.couponDiscount = appliedCoupon.discount;
+                    orderData.couponType = appliedCoupon.type;
+                    orderData.finalPrice = originalTotalPrice - appliedCoupon.discount;
+                }
 
                 // Save order to Firebase under user's orders using orderId as key
                 const ordersRef = ref(database, `orders/${user.uid}/${orderData.orderId}`);
@@ -1223,12 +2075,13 @@
             }
         }
 
-        // VNPAY Payment Processing - Copy from checkout.html
+        // VNPAY Payment Processing
         async function processVNPayPayment(order, orderKey) {
             const vnp_TmnCode = "2Q01AVYB";
             const vnp_HashSecret = "U3I3A1Q4G3Z3MNNJ2NODFKA7G3CBU27P";
             const vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                            const vnp_ReturnUrl = window.location.origin + "/payment.html";
+                            const vnp_ReturnUrl = window.location.origin + "/checkout.html";
+            console.log('🔗 Return URL:', vnp_ReturnUrl);
 
             // Lấy địa chỉ IP của người dùng
             async function getClientIp() {
@@ -1247,6 +2100,16 @@
             console.log('OrderKey:', orderKey);
             console.log('TxnRef:', txnRef);
 
+            // Xác định thông tin thanh toán dựa trên loại đơn hàng
+            let orderInfo, orderAmount;
+            if (order.orderType === 'cart') {
+                orderInfo = `Thanh toan gio hang ${order.totalItems} san pham`;
+                orderAmount = order.finalPrice || order.totalPrice;
+            } else {
+                orderInfo = `Thanh toan sach va truyen ${order.productName}`;
+                orderAmount = order.finalPrice || order.productPrice;
+            }
+
             const vnp_Params = {
                 vnp_Version: '2.1.0',
                 vnp_Command: 'pay',
@@ -1254,9 +2117,9 @@
                 vnp_Locale: 'vn',
                 vnp_CurrCode: 'VND',
                 vnp_TxnRef: txnRef,
-                vnp_OrderInfo: `Thanh toan goi hoi vien ${order.packageName}`,
+                vnp_OrderInfo: orderInfo,
                 vnp_OrderType: 'other',
-                vnp_Amount: Math.round(order.packagePrice * 100),
+                vnp_Amount: Math.round(orderAmount * 100),
                 vnp_ReturnUrl: vnp_ReturnUrl,
                 vnp_IpAddr: await getClientIp(),
                 vnp_CreateDate: moment().format('YYYYMMDDHHmmss')
@@ -1355,21 +2218,28 @@
                     throw new Error('Số điện thoại không đúng định dạng. Vui lòng nhập số điện thoại 10-11 chữ số');
                 }
 
-                // Load package info
-                const pkg = await loadPackageInfo();
-                if (!pkg) {
-                    throw new Error('Không thể tải thông tin gói hội viên');
+                // Load product info
+                const product = await loadProductInfo();
+                if (!product) {
+                    throw new Error('Không thể tải thông tin sản phẩm');
                 }
 
-                // Validate package price
-                if (!pkg.price || pkg.price <= 0) {
-                    throw new Error('Giá gói hội viên không hợp lệ');
+                // Validate product price
+                const productDetails = getProductDetails();
+                if (productDetails.type === 'cart') {
+                    if (!product.totalPrice || product.totalPrice <= 0) {
+                        throw new Error('Tổng tiền giỏ hàng không hợp lệ');
+                    }
+                } else {
+                    if (!product.price || product.price <= 0) {
+                        throw new Error('Giá sản phẩm không hợp lệ');
+                    }
                 }
 
-                console.log('Package info:', pkg); // Debug log
+                console.log('Product info:', product); // Debug log
 
                 // Create order
-                const orderData = await createOrder(pkg, customerInfo);
+                const orderData = await createOrder(product, customerInfo);
 
                 console.log('Order created:', orderData); // Debug log
 
@@ -1442,7 +2312,7 @@
                     return; // Not a VNPAY response
                 }
 
-                console.log('Processing VNPAY response on payment.html');
+                console.log('Processing VNPAY response on checkout.html');
                 
                 const params = {};
                 for (const [key, value] of urlParams.entries()) {
@@ -1483,7 +2353,28 @@
                 if (responseCode === '00') {
                     // Payment successful
                     const order = await updateOrderStatus(txnRef, 'success', params);
-                    showSuccess('🎉 Thanh toán thành công! Gói hội viên đã được kích hoạt thành công.');
+                    showSuccess('🎉 Thanh toán thành công! Sản phẩm đã được đặt hàng thành công.');
+                    
+                    // Update coupon usage if applied
+                    if (appliedCoupon) {
+                        await updateCouponUsage(appliedCoupon.code);
+                    }
+                    
+                    // Nếu là giỏ hàng, xóa giỏ hàng sau khi thanh toán thành công
+                    const cartData = sessionStorage.getItem('checkoutCart');
+                    if (cartData) {
+                        try {
+                            const cart = JSON.parse(cartData);
+                            if (cart.items && cart.items.length > 0) {
+                                // Xóa giỏ hàng khỏi localStorage
+                                localStorage.removeItem('cart');
+                                sessionStorage.removeItem('checkoutCart');
+                                console.log('Cart cleared after successful payment');
+                            }
+                        } catch (error) {
+                            console.error('Error clearing cart:', error);
+                        }
+                    }
                     
                     // Update progress to step 3 (completed)
                     updateProgressSteps(2);
@@ -1579,9 +2470,16 @@
                         
                         if (status === 'success') {
                             updatedOrder.activatedAt = new Date().toISOString();
+                            updatedOrder.orderStatus = 'confirmed';
+                            updatedOrder.paymentStatus = 'completed';
+                            updatedOrder.transactionId = vnpResponse.vnp_TransactionNo || '';
+                            updatedOrder.paymentDate = new Date().toISOString();
+                            updatedOrder.vnpayResponse = vnpResponse;
                             
-                            // Create or update membership when payment is successful
-                            await createOrUpdateMembership(order, vnpResponse);
+                            // Update coupon usage if applicable
+                            if (order.couponCode) {
+                                await updateCouponUsage(order.couponCode);
+                            }
                         }
                         
                         await set(orderRef, updatedOrder);
@@ -1604,49 +2502,60 @@
             }
         }
 
-        // Create or update membership
-        async function createOrUpdateMembership(order, vnpResponse) {
+        // Create or update order
+        async function createOrUpdateOrder(order, vnpResponse) {
             try {
                 const user = auth.currentUser;
                 if (!user) {
                     throw new Error('Người dùng chưa đăng nhập');
                 }
 
-                const now = new Date();
-                const startDate = new Date();
-                const endDate = new Date();
-                endDate.setMonth(endDate.getMonth() + order.packageDuration);
+                console.log('🔍 Order data for createOrUpdateOrder:', order);
 
-                // Determine membership type based on package
-                let membershipType = 'basic';
-                let features = ['unlimited_books'];
+                const now = new Date();
+                const orderDate = new Date();
+                const estimatedDelivery = new Date();
+                estimatedDelivery.setDate(estimatedDelivery.getDate() + 3); // 3 ngày giao hàng
+
+                // Determine product type and delivery method
+                let productType = 'book';
+                let deliveryMethod = 'standard';
                 
-                if (order.packageName.includes('Premium') || order.packageName.includes('VIP')) {
-                    membershipType = 'premium';
-                    features = ['unlimited_books', 'ad_free', 'priority_support', 'exclusive_content'];
-                } else if (order.packageName.includes('VIP')) {
-                    membershipType = 'vip';
-                    features = ['unlimited_books', 'ad_free', 'priority_support', 'exclusive_content', 'personal_assistant'];
+                if (order.productName && (order.productName.includes('Truyện') || order.productName.includes('Comic'))) {
+                    productType = 'story';
+                    deliveryMethod = 'express';
+                } else if (order.productName && order.productName.includes('Ebook')) {
+                    productType = 'ebook';
+                    deliveryMethod = 'instant';
                 }
 
-                const membershipData = {
-                    membershipId: `MEM_${Date.now()}_${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+                // For cart orders, use cart-specific data
+                const orderData = {
+                    orderId: order.orderId || `ORD_${Date.now()}_${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
                     userId: user.uid,
-                    packageId: order.packageId,
-                    packageName: order.packageName,
-                    packageDuration: order.packageDuration,
-                    packagePrice: order.packagePrice,
-                    orderId: order.orderId,     
+                    productId: order.productId || 'cart_order', // Default for cart orders
+                    productName: order.productName || 'Giỏ hàng',
+                    productType: productType,
+                    productPrice: order.productPrice || order.totalPrice || 0,
+                    originalOrderId: order.orderId,     
                     
-                    // Membership details
-                    membershipType: membershipType,
-                    status: 'active',
-                    startDate: startDate.toISOString(),
-                    endDate: endDate.toISOString(),
-                    autoRenew: false,
+                    // Cart-specific data
+                    cartItems: order.cartItems || [],
+                    totalItems: order.totalItems || 0,
+                    totalPrice: order.totalPrice || 0,
+                    totalOriginal: order.totalOriginal || 0,
+                    couponCode: order.couponCode || null,
+                    couponDiscount: order.couponDiscount || 0,
+                    couponType: order.couponType || null,
+                    
+                    // Order details
+                    orderStatus: 'confirmed',
+                    orderDate: orderDate.toISOString(),
+                    estimatedDelivery: estimatedDelivery.toISOString(),
+                    deliveryMethod: deliveryMethod,
                     
                     // Payment information
-                    paymentMethod: order.paymentMethod,
+                    paymentMethod: order.paymentMethod || 'VNPAY',
                     transactionId: vnpResponse.vnp_TransactionNo || '',
                     paymentStatus: 'completed',
                     paymentDate: now.toISOString(),
@@ -1656,23 +2565,26 @@
                     updatedAt: now.toISOString(),
                     
                     // Additional information
-                    features: features,
-                    notes: `Gói hội viên ${order.packageName} - Thanh toán qua ${order.paymentMethod.toUpperCase()}`,
+                    deliveryAddress: order.customerAddress || '',
+                    notes: `Đơn hàng giỏ hàng - Thanh toán qua VNPAY`,
                     
                     // VNPAY response for reference
                     vnpayResponse: vnpResponse
                 };
 
-                // Save membership to Firebase
-                const membershipRef = ref(database, `Membership/${user.uid}`);
-                await set(membershipRef, membershipData);
+                // Debug orderData before saving
+                console.log('🔍 OrderData to save:', orderData);
+                
+                // Save order to Firebase
+                const orderRef = ref(database, `orders/${user.uid}/${orderData.orderId}`);
+                await set(orderRef, orderData);
 
-                console.log('Membership created/updated successfully:', membershipData);
+                console.log('Order created/updated successfully:', orderData);
                 
-                // Update user profile with membership status
-                await updateUserMembershipStatus(membershipData);
+                // Update user profile with order status
+                await updateUserOrderStatus(orderData);
                 
-                return membershipData;
+                return orderData;
                 
             } catch (error) {
                 console.error('Error creating/updating membership:', error);
@@ -1680,8 +2592,8 @@
             }
         }
 
-        // Update user profile with membership status
-        async function updateUserMembershipStatus(membershipData) {
+        // Update user profile with order status
+        async function updateUserOrderStatus(orderData) {
             try {
                 const user = auth.currentUser;
                 if (!user) {
@@ -1696,22 +2608,20 @@
                     currentProfile = profileSnapshot.val();
                 }
 
-                // Update membership information in user profile
+                // Update order information in user profile
                 const updatedProfile = {
                     ...currentProfile,
-                    membership: {
-                        isActive: true,
-                        type: membershipData.membershipType,
-                        startDate: membershipData.startDate,
-                        endDate: membershipData.endDate,
-                        packageName: membershipData.packageName,
-                        features: membershipData.features
+                    orders: {
+                        lastOrderId: orderData.orderId,
+                        lastOrderDate: orderData.orderDate,
+                        totalOrders: (currentProfile.orders?.totalOrders || 0) + 1,
+                        orderHistory: [...(currentProfile.orders?.orderHistory || []), orderData.orderId]
                     },
                     lastUpdated: new Date().toISOString()
                 };
 
                 await set(userProfileRef, updatedProfile);
-                console.log('User profile updated with membership status');
+                console.log('User profile updated with order status');
 
             } catch (error) {
                 console.error('Error updating user membership status:', error);
@@ -1719,79 +2629,66 @@
             }
         }
 
-        // Utility functions for membership management
-        window.getUserMembership = async function(userId) {
+        // Utility functions for order management
+        window.getUserOrders = async function(userId) {
             try {
-                const membershipRef = ref(database, `Membership/${userId}`);
-                const snapshot = await get(membershipRef);
+                const ordersRef = ref(database, `orders/${userId}`);
+                const snapshot = await get(ordersRef);
                 
                 if (snapshot.exists()) {
-                    const membership = snapshot.val();
-                    
-                    // Check if membership is expired
-                    const now = new Date();
-                    const endDate = new Date(membership.endDate);
-                    
-                    if (now > endDate && membership.status === 'active') {
-                        // Update status to expired
-                        await updateMembershipStatus(userId, 'expired');
-                        membership.status = 'expired';
-                    }
-                    
-                    return membership;
+                    const orders = snapshot.val();
+                    return orders;
                 }
                 return null;
             } catch (error) {
-                console.error('Error getting user membership:', error);
+                console.error('Error getting user orders:', error);
                 return null;
             }
         };
 
-        window.updateMembershipStatus = async function(userId, status) {
+        window.updateOrderStatus = async function(userId, orderId, status) {
             try {
-                const membershipRef = ref(database, `Membership/${userId}`);
-                const snapshot = await get(membershipRef);
+                const orderRef = ref(database, `orders/${userId}/${orderId}`);
+                const snapshot = await get(orderRef);
                 
                 if (snapshot.exists()) {
-                    const membership = snapshot.val();
-                    const updatedMembership = {
-                        ...membership,
-                        status: status,
+                    const order = snapshot.val();
+                    const updatedOrder = {
+                        ...order,
+                        orderStatus: status,
                         updatedAt: new Date().toISOString()
                     };
                     
-                    await set(membershipRef, updatedMembership);
-                    console.log(`Membership status updated to: ${status}`);
-                    return updatedMembership;
+                    await set(orderRef, updatedOrder);
+                    console.log(`Order status updated to: ${status}`);
+                    return updatedOrder;
                 }
                 return null;
             } catch (error) {
-                console.error('Error updating membership status:', error);
+                console.error('Error updating order status:', error);
                 return null;
             }
         };
 
-        window.isMembershipActive = async function(userId) {
+        window.hasActiveOrders = async function(userId) {
             try {
-                const membership = await window.getUserMembership(userId);
-                if (!membership) return false;
+                const orders = await window.getUserOrders(userId);
+                if (!orders) return false;
                 
-                const now = new Date();
-                const endDate = new Date(membership.endDate);
-                
-                return membership.status === 'active' && now <= endDate;
+                // Check if user has any orders
+                return Object.keys(orders).length > 0;
             } catch (error) {
-                console.error('Error checking membership status:', error);
+                console.error('Error checking order status:', error);
                 return false;
             }
         };
 
-        window.getMembershipFeatures = async function(userId) {
+        window.getOrderHistory = async function(userId) {
             try {
-                const membership = await window.getUserMembership(userId);
-                return membership ? membership.features : [];
+                const orders = await window.getUserOrders(userId);
+                return orders ? Object.values(orders) : [];
             } catch (error) {
-                console.error('Error getting membership features:', error);
+                console.error('Error getting order history:', error);
                 return [];
             }
         };
@@ -1804,15 +2701,96 @@
             // Setup phone validation
             setupPhoneValidation();
             
+            // Check if this is a cart checkout and show back button
+            const urlParams = new URLSearchParams(window.location.search);
+            const source = urlParams.get('source');
+            if (source === 'cart') {
+                const backToCartBtn = document.getElementById('backToCart');
+                if (backToCartBtn) {
+                    backToCartBtn.style.display = 'block';
+                    backToCartBtn.addEventListener('click', function() {
+                        // Kiểm tra xem giỏ hàng có chứa truyện không để quay lại trang phù hợp
+                        const cartData = sessionStorage.getItem('checkoutCart');
+                        if (cartData) {
+                            try {
+                                const cart = JSON.parse(cartData);
+                                const hasStories = cart.items && cart.items.some(item => item.type === 'story');
+                                const hasBooks = cart.items && cart.items.some(item => item.type === 'book' || !item.type);
+                                
+                                // Nếu có cả sách và truyện, ưu tiên quay lại book.html
+                                if (hasBooks) {
+                                    window.location.href = 'book.html';
+                                } else if (hasStories) {
+                                    window.location.href = 'story.html';
+                                } else {
+                                    window.location.href = 'book.html';
+                                }
+                            } catch (error) {
+                                window.location.href = 'book.html';
+                            }
+                        } else {
+                            window.location.href = 'book.html';
+                        }
+                    });
+                }
+                
+                // Setup cart details toggle
+                const toggleCartDetails = document.getElementById('toggleCartDetails');
+                const cartItemsList = document.getElementById('cartItemsList');
+                if (toggleCartDetails && cartItemsList) {
+                    toggleCartDetails.addEventListener('click', function() {
+                        const isVisible = cartItemsList.style.display !== 'none';
+                        cartItemsList.style.display = isVisible ? 'none' : 'block';
+                        const icon = this.querySelector('i');
+                        const text = this.querySelector('span') || this.lastChild;
+                        
+                        if (isVisible) {
+                            icon.className = 'fa fa-chevron-down';
+                            this.innerHTML = '<i class="fa fa-chevron-down"></i> Hiện';
+                        } else {
+                            icon.className = 'fa fa-chevron-up';
+                            this.innerHTML = '<i class="fa fa-chevron-up"></i> Ẩn';
+                        }
+                    });
+                }
+                
+                // Setup coupon functionality
+                const applyCouponBtn = document.getElementById('applyCouponBtn');
+                const removeCouponBtn = document.getElementById('removeCouponBtn');
+                const couponCodeInput = document.getElementById('couponCode');
+                
+                if (applyCouponBtn) {
+                    applyCouponBtn.addEventListener('click', window.applyCoupon);
+                }
+                
+                if (removeCouponBtn) {
+                    removeCouponBtn.addEventListener('click', window.removeCoupon);
+                }
+                
+                if (couponCodeInput) {
+                    couponCodeInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            window.applyCoupon();
+                        }
+                    });
+                }
+                
+                // Setup show available coupons button
+                const showAvailableCouponsBtn = document.getElementById('showAvailableCoupons');
+                if (showAvailableCouponsBtn) {
+                    showAvailableCouponsBtn.addEventListener('click', window.showAvailableCoupons);
+                }
+            }
+            
             // Check authentication state
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     loadUserInfo();
                     
-                    // Check and update membership status
-                    window.getUserMembership(user.uid).then(membership => {
-                        if (membership) {
-                            console.log('User membership:', membership);
+                    // Check and update order status
+                    window.getUserOrders(user.uid).then(orders => {
+                        if (orders) {
+                            console.log('User orders:', orders);
                         }
                     });
                 } else {
@@ -1820,8 +2798,11 @@
                 }
             });
 
-            // Load package info
-            loadPackageInfo();
+            // Load coupons from Firebase
+            loadCouponsFromFirebase();
+            
+            // Load product info
+            loadProductInfo();
             
             // Process VNPAY response if returning from payment
             processVNPAYResponse();

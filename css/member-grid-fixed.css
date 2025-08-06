@@ -1,0 +1,232 @@
+/* Member Grid Fixed Layout - Tăng khoảng cách và đơn giản hóa */
+.tg-member-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px; /* Tăng khoảng cách từ 20px lên 40px */
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.tg-member-item {
+    background: white;
+    border-radius: 15px; /* Tăng border radius */
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Tăng shadow */
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    height: 380px; /* Giảm chiều cao vì không có sao */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.tg-member-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+/* Ảnh bìa cố định */
+.tg-member-item-image {
+    position: relative;
+    height: 180px; /* Giảm chiều cao ảnh */
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.tg-member-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.tg-member-item:hover .tg-member-item-image img {
+    transform: scale(1.05);
+}
+
+/* Tag loại sách/truyện */
+.tg-member-category {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffd700;
+    color: #333;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 2;
+}
+
+/* Giá */
+.tg-member-price {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #28a745;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 2;
+}
+
+/* Nội dung chính - Đơn giản hóa */
+.tg-member-content {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Tiêu đề - Chỉ hiển thị tên sách */
+.tg-member-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Tác giả - Chỉ hiển thị tên tác giả */
+.tg-member-author {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* Thể loại - Chỉ hiển thị thể loại chính */
+.tg-member-genre {
+    display: inline-block;
+    background: #f8f9fa;
+    color: #495057;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    border: 1px solid #e9ecef;
+}
+
+/* Nút hành động - Chỉ 2 nút chính */
+.tg-member-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.tg-member-btn {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.tg-member-btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.tg-member-btn-primary:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.tg-member-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.tg-member-btn-secondary:hover {
+    background: #545b62;
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .tg-member-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tg-member-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tg-member-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Animation cho card */
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tg-member-item {
+    animation: cardFadeIn 0.5s ease forwards;
+}
+
+/* Loading state */
+.tg-member-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.tg-member-loading i {
+    font-size: 2rem;
+    color: #4A6366;
+    margin-bottom: 15px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Empty state */
+.tg-member-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.tg-member-empty i {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+.tg-member-empty h3 {
+    color: #333;
+    margin-bottom: 10px;
+} 
