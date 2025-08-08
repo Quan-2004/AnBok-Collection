@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Tác Giả - Quản Lý Sáng Tác</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/profile-dashboard.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-header h1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+
+        .dashboard-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .author-profile {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 1rem;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .author-profile img {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .author-profile:hover img {
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 1400px;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .stats-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .stats-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stats-card:hover .stats-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .book-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-cover {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.05);
+        }
+
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .book-card:hover .book-cover::before {
+            opacity: 1;
+        }
+
+        .book-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 2;
+        }
+
+        .status-featured {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .status-member {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .status-new {
+            background: linear-gradient(135deg, #45b7d1, #96c93d);
+            color: white;
+            box-shadow: 0 5px 15px rgba(69, 183, 209, 0.4);
+        }
+
+        .book-info {
+            padding: 2rem;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #2c3e50;
+            line-height: 1.3;
+        }
+
+        .book-author {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+        }
+
+        .book-rating {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        .book-price {
+            font-weight: 700;
+            color: #27ae60;
+            font-size: 1.1rem;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-action {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-action:hover::before {
+            left: 100%;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.6);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-view:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.6);
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar h5 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            color: #34495e;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .sidebar-menu a:hover::before {
+            left: 100%;
+        }
+
+        .sidebar-menu a i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-box .form-control,
+        .search-box .form-select {
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .search-box .form-control:focus,
+        .search-box .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            background: white;
+        }
+
+        .search-box .btn {
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-box .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chart-container h5 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .progress-bar-custom {
+            height: 12px;
+            border-radius: 6px;
+            background: rgba(102, 126, 234, 0.1);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .section-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h4 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-card {
+                padding: 1.5rem;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+            
+            .book-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .sidebar {
+                margin-bottom: 2rem;
+                position: static;
+            }
+            
+            .book-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            margin: -15px 0 0 -15px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a5acd);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1><i class="fa fa-book"></i> Dashboard Tác Giả</h1>
+                    <p class="mb-0">Quản lý sáng tác và theo dõi hiệu suất sách của bạn</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="author-profile d-flex align-items-center justify-content-end">
+                        <img src="images/users/img-01.jpg" alt="Author" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0">Tác Giả</h6>
+                            <small>Quản lý sáng tác</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="sidebar">
+                    <h5 class="mb-3"><i class="fa fa-bars"></i> Menu</h5>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="active"><i class="fa fa-dashboard"></i> Tổng quan</a></li>
+                        <li><a href="#"><i class="fa fa-book"></i> Quản lý sách</a></li>
+                        <li><a href="#"><i class="fa fa-plus"></i> Thêm sách mới</a></li>
+                        <li><a href="#"><i class="fa fa-chart-bar"></i> Thống kê</a></li>
+                        <li><a href="#"><i class="fa fa-comments"></i> Đánh giá</a></li>
+                        <li><a href="#"><i class="fa fa-download"></i> Báo cáo</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <!-- Search and Filter -->
+                <div class="search-box">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm sách...">
+                                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-select">
+                                <option>Tất cả thể loại</option>
+                                <option>Tiểu thuyết</option>
+                                <option>Kỹ năng sống</option>
+                                <option>Fantasy</option>
+                                <option>Thơ</option>
+                                <option>Công nghệ</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="stats-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                                <i class="fa fa-book"></i>
+                            </div>
+                            <div class="stats-number" id="totalBooks">0</div>
+                            <div class="text-muted">Tổng số sách</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="stats-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                                <i class="fa fa-eye"></i>
+                            </div>
+                            <div class="stats-number" id="totalViews">0</div>
+                            <div class="text-muted">Lượt xem</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="stats-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                                <i class="fa fa-download"></i>
+                            </div>
+                            <div class="stats-number" id="totalDownloads">0</div>
+                            <div class="text-muted">Lượt tải</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="stats-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="stats-number" id="avgRating">0.0</div>
+                            <div class="text-muted">Đánh giá TB</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <h5><i class="fa fa-chart-pie"></i> Phân bố thể loại</h5>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Tiểu thuyết</span>
+                                    <span>20%</span>
+                                </div>
+                                <div class="progress-bar-custom">
+                                    <div class="progress-fill" style="width: 20%"></div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mb-2 mt-3">
+                                    <span>Kỹ năng sống</span>
+                                    <span>10%</span>
+                                </div>
+                                <div class="progress-bar-custom">
+                                    <div class="progress-fill" style="width: 10%"></div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mb-2 mt-3">
+                                    <span>Fantasy</span>
+                                    <span>10%</span>
+                                </div>
+                                <div class="progress-bar-custom">
+                                    <div class="progress-fill" style="width: 10%"></div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mb-2 mt-3">
+                                    <span>Thơ</span>
+                                    <span>10%</span>
+                                </div>
+                                <div class="progress-bar-custom">
+                                    <div class="progress-fill" style="width: 10%"></div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mb-2 mt-3">
+                                    <span>Công nghệ</span>
+                                    <span>10%</span>
+                                </div>
+                                <div class="progress-bar-custom">
+                                    <div class="progress-fill" style="width: 10%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <h5><i class="fa fa-chart-line"></i> Hiệu suất tháng</h5>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Lượt xem</span>
+                                    <span>+15%</span>
+                                </div>
+                                <div class="progress-bar-custom">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mb-2 mt-3">
+                                    <span>Lượt tải</span>
+                                    <span>+8%</span>
+                                </div>
+                                <div class="progress-bar-custom">
+                                    <div class="progress-fill" style="width: 60%"></div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mb-2 mt-3">
+                                    <span>Đánh giá</span>
+                                    <span>+12%</span>
+                                </div>
+                                <div class="progress-bar-custom">
+                                    <div class="progress-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Books Grid -->
+                <div class="section-header">
+                    <h4><i class="fa fa-book"></i> Danh sách sách</h4>
+                    <button class="btn btn-primary"><i class="fa fa-plus"></i> Thêm sách mới</button>
+                </div>
+
+                <div class="row" id="booksGrid">
+                    <!-- Book cards will be dynamically generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="js/vendor/jquery-library.js"></script>
+    
+    <script>
+        // Dynamic book data - will be loaded from Firebase or API
+        let booksData = {};
+        
+        // Statistics data - will be calculated from booksData
+        let statistics = {
+            totalBooks: 0,
+            totalViews: 0,
+            totalDownloads: 0,
+            avgRating: 0
+        };
+
+        // Function to format numbers
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Function to get status class
+        function getStatusClass(book) {
+            if (book.is_featured) return 'status-featured';
+            if (book.is_member_only) return 'status-member';
+            return 'status-new';
+        }
+
+        // Function to get status text
+        function getStatusText(book) {
+            if (book.is_featured) return 'Nổi bật';
+            if (book.is_member_only) return 'VIP';
+            return 'Mới';
+        }
+
+        // Function to render book cards
+        function renderBooks() {
+            const booksGrid = document.getElementById('booksGrid');
+            booksGrid.innerHTML = '';
+
+            if (Object.keys(booksData).length === 0) {
+                booksGrid.innerHTML = `
+                    <div class="col-12">
+                        <div class="text-center py-5">
+                            <i class="fa fa-book" style="font-size: 4rem; color: #667eea; opacity: 0.5;"></i>
+                            <h4 class="mt-3 text-muted">Chưa có sách nào</h4>
+                            <p class="text-muted">Bắt đầu thêm sách mới để quản lý tác phẩm của bạn</p>
+                            <button class="btn btn-primary" onclick="showAddBookModal()">
+                                <i class="fa fa-plus"></i> Thêm sách đầu tiên
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            Object.values(booksData).forEach(book => {
+                const bookCard = `
+                    <div class="col-md-6 col-lg-4">
+                        <div class="book-card" data-book-id="${book.book_id || ''}">
+                            <div class="book-cover" style="background-image: url('${book.cover_image || 'images/placeholder.jpg'}')">
+                                <span class="book-status ${getStatusClass(book)}">${getStatusText(book)}</span>
+                            </div>
+                            <div class="book-info">
+                                <div class="book-title">${book.title || 'Chưa có tiêu đề'}</div>
+                                <div class="book-author">Tác giả: ${book.author || 'Chưa có tác giả'}</div>
+                                <div class="book-meta">
+                                    <div class="book-rating">
+                                        <i class="fa fa-star"></i> ${book.rating || 0} (${book.review_count || 0})
+                                    </div>
+                                    <div class="book-price">
+                                        ${(book.price || 0) === 0 ? 'Miễn phí' : formatNumber(book.price) + 'đ'}
+                                    </div>
+                                </div>
+                                <div class="book-meta">
+                                    <small class="text-muted">
+                                        <i class="fa fa-eye"></i> ${formatNumber(book.view_count || 0)} lượt xem
+                                    </small>
+                                    <small class="text-muted">
+                                        <i class="fa fa-download"></i> ${formatNumber(book.download_count || 0)} lượt tải
+                                    </small>
+                                </div>
+                                <div class="book-actions">
+                                    <button class="btn-action btn-view" onclick="viewBook('${book.book_id || ''}')">
+                                        <i class="fa fa-eye"></i> Xem
+                                    </button>
+                                    <button class="btn-action btn-edit" onclick="editBook('${book.book_id || ''}')">
+                                        <i class="fa fa-edit"></i> Sửa
+                                    </button>
+                                    <button class="btn-action btn-delete" onclick="deleteBook('${book.book_id || ''}')">
+                                        <i class="fa fa-trash"></i> Xóa
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                booksGrid.innerHTML += bookCard;
+            });
+        }
+
+        // Function to calculate and update statistics
+        function updateStatistics() {
+            const books = Object.values(booksData);
+            const totalBooks = books.length;
+            const totalViews = books.reduce((sum, book) => sum + (book.view_count || 0), 0);
+            const totalDownloads = books.reduce((sum, book) => sum + (book.download_count || 0), 0);
+            const avgRating = totalBooks > 0 ? (books.reduce((sum, book) => sum + (book.rating || 0), 0) / totalBooks).toFixed(1) : '0.0';
+
+            // Update statistics object
+            statistics = {
+                totalBooks,
+                totalViews,
+                totalDownloads,
+                avgRating: parseFloat(avgRating)
+            };
+
+            // Update UI
+            document.getElementById('totalBooks').textContent = totalBooks;
+            document.getElementById('totalViews').textContent = formatNumber(totalViews);
+            document.getElementById('totalDownloads').textContent = formatNumber(totalDownloads);
+            document.getElementById('avgRating').textContent = avgRating;
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            renderBooks();
+            updateStatistics();
+            
+            // Add smooth animations
+            animateOnScroll();
+            
+            // Load data from Firebase or API
+            loadBooksData();
+            
+            // Add event listeners for buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('btn-view')) {
+                    showNotification('Đang mở chi tiết sách...', 'info');
+                } else if (e.target.classList.contains('btn-edit')) {
+                    showNotification('Chuyển đến trang chỉnh sửa...', 'info');
+                } else if (e.target.classList.contains('btn-delete')) {
+                    if (confirm('Bạn có chắc muốn xóa sách này?')) {
+                        showNotification('Đã xóa sách thành công!', 'success');
+                    }
+                }
+            });
+
+            // Add search functionality
+            const searchInput = document.querySelector('.search-box input');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    filterBooks(searchTerm);
+                });
+            }
+
+            // Add category filter
+            const categorySelect = document.querySelector('.search-box select');
+            if (categorySelect) {
+                categorySelect.addEventListener('change', function() {
+                    const selectedCategory = this.value;
+                    filterBooksByCategory(selectedCategory);
+                });
+            }
+        });
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.stats-card, .book-card, .chart-container').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // Filter books by search term
+        function filterBooks(searchTerm) {
+            const bookCards = document.querySelectorAll('.book-card');
+            bookCards.forEach(card => {
+                const title = card.querySelector('.book-title').textContent.toLowerCase();
+                const author = card.querySelector('.book-author').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || author.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Filter books by category
+        function filterBooksByCategory(category) {
+            if (category === 'Tất cả thể loại') {
+                document.querySelectorAll('.book-card').forEach(card => {
+                    card.style.display = 'block';
+                });
+                return;
+            }
+
+            const bookCards = document.querySelectorAll('.book-card');
+            bookCards.forEach(card => {
+                // This would need to be connected to actual book data
+                // For now, we'll show all cards
+                card.style.display = 'block';
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fa fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #2ecc71, #27ae60)' : 'linear-gradient(135deg, #3498db, #2980b9)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                z-index: 1000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                backdrop-filter: blur(10px);
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Load books data from Firebase or API
+        async function loadBooksData() {
+            try {
+                showLoading(true);
+                
+                // TODO: Replace with actual Firebase/API call
+                // Example Firebase call:
+                // const booksRef = firebase.firestore().collection('books');
+                // const snapshot = await booksRef.where('author_id', '==', currentUserId).get();
+                // booksData = {};
+                // snapshot.forEach(doc => {
+                //     booksData[doc.id] = { ...doc.data(), book_id: doc.id };
+                // });
+                
+                // For now, using empty data
+                booksData = {};
+                
+                renderBooks();
+                updateStatistics();
+                showLoading(false);
+                
+            } catch (error) {
+                console.error('Error loading books:', error);
+                showNotification('Lỗi khi tải dữ liệu sách', 'error');
+                showLoading(false);
+            }
+        }
+
+        // CRUD Functions
+        async function addBook(bookData) {
+            try {
+                showLoading(true);
+                
+                // TODO: Replace with actual Firebase/API call
+                // Example Firebase call:
+                // const booksRef = firebase.firestore().collection('books');
+                // const docRef = await booksRef.add({
+                //     ...bookData,
+                //     author_id: currentUserId,
+                //     created_at: firebase.firestore.FieldValue.serverTimestamp(),
+                //     view_count: 0,
+                //     download_count: 0,
+                //     rating: 0,
+                //     review_count: 0
+                // });
+                
+                showNotification('Thêm sách thành công!', 'success');
+                await loadBooksData(); // Reload data
+                
+            } catch (error) {
+                console.error('Error adding book:', error);
+                showNotification('Lỗi khi thêm sách', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function editBook(bookId) {
+            try {
+                // TODO: Implement edit functionality
+                // Could open a modal or redirect to edit page
+                showNotification('Chuyển đến trang chỉnh sửa...', 'info');
+                
+            } catch (error) {
+                console.error('Error editing book:', error);
+                showNotification('Lỗi khi chỉnh sửa sách', 'error');
+            }
+        }
+
+        async function deleteBook(bookId) {
+            try {
+                if (!confirm('Bạn có chắc muốn xóa sách này?')) {
+                    return;
+                }
+                
+                showLoading(true);
+                
+                // TODO: Replace with actual Firebase/API call
+                // Example Firebase call:
+                // await firebase.firestore().collection('books').doc(bookId).delete();
+                
+                showNotification('Đã xóa sách thành công!', 'success');
+                await loadBooksData(); // Reload data
+                
+            } catch (error) {
+                console.error('Error deleting book:', error);
+                showNotification('Lỗi khi xóa sách', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function viewBook(bookId) {
+            try {
+                // TODO: Implement view functionality
+                // Could open a modal or redirect to book detail page
+                showNotification('Đang mở chi tiết sách...', 'info');
+                
+            } catch (error) {
+                console.error('Error viewing book:', error);
+                showNotification('Lỗi khi xem sách', 'error');
+            }
+        }
+
+        // Utility Functions
+        function showLoading(show) {
+            const loadingElement = document.querySelector('.loading-overlay');
+            if (show) {
+                if (!loadingElement) {
+                    const overlay = document.createElement('div');
+                    overlay.className = 'loading-overlay';
+                    overlay.innerHTML = `
+                        <div class="loading-spinner">
+                            <i class="fa fa-spinner fa-spin"></i>
+                            <p>Đang tải...</p>
+                        </div>
+                    `;
+                    overlay.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.5);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        z-index: 9999;
+                        backdrop-filter: blur(5px);
+                    `;
+                    
+                    const spinner = overlay.querySelector('.loading-spinner');
+                    spinner.style.cssText = `
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 15px;
+                        text-align: center;
+                        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+                    `;
+                    
+                    document.body.appendChild(overlay);
+                }
+            } else {
+                if (loadingElement) {
+                    document.body.removeChild(loadingElement);
+                }
+            }
+        }
+
+        function showAddBookModal() {
+            // TODO: Implement add book modal
+            showNotification('Tính năng thêm sách sẽ được cập nhật sớm', 'info');
+        }
+
+        // Add CSS for fadeIn animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+

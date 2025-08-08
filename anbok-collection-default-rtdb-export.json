@@ -1,4 +1,27 @@
 {
+  "AuthorApplications": {
+    "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
+      "authorBio": "Xin chào, tôi là Quân Phạm. Tôi đến từ cần thơ. Tôi có niềm đam mê viết lách và mong muốn chia sẻ những câu chuyện, kiến thức của mình với cộng đồng độc giả. Tôi hy vọng có thể đóng góp những tác phẩm chất lượng và ý nghĩa cho thư viện AnBok Collection.",
+      "authorGenres": "Tâm lý học",
+      "authorName": "Quân Phạm",
+      "authorPhone": "0956635540",
+      "displayName": "Quân Phạm",
+      "email": "phamhongquan9117@gmail.com",
+      "status": "approved",
+      "submittedAt": "2025-08-08T07:11:52.701Z",
+      "type": "book",
+      "uid": "Tt50hFcTNLNZB1tggdFzKWCFcvB3",
+      "userProfile": {
+        "address": "cần thơ",
+        "dateOfBirth": "01/01/1900",
+        "fullName": "Quân Phạm",
+        "gender": "KhácTất cảTất cảTất cảTất cảTất cảTất cảTâm lý học",
+        "photoURL": "https://res.cloudinary.com/dvcebine7/image/upload/v1754384811/h58yymy2wotwvrvkvvqr.jpg",
+        "userId": "UVZ8L9EPFO",
+        "username": "phamhongquan9117"
+      }
+    }
+  },
   "BookCategories": {
     "featured_books": {
       "category_code": "SNB002",
@@ -529,6 +552,44 @@
         "vnp_TransactionNo": "15118875",
         "vnp_TransactionStatus": "00",
         "vnp_TxnRef": "U2N6HWGP"
+      }
+    },
+    "YpWN3bXOouP7bqiBxhCd9yxs1Xc2": {
+      "autoRenew": false,
+      "createdAt": "2025-08-06T17:48:14.556Z",
+      "endDate": "2026-02-06T17:48:14.556Z",
+      "features": [
+        "unlimited_books"
+      ],
+      "membershipId": "MEM_1754502494556_J7RVH9PWC",
+      "membershipType": "basic",
+      "notes": "Gói hội viên Gói 6 Tháng - Thanh toán qua VNPAY",
+      "orderId": "ORDER_1754502386519_s0te08pux",
+      "packageDuration": 6,
+      "packageId": "package_6_months",
+      "packageName": "Gói 6 Tháng",
+      "packagePrice": 534000,
+      "paymentDate": "2025-08-06T17:48:14.556Z",
+      "paymentMethod": "vnpay",
+      "paymentStatus": "completed",
+      "startDate": "2025-08-06T17:48:14.556Z",
+      "status": "active",
+      "transactionId": "15119926",
+      "updatedAt": "2025-08-06T17:48:14.556Z",
+      "userId": "YpWN3bXOouP7bqiBxhCd9yxs1Xc2",
+      "vnpayResponse": {
+        "vnp_Amount": "53400000",
+        "vnp_BankCode": "NCB",
+        "vnp_BankTranNo": "VNP15119926",
+        "vnp_CardType": "ATM",
+        "vnp_OrderInfo": "Thanh toan goi hoi vien Gói 6 Tháng",
+        "vnp_PayDate": "20250807004914",
+        "vnp_ResponseCode": "00",
+        "vnp_SecureHash": "38075906fa21e4bf4db42f18c421713df9ce63f1e10190f469369ec8fc8ad8adc85e0588f34247b33653cd9b9e0a1c9d20425a7368dc324e631e6f3fd01df0cb",
+        "vnp_TmnCode": "2Q01AVYB",
+        "vnp_TransactionNo": "15119926",
+        "vnp_TransactionStatus": "00",
+        "vnp_TxnRef": "0TE08PUX"
       }
     }
   },
@@ -1354,52 +1415,16 @@
   },
   "Wishlist": {
     "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
-      "book_004": {
-        "addedAt": "2025-08-06T14:30:03.407Z",
-        "author": "J.K. Rowling",
-        "coverImage": "images/books/img-04.jpg",
-        "genre": "Fantasy",
-        "id": "book_004",
-        "price": 600000,
-        "rating": 4.7,
-        "title": "Harry Potter và Hòn đá Phù thủy",
+      "book_001": {
+        "addedAt": "2025-08-06T15:50:11.287Z",
+        "author": "Nam Cao",
+        "coverImage": "images/books/img-01.jpg",
+        "genre": "Tiểu thuyết",
+        "id": "book_001",
+        "price": 35000,
+        "rating": 4.2,
+        "title": "Lão Hạc",
         "type": "book",
-        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
-      },
-      "book_006": {
-        "addedAt": "2025-08-06T14:27:19.473Z",
-        "author": "Tôn Tử",
-        "coverImage": "images/books/img-06.jpg",
-        "genre": "Chiến lược",
-        "id": "book_006",
-        "price": 750000,
-        "rating": 4.6,
-        "title": "Nghệ Thuật Chiến Tranh",
-        "type": "book",
-        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
-      },
-      "story_004": {
-        "addedAt": "2025-08-06T14:24:41.957Z",
-        "author": "Nguyễn Nhật Ánh",
-        "coverImage": "https://cdn1.fahasa.com/media/catalog/product/b/i/bia1t1_4.jpg?_gl=1*1ekjduk*_ga*ODA5NzA5MTQuMTc0NTQ1NzQ2Ng..*_ga_D3YYPWQ9LN*czE3NDcwNTI5NTAkbzU0JGcxJHQxNzQ3MDU4ODYyJGowJGwwJGgw*_gcl_aw*R0NMLjE3NDU0NzA2NjUuQ2p3S0NBanduNkxBQmhCU0Vpd0FzTkpyam5GRV92Wlc1NVdsNUpuVHgzNVRGanNUd3IxQXNuV0pxUHA0SDNvREZBWS1rR3JMQW1EUXd4b0N2dHNRQXZEX0J3RQ..*_gcl_au*MTkzNzI0NzE2OC4xNzQ1NDU3NDY2*_ga_460L9JMC2G*czE3NDcwNTI5NTAkbzUzJGcxJHQxNzQ3MDU4ODYzJGo1NSRsMCRoMTcwNzE4OTYwOQ..",
-        "genre": "Tình cảm",
-        "id": "story_004",
-        "price": 100000,
-        "rating": 4.8,
-        "title": "Tuyển Tập Nguyễn Nhật Ánh",
-        "type": "story",
-        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
-      },
-      "story_012": {
-        "addedAt": "2025-08-06T14:30:02.349Z",
-        "author": "Masashi Kishimoto",
-        "coverImage": "https://qmanga.art/wp-content/uploads/2024/10/muon-khi-nao-thi-muon-thich-bao-nhieu-thi-thich.jpg",
-        "genre": "Truyện tranh",
-        "id": "story_012",
-        "price": 120000,
-        "rating": 4.8,
-        "title": "Naruto",
-        "type": "story",
         "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
       }
     }
@@ -1422,6 +1447,188 @@
       "updatedAt": "2025-08-06T12:13:09.112Z",
       "validFrom": "2024-01-01",
       "validTo": "2027-12-31"
+    }
+  },
+  "news": {
+    "tin_001": {
+      "author": "Admin",
+      "content": "The 'Contemporary Vietnamese Literature' collection is an important literary project that has been implemented over the past 2 years. The project brings together 50 outstanding works by Vietnamese authors from 2000 to present, including works that have won national and international literary awards.\n\nThe collection is divided into 5 volumes, each focusing on a main theme: Love and Family, Contemporary Society, Nature and Environment, Traditional Culture, and Future and Dreams. Each work is carefully selected, ensuring high literary quality and profound meaning.\n\nThe launch of this collection is not only an important literary event but also an opportunity for readers to access high-quality literary works while better understanding the development of Vietnamese literature in the contemporary period.",
+      "image": "images/blog/img-01.jpg",
+      "imageDescription": "Contemporary Vietnamese Literature collection with 5 beautifully designed volumes",
+      "newsId": "TT001",
+      "publishDate": "2024-12-15T08:00:00Z",
+      "status": "active",
+      "summary": "The 'Contemporary Vietnamese Literature' collection has just been launched with the participation of many famous authors. The collection gathers the most outstanding works over the past 20 years, authentically reflecting the life and people of modern Vietnam.",
+      "title": "Launch of 'Contemporary Vietnamese Literature' Collection - Gathering the Most Outstanding Works",
+      "views": 1250
+    },
+    "tin_002": {
+      "author": "Nguyen Van An",
+      "content": "The Autumn Book Fair 2024 is the largest cultural event of the year, bringing together over 100 domestic and foreign publishers, with more than 50,000 books on display and introduction.\n\nThe event will take place at the Exhibition Center from December 20 to 25, 2024, with many interesting activities such as: Author meet-and-greets, Book signings, Writing workshops, Antique book exhibitions, and many attractive promotional programs.\n\nEspecially, within the framework of the book fair, there will be seminars on contemporary literature, new book introductions, and reading culture activities for children. This is a great opportunity for readers to access the latest books and meet directly with their favorite authors.",
+      "image": "images/blog/img-02.jpg",
+      "imageDescription": "Autumn Book Fair 2024 with spacious exhibition space",
+      "newsId": "TT002",
+      "publishDate": "2024-12-12T10:30:00Z",
+      "status": "active",
+      "summary": "The Autumn Book Fair 2024 will take place from December 20-25 at the Exhibition Center with the participation of over 100 publishers and thousands of new books.",
+      "title": "Autumn Book Fair 2024 - A Meeting Place for Book Lovers",
+      "views": 890
+    },
+    "tin_003": {
+      "author": "Tran Thi Binh",
+      "content": "The work 'Green Summer' by author Nguyen Nhat Anh is a beautiful story about friendship, love, and memorable memories of youth. The work is written with the author's characteristic pure and innocent writing style.\n\nThe story revolves around a group of young friends in a special summer, where they experience memorable moments together, from small adventures to valuable life lessons. The work is not only for young readers but can also touch the hearts of mature readers.\n\n'Green Summer' is considered one of the most outstanding works by author Nguyen Nhat Anh, continuing to affirm his position in contemporary Vietnamese literature.",
+      "image": "images/blog/img-03.jpg",
+      "imageDescription": "Cover of Green Summer book by author Nguyen Nhat Anh",
+      "newsId": "TT003",
+      "publishDate": "2024-12-10T14:15:00Z",
+      "status": "active",
+      "summary": "Author Nguyen Nhat Anh has just released his new work 'Green Summer' - a beautiful story about friendship and youth.",
+      "title": "Author Nguyen Nhat Anh Releases New Work 'Green Summer'",
+      "views": 1560
+    },
+    "tin_004": {
+      "author": "Le Van Cuong",
+      "content": "The ASEAN Literature Award 2024 is an important international literary event, bringing together outstanding authors from 10 ASEAN member countries. The award is organized to honor literary works with high artistic value and positive contributions to regional cultural development.\n\nThis year, the award attracted over 500 works from ASEAN countries, including genres: Novels, Short Stories, Poetry, and Children's Literature. The jury consists of famous writers and literary critics from ASEAN countries.\n\nThe organization of this award not only creates opportunities for ASEAN authors to exchange and learn from each other but also contributes to promoting literary development in the region and strengthening solidarity among ASEAN countries.",
+      "image": "images/blog/img-04.jpg",
+      "imageDescription": "ASEAN Literature Award 2024 ceremony",
+      "newsId": "TT004",
+      "publishDate": "2024-12-08T16:45:00Z",
+      "status": "active",
+      "summary": "The ASEAN Literature Award 2024 has just been announced with the participation of authors from 10 ASEAN member countries.",
+      "title": "ASEAN Literature Award 2024 - Honoring Outstanding Works",
+      "views": 2100
+    },
+    "tin_005": {
+      "author": "Pham Thi Dung",
+      "content": "The list of 10 best-selling books in December 2024 has just been announced, showing the diversity in reading preferences of Vietnamese readers. Topping the list is the work 'Green Summer' by author Nguyen Nhat Anh, followed by foreign literary works and life skills books.\n\nNotably, the appearance of many children's literary works in the top 10 shows the increasing interest of parents in developing reading culture for children. Life skills books also occupy an important position in this list.\n\nThe announcement of the bestseller list not only helps readers have more reference information when choosing books but also reflects current reading trends in society, thereby contributing to orienting the development of reading culture in the future.",
+      "image": "images/blog/img-05.jpg",
+      "imageDescription": "Top 10 bestselling books December 2024",
+      "newsId": "TT005",
+      "publishDate": "2024-12-05T09:20:00Z",
+      "status": "active",
+      "summary": "The list of 10 best-selling books in December 2024 has just been announced with many interesting surprises.",
+      "title": "Top 10 Bestselling Books December 2024 - The Most Loved Books",
+      "views": 3200
+    },
+    "tin_006": {
+      "author": "Hoang Minh Duc",
+      "content": "The digital reading revolution is taking place strongly in Vietnam, with e-books becoming an increasingly popular choice among young readers. According to recent statistics, the number of e-book readers has increased by 40% compared to last year.\n\nThis trend is driven by the convenience of reading anywhere, anytime, the ability to carry thousands of books in a single device, and the interactive features that traditional books cannot provide. Many Vietnamese publishers have also started investing in digital publishing platforms.\n\nThe development of digital reading not only changes reading habits but also opens up new opportunities for authors and publishers to reach readers more effectively. However, this also poses challenges in copyright protection and maintaining reading culture.",
+      "image": "images/blog/img-06.jpg",
+      "imageDescription": "Young people reading e-books on digital devices",
+      "newsId": "TT006",
+      "publishDate": "2024-12-03T11:00:00Z",
+      "status": "active",
+      "summary": "The digital reading trend is growing rapidly in Vietnam, with e-books becoming increasingly popular among young readers.",
+      "title": "Digital Reading Revolution - E-books Gaining Popularity in Vietnam",
+      "views": 1850
+    },
+    "tin_007": {
+      "author": "Nguyen Thi Mai",
+      "content": "The Children's Literature Festival 2024 is a special event dedicated to nurturing young readers and developing reading culture from an early age. The festival will feature storytelling sessions, book illustration workshops, and interactive reading activities.\n\nMore than 50 children's book authors and illustrators will participate in the festival, bringing hundreds of new and classic children's books. The event also includes educational programs for parents on how to choose appropriate books for their children and methods to encourage reading habits.\n\nThis festival not only provides entertainment for children but also plays an important role in building a foundation for lifelong learning and developing critical thinking skills through reading.",
+      "image": "images/blog/img-07.jpg",
+      "imageDescription": "Children participating in reading activities at the festival",
+      "newsId": "TT007",
+      "publishDate": "2024-12-01T15:30:00Z",
+      "status": "active",
+      "summary": "The Children's Literature Festival 2024 will be held with many activities to encourage reading habits among children.",
+      "title": "Children's Literature Festival 2024 - Nurturing Young Readers",
+      "views": 1420
+    },
+    "tin_008": {
+      "author": "Tran Van Hung",
+      "content": "A major international book translation project has been launched with the goal of bringing world literature closer to Vietnamese readers. The project will translate and publish 100 outstanding works from various countries around the world.\n\nThe project focuses on diverse genres including contemporary literature, science fiction, philosophy, and children's literature. Each translation is carefully done by experienced translators to preserve the original meaning and cultural nuances.\n\nThis project not only enriches Vietnamese literature but also helps readers access different cultures and perspectives from around the world. It is expected to contribute significantly to the development of reading culture and international cultural exchange in Vietnam.",
+      "image": "images/blog/img-08.jpg",
+      "imageDescription": "International books being translated and published in Vietnam",
+      "newsId": "TT008",
+      "publishDate": "2024-11-28T13:45:00Z",
+      "status": "active",
+      "summary": "A major international book translation project has been launched to bring world literature closer to Vietnamese readers.",
+      "title": "International Book Translation Project - Bringing World Literature to Vietnam",
+      "views": 2300
+    },
+    "tin_009": {
+      "author": "Le Thi Lan",
+      "content": "A comprehensive library modernization project is being implemented across Vietnam to create better reading environments for the community. The project includes upgrading facilities, digitizing collections, and creating comfortable reading spaces.\n\nThe modernization includes installing modern reading equipment, creating digital reading areas, and developing mobile library services. Special attention is paid to creating accessible reading spaces for people with disabilities and elderly readers.\n\nThis project aims to make libraries more attractive and accessible to all age groups, especially young people. It is expected to significantly increase library usage and contribute to the development of reading culture in the community.",
+      "image": "images/blog/img-09.jpg",
+      "imageDescription": "Modern library space with comfortable reading areas",
+      "newsId": "TT009",
+      "publishDate": "2024-11-25T10:15:00Z",
+      "status": "active",
+      "summary": "A comprehensive library modernization project is being implemented to create better reading environments for the community.",
+      "title": "Library Modernization Project - Transforming Reading Spaces",
+      "views": 1680
+    },
+    "tin_010": {
+      "author": "Pham Van Tuan",
+      "content": "A new series of author interviews has been launched to provide readers with deeper insights into the creative process and the stories behind literary works. The series features both established and emerging Vietnamese authors.\n\nEach interview explores the author's inspiration, writing process, challenges faced during creation, and their views on contemporary literature. The series also includes discussions about the role of literature in society and the future of Vietnamese literature.\n\nThis initiative helps readers better understand and appreciate literary works while providing valuable information for aspiring writers. It also creates a bridge between authors and readers, fostering a stronger literary community.",
+      "image": "images/blog/img-10.jpg",
+      "imageDescription": "Author interview session with literary discussion",
+      "newsId": "TT010",
+      "publishDate": "2024-11-22T14:20:00Z",
+      "status": "active",
+      "summary": "A new series of author interviews has been launched to provide readers with insights into the creative process.",
+      "title": "Author Interview Series - Behind the Scenes of Literary Creation",
+      "views": 1950
+    },
+    "tin_011": {
+      "author": "Nguyen Thi Hoa",
+      "content": "The book club movement is growing rapidly across Vietnam, creating vibrant reading communities in cities and rural areas. These clubs provide platforms for readers to share their thoughts, discuss books, and build meaningful connections.\n\nBook clubs are organized in various formats including online discussions, face-to-face meetings, and hybrid models. They cover diverse genres and topics, from contemporary literature to classic works and specialized subjects.\n\nThis movement not only promotes reading culture but also helps develop critical thinking and communication skills. Many book clubs also organize author meet-ups, literary events, and community reading programs.",
+      "image": "images/blog/img-11.jpg",
+      "imageDescription": "Book club members discussing literature together",
+      "newsId": "TT011",
+      "publishDate": "2024-11-20T16:30:00Z",
+      "status": "active",
+      "summary": "The book club movement is growing rapidly across Vietnam, creating vibrant reading communities.",
+      "title": "Book Club Movement - Building Reading Communities",
+      "views": 2100
+    },
+    "tin_012": {
+      "author": "Tran Thi Kim",
+      "content": "A new platform for literary criticism and analysis has been established to help readers better understand and appreciate literary works. The platform features articles by experienced literary critics and scholars.\n\nThe analysis covers various aspects including themes, writing techniques, historical context, and cultural significance. The platform also provides reading guides for complex works and comparative studies of different authors and periods.\n\nThis initiative aims to bridge the gap between academic literary studies and general readers, making literary analysis more accessible and engaging for everyone interested in literature.",
+      "image": "images/blog/img-12.jpg",
+      "imageDescription": "Literary analysis and criticism articles",
+      "newsId": "TT012",
+      "publishDate": "2024-11-18T12:00:00Z",
+      "status": "active",
+      "summary": "A new platform for literary criticism and analysis has been established to help readers better understand literary works.",
+      "title": "Literary Criticism and Analysis - Deepening Understanding of Literature",
+      "views": 1750
+    },
+    "tin_013": {
+      "author": "Le Van Minh",
+      "content": "Audio books are becoming increasingly popular in Vietnam, offering a new way to experience literature for busy readers and those with visual impairments. The market has seen significant growth with hundreds of Vietnamese and international titles available.\n\nAudio books are particularly popular among commuters, students, and people who prefer listening to reading. Many publishers are now producing high-quality audio versions of their books with professional narrators.\n\nThis trend not only makes literature more accessible but also helps develop listening skills and imagination. Audio books are also being used in educational settings to improve language learning and comprehension.",
+      "image": "images/blog/img-13.jpg",
+      "imageDescription": "Person listening to audio book on mobile device",
+      "newsId": "TT013",
+      "publishDate": "2024-11-15T09:45:00Z",
+      "status": "active",
+      "summary": "Audio books are becoming increasingly popular in Vietnam, offering a new way to experience literature.",
+      "title": "Audio Books - A New Way to Experience Literature",
+      "views": 2200
+    },
+    "tin_014": {
+      "author": "Hoang Thi Linh",
+      "content": "Various literary awards and recognition programs are being established across Vietnam to celebrate excellence in writing and encourage literary creativity. These awards cover different genres and age groups.\n\nThe awards include categories for novels, short stories, poetry, children's literature, and emerging authors. They provide not only recognition but also financial support and publishing opportunities for winners.\n\nThese initiatives play an important role in promoting literary quality and encouraging new talent. They also help raise public awareness about the importance of literature and reading in society.",
+      "image": "images/blog/img-14.jpg",
+      "imageDescription": "Literary award ceremony with authors and organizers",
+      "newsId": "TT014",
+      "publishDate": "2024-11-12T17:15:00Z",
+      "status": "active",
+      "summary": "Various literary awards and recognition programs are being established to celebrate excellence in writing.",
+      "title": "Literary Awards and Recognition - Celebrating Excellence in Writing",
+      "views": 1850
+    },
+    "tin_015": {
+      "author": "Nguyen Van Thanh",
+      "content": "Comprehensive reading statistics for 2024 have been released, revealing interesting trends in reading habits among Vietnamese people. The data shows a significant increase in digital reading while traditional book reading remains strong.\n\nThe statistics indicate that young people aged 18-35 are the most active readers, with fiction and self-help books being the most popular genres. Reading time has increased by 25% compared to last year, with most reading happening in the evening and weekends.\n\nThese insights help publishers and authors better understand reader preferences and develop more targeted content. The data also shows the positive impact of various reading promotion programs and initiatives.",
+      "image": "images/blog/img-15.jpg",
+      "imageDescription": "Reading statistics and data visualization charts",
+      "newsId": "TT015",
+      "publishDate": "2024-11-10T11:30:00Z",
+      "status": "active",
+      "summary": "Comprehensive reading statistics for 2024 reveal interesting trends in reading habits among Vietnamese people.",
+      "title": "Reading Statistics 2024 - Understanding Reading Trends in Vietnam",
+      "views": 2400
     }
   },
   "orders": {
@@ -1597,99 +1804,344 @@
           "vnp_TxnRef": "WEEOLQK5"
         }
       },
-      "ORDER_1754482419947_xb891ge4w": {
-        "activatedAt": "2025-08-06T12:14:05.340Z",
+      "ORDER_1754518410764_6beakp93a": {
         "cartItems": [
           {
-            "added_at": "2025-08-06T12:13:34.084Z",
-            "author": "Nhiều tác giả",
-            "category_code": "TNB002",
-            "category_name": "Featured Stories",
-            "cover_image": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
-            "description": "Tuyển tập những câu chuyện cổ tích dân gian Việt Nam được yêu thích nhất như: Tấm Cám, Thạch Sanh, Sọ Dừa, Cây Khế... Những câu chuyện mang đậm bản sắc văn hóa Việt Nam với bài học về đạo đức và nhân cách.",
-            "genre": "Cổ tích",
-            "image": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
+            "added_at": "2025-08-06T22:11:55.174Z",
+            "author": "Dale Carnegie",
+            "book_id": "BK003",
+            "category_code": "SNB002",
+            "category_name": "Featured Books",
+            "cover_image": "images/books/img-03.jpg",
+            "description": "Cuốn sách kinh điển về nghệ thuật đối nhân xử thế, giúp độc giả phát triển kỹ năng giao tiếp và xây dựng mối quan hệ tốt đẹp.",
+            "image": "images/books/img-03.jpg",
             "is_featured": true,
             "is_free": false,
             "is_member_only": false,
-            "isbn": "",
+            "isbn": "978-604-1-12347-8",
             "language": "Vietnamese",
-            "original_price": 75000,
-            "pages": 0,
-            "price": 50000,
-            "publish_date": "2023-10-15",
-            "publisher": "Chưa có thông tin",
+            "original_price": 500000,
+            "pages": 320,
+            "price": 450000,
+            "publish_date": "2023-09-10",
+            "publisher": "NXB Tổng Hợp",
             "quantity": 1,
-            "rating": 4.7,
-            "story_id": "story_002",
-            "tags": [
-              "cổ tích",
-              "dân gian",
-              "Việt Nam",
-              "thiếu nhi",
-              "Tấm Cám",
-              "Thạch Sanh"
-            ],
-            "title": "Truyện Cổ Tích Việt Nam",
-            "type": "story"
+            "rating": 4.8,
+            "title": "Đắc Nhân Tâm"
           }
         ],
-        "createdAt": "2025-08-06T12:13:39.947Z",
+        "createdAt": "2025-08-06T22:13:30.764Z",
         "customerAddress": "111111111",
         "customerEmail": "phamhongquan9117@gmail.com",
         "customerName": "Quân Phạm",
         "customerPhone": "111111111",
-        "orderId": "ORDER_1754482419947_xb891ge4w",
+        "orderId": "ORDER_1754518410764_6beakp93a",
+        "orderType": "cart",
+        "paymentMethod": "vnpay",
+        "status": "pending",
+        "totalItems": 1,
+        "totalOriginal": 500000,
+        "totalPrice": 450000,
+        "updatedAt": "2025-08-06T22:13:30.764Z",
+        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
+      }
+    },
+    "YpWN3bXOouP7bqiBxhCd9yxs1Xc2": {
+      "ORDER_1754502368232_1z8fgg1mw": {
+        "createdAt": "2025-08-06T17:46:08.232Z",
+        "customerAddress": "",
+        "customerEmail": "quanpham4298@gmail.com",
+        "customerName": "quân pham",
+        "customerPhone": "123456789",
+        "orderId": "ORDER_1754502368232_1z8fgg1mw",
+        "packageDuration": 6,
+        "packageId": "package_6_months",
+        "packageName": "Gói 6 Tháng",
+        "packagePrice": 534000,
+        "paymentMethod": "vnpay",
+        "status": "pending",
+        "updatedAt": "2025-08-06T17:46:08.232Z",
+        "userId": "YpWN3bXOouP7bqiBxhCd9yxs1Xc2"
+      },
+      "ORDER_1754502386519_s0te08pux": {
+        "activatedAt": "2025-08-06T17:48:14.555Z",
+        "createdAt": "2025-08-06T17:46:26.520Z",
+        "customerAddress": "qưead",
+        "customerEmail": "quanpham4298@gmail.com",
+        "customerName": "quân pham",
+        "customerPhone": "1234568124",
+        "orderId": "ORDER_1754502386519_s0te08pux",
+        "packageDuration": 6,
+        "packageId": "package_6_months",
+        "packageName": "Gói 6 Tháng",
+        "packagePrice": 534000,
+        "paymentMethod": "vnpay",
+        "status": "success",
+        "updatedAt": "2025-08-06T17:48:14.555Z",
+        "userId": "YpWN3bXOouP7bqiBxhCd9yxs1Xc2",
+        "vnpayResponse": {
+          "vnp_Amount": "53400000",
+          "vnp_BankCode": "NCB",
+          "vnp_BankTranNo": "VNP15119926",
+          "vnp_CardType": "ATM",
+          "vnp_OrderInfo": "Thanh toan goi hoi vien Gói 6 Tháng",
+          "vnp_PayDate": "20250807004914",
+          "vnp_ResponseCode": "00",
+          "vnp_SecureHash": "38075906fa21e4bf4db42f18c421713df9ce63f1e10190f469369ec8fc8ad8adc85e0588f34247b33653cd9b9e0a1c9d20425a7368dc324e631e6f3fd01df0cb",
+          "vnp_TmnCode": "2Q01AVYB",
+          "vnp_TransactionNo": "15119926",
+          "vnp_TransactionStatus": "00",
+          "vnp_TxnRef": "0TE08PUX"
+        }
+      },
+      "ORDER_1754502781188_wfm0zbjxt": {
+        "cartItems": [
+          {
+            "added_at": "2025-08-06T17:33:32.849Z",
+            "author": "Dale Carnegie",
+            "book_id": "BK003",
+            "category_code": "SNB002",
+            "category_name": "Featured Books",
+            "cover_image": "images/books/img-03.jpg",
+            "description": "Cuốn sách kinh điển về nghệ thuật đối nhân xử thế, giúp độc giả phát triển kỹ năng giao tiếp và xây dựng mối quan hệ tốt đẹp.",
+            "image": "images/books/img-03.jpg",
+            "is_featured": true,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "978-604-1-12347-8",
+            "language": "Vietnamese",
+            "original_price": 500000,
+            "pages": 320,
+            "price": 450000,
+            "publish_date": "2023-09-10",
+            "publisher": "NXB Tổng Hợp",
+            "quantity": 1,
+            "rating": 4.8,
+            "title": "Đắc Nhân Tâm"
+          },
+          {
+            "added_at": "2025-08-06T17:51:02.928Z",
+            "author": "Nhiều tác giả",
+            "book_id": "BK008",
+            "category_code": "SM001",
+            "category_name": "New Books",
+            "cover_image": "images/books/img-08.jpg",
+            "description": "Cuốn sách về cuộc cách mạng công nghiệp lần thứ 4 và những tác động của nó đến thế giới.",
+            "image": "images/books/img-08.jpg",
+            "is_featured": false,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "978-604-1-12352-3",
+            "language": "Vietnamese",
+            "original_price": 300000,
+            "pages": 250,
+            "price": 250000,
+            "publish_date": "2024-01-20",
+            "publisher": "NXB Khoa Học Kỹ Thuật",
+            "quantity": 1,
+            "rating": 4.3,
+            "title": "Cách Mạng Công Nghiệp 4.0"
+          }
+        ],
+        "couponCode": "WELCOME10",
+        "couponDiscount": 50000,
+        "couponType": "percentage",
+        "createdAt": "2025-08-06T17:53:01.188Z",
+        "customerAddress": "Châu đốc, An Giang",
+        "customerEmail": "quanpham4298@gmail.com",
+        "customerName": "quân pham",
+        "customerPhone": "123456789",
+        "finalPrice": 650000,
+        "orderId": "ORDER_1754502781188_wfm0zbjxt",
+        "orderType": "cart",
+        "paymentMethod": "vnpay",
+        "status": "pending",
+        "totalItems": 2,
+        "totalOriginal": 800000,
+        "totalPrice": 700000,
+        "updatedAt": "2025-08-06T17:53:01.188Z",
+        "userId": "YpWN3bXOouP7bqiBxhCd9yxs1Xc2"
+      },
+      "ORDER_1754502798518_xbbndx14b": {
+        "activatedAt": "2025-08-06T17:53:50.239Z",
+        "cartItems": [
+          {
+            "added_at": "2025-08-06T17:33:32.849Z",
+            "author": "Dale Carnegie",
+            "book_id": "BK003",
+            "category_code": "SNB002",
+            "category_name": "Featured Books",
+            "cover_image": "images/books/img-03.jpg",
+            "description": "Cuốn sách kinh điển về nghệ thuật đối nhân xử thế, giúp độc giả phát triển kỹ năng giao tiếp và xây dựng mối quan hệ tốt đẹp.",
+            "image": "images/books/img-03.jpg",
+            "is_featured": true,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "978-604-1-12347-8",
+            "language": "Vietnamese",
+            "original_price": 500000,
+            "pages": 320,
+            "price": 450000,
+            "publish_date": "2023-09-10",
+            "publisher": "NXB Tổng Hợp",
+            "quantity": 1,
+            "rating": 4.8,
+            "title": "Đắc Nhân Tâm"
+          },
+          {
+            "added_at": "2025-08-06T17:51:02.928Z",
+            "author": "Nhiều tác giả",
+            "book_id": "BK008",
+            "category_code": "SM001",
+            "category_name": "New Books",
+            "cover_image": "images/books/img-08.jpg",
+            "description": "Cuốn sách về cuộc cách mạng công nghiệp lần thứ 4 và những tác động của nó đến thế giới.",
+            "image": "images/books/img-08.jpg",
+            "is_featured": false,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "978-604-1-12352-3",
+            "language": "Vietnamese",
+            "original_price": 300000,
+            "pages": 250,
+            "price": 250000,
+            "publish_date": "2024-01-20",
+            "publisher": "NXB Khoa Học Kỹ Thuật",
+            "quantity": 1,
+            "rating": 4.3,
+            "title": "Cách Mạng Công Nghiệp 4.0"
+          }
+        ],
+        "createdAt": "2025-08-06T17:53:18.518Z",
+        "customerAddress": "Châu đốc, An Giang",
+        "customerEmail": "quanpham4298@gmail.com",
+        "customerName": "quân pham",
+        "customerPhone": "123456789",
+        "orderId": "ORDER_1754502798518_xbbndx14b",
         "orderStatus": "confirmed",
         "orderType": "cart",
-        "paymentDate": "2025-08-06T12:14:05.340Z",
+        "paymentDate": "2025-08-06T17:53:50.239Z",
         "paymentMethod": "vnpay",
         "paymentStatus": "completed",
         "status": "success",
-        "totalItems": 1,
-        "totalOriginal": 75000,
-        "totalPrice": 50000,
-        "transactionId": "15119591",
-        "updatedAt": "2025-08-06T12:14:05.340Z",
-        "userId": "Tt50hFcTNLNZB1tggdFzKWCFcvB3",
+        "totalItems": 2,
+        "totalOriginal": 800000,
+        "totalPrice": 700000,
+        "transactionId": "15119927",
+        "updatedAt": "2025-08-06T17:53:50.239Z",
+        "userId": "YpWN3bXOouP7bqiBxhCd9yxs1Xc2",
         "vnpayResponse": {
-          "vnp_Amount": "5000000",
+          "vnp_Amount": "70000000",
           "vnp_BankCode": "NCB",
-          "vnp_BankTranNo": "VNP15119591",
+          "vnp_BankTranNo": "VNP15119927",
           "vnp_CardType": "ATM",
-          "vnp_OrderInfo": "Thanh toan gio hang 1 san pham",
-          "vnp_PayDate": "20250806191506",
+          "vnp_OrderInfo": "Thanh toan gio hang 2 san pham",
+          "vnp_PayDate": "20250807005444",
           "vnp_ResponseCode": "00",
-          "vnp_SecureHash": "f684485ee3765cbe50859d7690fd40b69584424dbe8b86d9d806de0005751bb29ddeaa6fa8f6ed5b84bd964956e1fe547f6f52f2ccbf9410a6f07da099972c8f",
+          "vnp_SecureHash": "3fd76d753db4f1a30b5d44e7d018f1b7061fc07ad5fb48e369900ef1362dc11bc4fc9d534d15f38e8c926b58a6c2cc51ad2929ccd892bc2253f07c6963c6b52b",
           "vnp_TmnCode": "2Q01AVYB",
-          "vnp_TransactionNo": "15119591",
+          "vnp_TransactionNo": "15119927",
           "vnp_TransactionStatus": "00",
-          "vnp_TxnRef": "B891GE4W"
+          "vnp_TxnRef": "BBNDX14B"
         }
+      }
+    },
+    "bhgUq7LDs0fnNE3by1gzExO6B7U2": {
+      "ORDER_1754556389674_gaqio5h1g": {
+        "cartItems": [
+          {
+            "added_at": "2025-08-07T08:46:04.610Z",
+            "author": "Dale Carnegie",
+            "book_id": "BK003",
+            "category_code": "SNB002",
+            "category_name": "Featured Books",
+            "cover_image": "images/books/img-03.jpg",
+            "description": "Cuốn sách kinh điển về nghệ thuật đối nhân xử thế, giúp độc giả phát triển kỹ năng giao tiếp và xây dựng mối quan hệ tốt đẹp.",
+            "image": "images/books/img-03.jpg",
+            "is_featured": true,
+            "is_free": false,
+            "is_member_only": false,
+            "isbn": "978-604-1-12347-8",
+            "language": "Vietnamese",
+            "original_price": 500000,
+            "pages": 320,
+            "price": 450000,
+            "publish_date": "2023-09-10",
+            "publisher": "NXB Tổng Hợp",
+            "quantity": 1,
+            "rating": 4.8,
+            "title": "Đắc Nhân Tâm"
+          }
+        ],
+        "createdAt": "2025-08-07T08:46:29.674Z",
+        "customerAddress": "sagdczd",
+        "customerEmail": "fxbfnf@gmail.com",
+        "customerName": "vuònafaf",
+        "customerPhone": "0836185040",
+        "orderId": "ORDER_1754556389674_gaqio5h1g",
+        "orderType": "cart",
+        "paymentMethod": "vnpay",
+        "status": "pending",
+        "totalItems": 1,
+        "totalOriginal": 500000,
+        "totalPrice": 450000,
+        "updatedAt": "2025-08-07T08:46:29.674Z",
+        "userId": "bhgUq7LDs0fnNE3by1gzExO6B7U2"
       }
     }
   },
   "users": {
+    "A2VyvLrftxffAuLkQXTxq3XQN1H2": {
+      "profile": {
+        "displayName": "Kazami Jim",
+        "email": "kazamijim@gmail.com",
+        "isAuthor": {
+          "requestedAt": "2025-08-06T17:59:49.438Z",
+          "status": "pending"
+        },
+        "lastUpdated": "2025-08-06T17:59:49.438Z",
+        "personalInfo": {
+          "fullName": "Kazami Jim",
+          "username": "kazamijim"
+        },
+        "photoURL": "https://res.cloudinary.com/dvcebine7/image/upload/v1754503188/ltfsqyiuxb3j3dhtdhtl.jpg",
+        "uid": "A2VyvLrftxffAuLkQXTxq3XQN1H2"
+      },
+      "storyReadingHistory": {
+        "story_003": {
+          "isCurrentlyReading": false,
+          "lastReadTime": 1754503369019,
+          "readingProgress": 5,
+          "readingTime": 3,
+          "startTime": 1754503365925,
+          "storyAuthor": "Nam Cao",
+          "storyCover": "https://conmuamuaha31.wordpress.com/wp-content/uploads/2020/10/1.png?w=809",
+          "storyId": "story_003",
+          "storyTitle": "Truyện Ngắn Nam Cao",
+          "totalWords": 621
+        }
+      }
+    },
     "Tt50hFcTNLNZB1tggdFzKWCFcvB3": {
       "bookReadingHistory": {
-        "book_004": {
-          "bookAuthor": "J.K. Rowling",
-          "bookCover": "images/books/img-04.jpg",
-          "bookId": "book_004",
-          "bookTitle": "Harry Potter và Hòn đá Phù thủy",
+        "book_001": {
+          "bookAuthor": "Nam Cao",
+          "bookCover": "images/books/img-01.jpg",
+          "bookId": "book_001",
+          "bookTitle": "Lão Hạc",
           "isCurrentlyReading": false,
-          "lastReadTime": 1754493694384,
-          "readingProgress": 51,
-          "readingTime": 4,
-          "startTime": 1754493689743,
-          "totalWords": 792
+          "lastReadTime": 1754496552094,
+          "readingProgress": 50,
+          "readingTime": 1482,
+          "startTime": 1754495651888,
+          "totalWords": 529
         }
       },
       "profile": {
         "createdAt": "2025-08-05T08:19:43.980Z",
         "displayName": "Quân Phạm",
         "email": "phamhongquan9117@gmail.com",
-        "lastUpdated": "2025-08-06T12:06:56.402Z",
+        "lastUpdated": "2025-08-08T07:11:51.050Z",
         "membership": {
           "endDate": "2025-11-06T06:34:34.354Z",
           "features": [
@@ -1711,31 +2163,338 @@
           "totalOrders": 3
         },
         "personalInfo": {
-          "address": "111111111",
+          "address": "cần thơ",
           "dateOfBirth": "01/01/1900",
           "fullName": "Quân Phạm",
-          "gender": "KhácTất cảTất cảTất cảTất cảTất cảTất cả",
-          "phone": "111111111",
+          "gender": "KhácTất cảTất cảTất cảTất cảTất cảTất cảTâm lý học",
+          "phone": "0956635540",
           "userId": "UVZ8L9EPFO",
           "username": "phamhongquan9117"
         },
         "photoURL": "https://res.cloudinary.com/dvcebine7/image/upload/v1754384811/h58yymy2wotwvrvkvvqr.jpg",
         "uid": "Tt50hFcTNLNZB1tggdFzKWCFcvB3"
+      }
+    },
+    "YpWN3bXOouP7bqiBxhCd9yxs1Xc2": {
+      "bookReadingHistory": {
+        "book_005": {
+          "bookAuthor": "Tác giả Ẩn danh",
+          "bookCover": "images/books/img-05.jpg",
+          "bookId": "book_005",
+          "bookTitle": "Sách Đỏ",
+          "isCurrentlyReading": false,
+          "lastReadTime": 1754501628248,
+          "readingProgress": 56,
+          "readingTime": 4,
+          "startTime": 1754501623678,
+          "totalWords": 1033
+        }
+      },
+      "profile": {
+        "createdAt": "2025-08-06T17:34:34.301Z",
+        "displayName": "quân pham",
+        "email": "quanpham4298@gmail.com",
+        "isAuthor": {
+          "status": "none"
+        },
+        "lastUpdated": "2025-08-06T17:52:35.615Z",
+        "membership": {
+          "endDate": "2026-02-06T17:48:14.556Z",
+          "features": [
+            "unlimited_books"
+          ],
+          "isActive": true,
+          "packageName": "Gói 6 Tháng",
+          "startDate": "2025-08-06T17:48:14.556Z",
+          "type": "basic"
+        },
+        "personalInfo": {
+          "address": "Châu đốc, An Giang",
+          "dateOfBirth": "01/01/1900",
+          "fullName": "quân pham",
+          "gender": "NamTất cảTất cảTất cảTất cảTất cảTất cả",
+          "phone": "123456789",
+          "userId": "U34X5N6QHS",
+          "username": "quanpham4298"
+        },
+        "photoURL": "https://res.cloudinary.com/dvcebine7/image/upload/v1754501739/cfozejbsyf6gtso14slf.png",
+        "uid": "YpWN3bXOouP7bqiBxhCd9yxs1Xc2"
       },
       "storyReadingHistory": {
-        "story_002": {
+        "story_003": {
           "isCurrentlyReading": false,
-          "lastReadTime": 1754493695700,
-          "readingProgress": 12,
-          "readingTime": 61,
-          "startTime": 1754493634071,
-          "storyAuthor": "Nhiều tác giả",
-          "storyCover": "https://cdn.kenhsinhvien.vn/data/2023/08/456293_1692695231261.png",
-          "storyId": "story_002",
-          "storyTitle": "Truyện Cổ Tích Việt Nam",
-          "totalWords": 628
+          "lastReadTime": 1754501663856,
+          "readingProgress": 100,
+          "readingTime": 20,
+          "startTime": 1754501643756,
+          "storyAuthor": "Nam Cao",
+          "storyCover": "https://conmuamuaha31.wordpress.com/wp-content/uploads/2020/10/1.png?w=809",
+          "storyId": "story_003",
+          "storyTitle": "Truyện Ngắn Nam Cao",
+          "totalWords": 621
         }
       }
+    },
+    "bhgUq7LDs0fnNE3by1gzExO6B7U2": {
+      "badges": [
+        "Độc giả mới"
+      ],
+      "bio": "",
+      "birthday": "",
+      "createdAt": "2025-08-07T08:55:49.523Z",
+      "displayName": "Phúc Vương",
+      "email": "phucvuong175@gmail.com",
+      "isAuthor": {
+        "status": "none"
+      },
+      "location": "",
+      "phone": "",
+      "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocLrKOVVIzr-6BkOapJTIfdxCjPUETx5iKsC0skL24xAtR1SLJw=s96-c",
+      "readingGoal": {
+        "current": 0,
+        "target": 50,
+        "year": 2025
+      },
+      "stats": {
+        "booksRead": 0,
+        "points": 0,
+        "readingHours": 0,
+        "reviews": 0
+      }
+    },
+    "e7rkuPcNkAZ64WAwwnD8RPhvmiE2": {
+      "badges": [
+        "Độc giả mới"
+      ],
+      "bio": "",
+      "birthday": "",
+      "createdAt": "2025-08-07T06:55:57.788Z",
+      "displayName": "Siuu",
+      "email": "transieuhoangkhang@gmail.com",
+      "isAuthor": {
+        "status": "none"
+      },
+      "location": "",
+      "phone": "",
+      "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocKOLCVINc3S6BC1PEOMkZQMbhFDdrBzupx2K1NtJb4mu7UmQDk5=s96-c",
+      "readingGoal": {
+        "current": 0,
+        "target": 50,
+        "year": 2025
+      },
+      "stats": {
+        "booksRead": 0,
+        "points": 0,
+        "readingHours": 0,
+        "reviews": 0
+      }
+    }
+  },
+  "Authors": {
+    "author_001": {
+      "author_id": "AUTH001",
+      "name": "Nam Cao",
+      "bio": "Nam Cao (1915-1951) là một nhà văn hiện thực xuất sắc của văn học Việt Nam. Ông được coi là một trong những nhà văn tiêu biểu nhất của trào lưu văn học hiện thực phê phán Việt Nam giai đoạn 1930-1945. Các tác phẩm của ông thường tập trung vào cuộc sống của người nông dân nghèo khổ và trí thức tiểu tư sản nghèo, với những tác phẩm nổi tiếng như 'Lão Hạc', 'Chí Phèo', 'Sống mòn'.",
+      "birth_date": "1915-10-29",
+      "death_date": "1951-11-30",
+      "nationality": "Vietnamese",
+      "genre": ["Tiểu thuyết", "Truyện ngắn"],
+      "notable_works": ["Lão Hạc", "Chí Phèo", "Sống mòn", "Đời thừa"],
+      "awards": ["Giải thưởng Hồ Chí Minh về Văn học Nghệ thuật"],
+      "photo_url": "images/authors/nam-cao.jpg",
+      "website": "",
+      "social_media": {},
+      "total_books": 1,
+      "total_views": 8900,
+      "rating": 4.2,
+      "is_featured": true,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_002": {
+      "author_id": "AUTH002",
+      "name": "Paulo Coelho",
+      "bio": "Paulo Coelho (sinh 1947) là một nhà văn Brazil nổi tiếng thế giới. Ông được biết đến với những tác phẩm mang tính triết lý sâu sắc và tâm linh. Tác phẩm 'Nhà Giả Kim' của ông đã được dịch ra hơn 80 ngôn ngữ và bán được hơn 225 triệu bản trên toàn thế giới. Coelho thường viết về hành trình tìm kiếm ý nghĩa cuộc sống và khám phá bản thân.",
+      "birth_date": "1947-08-24",
+      "death_date": null,
+      "nationality": "Brazilian",
+      "genre": ["Tiểu thuyết", "Tâm linh", "Triết học"],
+      "notable_works": ["Nhà Giả Kim", "Veronika quyết chết", "Mười một phút", "Brida"],
+      "awards": ["Giải thưởng Văn học Quốc tế Grinzane Cavour", "Giải thưởng Văn học Hans Christian Andersen"],
+      "photo_url": "images/authors/paulo-coelho.jpg",
+      "website": "https://paulocoelhoblog.com",
+      "social_media": {
+        "twitter": "@paulocoelho",
+        "instagram": "@paulocoelho"
+      },
+      "total_books": 1,
+      "total_views": 15600,
+      "rating": 4.5,
+      "is_featured": true,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_003": {
+      "author_id": "AUTH003",
+      "name": "Dale Carnegie",
+      "bio": "Dale Carnegie (1888-1955) là một nhà văn và diễn giả người Mỹ, được biết đến với những cuốn sách về kỹ năng giao tiếp và phát triển bản thân. Tác phẩm 'Đắc Nhân Tâm' của ông đã trở thành một trong những cuốn sách bán chạy nhất mọi thời đại, với hơn 30 triệu bản được bán trên toàn thế giới. Carnegie cũng là người sáng lập Dale Carnegie Training, một tổ chức đào tạo kỹ năng mềm.",
+      "birth_date": "1888-11-24",
+      "death_date": "1955-11-01",
+      "nationality": "American",
+      "genre": ["Kỹ năng sống", "Giao tiếp", "Phát triển bản thân"],
+      "notable_works": ["Đắc Nhân Tâm", "Quẳng gánh lo đi và vui sống", "Nghệ thuật nói trước công chúng"],
+      "awards": [],
+      "photo_url": "images/authors/dale-carnegie.jpg",
+      "website": "https://www.dalecarnegie.com",
+      "social_media": {},
+      "total_books": 1,
+      "total_views": 18900,
+      "rating": 4.8,
+      "is_featured": true,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_004": {
+      "author_id": "AUTH004",
+      "name": "J.K. Rowling",
+      "bio": "J.K. Rowling (sinh 1965) là một nhà văn người Anh, được biết đến với series tiểu thuyết fantasy 'Harry Potter'. Series này đã trở thành hiện tượng văn học toàn cầu, bán được hơn 500 triệu bản và được dịch ra 80 ngôn ngữ. Rowling cũng viết dưới bút danh Robert Galbraith cho series tiểu thuyết trinh thám 'Cormoran Strike'.",
+      "birth_date": "1965-07-31",
+      "death_date": null,
+      "nationality": "British",
+      "genre": ["Fantasy", "Trinh thám", "Văn học thiếu nhi"],
+      "notable_works": ["Harry Potter series", "Cormoran Strike series", "The Casual Vacancy"],
+      "awards": ["Huân chương Đế quốc Anh", "Giải thưởng Văn học Hans Christian Andersen"],
+      "photo_url": "images/authors/jk-rowling.jpg",
+      "website": "https://www.jkrowling.com",
+      "social_media": {
+        "twitter": "@jk_rowling"
+      },
+      "total_books": 1,
+      "total_views": 12300,
+      "rating": 4.7,
+      "is_featured": false,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_005": {
+      "author_id": "AUTH005",
+      "name": "Tác giả Ẩn danh",
+      "bio": "Tác giả ẩn danh chuyên viết về các chủ đề khoa học và bảo tồn thiên nhiên. Các tác phẩm thường tập trung vào việc nâng cao nhận thức về môi trường và đa dạng sinh học.",
+      "birth_date": null,
+      "death_date": null,
+      "nationality": "Vietnamese",
+      "genre": ["Khoa học", "Môi trường", "Bảo tồn"],
+      "notable_works": ["Sách Đỏ"],
+      "awards": [],
+      "photo_url": "images/authors/anonymous.jpg",
+      "website": "",
+      "social_media": {},
+      "total_books": 1,
+      "total_views": 8900,
+      "rating": 4.0,
+      "is_featured": false,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_006": {
+      "author_id": "AUTH006",
+      "name": "Tôn Tử",
+      "bio": "Tôn Tử (544-496 TCN) là một nhà quân sự, nhà tư tưởng và nhà văn Trung Quốc cổ đại. Ông được coi là tác giả của 'Binh pháp Tôn Tử' (Nghệ Thuật Chiến Tranh), một trong những tác phẩm quân sự có ảnh hưởng nhất trong lịch sử. Tác phẩm này không chỉ được áp dụng trong quân sự mà còn được sử dụng rộng rãi trong kinh doanh, thể thao và các lĩnh vực khác.",
+      "birth_date": "-544-01-01",
+      "death_date": "-496-01-01",
+      "nationality": "Chinese",
+      "genre": ["Chiến lược", "Quân sự", "Triết học"],
+      "notable_works": ["Nghệ Thuật Chiến Tranh"],
+      "awards": [],
+      "photo_url": "images/authors/sun-tzu.jpg",
+      "website": "",
+      "social_media": {},
+      "total_books": 1,
+      "total_views": 6700,
+      "rating": 4.6,
+      "is_featured": false,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_007": {
+      "author_id": "AUTH007",
+      "name": "Nguyễn Du",
+      "bio": "Nguyễn Du (1765-1820) là đại thi hào dân tộc Việt Nam, được UNESCO vinh danh là Danh nhân văn hóa thế giới. Ông là tác giả của 'Truyện Kiều', một tác phẩm thơ Nôm nổi tiếng được coi là kiệt tác của văn học Việt Nam. Tác phẩm này đã được dịch ra nhiều ngôn ngữ và được nghiên cứu rộng rãi trên thế giới.",
+      "birth_date": "1765-01-03",
+      "death_date": "1820-08-16",
+      "nationality": "Vietnamese",
+      "genre": ["Thơ", "Văn học cổ điển"],
+      "notable_works": ["Truyện Kiều", "Văn tế thập loại chúng sinh", "Thanh Hiên thi tập"],
+      "awards": ["Danh hiệu Danh nhân văn hóa thế giới (UNESCO)"],
+      "photo_url": "images/authors/nguyen-du.jpg",
+      "website": "",
+      "social_media": {},
+      "total_books": 1,
+      "total_views": 15600,
+      "rating": 4.9,
+      "is_featured": true,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_008": {
+      "author_id": "AUTH008",
+      "name": "Nhiều tác giả",
+      "bio": "Tập thể các tác giả chuyên viết về công nghệ và khoa học, bao gồm các chuyên gia, nhà nghiên cứu và nhà báo khoa học. Các tác phẩm thường tập trung vào những xu hướng công nghệ mới và tác động của chúng đến xã hội.",
+      "birth_date": null,
+      "death_date": null,
+      "nationality": "Vietnamese",
+      "genre": ["Công nghệ", "Khoa học", "Kinh tế"],
+      "notable_works": ["Cách Mạng Công Nghiệp 4.0"],
+      "awards": [],
+      "photo_url": "images/authors/multiple-authors.jpg",
+      "website": "",
+      "social_media": {},
+      "total_books": 1,
+      "total_views": 7800,
+      "rating": 4.3,
+      "is_featured": false,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_009": {
+      "author_id": "AUTH009",
+      "name": "Napoleon Hill",
+      "bio": "Napoleon Hill (1883-1970) là một tác giả người Mỹ chuyên viết về thành công và phát triển bản thân. Ông được biết đến với cuốn sách 'Think and Grow Rich' (Nghĩ giàu và làm giàu), một trong những cuốn sách bán chạy nhất mọi thời đại. Hill đã dành 20 năm nghiên cứu về những người thành công nhất để tìm ra những nguyên tắc thành công.",
+      "birth_date": "1883-10-26",
+      "death_date": "1970-11-08",
+      "nationality": "American",
+      "genre": ["Thành công", "Phát triển bản thân", "Kinh doanh"],
+      "notable_works": ["Think and Grow Rich", "The Law of Success", "Outwitting the Devil"],
+      "awards": [],
+      "photo_url": "images/authors/napoleon-hill.jpg",
+      "website": "",
+      "social_media": {},
+      "total_books": 1,
+      "total_views": 8900,
+      "rating": 4.4,
+      "is_featured": false,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
+    },
+    "author_010": {
+      "author_id": "AUTH010",
+      "name": "Chef Minh",
+      "bio": "Chef Minh là một đầu bếp chuyên nghiệp và tác giả sách nấu ăn nổi tiếng tại Việt Nam. Với hơn 20 năm kinh nghiệm trong lĩnh vực ẩm thực, ông đã xuất bản nhiều cuốn sách hướng dẫn nấu ăn và tham gia nhiều chương trình truyền hình về ẩm thực. Chef Minh chuyên về ẩm thực Việt Nam và quốc tế.",
+      "birth_date": null,
+      "death_date": null,
+      "nationality": "Vietnamese",
+      "genre": ["Nấu ăn", "Ẩm thực", "Hướng dẫn"],
+      "notable_works": ["Sách Hướng Dẫn Nấu Ăn"],
+      "awards": [],
+      "photo_url": "images/authors/chef-minh.jpg",
+      "website": "",
+      "social_media": {},
+      "total_books": 1,
+      "total_views": 13400,
+      "rating": 4.6,
+      "is_featured": true,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-15T00:00:00.000Z"
     }
   }
 }

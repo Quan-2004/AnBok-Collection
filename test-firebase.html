@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Firebase - AnBok Collection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Firebase Connection</h1>
+    
+    <div class="test-section info">
+        <h3>Firebase Configuration</h3>
+        <div id="firebase-config"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Connection Status</h3>
+        <div id="connection-status">Testing...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Stories Data</h3>
+        <div id="stories-data">Loading...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test Story Detail (story_001)</h3>
+        <div id="story-detail">Loading...</div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
+            authDomain: "anbok-collection.firebaseapp.com",
+            databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "anbok-collection",
+            storageBucket: "anbok-collection.firebasestorage.app",
+            messagingSenderId: "835844957818",
+            appId: "1:835844957818:web:33fc3d03875d49fc5c3dc3"
+        };
+
+        // Display Firebase config
+        document.getElementById('firebase-config').innerHTML = `
+            <pre>${JSON.stringify(firebaseConfig, null, 2)}</pre>
+        `;
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Test connection
+        firebase.database().ref('.info/connected').on('value', function(snap) {
+            const status = snap.val() ? 'Connected' : 'Disconnected';
+            const statusDiv = document.getElementById('connection-status');
+            statusDiv.innerHTML = `
+                <div class="${snap.val() ? 'success' : 'error'}">
+                    <strong>Status:</strong> ${status}
+                </div>
+            `;
+        });
+
+        // Test loading all stories
+        async function loadStories() {
+            try {
+                const snapshot = await firebase.database().ref('Stories').once('value');
+                const stories = snapshot.val();
+                
+                if (stories) {
+                    const storyKeys = Object.keys(stories);
+                    document.getElementById('stories-data').innerHTML = `
+                        <div class="success">
+                            <strong>Success!</strong> Loaded ${storyKeys.length} stories<br>
+                            <strong>Story Keys:</strong> ${storyKeys.join(', ')}
+                        </div>
+                        <pre>${JSON.stringify(stories, null, 2)}</pre>
+                    `;
+                } else {
+                    document.getElementById('stories-data').innerHTML = `
+                        <div class="error">
+                            <strong>Error:</strong> No stories found
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('stories-data').innerHTML = `
+                    <div class="error">
+                        <strong>Error:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Test loading specific story
+        async function loadStoryDetail() {
+            try {
+                const snapshot = await firebase.database().ref('Stories/story_001').once('value');
+                const story = snapshot.val();
+                
+                if (story) {
+                    document.getElementById('story-detail').innerHTML = `
+                        <div class="success">
+                            <strong>Success!</strong> Found story: ${story.title}
+                        </div>
+                        <pre>${JSON.stringify(story, null, 2)}</pre>
+                    `;
+                } else {
+                    document.getElementById('story-detail').innerHTML = `
+                        <div class="error">
+                            <strong>Error:</strong> Story story_001 not found
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('story-detail').innerHTML = `
+                    <div class="error">
+                        <strong>Error:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Load data when page is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                loadStories();
+                loadStoryDetail();
+            }, 2000);
+        });
+    </script>
+</body>
+</html> 

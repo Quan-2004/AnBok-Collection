@@ -1,64 +1,58 @@
 {
   "rules": {
+    "news": {
+      ".read": true,
+      ".write": "auth != null"
+    },
     "users": {
       "$uid": {
-        ".read": "auth != null && auth.uid == $uid",
-        ".write": "auth != null && auth.uid == $uid"
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
       }
+    },
+    "books": {
+      ".read": true,
+      ".write": "auth != null"
     },
     "orders": {
       "$uid": {
-        ".read": "auth != null && auth.uid == $uid",
-        ".write": "auth != null && auth.uid == $uid"
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
+    },
+    "cart": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
       }
     },
     "wishlist": {
       "$uid": {
-        ".read": "auth != null && auth.uid == $uid",
-        ".write": "auth != null && auth.uid == $uid"
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
       }
     },
-    "BookCategories": {
+    "reviews": {
       ".read": true,
       ".write": "auth != null"
     },
-    "BookGenres": {
+    "authors": {
       ".read": true,
       ".write": "auth != null"
     },
-    "StoryCategories": {
+    "categories": {
       ".read": true,
       ".write": "auth != null"
     },
-    "StoryGenres": {
+    "settings": {
       ".read": true,
-      ".write": "auth != null"
+      ".write": "auth != null && auth.token.admin === true"
     },
-    "Books": {
-      ".read": true,
-      ".write": "auth != null"
-    },
-    "Stories": {
-      ".read": true,
-      ".write": "auth != null"
-    },
-    "Carts": {
-      ".read": true,
-      ".write": "auth != null"
-    },
-    "Membership": {
+    "AuthorApplications": {
       "$uid": {
-        ".read": "auth != null && auth.uid == $uid",
-        ".write": "auth != null && auth.uid == $uid"
+        ".read": "$uid === auth.uid || auth.token.admin === true",
+        ".write": "$uid === auth.uid"
       }
-    },
-    "MembershipPackages": {
-      ".read": true,
-      ".write": "auth != null"
-    },
-    "vnpay_transactions": {
-      ".read": "auth != null",
-      ".write": "auth != null"
     }
   }
 } 

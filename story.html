@@ -6878,6 +6878,67 @@
 				justify-content: center;
 		}
 		}
+
+		/* Story Card Hover Effects */
+		.tg-story-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+		}
+		
+		.tg-story-card:hover .tg-story-overlay {
+			opacity: 1 !important;
+		}
+		
+		.tg-story-card:hover .tg-story-image-container img {
+			transform: scale(1.1);
+		}
+		
+		/* Quick Action Buttons - Consistent with book.html */
+		.tg-overlay-btn {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			border: none;
+			background: rgba(255, 255, 255, 0.95);
+			color: #4A6366;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 16px;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+			backdrop-filter: blur(10px);
+		}
+		
+		.tg-overlay-btn:hover {
+			transform: scale(1.15);
+			box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+		}
+		
+		.tg-overlay-btn.view-btn:hover {
+			background: #4A6366;
+			color: white;
+		}
+		
+		.tg-overlay-btn.wishlist-btn:hover {
+			background: #F4A261;
+			color: white;
+		}
+		
+		.tg-overlay-btn.read-btn:hover {
+			background: #17a2b8;
+			color: white;
+		}
+		
+		.tg-overlay-btn.cart-btn:hover {
+			background: #28a745;
+			color: white;
+		}
+		
+		.tg-story-title a:hover {
+			color: #4A6366;
+		}
 	
 	</style>
 </head>
@@ -6975,47 +7036,14 @@
 
 								<!-- User Profile -->
 								<div class="tg-user-profile">
-									<div class="tg-user-info" onclick="toggleUserDropdown();">
-										<div class="tg-user-avatar">
-											<img id="userAvatar" src="" alt="User Avatar">
-										</div>
-										<span id="userName">Loading...</span>
-										<i class="fa fa-chevron-down"></i>
-									</div>
-									
-									<!-- User Dropdown Menu -->
-									<div class="tg-user-dropdown" id="userDropdown">
-										<div class="tg-dropdown-header">
-											<div class="tg-dropdown-avatar">
-												<img id="dropdownUserAvatar" src="" alt="User Avatar">
+									<a href="profile.html" style="text-decoration: none; color: inherit;">
+										<div class="tg-user-info">
+											<div class="tg-user-avatar">
+												<img id="userAvatar" src="" alt="User Avatar">
 											</div>
-											<div id="dropdownUserName">Loading...</div>
-											<div id="dropdownUserEmail">Loading...</div>
+											<span id="userName">Loading...</span>
 										</div>
-										<div class="tg-dropdown-menu">
-											<a href="profile.html" class="tg-dropdown-item">
-												<i class="fa fa-user"></i>
-												<span>Hồ sơ cá nhân</span>
-											</a>
-											<a href="account/bookcase.html?tab=favorites" class="tg-dropdown-item">
-												<i class="fa fa-heart"></i>
-												<span>Yêu thích</span>
-											</a>
-											<a href="account/orders/orders-list.html" class="tg-dropdown-item">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Đơn hàng</span>
-											</a>
-											<a href="account/setting.html" class="tg-dropdown-item">
-												<i class="fa fa-cog"></i>
-												<span>Cài đặt</span>
-											</a>
-											<div class="tg-dropdown-divider"></div>
-											<a href="javascript:void(0);" class="tg-dropdown-item tg-dropdown-logout logout-btn">
-												<i class="fa fa-sign-out"></i>
-												<span>Đăng xuất</span>
-											</a>
-										</div>
-									</div>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -7059,25 +7087,25 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="author-bio.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-user" style="margin-right: 8px;"></i>
 													Tác giả
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="news.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Tin tức
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="about.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-info-circle" style="margin-right: 8px;"></i>
 													Về chúng tôi
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="contact.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-envelope" style="margin-right: 8px;"></i>
 													Liên hệ
 												</a>
@@ -7088,7 +7116,7 @@
 									<!-- Cart Button -->
 									<div class="tg-cart-btn">
 										<a href="javascript:void(0);" class="tg-cart-link" onclick="toggleCartModal();">
-											<i class="fa fa-shopping-cart"></i>
+											<i class="fa fa-shopping-basket"></i>
 											<span class="tg-cart-badge" id="cart-badge">0</span>
 										</a>
 									</div>
@@ -7236,7 +7264,7 @@
 			<div class="tg-cart-modal-overlay" onclick="toggleCartModal();"></div>
 			<div class="tg-cart-modal-content">
 				<div class="tg-cart-modal-header">
-					<h3><i class="fa fa-shopping-cart"></i> Giỏ hàng</h3>
+					<h3><i class="fa fa-shopping-basket"></i> Giỏ hàng</h3>
 					<button class="tg-cart-modal-close" onclick="toggleCartModal();">
 						<i class="fa fa-times"></i>
 					</button>
@@ -7245,7 +7273,7 @@
 									<div class="tg-cart-items" id="cart-items-container">
 					<!-- Cart items will be loaded dynamically from Firebase -->
 					<div class="tg-cart-empty" style="display: block;">
-						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-shopping-basket"></i>
 						<h4>Giỏ hàng trống</h4>
 						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
 					</div>
@@ -7253,7 +7281,7 @@
 					
 					<!-- Empty Cart Message -->
 					<div class="tg-cart-empty" style="display: none;">
-						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-shopping-basket"></i>
 						<h4>Giỏ hàng trống</h4>
 						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
 						<button class="tg-btn tg-btn-primary" onclick="toggleCartModal();">Tiếp tục mua sắm</button>
@@ -7367,21 +7395,21 @@
                                     </div>
                                     <div class="tg-widgetcontent">
                                                                                 <ul>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Điều khoản sử dụng</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Điều khoản mua bán</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách đổi trả</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách bảo mật</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách Cookie</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Liên hệ chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Đối tác của chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Tầm nhìn &amp; Mục tiêu</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Điều khoản sử dụng</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Điều khoản mua bán</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Chính sách đổi trả</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Chính sách bảo mật</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Chính sách Cookie</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Liên hệ chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Đối tác của chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Tầm nhìn &amp; Mục tiêu</a></li>
                                         </ul>
                                         <ul>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Câu chuyện của chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Gặp gỡ đội ngũ</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Câu hỏi thường gặp</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Đánh giá khách hàng</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Tham gia cùng chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Câu chuyện của chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Gặp gỡ đội ngũ</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Câu hỏi thường gặp</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Đánh giá khách hàng</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Tham gia cùng chúng tôi</a></li>
                                         </ul>
                                     </div>
 								</div>
@@ -7394,23 +7422,23 @@
                                     <div class="tg-widgetcontent">
                                         <ul>
                                                                                         <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-09.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-bio.html"><img src="images/author/imag-09.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Nguyễn Văn An</a></h4>
+                                                    <h4><a href="author-bio.html" style="color: white;">Nguyễn Văn An</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">21,658 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
                                             <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-10.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-bio.html"><img src="images/author/imag-10.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Trần Thị Bình</a></h4>
+                                                    <h4><a href="author-bio.html" style="color: white;">Trần Thị Bình</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">20,257 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
                                             <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-11.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-bio.html"><img src="images/author/imag-11.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Lê Văn Cường</a></h4>
+                                                    <h4><a href="author-bio.html" style="color: white;">Lê Văn Cường</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">15,686 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
@@ -7537,7 +7565,7 @@
 						
 					</button>
 					<button class="tg-btn tg-btn-cart" id="tg-preview-cart">
-						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-shopping-basket"></i>
 						<span>Thêm vào giỏ</span>
 					</button>
 				</div>
@@ -7962,7 +7990,7 @@
 								<span class="tg-menu-badge">12</span>
 							</a>
 							<a href="javascript:void(0);" class="tg-menu-item">
-								<i class="fa fa-shopping-cart"></i>
+								<i class="fa fa-shopping-basket"></i>
 								<span>Quản lý đơn hàng</span>
 								<i class="fa fa-chevron-right tg-menu-arrow"></i>
 							</a>
@@ -8843,30 +8871,6 @@
 	<script>
 		// Header JavaScript Functions
 		document.addEventListener('DOMContentLoaded', function() {
-			// Toggle User Dropdown
-			window.toggleUserDropdown = function() {
-				const dropdown = document.getElementById('userDropdown');
-				const chevron = document.querySelector('.tg-user-info .fa-chevron-down');
-				
-				if (dropdown.style.display === 'block') {
-					dropdown.style.display = 'none';
-					chevron.style.transform = 'rotate(0deg)';
-				} else {
-					dropdown.style.display = 'block';
-					chevron.style.transform = 'rotate(180deg)';
-				}
-			};
-			
-			// Close dropdown when clicking outside
-			document.addEventListener('click', function(event) {
-				const userProfile = document.querySelector('.tg-user-profile');
-				const dropdown = document.getElementById('userDropdown');
-				
-				if (!userProfile.contains(event.target)) {
-					dropdown.style.display = 'none';
-					document.querySelector('.tg-user-info .fa-chevron-down').style.transform = 'rotate(0deg)';
-				}
-			});
 			
 			// Search Functionality
 			const searchInput = document.querySelector('.tg-search-box input');
@@ -9743,7 +9747,7 @@
 									<i class="fa fa-heart"></i>
 								</button>
 								<button class="tg-action-btn" onclick="addToCart('${story.story_id}')" style="background: #28a745; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">
-									<i class="fa fa-shopping-cart"></i>
+									<i class="fa fa-shopping-basket"></i>
 								</button>
 							</div>
 						</div>
@@ -10180,7 +10184,7 @@
 				// Hiển thị giỏ hàng trống
 				cartItemsContainer.innerHTML = `
 					<div class="tg-cart-empty" style="display: block;">
-						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-shopping-basket"></i>
 						<h4>Giỏ hàng trống</h4>
 						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
 					</div>
@@ -10938,15 +10942,22 @@
 								<img src="${story.cover_image}" alt="${story.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
 								<div class="tg-story-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(74, 99, 102, 0.9) 0%, rgba(58, 79, 82, 0.9) 100%); display: flex; align-items: center; justify-content: center; opacity: 0; transition: all 0.4s ease;">
 									<div class="tg-overlay-actions" style="display: flex; gap: 10px;">
-										<button class="tg-overlay-btn" onclick="event.stopPropagation(); viewStory('${story.story_id}')" style="background: rgba(255,255,255,0.9); color: #4A6366; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+										<button class="tg-overlay-btn view-btn" onclick="event.stopPropagation(); viewStory('${story.story_id}')">
 											<i class="fa fa-eye"></i>
 										</button>
-										<button class="tg-overlay-btn" onclick="event.stopPropagation(); addToWishlist('${story.story_id}')" style="background: rgba(255,255,255,0.9); color: #F4A261; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+										<button class="tg-overlay-btn wishlist-btn" onclick="event.stopPropagation(); addToWishlist('${story.story_id}')">
 											<i class="fa fa-heart"></i>
 										</button>
-										<button class="tg-overlay-btn" onclick="event.stopPropagation(); ${buttonInfo.action === 'buyMembership' ? 'buyMembership' : 'addToCart'}('${story.story_id}')" style="background: rgba(255,255,255,0.9); color: ${buttonInfo.action === 'buyMembership' ? '#F4A261' : '#28a745'}; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 14px;">
-											<i class="fa fa-${buttonInfo.icon}"></i>
-										</button>
+										${!story.is_member_only ? 
+											story.is_free ? 
+												`<button class="tg-overlay-btn read-btn" onclick="event.stopPropagation(); window.readStory && window.readStory('${story.story_id}')">
+													<i class="fa fa-book"></i>
+												</button>` :
+												`<button class="tg-overlay-btn cart-btn" onclick="event.stopPropagation(); window.addToCart && window.addToCart('${story.story_id}')">
+													<i class="fa fa-shopping-basket"></i>
+												</button>`
+											: ''
+										}
 									</div>
 								</div>
 								
@@ -11009,56 +11020,10 @@
 									}
 								</div>
 								
-								<!-- Story Actions -->
-								<div class="tg-story-actions" style="display: flex; gap: 8px; margin-top: auto;">
-									<button class="${buttonClass}" onclick="event.stopPropagation(); ${buttonInfo.action}('${story.story_id}')" style="${buttonStyle}">
-										<i class="fa fa-${buttonInfo.icon}" style="font-size: 0.8rem;"></i>
-										${buttonInfo.text}
-									</button>
-									<button class="tg-btn-secondary" onclick="event.stopPropagation(); addToWishlist('${story.story_id}')" style="background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(244, 162, 97, 0.3);">
-										<i class="fa fa-heart" style="font-size: 0.8rem;"></i>
-									</button>
-								</div>
+
 							</div>
 							
-							<!-- Hover Effects -->
-							<style>
-								.tg-story-card:hover {
-									transform: translateY(-8px);
-									box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-								}
-								.tg-story-card:hover .tg-story-overlay {
-									opacity: 1;
-								}
-								.tg-story-card:hover .tg-story-image-container img {
-									transform: scale(1.1);
-								}
-								.tg-overlay-btn:hover {
-									transform: scale(1.1);
-									box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-								}
-								.tg-btn-primary:hover {
-									transform: translateY(-2px);
-									box-shadow: 0 6px 20px rgba(74, 99, 102, 0.4);
-								}
-								.tg-btn-secondary:hover {
-									transform: translateY(-2px);
-									box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4);
-								}
-								.tg-btn-membership:hover {
-									transform: translateY(-2px);
-									box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4);
-								}
-								.tg-story-title a:hover {
-									color: #4A6366;
-								}
-								.tg-story-card {
-									cursor: pointer;
-								}
-								.tg-story-card:hover {
-									cursor: pointer;
-								}
-							</style>
+
 						</div>
 					</div>
 				`;

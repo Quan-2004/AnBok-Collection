@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Tác giả - Quản lý truyện</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --topbar-height: 60px;
+            --primary-color: #4e73df;
+            --secondary-color: #858796;
+            --success-color: #1cc88a;
+            --warning-color: #f6c23e;
+            --danger-color: #e74a3b;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fc;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: linear-gradient(180deg, var(--primary-color) 10%, #224abe 100%);
+            color: white;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        #sidebar .sidebar-brand {
+            height: var(--topbar-height);
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        #sidebar .nav-item {
+            padding: 0.5rem 1rem;
+        }
+
+        #sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.35rem;
+            text-decoration: none;
+        }
+
+        #sidebar .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        #sidebar .nav-link.active {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        #sidebar .nav-link i {
+            margin-right: 0.75rem;
+            width: 20px;
+        }
+
+        /* Main Content */
+        #content {
+            margin-left: var(--sidebar-width);
+            padding: 1.5rem;
+        }
+
+        /* Topbar */
+        #topbar {
+            height: var(--topbar-height);
+            background: white;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58,59,69,0.15);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.35rem;
+        }
+
+        /* Cards */
+        .dashboard-card {
+            border: none;
+            border-radius: 0.35rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58,59,69,0.15);
+        }
+
+        .dashboard-card .card-header {
+            background-color: #f8f9fc;
+            border-bottom: 1px solid #e3e6f0;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Charts */
+        .chart-container {
+            height: 320px;
+        }
+
+        /* Tables */
+        .table-responsive {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.35rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58,59,69,0.15);
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            border-left: 4px solid;
+            border-radius: 0.35rem;
+        }
+
+        .stat-card-primary {
+            border-left-color: var(--primary-color);
+        }
+
+        .stat-card-success {
+            border-left-color: var(--success-color);
+        }
+
+        .stat-card-info {
+            border-left-color: #36b9cc;
+        }
+
+        .stat-card-warning {
+            border-left-color: var(--warning-color);
+        }
+
+        .stat-card-danger {
+            border-left-color: var(--danger-color);
+        }
+
+        /* Story cover preview */
+        .story-cover {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Status badges */
+        .status-published {
+            background-color: var(--success-color);
+        }
+
+        .status-draft {
+            background-color: var(--warning-color);
+        }
+
+        .status-review {
+            background-color: #36b9cc;
+        }
+
+        .status-rejected {
+            background-color: var(--danger-color);
+        }
+
+        .status-ongoing {
+            background-color: #6f42c1;
+        }
+
+        .status-completed {
+            background-color: #20c997;
+        }
+
+        /* Action buttons */
+        .btn-action {
+            padding: 0.25rem 0.5rem;
+            margin: 0 0.125rem;
+        }
+
+        /* Story form */
+        .story-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.35rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58,59,69,0.15);
+        }
+
+        /* Chapter indicator */
+        .chapter-count {
+            font-size: 0.875rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        /* Word count */
+        .word-count {
+            font-size: 0.75rem;
+            color: #858796;
+            font-weight: 400;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #sidebar {
+                transform: translateX(-100%);
+            }
+            
+            #content {
+                margin-left: 0;
+            }
+            
+            .sidebar-open #sidebar {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-scroll me-2"></i>
+            Dashboard Truyện
+        </div>
+        <div class="nav flex-column">
+            <div class="nav-item">
+                <a href="#" class="nav-link active" data-section="dashboard">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    Tổng quan
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="stories">
+                    <i class="fas fa-fw fa-scroll"></i>
+                    Quản lý truyện
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="chapters">
+                    <i class="fas fa-fw fa-list-ol"></i>
+                    Quản lý chương
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="analytics">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    Thống kê đọc
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="earnings">
+                    <i class="fas fa-fw fa-dollar-sign"></i>
+                    Thu nhập
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="comments">
+                    <i class="fas fa-fw fa-comments"></i>
+                    Bình luận
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-section="settings">
+                    <i class="fas fa-fw fa-cog"></i>
+                    Cài đặt
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Topbar -->
+        <div id="topbar">
+            <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="d-none d-sm-inline-block form-inline me-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm truyện...">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                        <span class="d-none d-lg-inline text-gray-600 small me-2">Tác giả</span>
+                        <img class="img-profile rounded-circle" src="https://startbootstrap.github.io/startbootstrap-sb-admin-2/img/undraw_profile.svg" style="height: 32px;">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>Hồ sơ</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>Cài đặt</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>Đăng xuất</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Dashboard Truyện</h1>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStoryModal">
+                    <i class="fas fa-plus fa-sm text-white-50"></i> Thêm truyện mới
+                </button>
+            </div>
+
+            <!-- Stats Cards Row -->
+            <div class="row">
+                <!-- Total Stories Card -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card dashboard-card stat-card stat-card-primary h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Tổng số truyện</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-scroll fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Published Stories Card -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card dashboard-card stat-card stat-card-success h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Truyện đã xuất bản</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Chapters Card -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card dashboard-card stat-card stat-card-info h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                        Tổng số chương</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">156</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-list-ol fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Earnings Card -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card dashboard-card stat-card stat-card-warning h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Thu nhập tháng</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">8,750,000đ</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="row">
+                <!-- Reading Analytics Chart -->
+                <div class="col-xl-8 col-lg-7">
+                    <div class="card dashboard-card mb-4">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold">Thống kê đọc truyện (30 ngày qua)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="readingChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Categories Chart -->
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card dashboard-card mb-4">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold">Phân loại truyện</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="categoriesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Stories Table -->
+            <div class="card dashboard-card mb-4">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold">Truyện gần đây</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Bìa truyện</th>
+                                    <th>Tên truyện</th>
+                                    <th>Thể loại</th>
+                                    <th>Trạng thái</th>
+                                    <th>Số chương</th>
+                                    <th>Lượt đọc</th>
+                                    <th>Đánh giá</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="images/books/img-01.jpg" alt="Story Cover" class="story-cover"></td>
+                                    <td>
+                                        <div>Cuộc phiêu lưu của anh hùng</div>
+                                        <div class="word-count">Tổng: 45,000 từ</div>
+                                    </td>
+                                    <td>Phiêu lưu</td>
+                                    <td><span class="badge status-ongoing">Đang viết</span></td>
+                                    <td>
+                                        <div class="chapter-count">15/25 chương</div>
+                                        <div class="word-count">3,000 từ/chương</div>
+                                    </td>
+                                    <td>5,240</td>
+                                    <td>4.7 ⭐</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary btn-action" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-success btn-action" title="Thêm chương"><i class="fas fa-plus"></i></button>
+                                        <button class="btn btn-sm btn-info btn-action" title="Xem"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-danger btn-action" title="Xóa"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="images/books/img-02.jpg" alt="Story Cover" class="story-cover"></td>
+                                    <td>
+                                        <div>Bí mật của thời gian</div>
+                                        <div class="word-count">Tổng: 32,000 từ</div>
+                                    </td>
+                                    <td>Khoa học viễn tưởng</td>
+                                    <td><span class="badge status-completed">Hoàn thành</span></td>
+                                    <td>
+                                        <div class="chapter-count">12/12 chương</div>
+                                        <div class="word-count">2,667 từ/chương</div>
+                                    </td>
+                                    <td>3,890</td>
+                                    <td>4.5 ⭐</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary btn-action" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-success btn-action" title="Thêm chương"><i class="fas fa-plus"></i></button>
+                                        <button class="btn btn-sm btn-info btn-action" title="Xem"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-danger btn-action" title="Xóa"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="images/books/img-03.jpg" alt="Story Cover" class="story-cover"></td>
+                                    <td>
+                                        <div>Những ngày tháng yêu thương</div>
+                                        <div class="word-count">Tổng: 18,000 từ</div>
+                                    </td>
+                                    <td>Lãng mạn</td>
+                                    <td><span class="badge status-draft">Bản thảo</span></td>
+                                    <td>
+                                        <div class="chapter-count">6/15 chương</div>
+                                        <div class="word-count">3,000 từ/chương</div>
+                                    </td>
+                                    <td>0</td>
+                                    <td>-</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary btn-action" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-success btn-action" title="Thêm chương"><i class="fas fa-plus"></i></button>
+                                        <button class="btn btn-sm btn-info btn-action" title="Xem"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-danger btn-action" title="Xóa"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="images/books/img-04.jpg" alt="Story Cover" class="story-cover"></td>
+                                    <td>
+                                        <div>Hành trình tìm kiếm</div>
+                                        <div class="word-count">Tổng: 28,000 từ</div>
+                                    </td>
+                                    <td>Huyền bí</td>
+                                    <td><span class="badge status-review">Đang duyệt</span></td>
+                                    <td>
+                                        <div class="chapter-count">8/10 chương</div>
+                                        <div class="word-count">3,500 từ/chương</div>
+                                    </td>
+                                    <td>0</td>
+                                    <td>-</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary btn-action" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-success btn-action" title="Thêm chương"><i class="fas fa-plus"></i></button>
+                                        <button class="btn btn-sm btn-info btn-action" title="Xem"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-danger btn-action" title="Xóa"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Story Modal -->
+    <div class="modal fade" id="addStoryModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm truyện mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="story-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="storyTitle" class="form-label">Tên truyện *</label>
+                                    <input type="text" class="form-control" id="storyTitle" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storyAuthor" class="form-label">Tác giả</label>
+                                    <input type="text" class="form-control" id="storyAuthor" value="Tác giả hiện tại" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storyCategory" class="form-label">Thể loại *</label>
+                                    <select class="form-select" id="storyCategory" required>
+                                        <option value="">Chọn thể loại</option>
+                                        <option value="romance">Lãng mạn</option>
+                                        <option value="adventure">Phiêu lưu</option>
+                                        <option value="mystery">Huyền bí</option>
+                                        <option value="scifi">Khoa học viễn tưởng</option>
+                                        <option value="fantasy">Giả tưởng</option>
+                                        <option value="horror">Kinh dị</option>
+                                        <option value="comedy">Hài hước</option>
+                                        <option value="drama">Tâm lý</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storyStatus" class="form-label">Trạng thái</label>
+                                    <select class="form-select" id="storyStatus">
+                                        <option value="draft">Bản thảo</option>
+                                        <option value="ongoing">Đang viết</option>
+                                        <option value="review">Gửi duyệt</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="storyCover" class="form-label">Bìa truyện</label>
+                                    <input type="file" class="form-control" id="storyCover" accept="image/*">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storyDescription" class="form-label">Mô tả</label>
+                                    <textarea class="form-control" id="storyDescription" rows="4"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storyTags" class="form-label">Tags</label>
+                                    <input type="text" class="form-control" id="storyTags" placeholder="Nhập tags, phân cách bằng dấu phẩy">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="storyType" class="form-label">Loại truyện</label>
+                                    <select class="form-select" id="storyType">
+                                        <option value="series">Truyện dài</option>
+                                        <option value="oneshot">Truyện ngắn</option>
+                                        <option value="novel">Tiểu thuyết</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary">Lưu truyện</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Scripts -->
+    <script>
+        // Reading Analytics Chart
+        const readingChart = new Chart(document.getElementById('readingChart'), {
+            type: 'line',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+                datasets: [{
+                    label: 'Lượt đọc',
+                    data: [85, 120, 150, 180, 220, 250, 280, 320, 350, 380, 420, 450, 480, 520, 550, 580, 620, 650, 680, 720, 750, 780, 820, 850, 880, 920, 950, 980, 1020, 1050],
+                    borderColor: '#4e73df',
+                    backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Categories Chart
+        const categoriesChart = new Chart(document.getElementById('categoriesChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Lãng mạn', 'Phiêu lưu', 'Huyền bí', 'Khoa học viễn tưởng', 'Giả tưởng', 'Hài hước'],
+                datasets: [{
+                    data: [30, 25, 20, 15, 8, 2],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b', '#6f42c1']
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // Sidebar toggle for mobile
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.body.classList.toggle('sidebar-open');
+        });
+
+        // Navigation
+        document.querySelectorAll('#sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('#sidebar .nav-link').forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Here you would typically load different content based on the section
+                const section = this.getAttribute('data-section');
+                console.log('Switching to section:', section);
+            });
+        });
+    </script>
+
+</body>
+</html>

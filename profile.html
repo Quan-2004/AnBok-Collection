@@ -8473,6 +8473,624 @@
 		.tg-member-item {
 			align-self: stretch;
 		}
+
+		/* Security Tab Styles */
+		.tg-security-actions {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			margin-top: 20px;
+		}
+		
+		.tg-security-item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 20px;
+			background: #f8f9fa;
+			border-radius: 10px;
+			border: 1px solid #e9ecef;
+			transition: all 0.3s ease;
+		}
+		
+		.tg-security-item:hover {
+			background: #ffffff;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+			transform: translateY(-2px);
+		}
+		
+		.tg-security-info {
+			flex: 1;
+		}
+		
+		.tg-security-info h4 {
+			margin: 0 0 8px 0;
+			color: #333;
+			font-size: 18px;
+			font-weight: 600;
+		}
+		
+		.tg-security-info p {
+			margin: 0;
+			color: #666;
+			font-size: 14px;
+			line-height: 1.4;
+		}
+		
+		.tg-btn-security {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			border: none;
+			padding: 12px 20px;
+			border-radius: 8px;
+			font-size: 14px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			min-width: 160px;
+			justify-content: center;
+		}
+		
+		.tg-btn-security:hover {
+			background: linear-gradient(135deg, #5A7376 0%, #4A5F62 100%);
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(74, 99, 102, 0.3);
+		}
+		
+		.tg-btn-security.tg-btn-author {
+			background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%);
+		}
+		
+		.tg-btn-security.tg-btn-author:hover {
+			background: linear-gradient(135deg, #F5B072 0%, #EA9F5B 100%);
+			box-shadow: 0 6px 20px rgba(244, 162, 97, 0.3);
+		}
+		
+		@media (max-width: 768px) {
+			.tg-security-item {
+				flex-direction: column;
+				text-align: center;
+				gap: 15px;
+			}
+			
+			.tg-security-info {
+				margin-bottom: 10px;
+			}
+			
+			.tg-btn-security {
+				width: 100%;
+			}
+		}
+
+		/* Custom Modal Styles */
+		.tg-custom-modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 10000;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		/* Accessibility improvements */
+		.tg-custom-modal[aria-hidden="true"] {
+			display: none !important;
+		}
+		
+		.tg-custom-modal[aria-modal="true"] {
+			display: flex;
+		}
+		
+		/* Focus management */
+		.tg-custom-modal:focus {
+			outline: none;
+		}
+		
+		.tg-custom-modal .tg-modal-content:focus {
+			outline: 2px solid #F4A261;
+			outline-offset: 2px;
+		}
+		
+		/* Phone validation styles */
+		#authorPhone.valid {
+			border-color: #28a745;
+			box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+		}
+		
+		#authorPhone.invalid {
+			border-color: #dc3545;
+			box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+		}
+		
+		#authorPhone.valid + small {
+			color: #28a745;
+		}
+		
+		#authorPhone.invalid + small {
+			color: #dc3545;
+		}
+		
+		/* Profile form phone validation */
+		input[name="phone"].valid {
+			border-color: #28a745;
+			box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+		}
+		
+		input[name="phone"].invalid {
+			border-color: #dc3545;
+			box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+		}
+
+		.tg-modal-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.7);
+			backdrop-filter: blur(5px);
+		}
+
+		.tg-modal-content {
+			position: relative;
+			background: white;
+			border-radius: 15px;
+			max-width: 540px;
+			width: 92%;
+			max-height: 90vh;
+			overflow: hidden;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+			animation: modalSlideIn 0.3s ease;
+		}
+
+		/* Modal specific sizes */
+		#changePasswordModal .tg-modal-content { max-width: 460px; }
+		#authorRegistrationModal .tg-modal-content { max-width: 680px; }
+
+		/* Form spacing and layout */
+		#authorRegistrationModal .tg-form-group { margin-bottom: 20px; }
+		#authorRegistrationModal .tg-form-group small { margin-top: 8px; }
+		#authorRegistrationModal .tg-modal-body { padding-top: 25px; }
+		#changePasswordModal .tg-form-group { margin-bottom: 14px; }
+		#changePasswordModal .tg-modal-body { padding-top: 18px; }
+
+		/* Form Sections */
+		.tg-form-section {
+			margin-bottom: 30px;
+			padding-bottom: 25px;
+			border-bottom: 1px solid #f0f0f0;
+			animation: fadeInUp 0.5s ease forwards;
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		
+		.tg-form-section:nth-child(1) { animation-delay: 0.1s; }
+		.tg-form-section:nth-child(2) { animation-delay: 0.2s; }
+		.tg-form-section:nth-child(3) { animation-delay: 0.3s; }
+		
+		@keyframes fadeInUp {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		
+		.tg-form-section:last-of-type {
+			border-bottom: none;
+			margin-bottom: 20px;
+		}
+		
+		.tg-section-title {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin: 0 0 20px 0;
+			font-size: 16px;
+			font-weight: 600;
+			color: #333;
+			padding-bottom: 10px;
+			border-bottom: 2px solid #F4A261;
+		}
+		
+		.tg-section-title i {
+			color: #F4A261;
+			font-size: 18px;
+		}
+		
+		/* Radio and checkbox custom styles */
+		.tg-radio-group {
+			display: flex;
+			gap: 20px;
+			margin-top: 10px;
+		}
+		
+		.tg-radio-option {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			cursor: pointer;
+			padding: 12px 16px;
+			border: 2px solid #e1e5e9;
+			border-radius: 25px;
+			transition: all 0.3s ease;
+			flex: 1;
+		}
+		
+		.tg-radio-option:hover {
+			border-color: #F4A261;
+			background: rgba(244, 162, 97, 0.05);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(244, 162, 97, 0.15);
+		}
+		
+		.tg-radio-option input[type="radio"] {
+			appearance: none;
+			width: 18px;
+			height: 18px;
+			border: 2px solid #4A6366;
+			border-radius: 50%;
+			position: relative;
+			outline: none;
+			cursor: pointer;
+			flex-shrink: 0;
+		}
+		
+		.tg-radio-option input[type="radio"]:checked {
+			border-color: #F4A261;
+		}
+		
+		.tg-radio-option:has(input[type="radio"]:checked) {
+			border-color: #F4A261;
+			background: linear-gradient(135deg, rgba(244, 162, 97, 0.1) 0%, rgba(232, 148, 74, 0.1) 100%);
+			box-shadow: 0 2px 8px rgba(244, 162, 97, 0.2);
+		}
+		
+		.tg-radio-option input[type="radio"]:checked::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 10px;
+			height: 10px;
+			background: #F4A261;
+			border-radius: 50%;
+		}
+		
+		.tg-radio-label {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-weight: 500;
+			color: #333;
+		}
+		
+		.tg-radio-label i {
+			color: #F4A261;
+			font-size: 16px;
+		}
+		
+		/* Checkbox styles */
+		.tg-checkbox-option {
+			display: flex;
+			align-items: flex-start;
+			gap: 12px;
+			cursor: pointer;
+			padding: 15px;
+			border: 2px solid #e1e5e9;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+			background: #f8f9fa;
+		}
+		
+		.tg-checkbox-option:hover {
+			border-color: #F4A261;
+			background: rgba(244, 162, 97, 0.05);
+		}
+		
+		.tg-checkbox-option input[type="checkbox"] {
+			appearance: none;
+			width: 18px;
+			height: 18px;
+			border: 2px solid #4A6366;
+			border-radius: 4px;
+			position: relative;
+			outline: none;
+			cursor: pointer;
+			flex-shrink: 0;
+			margin-top: 2px;
+		}
+		
+		.tg-checkbox-option input[type="checkbox"]:checked {
+			border-color: #F4A261;
+			background: #F4A261;
+		}
+		
+		.tg-checkbox-option input[type="checkbox"]:checked::after {
+			content: '✓';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: white;
+			font-size: 12px;
+			font-weight: bold;
+		}
+		
+		.tg-checkbox-label {
+			font-size: 14px;
+			line-height: 1.5;
+			color: #333;
+		}
+
+		/* Inputs */
+		#authorRegistrationModal input[type="text"],
+		#authorRegistrationModal input[type="url"],
+		#authorRegistrationModal input[type="tel"],
+		#authorRegistrationModal textarea {
+			background: #fff;
+			border-color: #e1e5e9;
+			transition: all 0.3s ease;
+		}
+		#authorRegistrationModal input:focus,
+		#authorRegistrationModal textarea:focus {
+			border-color: #F4A261;
+			box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.1);
+			transform: translateY(-1px);
+		}
+		
+		#authorRegistrationModal input:hover,
+		#authorRegistrationModal textarea:hover {
+			border-color: #F4A261;
+		}
+
+		/* Headers themed by modal */
+		#changePasswordModal .tg-modal-header { background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); }
+		#authorRegistrationModal .tg-modal-header { background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); }
+
+		#authorRegistrationModal .tg-btn-submit { background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); }
+		#authorRegistrationModal .tg-btn-submit:hover { background: linear-gradient(135deg, #F5B072 0%, #EA9F5B 100%); }
+
+		/* Helper layout for two-columns at large width */
+		@media (min-width: 680px) {
+			#authorRegistrationModal .tg-modal-body .tg-form-group.inline {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+			}
+			
+			#authorRegistrationModal .tg-form-row {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+			}
+		}
+
+		@keyframes modalSlideIn {
+			from {
+				opacity: 0;
+				transform: scale(0.8) translateY(-50px);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1) translateY(0);
+			}
+		}
+
+		.tg-modal-header {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			padding: 20px 25px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.tg-modal-title {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.tg-modal-title i {
+			font-size: 20px;
+		}
+
+		.tg-modal-title h3 {
+			margin: 0;
+			font-size: 18px;
+			font-weight: 600;
+		}
+
+		.tg-modal-close {
+			background: rgba(255, 255, 255, 0.2);
+			border: none;
+			color: white;
+			font-size: 18px;
+			cursor: pointer;
+			padding: 8px;
+			border-radius: 50%;
+			transition: all 0.3s ease;
+			width: 35px;
+			height: 35px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.tg-modal-close:hover {
+			background: rgba(255, 255, 255, 0.3);
+			transform: scale(1.1);
+		}
+
+		.tg-modal-body {
+			padding: 25px;
+			max-height: 60vh;
+			overflow-y: auto;
+		}
+
+		.tg-form-group {
+			margin-bottom: 20px;
+		}
+
+		.tg-form-group label {
+			display: block;
+			margin-bottom: 8px;
+			font-weight: 600;
+			color: #333;
+			font-size: 14px;
+		}
+
+		.tg-form-group .required {
+			color: #e74c3c;
+		}
+
+		.tg-form-group input,
+		.tg-form-group textarea {
+			width: 100%;
+			padding: 12px 15px;
+			border: 2px solid #e1e5e9;
+			border-radius: 8px;
+			font-size: 14px;
+			transition: all 0.3s ease;
+			box-sizing: border-box;
+			font-family: inherit;
+		}
+
+		.tg-form-group input:focus,
+		.tg-form-group textarea:focus {
+			outline: none;
+			border-color: #4A6366;
+			box-shadow: 0 0 0 3px rgba(74, 99, 102, 0.1);
+		}
+
+		.tg-form-group textarea {
+			resize: vertical;
+			min-height: 100px;
+		}
+
+		.tg-form-group small {
+			display: block;
+			margin-top: 5px;
+			color: #666;
+			font-size: 12px;
+		}
+
+		.tg-modal-actions {
+			display: flex;
+			gap: 15px;
+			margin-top: 25px;
+			justify-content: flex-end;
+		}
+
+		.tg-btn-cancel {
+			background: #f8f9fa;
+			color: #666;
+			border: 2px solid #e9ecef;
+			padding: 12px 20px;
+			border-radius: 8px;
+			font-size: 14px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.tg-btn-cancel:hover {
+			background: #e9ecef;
+			color: #333;
+		}
+
+		.tg-btn-submit {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+			border: none;
+			padding: 12px 20px;
+			border-radius: 8px;
+			font-size: 14px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.tg-btn-submit:hover {
+			background: linear-gradient(135deg, #5A7376 0%, #4A5F62 100%);
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(74, 99, 102, 0.3);
+		}
+
+		.tg-btn-submit.tg-btn-author {
+			background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%);
+		}
+
+		.tg-btn-submit.tg-btn-author:hover {
+			background: linear-gradient(135deg, #F5B072 0%, #EA9F5B 100%);
+			box-shadow: 0 6px 20px rgba(244, 162, 97, 0.3);
+		}
+
+		/* Mobile Responsive for Modals */
+		@media (max-width: 768px) {
+			.tg-modal-content {
+				width: 95%;
+				max-height: 95vh;
+			}
+
+			.tg-modal-header {
+				padding: 15px 20px;
+			}
+
+			.tg-modal-title h3 {
+				font-size: 16px;
+			}
+
+			.tg-modal-body {
+				padding: 20px;
+			}
+			
+			.tg-form-section {
+				margin-bottom: 25px;
+				padding-bottom: 20px;
+			}
+			
+			.tg-section-title {
+				font-size: 15px;
+				margin-bottom: 15px;
+			}
+			
+			.tg-radio-group {
+				flex-direction: column;
+				gap: 10px;
+			}
+			
+			.tg-radio-option {
+				padding: 10px 12px;
+				border-radius: 20px;
+			}
+			
+			.tg-form-row {
+				grid-template-columns: 1fr;
+				gap: 15px;
+			}
+
+			.tg-modal-actions {
+				flex-direction: column;
+				gap: 10px;
+			}
+
+			.tg-btn-cancel,
+			.tg-btn-submit {
+				width: 100%;
+				justify-content: center;
+			}
+		}
 	</style>
 
 		
@@ -16900,47 +17518,14 @@
 
 								<!-- User Profile -->
 								<div class="tg-user-profile">
-									<div class="tg-user-info" onclick="toggleUserDropdown();">
-										<div class="tg-user-avatar">
-											<img id="userAvatar" src="" alt="User Avatar">
-										</div>
-										<span id="userName">Loading...</span>
-										<i class="fa fa-chevron-down"></i>
-									</div>
-									
-									<!-- User Dropdown Menu -->
-									<div class="tg-user-dropdown" id="userDropdown">
-										<div class="tg-dropdown-header">
-											<div class="tg-dropdown-avatar">
-												<img id="dropdownUserAvatar" src="" alt="User Avatar">
+									<a href="profile.html" style="text-decoration: none; color: inherit;">
+										<div class="tg-user-info">
+											<div class="tg-user-avatar">
+												<img id="userAvatar" src="" alt="User Avatar">
 											</div>
-											<div id="dropdownUserName">Loading...</div>
-											<div id="dropdownUserEmail">Loading...</div>
+											<span id="userName">Loading...</span>
 										</div>
-										<div class="tg-dropdown-menu">
-											<a href="profile.html" class="tg-dropdown-item">
-												<i class="fa fa-user"></i>
-												<span>Hồ sơ cá nhân</span>
-											</a>
-											<a href="account/bookcase.html?tab=favorites" class="tg-dropdown-item">
-												<i class="fa fa-heart"></i>
-												<span>Yêu thích</span>
-											</a>
-											<a href="account/orders/orders-list.html" class="tg-dropdown-item">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Đơn hàng</span>
-											</a>
-											<a href="account/setting.html" class="tg-dropdown-item">
-												<i class="fa fa-cog"></i>
-												<span>Cài đặt</span>
-											</a>
-											<div class="tg-dropdown-divider"></div>
-											<a href="javascript:void(0);" class="tg-dropdown-item tg-dropdown-logout logout-btn">
-												<i class="fa fa-sign-out"></i>
-												<span>Đăng xuất</span>
-											</a>
-										</div>
-									</div>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -16984,25 +17569,25 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="author-bio.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-user" style="margin-right: 8px;"></i>
 													Tác giả
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="news.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Tin tức
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="about.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-info-circle" style="margin-right: 8px;"></i>
 													Về chúng tôi
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="contact.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-envelope" style="margin-right: 8px;"></i>
 													Liên hệ
 												</a>
@@ -17018,13 +17603,7 @@
 					</a>
 				</div>
 
-									<!-- Membership Button -->
-									<div class="tg-membership-btn">
-										<a href="menbership.html" style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #4A6366; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);">
-											<i class="fa fa-crown"></i>
-											<span>Hội viên VIP</span>
-										</a>
-									</div>
+								
 								</div>
 							</nav>
 						</div>
@@ -17138,9 +17717,6 @@
 											<button class="tg-tab-btn" data-tab="security">
 												Tài khoản và bảo mật
 											</button>
-											<button class="tg-tab-btn" data-tab="linked-accounts">
-												Tài khoản liên kết
-											</button>
 										</div>
 
 										<!-- Tab Content -->
@@ -17217,7 +17793,32 @@
 											<div class="tg-tab-panel" id="security">
 												<div class="tg-security-content">
 													<h3>Bảo mật tài khoản</h3>
-													<p>Chức năng bảo mật tài khoản sẽ được phát triển sau.</p>
+													
+													<!-- Security Actions -->
+													<div class="tg-security-actions">
+														<div class="tg-security-item">
+															<div class="tg-security-info">
+																<h4>Đổi mật khẩu</h4>
+																<p>Thay đổi mật khẩu để bảo vệ tài khoản của bạn</p>
+															</div>
+															<button class="tg-btn-security" onclick="openChangePasswordModal()">
+																<i class="fa fa-lock"></i>
+																Đổi mật khẩu
+															</button>
+														</div>
+														
+														<div class="tg-security-item" id="authorSecurityItem">
+															<div class="tg-security-info">
+																<h4>Đăng ký làm tác giả</h4>
+																<p>Trở thành tác giả để đăng tải sách và truyện của bạn</p>
+																<div id="authorStatusText" style="margin-top:6px;color:#666;font-size:13px;"></div>
+															</div>
+															<button id="authorActionBtn" class="tg-btn-security tg-btn-author" onclick="openAuthorRegistrationModal()" style="display: none;">
+																<i class="fa fa-pen"></i>
+																Đăng ký làm tác giả
+															</button>
+														</div>
+													</div>
 												</div>
 											</div>
 
@@ -17635,11 +18236,11 @@
                                         </li>
                                     </ul>
 									<ul class="tg-socialicons">
-										<li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-										<li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-										<li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-										<li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-										<li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
+										<li class="tg-facebook"><a href="https://facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
+										<li class="tg-twitter"><a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a></li>
+										<li class="tg-linkedin"><a href="https://linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+										<li class="tg-googleplus"><a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+										<li class="tg-rss"><a href="https://rss.com" target="_blank"><i class="fa fa-rss"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -17650,21 +18251,21 @@
                                     </div>
                                     <div class="tg-widgetcontent">
                                                                                 <ul>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Điều khoản sử dụng</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Điều khoản mua bán</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách đổi trả</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách bảo mật</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách Cookie</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Liên hệ chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Đối tác của chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Tầm nhìn &amp; Mục tiêu</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Điều khoản sử dụng</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Điều khoản mua bán</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Chính sách đổi trả</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Chính sách bảo mật</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Chính sách Cookie</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Liên hệ chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Đối tác của chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Tầm nhìn &amp; Mục tiêu</a></li>
                                         </ul>
                                         <ul>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Câu chuyện của chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Gặp gỡ đội ngũ</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Câu hỏi thường gặp</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Đánh giá khách hàng</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Tham gia cùng chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Câu chuyện của chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Gặp gỡ đội ngũ</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Câu hỏi thường gặp</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Đánh giá khách hàng</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Tham gia cùng chúng tôi</a></li>
                                         </ul>
                                     </div>
 								</div>
@@ -17677,23 +18278,23 @@
                                     <div class="tg-widgetcontent">
                                         <ul>
                                                                                         <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-09.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-bio.html"><img src="images/author/imag-09.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Nguyễn Văn An</a></h4>
+                                                    <h4><a href="author-bio.html" style="color: white;">Nguyễn Văn An</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">21,658 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
                                             <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-10.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-bio.html"><img src="images/author/imag-10.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Trần Thị Bình</a></h4>
+                                                    <h4><a href="author-bio.html" style="color: white;">Trần Thị Bình</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">20,257 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
                                             <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-11.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-bio.html"><img src="images/author/imag-11.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Lê Văn Cường</a></h4>
+                                                    <h4><a href="author-bio.html" style="color: white;">Lê Văn Cường</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">15,686 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
@@ -17896,6 +18497,104 @@
 	
 	<!-- Cloudinary SDK -->
 	<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+	
+	<!-- Global Security Modal Functions -->
+	<script>
+		// Global Security Modal Functions - Available immediately
+		window.openChangePasswordModal = function() {
+			document.getElementById('changePasswordModal').style.display = 'flex';
+			document.body.style.overflow = 'hidden';
+		};
+
+		window.closeChangePasswordModal = function() {
+			document.getElementById('changePasswordModal').style.display = 'none';
+			document.body.style.overflow = 'auto';
+			// Reset form
+			document.getElementById('changePasswordForm').reset();
+		};
+
+		window.openAuthorRegistrationModal = function() {
+			document.getElementById('authorRegistrationModal').style.display = 'flex';
+			document.body.style.overflow = 'hidden';
+		};
+
+		window.closeAuthorRegistrationModal = function() {
+			document.getElementById('authorRegistrationModal').style.display = 'none';
+			document.body.style.overflow = 'auto';
+			// Reset form
+			document.getElementById('authorRegistrationForm').reset();
+		};
+
+		window.showAuthorButtonAndCloseModal = function() {
+			// Show the author registration button
+			const authorBtn = document.getElementById('authorActionBtn');
+			if (authorBtn) {
+				authorBtn.style.display = 'inline-flex';
+			}
+			// Close the modal
+			closeAuthorRegistrationModal();
+		};
+
+		window.submitChangePassword = function() {
+			const currentPassword = document.getElementById('currentPassword').value;
+			const newPassword = document.getElementById('newPassword').value;
+			const confirmPassword = document.getElementById('confirmPassword').value;
+			
+			if (!currentPassword || !newPassword || !confirmPassword) {
+				showErrorAlert('Vui lòng điền đầy đủ thông tin!');
+				return;
+			}
+			
+			if (newPassword !== confirmPassword) {
+				showErrorAlert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
+				return;
+			}
+			
+			if (newPassword.length < 6) {
+				showErrorAlert('Mật khẩu mới phải có ít nhất 6 ký tự!');
+				return;
+			}
+			
+			// Here you would implement the actual password change logic
+			showLoadingAlert('Đang đổi mật khẩu...');
+			
+			setTimeout(() => {
+				closeLoadingAlert();
+				showSuccessAlert('Đổi mật khẩu thành công!');
+				closeChangePasswordModal();
+			}, 2000);
+		};
+
+		window.submitAuthorRegistration = function() {
+			const authorName = document.getElementById('authorName').value;
+			const authorBio = document.getElementById('authorBio').value;
+			const authorWebsite = document.getElementById('authorWebsite').value;
+			
+			if (!authorName || !authorBio) {
+				showErrorAlert('Vui lòng điền đầy đủ thông tin bắt buộc!');
+				return;
+			}
+			
+			if (authorName.length < 2) {
+				showErrorAlert('Bút danh phải có ít nhất 2 ký tự!');
+				return;
+			}
+			
+			if (authorBio.length < 20) {
+				showErrorAlert('Giới thiệu phải có ít nhất 20 ký tự!');
+				return;
+			}
+			
+			// Here you would implement the actual author registration logic
+			showLoadingAlert('Đang xử lý đăng ký...');
+			
+			setTimeout(() => {
+				closeLoadingAlert();
+				showSuccessAlert('Đăng ký làm tác giả thành công! Chúng tôi sẽ xem xét và phê duyệt trong vòng 24h.');
+				closeAuthorRegistrationModal();
+			}, 2000);
+		};
+	</script>
 	
 	<!-- Firebase SDK (for auth only) -->
 	<script type="module">
@@ -19009,6 +19708,870 @@
 					}
 				});
 			}
+
+			// Security Tab Functions - Global scope
+			window.openChangePasswordModal = function() {
+				document.getElementById('changePasswordModal').style.display = 'flex';
+				document.body.style.overflow = 'hidden';
+			};
+
+			window.closeChangePasswordModal = function() {
+				document.getElementById('changePasswordModal').style.display = 'none';
+				document.body.style.overflow = 'auto';
+				// Reset form
+				document.getElementById('changePasswordForm').reset();
+			};
+
+			window.openAuthorRegistrationModal = function() {
+				const modal = document.getElementById('authorRegistrationModal');
+				const firstFocusableElement = modal.querySelector('input, button, select, textarea');
+				
+				// Show modal
+				modal.style.display = 'flex';
+				modal.removeAttribute('aria-hidden');
+				modal.setAttribute('aria-modal', 'true');
+				
+				// Prevent body scroll
+				document.body.style.overflow = 'hidden';
+				
+				// Set focus to first focusable element
+				if (firstFocusableElement) {
+					setTimeout(() => {
+						firstFocusableElement.focus();
+					}, 100);
+				}
+				
+				// Pre-fill form with user profile data
+				prefillAuthorRegistrationForm();
+				
+				// Add event listener for genre selection
+				const genreSelect = document.getElementById('authorGenres');
+				if (genreSelect) {
+					genreSelect.addEventListener('change', handleGenreSelection);
+				}
+				
+				// Add real-time phone validation
+				const phoneField = document.getElementById('authorPhone');
+				if (phoneField) {
+					phoneField.addEventListener('input', function() {
+						const value = this.value;
+						const clean = value.replace(/[\s\-\(\)]/g, '');
+						const isValid = /^(0|\+84|84)\d{9}$/.test(clean);
+						
+						// Remove existing validation classes
+						this.classList.remove('valid', 'invalid');
+						
+						// Add validation class
+						if (value.length > 0) {
+							this.classList.add(isValid ? 'valid' : 'invalid');
+						}
+					});
+				}
+				
+				// Debug form elements
+				console.log('Author registration modal opened');
+				debugAuthorForm();
+				
+				// Add keyboard event listener for escape key
+				const handleEscapeKey = function(event) {
+					if (event.key === 'Escape') {
+						closeAuthorRegistrationModal();
+						document.removeEventListener('keydown', handleEscapeKey);
+					}
+				};
+				document.addEventListener('keydown', handleEscapeKey);
+				
+				// Store the event listener reference for cleanup
+				modal._escapeKeyHandler = handleEscapeKey;
+			};
+
+			// Function to pre-fill author registration form with user profile data
+			window.prefillAuthorRegistrationForm = function() {
+				try {
+					const user = JSON.parse(localStorage.getItem('user'));
+					if (!user || !user.uid) {
+						console.log('No user data found for pre-filling form');
+						return;
+					}
+
+					// Get user profile data
+					const userProfile = user.profile || {};
+					const personalInfo = userProfile.personalInfo || {};
+
+					// Pre-fill form fields with user data
+					const authorNameField = document.getElementById('authorName');
+					const authorPhoneField = document.getElementById('authorPhone');
+					const authorBioField = document.getElementById('authorBio');
+
+					if (authorNameField) {
+						// Use fullName if available, otherwise use displayName
+						const suggestedName = personalInfo.fullName || userProfile.displayName || user.displayName || '';
+						if (suggestedName && !authorNameField.value) {
+							authorNameField.value = suggestedName;
+						}
+					}
+
+					if (authorPhoneField) {
+						// Use phone from personal info if available
+						const userPhone = personalInfo.phone || '';
+						console.log('Phone from profile:', userPhone);
+						if (userPhone && !authorPhoneField.value) {
+							const formattedPhone = formatPhoneNumber(userPhone);
+							console.log('Formatted phone:', formattedPhone);
+							
+							// Validate the formatted phone
+							const cleanFormatted = formattedPhone.replace(/[\s\-\(\)]/g, '');
+							const isValid = /^(0|\+84|84)\d{9}$/.test(cleanFormatted);
+							console.log('Formatted phone validation:', isValid);
+							
+							if (isValid) {
+								authorPhoneField.value = formattedPhone;
+							} else {
+								console.warn('Phone from profile is not valid, not pre-filling');
+								// Don't pre-fill if invalid, let user enter manually
+							}
+						}
+					}
+
+					if (authorBioField) {
+						// Create a suggested bio based on user info
+						const suggestedBio = generateSuggestedBio(userProfile, personalInfo);
+						if (suggestedBio && !authorBioField.value) {
+							authorBioField.value = suggestedBio;
+						}
+					}
+
+					// Pre-fill genre based on reading history
+					const authorGenresField = document.getElementById('authorGenres');
+					if (authorGenresField) {
+						const suggestedGenre = suggestGenreFromReadingHistory(userProfile);
+						if (suggestedGenre && !authorGenresField.value) {
+							authorGenresField.value = suggestedGenre;
+							// Trigger change event to show/hide other genre field
+							handleGenreSelection();
+						}
+					}
+
+					console.log('Pre-filled author registration form with user data:', {
+						name: authorNameField?.value,
+						phone: authorPhoneField?.value,
+						bio: authorBioField?.value,
+						genre: authorGenresField?.value
+					});
+
+					// Show pre-fill notice if any data was filled
+					const hasPrefilledData = (authorNameField?.value || authorPhoneField?.value || authorBioField?.value);
+					if (hasPrefilledData) {
+						showPrefillNotice();
+					}
+
+				} catch (error) {
+					console.error('Error pre-filling author registration form:', error);
+				}
+			};
+
+			// Function to show pre-fill notice
+			window.showPrefillNotice = function() {
+				const form = document.getElementById('authorRegistrationForm');
+				if (!form) return;
+
+				// Remove existing notice if any
+				const existingNotice = form.querySelector('.tg-form-prefill-notice');
+				if (existingNotice) {
+					existingNotice.remove();
+				}
+
+				// Create and insert notice
+				const notice = document.createElement('div');
+				notice.className = 'tg-form-prefill-notice';
+				notice.innerHTML = `
+					<i class="fa fa-info-circle"></i>
+					Thông tin đã được điền sẵn từ hồ sơ cá nhân của bạn. Bạn có thể chỉnh sửa nếu cần thiết.
+				`;
+
+				// Insert at the beginning of the form
+				form.insertBefore(notice, form.firstChild);
+			};
+
+			// Function to handle genre selection
+			window.handleGenreSelection = function() {
+				const genreSelect = document.getElementById('authorGenres');
+				const otherGenreGroup = document.getElementById('otherGenreGroup');
+				const otherGenreInput = document.getElementById('otherGenre');
+				
+				if (genreSelect && otherGenreGroup) {
+					if (genreSelect.value === 'Khác') {
+						otherGenreGroup.style.display = 'block';
+						if (otherGenreInput) {
+							otherGenreInput.required = true;
+						}
+					} else {
+						otherGenreGroup.style.display = 'none';
+						if (otherGenreInput) {
+							otherGenreInput.required = false;
+							otherGenreInput.value = '';
+						}
+					}
+				}
+			};
+
+			// Function to suggest genre based on reading history
+			window.suggestGenreFromReadingHistory = function(userProfile) {
+				const bookHistory = userProfile.bookReadingHistory || {};
+				const storyHistory = userProfile.storyReadingHistory || {};
+				
+				// Count genres from reading history
+				const genreCount = {};
+				
+				// Count from book history
+				Object.values(bookHistory).forEach(book => {
+					if (book.bookGenre) {
+						genreCount[book.bookGenre] = (genreCount[book.bookGenre] || 0) + 1;
+					}
+				});
+				
+				// Count from story history
+				Object.values(storyHistory).forEach(story => {
+					if (story.storyGenre) {
+						genreCount[story.storyGenre] = (genreCount[story.storyGenre] || 0) + 1;
+					}
+				});
+				
+				// Find most read genre
+				let mostReadGenre = null;
+				let maxCount = 0;
+				
+				Object.entries(genreCount).forEach(([genre, count]) => {
+					if (count > maxCount) {
+						maxCount = count;
+						mostReadGenre = genre;
+					}
+				});
+				
+				// Map genre names to dropdown options
+				const genreMapping = {
+					'Tiểu thuyết': 'Tiểu thuyết',
+					'Kỹ năng sống': 'Kỹ năng sống',
+					'Fantasy': 'Fantasy',
+					'Thơ': 'Thơ',
+					'Công nghệ': 'Công nghệ',
+					'Nấu ăn': 'Nấu ăn',
+					'Chiến lược': 'Chiến lược',
+					'Thành công': 'Thành công',
+					'Khoa học': 'Khoa học',
+					'Lãng mạn': 'Lãng mạn',
+					'Trinh thám': 'Trinh thám',
+					'Khoa học viễn tưởng': 'Khoa học viễn tưởng',
+					'Lịch sử': 'Lịch sử',
+					'Tâm lý học': 'Tâm lý học',
+					'Kinh doanh': 'Kinh doanh',
+					'Giáo dục': 'Giáo dục',
+					'Y tế': 'Y tế',
+					'Du lịch': 'Du lịch',
+					'Thể thao': 'Thể thao',
+					'Nghệ thuật': 'Nghệ thuật',
+					'Tôn giáo': 'Tôn giáo',
+					'Triết học': 'Triết học'
+				};
+				
+				// Return mapped genre or null if not found
+				return genreMapping[mostReadGenre] || null;
+			};
+
+			// Function to generate suggested bio based on user profile
+			window.generateSuggestedBio = function(userProfile, personalInfo) {
+				let bio = '';
+				
+				// Start with basic introduction
+				const fullName = personalInfo.fullName || userProfile.displayName || 'Tôi';
+				bio += `Xin chào, tôi là ${fullName}. `;
+				
+				// Add location if available
+				if (personalInfo.address) {
+					bio += `Tôi đến từ ${personalInfo.address}. `;
+				}
+				
+				// Add experience level based on reading history
+				const hasReadingHistory = userProfile.bookReadingHistory || userProfile.storyReadingHistory;
+				if (hasReadingHistory) {
+					bio += 'Tôi là một độc giả đam mê văn học và có kinh nghiệm đọc nhiều thể loại sách khác nhau. ';
+				}
+				
+				// Add writing interest
+				bio += 'Tôi có niềm đam mê viết lách và mong muốn chia sẻ những câu chuyện, kiến thức của mình với cộng đồng độc giả. ';
+				
+				// Add goals
+				bio += 'Tôi hy vọng có thể đóng góp những tác phẩm chất lượng và ý nghĩa cho thư viện AnBok Collection.';
+				
+				return bio;
+			};
+
+			window.closeAuthorRegistrationModal = function() {
+				const modal = document.getElementById('authorRegistrationModal');
+				
+				// Hide modal
+				modal.style.display = 'none';
+				modal.setAttribute('aria-hidden', 'true');
+				modal.removeAttribute('aria-modal');
+				
+				// Restore body scroll
+				document.body.style.overflow = 'auto';
+				
+				// Reset form
+				const form = document.getElementById('authorRegistrationForm');
+				if (form) {
+					form.reset();
+				}
+				
+				// Remove event listeners
+				const genreSelect = document.getElementById('authorGenres');
+				if (genreSelect) {
+					genreSelect.removeEventListener('change', handleGenreSelection);
+				}
+				
+				// Remove escape key event listener
+				if (modal._escapeKeyHandler) {
+					document.removeEventListener('keydown', modal._escapeKeyHandler);
+					delete modal._escapeKeyHandler;
+				}
+			};
+
+			// Form submission handlers - Global scope
+			window.submitChangePassword = function() {
+				const currentPassword = document.getElementById('currentPassword').value;
+				const newPassword = document.getElementById('newPassword').value;
+				const confirmPassword = document.getElementById('confirmPassword').value;
+				
+				if (!currentPassword || !newPassword || !confirmPassword) {
+					showErrorAlert('Vui lòng điền đầy đủ thông tin!');
+					return;
+				}
+				
+				if (newPassword !== confirmPassword) {
+					showErrorAlert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
+					return;
+				}
+				
+				if (newPassword.length < 6) {
+					showErrorAlert('Mật khẩu mới phải có ít nhất 6 ký tự!');
+					return;
+				}
+				
+				// Here you would implement the actual password change logic
+				showLoadingAlert('Đang đổi mật khẩu...');
+				
+				setTimeout(() => {
+					closeLoadingAlert();
+					showSuccessAlert('Đổi mật khẩu thành công!');
+					closeChangePasswordModal();
+				}, 2000);
+			};
+
+							window.submitAuthorRegistration = async function() {
+					// Check if modal is visible
+					const modal = document.getElementById('authorRegistrationModal');
+					if (!modal || modal.style.display !== 'flex') {
+						console.error('Author registration modal is not visible');
+						showErrorAlert('Lỗi: Form đăng ký tác giả không khả dụng. Vui lòng thử lại.');
+						return;
+					}
+
+					// Get form elements with null checks
+					const authorNameEl = document.getElementById('authorName');
+					const authorBioEl = document.getElementById('authorBio');
+					const authorPhoneEl = document.getElementById('authorPhone');
+					const authorGenresEl = document.getElementById('authorGenres');
+					const otherGenreEl = document.getElementById('otherGenre');
+					const authorPortfolioEl = document.getElementById('authorPortfolio');
+					const authorTermsEl = document.getElementById('authorTerms');
+					const authorTypeEl = document.querySelector('input[name="authorType"]:checked');
+
+					// Check if required elements exist
+					if (!authorNameEl || !authorBioEl || !authorPhoneEl || !authorGenresEl || !authorTermsEl) {
+						console.error('Required form elements not found:', {
+							authorNameEl: !!authorNameEl,
+							authorBioEl: !!authorBioEl,
+							authorPhoneEl: !!authorPhoneEl,
+							authorGenresEl: !!authorGenresEl,
+							authorTermsEl: !!authorTermsEl
+						});
+						showErrorAlert('Lỗi: Form không tìm thấy các trường bắt buộc. Vui lòng tải lại trang.');
+						return;
+					}
+
+					// Get values with null checks
+					const authorName = authorNameEl.value.trim();
+					const authorBio = authorBioEl.value.trim();
+					const authorPhone = authorPhoneEl.value.trim();
+					const authorGenres = authorGenresEl.value.trim();
+					const otherGenre = otherGenreEl?.value.trim() || '';
+					const authorPortfolio = authorPortfolioEl?.value.trim() || '';
+					const authorTerms = authorTermsEl.checked;
+					const authorType = authorTypeEl?.value || 'book';
+					
+					if (!authorName || !authorBio || !authorPhone || !authorGenres || !authorTerms) {
+						showErrorAlert('Vui lòng điền đầy đủ thông tin bắt buộc và đồng ý điều khoản!');
+						return;
+					}
+					
+					// Validate other genre if selected
+					if (authorGenres === 'Khác' && !otherGenre) {
+						showErrorAlert('Vui lòng nhập lĩnh vực cụ thể khi chọn "Khác"!');
+						return;
+					}
+					
+					if (authorName.length < 2) {
+						showErrorAlert('Bút danh phải có ít nhất 2 ký tự!');
+						return;
+					}
+					
+					if (authorBio.length < 20) {
+						showErrorAlert('Giới thiệu phải có ít nhất 20 ký tự!');
+						return;
+					}
+					
+					// Clean phone number (remove spaces, dashes, parentheses)
+					const cleanPhone = authorPhone.replace(/[\s\-\(\)]/g, '');
+					console.log('Original phone:', authorPhone);
+					console.log('Cleaned phone:', cleanPhone);
+					console.log('Phone length:', cleanPhone.length);
+					console.log('Phone pattern test:', /^(0|\+84|84)\d{9}$/.test(cleanPhone));
+					
+					// Check if it's a valid Vietnamese phone number
+					// Accepts: 0xxxxxxxxx, +84xxxxxxxxx, 84xxxxxxxxx
+					if (!/^(0|\+84|84)\d{9}$/.test(cleanPhone)) {
+						console.error('Phone validation failed:', {
+							original: authorPhone,
+							cleaned: cleanPhone,
+							length: cleanPhone.length,
+							pattern: /^(0|\+84|84)\d{9}$/
+						});
+						showErrorAlert('Số điện thoại không hợp lệ! Vui lòng nhập số điện thoại Việt Nam hợp lệ (VD: 0901234567 hoặc +84901234567)');
+						return;
+					}
+					
+					try {
+						showLoadingAlert('Đang gửi đăng ký tác giả...');
+						const user = JSON.parse(localStorage.getItem('user'));
+						if (!user || !user.uid) {
+							closeLoadingAlert();
+							showErrorAlert('Bạn cần đăng nhập để đăng ký làm tác giả');
+							return;
+						}
+						
+						// Save application to Firebase Realtime Database: AuthorApplications/{uid}
+						const database = window.firebaseDatabase;
+						const { ref, set } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js');
+						const appRef = ref(database, `AuthorApplications/${user.uid}`);
+						// Get additional user profile data
+						const userProfile = user.profile || {};
+						const personalInfo = userProfile.personalInfo || {};
+						
+						// Prepare genre data
+						const finalGenre = authorGenres === 'Khác' ? otherGenre : authorGenres;
+						
+						const application = {
+							uid: user.uid,
+							displayName: user.displayName || null,
+							email: user.email || null,
+							authorName,
+							authorBio,
+							authorPhone: cleanPhone, // Use cleaned phone number
+							authorGenres: finalGenre,
+							authorPortfolio: authorPortfolio || null,
+							type: authorType, // 'book' or 'story'
+							status: 'pending',
+							submittedAt: new Date().toISOString(),
+							// Additional user profile data
+							userProfile: {
+								fullName: personalInfo.fullName || null,
+								username: personalInfo.username || null,
+								userId: personalInfo.userId || null,
+								dateOfBirth: personalInfo.dateOfBirth || null,
+								gender: personalInfo.gender || null,
+								address: personalInfo.address || null,
+								photoURL: userProfile.photoURL || null
+							}
+						};
+						await set(appRef, application);
+						closeLoadingAlert();
+						showSuccessAlert('Gửi đăng ký thành công! Vui lòng chờ quản trị viên duyệt.');
+						// Optional: persist a flag locally for UX
+						localStorage.setItem('author_application_status', 'pending');
+						closeAuthorRegistrationModal();
+						updateAuthorUIState({ status: 'pending' });
+					} catch (err) {
+						closeLoadingAlert();
+						console.error('Error submitting author application:', err);
+						showErrorAlert('Có lỗi xảy ra khi gửi đăng ký. Vui lòng thử lại.');
+					}
+				};
+
+			// Update UI state for author registration
+			window.updateAuthorUIState = function(state) {
+				const statusEl = document.getElementById('authorStatusText');
+				const btn = document.getElementById('authorActionBtn');
+				if (!statusEl || !btn) return;
+				
+				if (!state || state.status === 'none') {
+					statusEl.textContent = '';
+					btn.disabled = false;
+					btn.textContent = 'Đăng ký làm tác giả';
+					btn.onclick = openAuthorRegistrationModal;
+					btn.classList.add('tg-btn-author');
+				} else if (state.status === 'pending') {
+					// Show pending application details
+					displayPendingApplicationInfo(state);
+					statusEl.textContent = 'Trạng thái: Chờ duyệt';
+					btn.disabled = true;
+					btn.textContent = 'Đã gửi đăng ký · Chờ duyệt';
+					btn.classList.add('tg-btn-author');
+				} else if (state.status === 'approved') {
+					statusEl.textContent = 'Trạng thái: Đã duyệt';
+					btn.disabled = false;
+					btn.textContent = 'Vào trang tác giả';
+					btn.classList.remove('tg-btn-author');
+					btn.onclick = function() {
+						// Redirect based on approved type
+						const t = state.type || 'book';
+						window.location.href = t === 'story' ? 'dashboard-author-story.html' : 'dashboard-author-book.html';
+					};
+				}
+			};
+
+			// Function to display pending application information
+			window.displayPendingApplicationInfo = function(application) {
+				const statusEl = document.getElementById('authorStatusText');
+				if (!statusEl) return;
+
+				let infoText = 'Trạng thái: Chờ duyệt';
+				
+				// Add submission date if available
+				if (application.submittedAt) {
+					const submitDate = new Date(application.submittedAt);
+					const formattedDate = submitDate.toLocaleDateString('vi-VN');
+					infoText += `\nNgày gửi: ${formattedDate}`;
+				}
+
+				// Add author name if available
+				if (application.authorName) {
+					infoText += `\nBút danh: ${application.authorName}`;
+				}
+
+				// Add type if available
+				if (application.type) {
+					const typeText = application.type === 'book' ? 'Sách' : 'Truyện';
+					infoText += `\nLoại tác phẩm: ${typeText}`;
+				}
+
+				// Add view details link
+				infoText += `\n<a href="#" onclick="viewAuthorApplicationDetails('${application.uid}'); return false;" style="color: #F4A261; text-decoration: underline; font-size: 12px;">Xem chi tiết</a>`;
+
+				statusEl.innerHTML = infoText.replace(/\n/g, '<br>');
+			};
+
+			// Function to view author application details
+			window.viewAuthorApplicationDetails = async function(userId) {
+				try {
+					const database = window.firebaseDatabase;
+					const { ref, get } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js');
+					
+					const appRef = ref(database, `AuthorApplications/${userId}`);
+					const appSnapshot = await get(appRef);
+					
+					if (appSnapshot.exists()) {
+						const application = appSnapshot.val();
+						showAuthorApplicationDetails(application);
+					} else {
+						showErrorAlert('Không tìm thấy thông tin đăng ký tác giả');
+					}
+				} catch (error) {
+					console.error('Error fetching author application details:', error);
+					showErrorAlert('Có lỗi xảy ra khi tải thông tin đăng ký');
+				}
+			};
+
+			// Function to show author application details modal
+			window.showAuthorApplicationDetails = function(application) {
+				const modalContent = `
+					<div class="tg-modal-header">
+						<h3>Chi tiết đăng ký tác giả</h3>
+						<button class="tg-modal-close" onclick="closeAuthorDetailsModal()">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>
+					<div class="tg-modal-body">
+						<div class="tg-application-details">
+							<div class="tg-detail-section">
+								<h4>Thông tin cơ bản</h4>
+								<div class="tg-detail-row">
+									<strong>Bút danh:</strong> ${application.authorName || 'Chưa cung cấp'}
+								</div>
+								<div class="tg-detail-row">
+									<strong>Loại tác phẩm:</strong> ${application.type === 'book' ? 'Sách' : 'Truyện'}
+								</div>
+								<div class="tg-detail-row">
+									<strong>Trạng thái:</strong> 
+									<span class="tg-status-${application.status}">
+										${application.status === 'pending' ? 'Chờ duyệt' : 
+										  application.status === 'approved' ? 'Đã duyệt' : 
+										  application.status === 'rejected' ? 'Từ chối' : 'Không xác định'}
+									</span>
+								</div>
+								<div class="tg-detail-row">
+									<strong>Ngày gửi:</strong> ${new Date(application.submittedAt).toLocaleDateString('vi-VN')}
+								</div>
+							</div>
+							
+							<div class="tg-detail-section">
+								<h4>Thông tin liên hệ</h4>
+								<div class="tg-detail-row">
+									<strong>Số điện thoại:</strong> ${application.authorPhone || 'Chưa cung cấp'}
+								</div>
+								${application.authorPortfolio ? `
+								<div class="tg-detail-row">
+									<strong>Portfolio:</strong> <a href="${application.authorPortfolio}" target="_blank">${application.authorPortfolio}</a>
+								</div>
+								` : ''}
+							</div>
+							
+							<div class="tg-detail-section">
+								<h4>Giới thiệu</h4>
+								<div class="tg-detail-content">
+									${application.authorBio || 'Chưa cung cấp'}
+								</div>
+							</div>
+							
+							${application.authorGenres ? `
+							<div class="tg-detail-section">
+								<h4>Thể loại yêu thích</h4>
+								<div class="tg-detail-content">
+									${application.authorGenres}
+								</div>
+							</div>
+							` : ''}
+							
+							${application.authorPortfolio ? `
+							<div class="tg-detail-section">
+								<h4>Portfolio</h4>
+								<div class="tg-detail-content">
+									${application.authorPortfolio}
+								</div>
+							</div>
+							` : ''}
+							
+							${application.userProfile ? `
+							<div class="tg-detail-section">
+								<h4>Thông tin từ hồ sơ cá nhân</h4>
+								<div class="tg-detail-row">
+									<strong>Họ tên:</strong> ${application.userProfile.fullName || 'Chưa cung cấp'}
+								</div>
+								<div class="tg-detail-row">
+									<strong>Địa chỉ:</strong> ${application.userProfile.address || 'Chưa cung cấp'}
+								</div>
+								<div class="tg-detail-row">
+									<strong>Ngày sinh:</strong> ${application.userProfile.dateOfBirth || 'Chưa cung cấp'}
+								</div>
+							</div>
+							` : ''}
+						</div>
+					</div>
+					<div class="tg-modal-footer">
+						<button type="button" class="tg-btn-cancel" onclick="closeAuthorDetailsModal()">
+							Đóng
+						</button>
+					</div>
+				`;
+				
+				// Create modal if it doesn't exist
+				let modal = document.getElementById('authorDetailsModal');
+				if (!modal) {
+					modal = document.createElement('div');
+					modal.id = 'authorDetailsModal';
+					modal.className = 'tg-custom-modal';
+					modal.innerHTML = `
+						<div class="tg-modal-overlay" onclick="closeAuthorDetailsModal()"></div>
+						<div class="tg-modal-content">
+							${modalContent}
+						</div>
+					`;
+					document.body.appendChild(modal);
+				} else {
+					modal.querySelector('.tg-modal-content').innerHTML = modalContent;
+				}
+				
+				modal.style.display = 'flex';
+				document.body.style.overflow = 'hidden';
+			};
+
+			// Function to close author details modal
+			window.closeAuthorDetailsModal = function() {
+				const modal = document.getElementById('authorDetailsModal');
+				if (modal) {
+					modal.style.display = 'none';
+					document.body.style.overflow = 'auto';
+				}
+			};
+
+			// Debug function to check form elements
+			window.debugAuthorForm = function() {
+				const elements = {
+					modal: document.getElementById('authorRegistrationModal'),
+					form: document.getElementById('authorRegistrationForm'),
+					authorName: document.getElementById('authorName'),
+					authorBio: document.getElementById('authorBio'),
+					authorPhone: document.getElementById('authorPhone'),
+					authorGenres: document.getElementById('authorGenres'),
+					otherGenre: document.getElementById('otherGenre'),
+					authorPortfolio: document.getElementById('authorPortfolio'),
+					authorTerms: document.getElementById('authorTerms'),
+					authorType: document.querySelector('input[name="authorType"]:checked')
+				};
+				
+				console.log('Author form elements debug:', elements);
+				return elements;
+			};
+
+			// Helper function to format phone number for display
+			window.formatPhoneNumber = function(phone) {
+				if (!phone) return '';
+				
+				console.log('Formatting phone:', phone);
+				
+				// Clean the phone number
+				const clean = phone.replace(/[\s\-\(\)]/g, '');
+				console.log('Cleaned phone:', clean);
+				
+				// Handle different formats
+				if (clean.startsWith('+84')) {
+					const result = clean.replace('+84', '0');
+					console.log('Converted +84 to 0:', result);
+					return result;
+				} else if (clean.startsWith('84')) {
+					const result = clean.replace('84', '0');
+					console.log('Converted 84 to 0:', result);
+					return result;
+				} else if (clean.startsWith('0')) {
+					console.log('Already starts with 0:', clean);
+					return clean;
+				} else if (clean.length === 9) {
+					// If it's 9 digits without prefix, add 0
+					const result = '0' + clean;
+					console.log('Added 0 prefix:', result);
+					return result;
+				} else if (clean.length === 10 && !clean.startsWith('0')) {
+					// If it's 10 digits but doesn't start with 0, might be missing prefix
+					console.log('10 digits without 0 prefix:', clean);
+					return clean;
+				}
+				
+				console.log('Returning as is:', clean);
+				return clean;
+			};
+
+			// Test function for phone number validation
+			window.testPhoneValidation = function() {
+				const testCases = [
+					'0901234567',      // Valid
+					'+84901234567',    // Valid
+					'84901234567',     // Valid
+					'090 123 4567',    // Valid (with spaces)
+					'090-123-4567',    // Valid (with dashes)
+					'(090) 123-4567',  // Valid (with parentheses)
+					'901234567',       // Invalid (no prefix)
+					'090123456',       // Invalid (too short)
+					'09012345678',     // Invalid (too long)
+					'abc1234567',      // Invalid (contains letters)
+				];
+				
+				console.log('Testing phone number validation:');
+				testCases.forEach(phone => {
+					const clean = phone.replace(/[\s\-\(\)]/g, '');
+					const isValid = /^(0|\+84|84)\d{9}$/.test(clean);
+					console.log(`${phone} -> ${clean} -> ${isValid ? 'VALID' : 'INVALID'}`);
+				});
+			};
+
+			// Function to check and fix current profile phone
+			window.checkProfilePhone = function() {
+				const user = JSON.parse(localStorage.getItem('user'));
+				if (!user || !user.profile) {
+					console.log('No user profile found');
+					return;
+				}
+				
+				const personalInfo = user.profile.personalInfo || {};
+				const currentPhone = personalInfo.phone;
+				
+				console.log('Current profile phone:', currentPhone);
+				
+				if (currentPhone) {
+					const formatted = formatPhoneNumber(currentPhone);
+					const clean = formatted.replace(/[\s\-\(\)]/g, '');
+					const isValid = /^(0|\+84|84)\d{9}$/.test(clean);
+					
+					console.log('Phone analysis:', {
+						original: currentPhone,
+						formatted: formatted,
+						clean: clean,
+						valid: isValid,
+						length: clean.length
+					});
+					
+					if (!isValid) {
+						console.warn('Profile phone is invalid!');
+						showErrorAlert('Số điện thoại trong hồ sơ không hợp lệ. Vui lòng cập nhật trong phần thông tin cá nhân.');
+					} else {
+						console.log('Profile phone is valid');
+						showSuccessAlert('Số điện thoại trong hồ sơ hợp lệ!');
+					}
+				} else {
+					console.log('No phone in profile');
+				}
+			};
+
+			// On load, get author application or author role
+									window.checkAuthorStatus = async function() {
+							// Ensure this runs after DOM and Firebase are ready
+							if (!window.firebaseDatabase) {
+								setTimeout(window.checkAuthorStatus, 800);
+								return;
+							}
+				try {
+					const user = JSON.parse(localStorage.getItem('user'));
+					if (!user || !user.uid) {
+						updateAuthorUIState({ status: 'none' });
+						return;
+					}
+					const database = window.firebaseDatabase;
+											const { ref, get, onValue } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js');
+						// Check if already an approved author
+						const authorRef = ref(database, `Authors/${user.uid}`);
+						onValue(authorRef, (snapshot) => {
+							if (snapshot.exists()) {
+								const author = snapshot.val();
+								updateAuthorUIState({ status: 'approved', type: author.type });
+								// Redirect immediately based on author type
+								const t = author.type || 'book';
+								window.location.href = t === 'story' ? 'dashboard-author-story.html' : 'dashboard-author-book.html';
+							} 
+						});
+						// Also observe pending application
+						const appRef = ref(database, `AuthorApplications/${user.uid}`);
+						onValue(appRef, (appSnap) => {
+							if (appSnap.exists()) {
+								const app = appSnap.val();
+								// Pass full application data to update UI
+								updateAuthorUIState(app);
+							} else {
+								updateAuthorUIState({ status: 'none' });
+							}
+						});
+				} catch (e) {
+					console.error('Error checking author status:', e);
+					updateAuthorUIState({ status: 'none' });
+				}
+			};
 			
 			// Add CSS animation for fade out effect
 			const style = document.createElement('style');
@@ -19016,6 +20579,129 @@
 				@keyframes fadeOut {
 					from { opacity: 1; transform: translateX(0); }
 					to { opacity: 0; transform: translateX(-20px); }
+				}
+
+				/* Author Application Details Modal Styles */
+				.tg-application-details {
+					max-height: 70vh;
+					overflow-y: auto;
+				}
+
+				.tg-detail-section {
+					margin-bottom: 25px;
+					padding: 15px;
+					background: #f8f9fa;
+					border-radius: 8px;
+					border-left: 4px solid #F4A261;
+				}
+
+				.tg-detail-section h4 {
+					margin: 0 0 15px 0;
+					color: #4A6366;
+					font-size: 16px;
+					font-weight: 600;
+				}
+
+				.tg-detail-row {
+					margin-bottom: 8px;
+					display: flex;
+					align-items: flex-start;
+				}
+
+				.tg-detail-row strong {
+					min-width: 120px;
+					color: #333;
+					font-weight: 600;
+				}
+
+				.tg-detail-content {
+					background: white;
+					padding: 12px;
+					border-radius: 6px;
+					border: 1px solid #e9ecef;
+					line-height: 1.6;
+					color: #555;
+				}
+
+				.tg-status-pending {
+					color: #ffc107;
+					font-weight: 600;
+				}
+
+				.tg-status-approved {
+					color: #28a745;
+					font-weight: 600;
+				}
+
+				.tg-status-rejected {
+					color: #dc3545;
+					font-weight: 600;
+				}
+
+				/* Author registration form pre-fill styles */
+				.tg-form-prefill-notice {
+					background: #e3f2fd;
+					border: 1px solid #2196f3;
+					border-radius: 6px;
+					padding: 10px 15px;
+					margin-bottom: 20px;
+					font-size: 14px;
+					color: #1976d2;
+				}
+
+				.tg-form-prefill-notice i {
+					margin-right: 8px;
+					color: #2196f3;
+				}
+
+				/* Author registration form select styles */
+				#authorRegistrationModal select {
+					width: 100%;
+					padding: 12px 15px;
+					border: 2px solid #e1e5e9;
+					border-radius: 8px;
+					font-size: 14px;
+					background: white;
+					color: #333;
+					transition: all 0.3s ease;
+					cursor: pointer;
+				}
+
+				#authorRegistrationModal select:focus {
+					outline: none;
+					border-color: #F4A261;
+					box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.1);
+				}
+
+				#authorRegistrationModal select:hover {
+					border-color: #F4A261;
+				}
+
+				#authorRegistrationModal select option {
+					padding: 8px;
+					font-size: 14px;
+				}
+
+				/* Other genre field animation */
+				#otherGenreGroup {
+					transition: all 0.3s ease;
+					overflow: hidden;
+				}
+
+				#otherGenreGroup.show {
+					display: block !important;
+					animation: slideDown 0.3s ease;
+				}
+
+				@keyframes slideDown {
+					from {
+						opacity: 0;
+						transform: translateY(-10px);
+					}
+					to {
+						opacity: 1;
+						transform: translateY(0);
+					}
 				}
 				
 				.qty-btn:hover {
@@ -19663,6 +21349,10 @@
 			console.log('Firebase ready event received');
 			// Load user profile when Firebase is ready
 			loadUserProfileFromFirebase();
+			// Check author application/role status and update UI
+			if (window.checkAuthorStatus) {
+				window.checkAuthorStatus();
+			}
 		});
 
 					// Load cart when page loads
@@ -19788,6 +21478,26 @@
 	<script>
 		// Profile Dashboard JavaScript
 		$(document).ready(function() {
+			// Handle URL hash navigation
+			function handleHashNavigation() {
+				const hash = window.location.hash.substring(1); // Remove the # symbol
+				if (hash) {
+					console.log('Handling hash navigation to:', hash);
+					// Use the existing navigateToTab function
+					if (window.navigateToTab) {
+						window.navigateToTab(hash);
+					}
+				}
+			}
+			
+			// Handle hash navigation on page load
+			handleHashNavigation();
+			
+			// Handle hash changes when user navigates
+			$(window).on('hashchange', function() {
+				handleHashNavigation();
+			});
+			
 			// Clear any old local storage image data on page load
 			const keysToRemove = [];
 			for (let i = 0; i < localStorage.length; i++) {
@@ -19849,6 +21559,21 @@
 				// Update phone and address if they exist
 				if (personalInfo.phone) {
 					$('input[name="phone"]').val(personalInfo.phone);
+					
+					// Add real-time validation for phone input
+					$('input[name="phone"]').off('input').on('input', function() {
+						const value = $(this).val();
+						const clean = value.replace(/[\s\-\(\)]/g, '');
+						const isValid = /^(0|\+84|84)\d{9}$/.test(clean);
+						
+						// Remove existing validation classes
+						$(this).removeClass('valid invalid');
+						
+						// Add validation class
+						if (value.length > 0) {
+							$(this).addClass(isValid ? 'valid' : 'invalid');
+						}
+					});
 				}
 				if (personalInfo.address) {
 					$('input[name="address"]').val(personalInfo.address);
@@ -19929,8 +21654,20 @@
 				const fullName = $('input[value*="Quân"]').val();
 				const dateOfBirth = $('input[value*="01/01"]').val();
 				const gender = $('select option:selected').text();
-				const phone = $('input[name="phone"]').val() || '';
+				const rawPhone = $('input[name="phone"]').val() || '';
 				const address = $('input[name="address"]').val() || '';
+				
+				// Validate and format phone number
+				let phone = rawPhone;
+				if (rawPhone) {
+					const cleanPhone = rawPhone.replace(/[\s\-\(\)]/g, '');
+					if (!/^(0|\+84|84)\d{9}$/.test(cleanPhone)) {
+						showNotification('Số điện thoại không hợp lệ! Vui lòng nhập số điện thoại Việt Nam hợp lệ.', 'error');
+						return false;
+					}
+					// Format phone to standard format (0xxxxxxxxx)
+					phone = formatPhoneNumber(rawPhone);
+				}
 
 				const profileData = {
 					personalInfo: {
@@ -20022,6 +21759,9 @@
 			
 			// Global function to navigate to specific tab
 			window.navigateToTab = function(tabName) {
+				// Update URL hash
+				window.location.hash = tabName;
+				
 				// Remove active class from all nav items and submenus
 				$('.tg-profile-nav li').removeClass('active');
 				$('.tg-content-section').removeClass('active');
@@ -20328,7 +22068,7 @@
 					const database = window.firebaseDatabase;
 					const { ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
 					
-					const wishlistRef = ref(database, `Wishlist/${user.uid}`);
+					const wishlistRef = ref(database, `wishlist/${user.uid}`);
 					const wishlistSnapshot = await get(wishlistRef);
 					
 					if (wishlistSnapshot.exists()) {
@@ -20620,7 +22360,7 @@
 						const database = window.firebaseDatabase;
 						const { ref, remove } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
 						
-						const wishlistRef = ref(database, `Wishlist/${user.uid}/${itemId}`);
+						const wishlistRef = ref(database, `wishlist/${user.uid}/${itemId}`);
 						await remove(wishlistRef);
 						
 						// Also remove from localStorage for sync
@@ -21593,7 +23333,7 @@
 					const { ref, set, get, remove } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
 					
 					// Kiểm tra xem item đã có trong wishlist chưa
-					const wishlistRef = ref(database, `Wishlist/${user.uid}/${itemId}`);
+					const wishlistRef = ref(database, `wishlist/${user.uid}/${itemId}`);
 					const wishlistSnapshot = await get(wishlistRef);
 					
 					if (wishlistSnapshot.exists()) {
@@ -21679,7 +23419,7 @@
 					const database = window.firebaseDatabase;
 					const { ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
 					
-					const wishlistRef = ref(database, `Wishlist/${user.uid}`);
+					const wishlistRef = ref(database, `wishlist/${user.uid}`);
 					const wishlistSnapshot = await get(wishlistRef);
 					
 					if (wishlistSnapshot.exists()) {
@@ -21762,6 +23502,194 @@
 	
 	<!-- Checkout Utilities - Đảm bảo tính nhất quán cho nút thanh toán -->
 	<script src="js/checkout-utils.js"></script>
+
+	<!-- Change Password Modal -->
+	<div id="changePasswordModal" class="tg-custom-modal">
+		<div class="tg-modal-overlay" onclick="closeChangePasswordModal()"></div>
+		<div class="tg-modal-content">
+			<div class="tg-modal-header">
+				<div class="tg-modal-title">
+					<i class="fa fa-lock"></i>
+					<h3>Đổi mật khẩu</h3>
+				</div>
+				<button class="tg-modal-close" onclick="closeChangePasswordModal()">
+					<i class="fa fa-times"></i>
+				</button>
+			</div>
+			<div class="tg-modal-body">
+				<form id="changePasswordForm" onsubmit="event.preventDefault(); submitChangePassword();">
+					<div class="tg-form-group">
+						<label for="currentPassword">Mật khẩu hiện tại</label>
+						<input type="password" id="currentPassword" name="currentPassword" required>
+					</div>
+					<div class="tg-form-group">
+						<label for="newPassword">Mật khẩu mới</label>
+						<input type="password" id="newPassword" name="newPassword" required>
+						<small>Mật khẩu phải có ít nhất 6 ký tự</small>
+					</div>
+					<div class="tg-form-group">
+						<label for="confirmPassword">Xác nhận mật khẩu mới</label>
+						<input type="password" id="confirmPassword" name="confirmPassword" required>
+					</div>
+					<div class="tg-modal-actions">
+						<button type="button" class="tg-btn-cancel" onclick="closeChangePasswordModal()">
+							Hủy
+						</button>
+						<button type="submit" class="tg-btn-submit">
+							<i class="fa fa-save"></i>
+							Đổi mật khẩu
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Author Registration Modal -->
+	<div id="authorRegistrationModal" class="tg-custom-modal" role="dialog" aria-labelledby="authorModalTitle" aria-describedby="authorModalDescription" aria-modal="true">
+		<div class="tg-modal-overlay" onclick="showAuthorButtonAndCloseModal()"></div>
+		<div class="tg-modal-content" tabindex="-1">
+			<div class="tg-modal-header">
+				<div class="tg-modal-title">
+					<i class="fa fa-user-plus"></i>
+					<h3 id="authorModalTitle">Đăng ký làm tác giả</h3>
+				</div>
+				<button class="tg-modal-close" onclick="closeAuthorRegistrationModal()" aria-label="Đóng modal đăng ký tác giả">
+					<i class="fa fa-times"></i>
+				</button>
+			</div>
+			<div class="tg-modal-body" id="authorModalDescription">
+				<form id="authorRegistrationForm" onsubmit="event.preventDefault(); submitAuthorRegistration();">
+					<!-- Basic Information Section -->
+					<div class="tg-form-section">
+						<h4 class="tg-section-title">
+							<i class="fa fa-user"></i>
+							Thông tin cơ bản
+						</h4>
+						
+						<div class="tg-form-group">
+							<label for="authorName">Bút danh <span class="required">*</span></label>
+							<input type="text" id="authorName" name="authorName" placeholder="Nhập bút danh của bạn" required>
+							<small>Bút danh sẽ hiển thị trên các tác phẩm của bạn</small>
+						</div>
+						
+						<div class="tg-form-group">
+							<label for="authorBio">Giới thiệu <span class="required">*</span></label>
+							<textarea id="authorBio" name="authorBio" rows="4" placeholder="Giới thiệu về bản thân, kinh nghiệm viết lách, thể loại yêu thích..." required></textarea>
+							<small>Tối thiểu 20 ký tự</small>
+						</div>
+						
+						<div class="tg-form-group">
+							<label>Loại tác giả <span class="required">*</span></label>
+							<div class="tg-radio-group">
+								<label class="tg-radio-option">
+									<input type="radio" name="authorType" value="book" checked>
+									<span class="tg-radio-custom"></span>
+									<span class="tg-radio-label">
+										<i class="fa fa-book"></i>
+										Tác giả Sách
+									</span>
+								</label>
+								<label class="tg-radio-option">
+									<input type="radio" name="authorType" value="story">
+									<span class="tg-radio-custom"></span>
+									<span class="tg-radio-label">
+										<i class="fa fa-file-text"></i>
+										Tác giả Truyện
+									</span>
+								</label>
+							</div>
+							<small>Chọn lĩnh vực chính mà bạn sẽ đăng nội dung</small>
+						</div>
+					</div>
+					
+					<!-- Contact & Details Section -->
+					<div class="tg-form-section">
+						<h4 class="tg-section-title">
+							<i class="fa fa-phone"></i>
+							Thông tin liên hệ & Chi tiết
+						</h4>
+						
+						<div class="tg-form-row">
+							<div class="tg-form-group">
+								<label for="authorPhone">Số điện thoại <span class="required">*</span></label>
+								<input type="tel" id="authorPhone" name="authorPhone" placeholder="VD: 0901234567 hoặc +84901234567" required>
+								<small>Nhập số điện thoại Việt Nam (có thể có dấu cách, dấu gạch ngang)</small>
+							</div>
+							
+							<div class="tg-form-group">
+								<label for="authorGenres">Lĩnh vực chính <span class="required">*</span></label>
+								<select id="authorGenres" name="authorGenres" required>
+									<option value="">Chọn lĩnh vực chính</option>
+									<option value="Tiểu thuyết">Tiểu thuyết</option>
+									<option value="Kỹ năng sống">Kỹ năng sống</option>
+									<option value="Fantasy">Fantasy (Kỳ ảo)</option>
+									<option value="Thơ">Thơ</option>
+									<option value="Công nghệ">Công nghệ</option>
+									<option value="Nấu ăn">Nấu ăn</option>
+									<option value="Chiến lược">Chiến lược</option>
+									<option value="Thành công">Thành công</option>
+									<option value="Khoa học">Khoa học</option>
+									<option value="Lãng mạn">Lãng mạn</option>
+									<option value="Trinh thám">Trinh thám</option>
+									<option value="Khoa học viễn tưởng">Khoa học viễn tưởng</option>
+									<option value="Lịch sử">Lịch sử</option>
+									<option value="Tâm lý học">Tâm lý học</option>
+									<option value="Kinh doanh">Kinh doanh</option>
+									<option value="Giáo dục">Giáo dục</option>
+									<option value="Y tế">Y tế</option>
+									<option value="Du lịch">Du lịch</option>
+									<option value="Thể thao">Thể thao</option>
+									<option value="Nghệ thuật">Nghệ thuật</option>
+									<option value="Tôn giáo">Tôn giáo</option>
+									<option value="Triết học">Triết học</option>
+									<option value="Khác">Khác</option>
+								</select>
+								<small>Chọn lĩnh vực chính mà bạn sẽ đăng nội dung</small>
+							</div>
+							
+							<div class="tg-form-group" id="otherGenreGroup" style="display: none;">
+								<label for="otherGenre">Lĩnh vực khác</label>
+								<input type="text" id="otherGenre" name="otherGenre" placeholder="Nhập lĩnh vực cụ thể">
+								<small>Mô tả chi tiết lĩnh vực bạn muốn viết</small>
+							</div>
+						</div>
+						
+						<div class="tg-form-group">
+							<label for="authorPortfolio">Portfolio/Link tác phẩm</label>
+							<input type="url" id="authorPortfolio" name="authorPortfolio" placeholder="https://your-portfolio.com">
+							<small>Tùy chọn - link đến tác phẩm đã xuất bản (nếu có)</small>
+						</div>
+					</div>
+					
+					<!-- Terms Section -->
+					<div class="tg-form-section">
+						<div class="tg-form-group">
+							<label class="tg-checkbox-option">
+								<input type="checkbox" id="authorTerms" required>
+								<span class="tg-checkbox-custom"></span>
+								<span class="tg-checkbox-label">
+									Tôi cam kết thông tin cung cấp là chính xác và đồng ý với 
+									<a href="#" style="color: #F4A261; text-decoration: underline;">điều khoản cộng tác</a>
+								</span>
+							</label>
+						</div>
+					</div>
+					
+					<div class="tg-modal-actions">
+						<button type="button" class="tg-btn-cancel" onclick="closeAuthorRegistrationModal()">
+							<i class="fa fa-times"></i>
+							Hủy
+						</button>
+						<button type="submit" class="tg-btn-submit tg-btn-author">
+							<i class="fa fa-pen"></i>
+							Đăng ký ngay
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

@@ -1,0 +1,309 @@
+// ================================
+// 1. User & Membership
+// ================================
+Table NguoiDung {
+  maNguoiDung varchar [pk, not null]
+  hoTen varchar [not null]
+  email varchar [not null, unique]
+  soDienThoai varchar [not null]
+  diaChi varchar [not null]
+  anhDaiDien varchar [not null]
+  phuongThucThanhToan varchar [not null]
+  ngayTao datetime [not null]
+}
+
+Table GoiHoiVien {
+  maGoiHoiVien varchar [pk, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  trangThai enum('active','inactive') [default: 'inactive']
+  loaiGoi enum('1month','3months','6months','12months') [not null]
+  thoiGianBatDau datetime [not null]
+  thoiGianKetThuc datetime [not null]
+  tuDongGiaHan boolean [default: false]
+}
+
+// ================================
+// 2. Categories & Tags
+// ================================
+Table TheLoai {
+  maTheLoai varchar [pk, not null]
+  tenTheLoai varchar [not null]
+  moTa text
+  hinhAnh varchar
+  trangThai varchar [not null]
+  thuTu int [default: 0]
+}
+
+Table DanhMuc {
+  maDanhMuc varchar [pk, not null]
+  tenDanhMuc varchar [not null]
+  moTa text
+  trangThai varchar [not null]
+}
+
+Table SachDanhMuc {
+  maSachDanhMuc varchar [pk, not null]
+  maDanhMuc varchar [ref: > DanhMuc.maDanhMuc, not null]
+  maSach varchar [ref: - Sach.maSach]
+  maTruyen varchar [ref: - Truyen.maTruyen]
+  ngayThem datetime [not null]
+}
+
+// ================================
+// 3. Books & Stories
+// ================================
+Table Sach {
+  maSach varchar [pk, not null]
+  tenSach varchar [not null]
+  hinhAnh varchar [not null]
+  giaSach int [not null]
+  maTheLoai varchar [ref: > TheLoai.maTheLoai, not null]
+  maTacGia varchar [ref: > NguoiDung.maNguoiDung, not null]
+  moTa text
+  trangThai varchar [not null]
+  ngayTao datetime [not null]
+  ngayCapNhat datetime [not null]
+  isMembershipBook boolean [default: false]
+  luotDoc bigint [default: 0]
+  diemDanhGia float [default: 0]
+  noiDungUrl varchar
+  isDigital boolean [default: false]
+  isFree boolean [default: false]
+}
+
+Table Truyen {
+  maTruyen varchar [pk, not null]
+  tenTruyen varchar [not null]
+  hinhAnh varchar [not null]
+  maTheLoai varchar [ref: > TheLoai.maTheLoai, not null]
+  maTacGia varchar [ref: > NguoiDung.maNguoiDung, not null]
+  moTa text
+  trangThai varchar [not null]
+  ngayTao datetime [not null]
+  ngayCapNhat datetime [not null]
+  isMembershipBook boolean [default: false]
+  luotDoc bigint [default: 0]
+  diemDanhGia float [default: 0]
+  noiDungUrl varchar
+  isDigital boolean [default: true]
+  isFree boolean [default: false]
+}
+
+// ================================
+// 4. Forum & Comments
+// ================================
+Table DienDan {
+  maBaiDang varchar [pk, not null]
+  tieuDe varchar [not null]
+  noiDung text [not null]
+  maSach varchar [ref: - Sach.maSach]
+  maTruyen varchar [ref: - Truyen.maTruyen]
+  maTacGia varchar [ref: > NguoiDung.maNguoiDung, not null]
+  ngayDang datetime [not null]
+  trangThai varchar [not null]
+  luotXem int [default: 0]
+}
+
+Table BinhLuan {
+  maBinhLuan varchar [pk, not null]
+  maBaiDang varchar [ref: > DienDan.maBaiDang, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  noiDung text [not null]
+  thoiGian datetime [not null]
+  trangThai varchar [not null]
+}
+
+// ================================
+// 5. Access Control & Purchase History
+// ================================
+Table QuyenTruyCap {
+  maQuyen varchar [pk, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  maSach varchar [ref: - Sach.maSach]
+  maTruyen varchar [ref: - Truyen.maTruyen]
+  ngayMua datetime [not null]
+  trangThai enum('active','expired') [not null]
+}
+
+Table LichSuMuaHang {
+  maLichSu varchar [pk, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  maDonHang varchar [ref: > DonHang.maDonHang, not null]
+  maSach varchar [ref: - Sach.maSach]
+  maTruyen varchar [ref: - Truyen.maTruyen]
+  soLuong int [not null]
+  gia int [not null]
+  tongTien int [not null]
+  ngayMua datetime [not null]
+  trangThai enum('completed','refunded','cancelled') [not null]
+  isDigital boolean [default: false]
+}
+
+// ================================
+// 6. Cart & Orders
+// ================================
+Table GioHang {
+  maGioHang varchar [pk, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null, unique]
+  ngayTao datetime [not null]
+  ngayCapNhat datetime [not null]
+  trangThai varchar [not null]
+}
+
+Table ChiTietGioHang {
+  maChiTiet varchar [pk, not null]
+  maGioHang varchar [ref: > GioHang.maGioHang, not null]
+  maSach varchar [ref: - Sach.maSach]
+  maTruyen varchar [ref: - Truyen.maTruyen]
+  soLuong int [not null]
+  gia int [not null]
+  tongTien int [not null]
+  ngayThem datetime [not null]
+}
+
+Table DonHang {
+  maDonHang varchar [pk, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  ngayTao datetime [not null]
+  ngayCapNhat datetime [not null]
+  ngayXacNhan datetime
+  ngayGiao date [not null]
+  gioGiao time [not null]
+  maKhuyenMai varchar [ref: - KhuyenMai.maKhuyenMai]
+  tongTien int [not null]
+  phiVanChuyen int [default: 0]
+  soTienGiamGia int [default: 0]
+  tongCong int [not null]
+  trangThaiThanhToan varchar [not null]
+  trangThai varchar [not null]
+  isDigitalOrder boolean [default: false]
+}
+
+Table ChiTietDonHang {
+  maChiTietDH varchar [pk, not null]
+  maDonHang varchar [ref: > DonHang.maDonHang, not null]
+  maSach varchar [ref: - Sach.maSach]
+  maTruyen varchar [ref: - Truyen.maTruyen]
+  soLuong int [not null]
+  gia int [not null]
+  tongTien int [not null]
+}
+
+// ================================
+// 7. Payments & Transactions
+// ================================
+Table KetQuaThanhToan {
+  maGiaoDich varchar [pk, not null]
+  maDonHang varchar [ref: > DonHang.maDonHang, not null]
+  soTien int [not null]
+  ngayThanhToan datetime [not null]
+  trangThai varchar [not null]
+}
+
+Table GiaoDichVnpay {
+  maGiaoDichRef varchar [pk, not null]
+  maDonHang varchar [ref: > DonHang.maDonHang, not null]
+  soTien int [not null]
+  ngayTao datetime [not null]
+  trangThai varchar [not null]
+  orderKey varchar [not null]
+  maGiaoDichVnp varchar [not null]
+  thongTinTraVe text [not null]
+}
+
+Table ThongKeThanhToan {
+  maThongKe varchar [pk, not null]
+  ngay date [not null]
+  tongSoGiaoDich int [default: 0]
+  tongTien int [default: 0]
+  soGiaoDichThanhCong int [default: 0]
+  soGiaoDichThatBai int [default: 0]
+  ngayCapNhat datetime [not null]
+}
+
+// ================================
+// 8. Promotions & Reviews & Support
+// ================================
+Table KhuyenMai {
+  maKhuyenMai varchar [pk, not null]
+  maGiamGia varchar [not null, unique]
+  mucGiamGia int [not null]
+  ngayBatDau datetime [not null]
+  ngayKetThuc datetime [not null]
+  trangThai varchar [not null]
+  moTa text
+  soLuongToiDa int [not null]
+  soLuongDaSuDung int [default: 0]
+}
+
+Table DanhGiaDonHang {
+  maDanhGia varchar [pk, not null]
+  maDonHang varchar [ref: > DonHang.maDonHang, not null, unique]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  diemDanhGia int [not null]
+  nhanXet text [not null]
+  thoiGian datetime [not null]
+  trangThai varchar [not null]
+}
+
+Table DanhGiaSach {
+  maDanhGiaSach varchar [pk, not null]
+  maSach varchar [ref: > Sach.maSach, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  diemDanhGia float [not null]
+  nhanXet text
+  thoiGian datetime [not null]
+  trangThai varchar [not null]
+}
+
+Table DanhGiaTruyen {
+  maDanhGiaTruyen varchar [pk, not null]
+  maTruyen varchar [ref: > Truyen.maTruyen, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  diemDanhGia float [not null]
+  nhanXet text
+  thoiGian datetime [not null]
+  trangThai varchar [not null]
+}
+
+Table TinNhanHoTro {
+  maTinNhan varchar [pk, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung, not null]
+  noiDung text [not null]
+  nguoiGui varchar [not null]
+  thoiGian datetime [not null]
+  traLoi text
+  trangThai varchar [not null]
+}
+
+Table TinNhanLienHe {
+  maTinLienHe varchar [pk, not null]
+  maNguoiDung varchar [ref: > NguoiDung.maNguoiDung]
+  hoTen varchar [not null]
+  email varchar [not null]
+  soDienThoai varchar [not null]
+  noiDung text [not null]
+  ngayTao datetime [not null]
+  trangThai varchar [not null]
+}
+
+Table TinTuc {
+  maTin varchar [pk, not null]
+  tieuDe varchar [not null]
+  tomTat text [not null]
+  noiDung text [not null]
+  hinhAnh varchar [not null]
+  moTaAnh varchar
+  ngayDang datetime [not null]
+  tacGia varchar [not null]
+  trangThai varchar [not null]
+  luotXem int [default: 0]
+}
+
+// ================================
+// 9. Author Revenue
+// ================================
+Table TacGia {
+  maTacGia varchar [pk, not null, ref: > NguoiDung.maNguoiDung]
+  revenueShare float [default: 0]
+}

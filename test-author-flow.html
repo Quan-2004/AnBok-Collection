@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Author Flow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-button {
+            background: #4A6366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #3A4F52;
+        }
+        .log {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Author Flow</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Chuyển từ author-bio.html sang author-detail.html</h2>
+        <p>Click vào nút bên dưới để test chức năng chuyển trang:</p>
+        <button class="test-button" onclick="testAuthorFlow()">Test Author Flow</button>
+        <div id="log1" class="log"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Kiểm tra Session Storage</h2>
+        <button class="test-button" onclick="checkSessionStorage()">Kiểm tra Session Storage</button>
+        <div id="log2" class="log"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Mô phỏng click vào tác giả</h2>
+        <button class="test-button" onclick="simulateAuthorClick('author_001')">Click vào Nam Cao</button>
+        <button class="test-button" onclick="simulateAuthorClick('author_002')">Click vào Paulo Coelho</button>
+        <button class="test-button" onclick="simulateAuthorClick('author_003')">Click vào Dale Carnegie</button>
+        <div id="log3" class="log"></div>
+    </div>
+
+    <script>
+        function log(elementId, message) {
+            const logElement = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.textContent += `[${timestamp}] ${message}\n`;
+        }
+
+        function testAuthorFlow() {
+            log('log1', 'Bắt đầu test author flow...');
+            
+            // Mô phỏng việc click vào tác giả
+            const authorId = 'author_001';
+            log('log1', `Mô phỏng click vào tác giả ID: ${authorId}`);
+            
+            // Lưu vào session storage
+            sessionStorage.setItem('selectedAuthorId', authorId);
+            log('log1', 'Đã lưu author ID vào session storage');
+            
+            // Chuyển đến author-detail.html
+            log('log1', 'Chuyển đến author-detail.html...');
+            window.location.href = 'author-detail.html';
+        }
+
+        function checkSessionStorage() {
+            log('log2', 'Kiểm tra session storage...');
+            
+            const authorId = sessionStorage.getItem('selectedAuthorId');
+            if (authorId) {
+                log('log2', `Tìm thấy author ID: ${authorId}`);
+            } else {
+                log('log2', 'Không tìm thấy author ID trong session storage');
+            }
+            
+            // Hiển thị tất cả session storage
+            log('log2', 'Tất cả session storage:');
+            for (let i = 0; i < sessionStorage.length; i++) {
+                const key = sessionStorage.key(i);
+                const value = sessionStorage.getItem(key);
+                log('log2', `  ${key}: ${value}`);
+            }
+        }
+
+        function simulateAuthorClick(authorId) {
+            log('log3', `Mô phỏng click vào tác giả: ${authorId}`);
+            
+            // Lưu author ID
+            sessionStorage.setItem('selectedAuthorId', authorId);
+            log('log3', `Đã lưu author ID: ${authorId}`);
+            
+            // Mô phỏng thông báo
+            log('log3', 'Hiển thị thông báo: "Đang chuyển đến trang chi tiết tác giả..."');
+            
+            // Chuyển trang sau 1 giây
+            setTimeout(() => {
+                log('log3', 'Chuyển đến author-detail.html...');
+                window.location.href = 'author-detail.html';
+            }, 1000);
+        }
+
+        // Kiểm tra session storage khi trang load
+        window.addEventListener('load', function() {
+            log('log2', 'Trang đã load, kiểm tra session storage...');
+            checkSessionStorage();
+        });
+    </script>
+</body>
+</html> 

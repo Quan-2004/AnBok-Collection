@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Firebase Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-button {
+            background: #4A6366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #3A4F52;
+        }
+        .log {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        .info {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Firebase Connection</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Kết nối Firebase</h2>
+        <button class="test-button" onclick="testFirebaseConnection()">Test Firebase Connection</button>
+        <div id="log1" class="log"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Load dữ liệu tác giả</h2>
+        <button class="test-button" onclick="testLoadAuthor('author_001')">Load Nam Cao</button>
+        <button class="test-button" onclick="testLoadAuthor('author_002')">Load Paulo Coelho</button>
+        <button class="test-button" onclick="testLoadAuthor('author_003')">Load Dale Carnegie</button>
+        <div id="log2" class="log"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Load sách của tác giả</h2>
+        <button class="test-button" onclick="testLoadAuthorBooks('Nam Cao')">Load sách Nam Cao</button>
+        <button class="test-button" onclick="testLoadAuthorBooks('Paulo Coelho')">Load sách Paulo Coelho</button>
+        <button class="test-button" onclick="testLoadAuthorBooks('Dale Carnegie')">Load sách Dale Carnegie</button>
+        <div id="log3" class="log"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYLKQprHcGWDUo4TNOvDzTqTbqUFG4FkA",
+            authDomain: "anbok-collection.firebaseapp.com",
+            databaseURL: "https://anbok-collection-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "anbok-collection",
+            storageBucket: "anbok-collection.firebasestorage.app",
+            messagingSenderId: "835844957818",
+            appId: "1:835844957818:web:33fc3d03875d49fc5c3dc3",
+            measurementId: "G-MS5FT355WW"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Make Firebase available globally
+        window.firebaseApp = app;
+        window.firebaseDatabase = database;
+
+        function log(elementId, message, type = 'info') {
+            const logElement = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : 'info';
+            logElement.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        window.testFirebaseConnection = async function() {
+            log('log1', 'Testing Firebase connection...', 'info');
+            
+            try {
+                log('log1', 'Firebase app initialized: ' + (app ? 'SUCCESS' : 'FAILED'), 'info');
+                log('log1', 'Database initialized: ' + (database ? 'SUCCESS' : 'FAILED'), 'info');
+                
+                // Test database connection
+                const dbRef = ref(database);
+                const snapshot = await get(child(dbRef, 'Authors'));
+                
+                if (snapshot.exists()) {
+                    const authors = snapshot.val();
+                    const authorCount = Object.keys(authors).length;
+                    log('log1', `Database connection SUCCESS! Found ${authorCount} authors`, 'success');
+                    log('log1', 'Author IDs: ' + Object.keys(authors).join(', '), 'info');
+                } else {
+                    log('log1', 'Database connection SUCCESS but no authors found', 'info');
+                }
+            } catch (error) {
+                log('log1', 'Database connection FAILED: ' + error.message, 'error');
+            }
+        };
+
+        window.testLoadAuthor = async function(authorId) {
+            log('log2', `Loading author data for ID: ${authorId}`, 'info');
+            
+            try {
+                const dbRef = ref(database);
+                const snapshot = await get(child(dbRef, `Authors/${authorId}`));
+                
+                if (snapshot.exists()) {
+                    const author = snapshot.val();
+                    log('log2', `Author loaded SUCCESS: ${author.name}`, 'success');
+                    log('log2', `Bio: ${author.bio ? author.bio.substring(0, 100) + '...' : 'No bio'}`, 'info');
+                    log('log2', `Total books: ${author.total_books || 0}`, 'info');
+                    log('log2', `Total views: ${author.total_views || 0}`, 'info');
+                } else {
+                    log('log2', `Author ${authorId} not found`, 'error');
+                }
+            } catch (error) {
+                log('log2', 'Error loading author: ' + error.message, 'error');
+            }
+        };
+
+        window.testLoadAuthorBooks = async function(authorName) {
+            log('log3', `Loading books for author: ${authorName}`, 'info');
+            
+            try {
+                const dbRef = ref(database);
+                const snapshot = await get(child(dbRef, 'Books'));
+                
+                if (snapshot.exists()) {
+                    const books = snapshot.val();
+                    const authorBooks = [];
+                    
+                    // Filter books by author name
+                    Object.keys(books).forEach(bookId => {
+                        const book = books[bookId];
+                        if (book.author === authorName) {
+                            authorBooks.push({
+                                id: bookId,
+                                title: book.title,
+                                genre: book.genre
+                            });
+                        }
+                    });
+                    
+                    if (authorBooks.length > 0) {
+                        log('log3', `Found ${authorBooks.length} books for ${authorName}`, 'success');
+                        authorBooks.forEach(book => {
+                            log('log3', `- ${book.title} (${book.genre})`, 'info');
+                        });
+                    } else {
+                        log('log3', `No books found for ${authorName}`, 'info');
+                    }
+                } else {
+                    log('log3', 'No books available in database', 'error');
+                }
+            } catch (error) {
+                log('log3', 'Error loading author books: ' + error.message, 'error');
+            }
+        };
+
+        // Auto-test Firebase connection on page load
+        window.addEventListener('load', function() {
+            log('log1', 'Page loaded, testing Firebase connection...', 'info');
+            setTimeout(() => {
+                testFirebaseConnection();
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 
