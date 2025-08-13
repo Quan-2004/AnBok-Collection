@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/color-custom.css">
 	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="css/book-card-modern.css">
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 	<script src="js/profile-loader.js"></script>
 	<style>
@@ -6878,6 +6879,280 @@
 				justify-content: center;
 		}
 		}
+
+		/* ========================
+		   MODERN BOOK CARD STYLES
+		   ======================== */
+		
+		.modern-book-card {
+			background: #ffffff;
+			border-radius: 20px;
+			overflow: hidden;
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			cursor: pointer;
+			position: relative;
+			border: 1px solid rgba(0, 0, 0, 0.04);
+			height: 480px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		/* Main Container Hover Effect */
+		.modern-book-card:hover {
+			transform: translateY(-12px) scale(1.02);
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+		}
+
+		/* Book Image Section */
+		.book-image-wrapper {
+			position: relative;
+			height: 240px;
+			overflow: hidden;
+		}
+
+		.book-image-container {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+
+		.book-cover-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.modern-book-card:hover .book-cover-img {
+			transform: scale(1.08);
+		}
+
+
+
+		/* Quick Action Buttons */
+		.book-quick-actions {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			display: flex;
+			gap: 12px;
+			opacity: 0;
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.modern-book-card:hover .book-quick-actions {
+			opacity: 1;
+		}
+
+		.quick-action-btn {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			border: none;
+			background: rgba(255, 255, 255, 0.95);
+			color: #4A6366;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 16px;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+			backdrop-filter: blur(10px);
+		}
+
+		.quick-action-btn:hover {
+			transform: scale(1.15);
+			box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+		}
+
+		.view-btn:hover {
+			background: #4A6366;
+			color: white;
+		}
+
+		.wishlist-btn:hover {
+			background: #F4A261;
+			color: white;
+		}
+
+		.cart-btn:hover {
+			background: #28a745;
+			color: white;
+		}
+
+		/* Status Badges */
+		.book-status-badges {
+			position: absolute;
+			top: 12px;
+			left: 12px;
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			z-index: 2;
+		}
+
+		.status-badge {
+			padding: 6px 12px;
+			border-radius: 20px;
+			font-size: 10px;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+			backdrop-filter: blur(10px);
+		}
+
+		.free-badge {
+			background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+			color: white;
+		}
+
+		.premium-badge {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+		}
+
+		.vip-badge {
+			background: linear-gradient(135deg, #ffd700 0%, #E8944A 100%);
+			color: white;
+		}
+
+		/* Book Content Section */
+		.book-content {
+			padding: 20px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.book-title {
+			font-size: 18px;
+			font-weight: 700;
+			color: #2c3e50;
+			margin-bottom: 8px;
+			line-height: 1.3;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+
+		.book-author {
+			font-size: 14px;
+			color: #7f8c8d;
+			margin-bottom: 12px;
+			font-weight: 500;
+		}
+
+		.book-categories {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+			margin-bottom: 15px;
+		}
+
+		.book-category {
+			padding: 4px 10px;
+			background: rgba(74, 99, 102, 0.1);
+			color: #4A6366;
+			border-radius: 12px;
+			font-size: 11px;
+			font-weight: 600;
+		}
+
+		.book-rating {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin-bottom: 15px;
+		}
+
+		.star-rating {
+			display: flex;
+			gap: 2px;
+		}
+
+		.star {
+			color: #ffd700;
+			font-size: 14px;
+		}
+
+		.rating-text {
+			font-size: 12px;
+			color: #7f8c8d;
+			font-weight: 500;
+		}
+
+		.book-actions {
+			display: flex;
+			gap: 10px;
+			margin-top: auto;
+		}
+
+		.action-btn {
+			flex: 1;
+			padding: 10px 16px;
+			border: none;
+			border-radius: 12px;
+			font-size: 13px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 6px;
+		}
+
+		.read-btn {
+			background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%);
+			color: white;
+		}
+
+		.read-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(74, 99, 102, 0.4);
+		}
+
+		.wishlist-btn {
+			background: #F4A261;
+			color: white;
+			border: 1px solid #F4A261;
+		}
+
+		.wishlist-btn:hover {
+			background: #e8944a;
+			color: white;
+			border-color: #e8944a;
+		}
+
+		/* Responsive Design */
+		@media (max-width: 768px) {
+			.modern-book-card {
+				height: auto;
+				min-height: 400px;
+			}
+
+			.book-image-wrapper {
+				height: 200px;
+			}
+
+			.book-content {
+				padding: 15px;
+			}
+
+			.book-title {
+				font-size: 16px;
+			}
+
+			.book-actions {
+				flex-direction: column;
+			}
+		}
 	
 	</style>
 </head>
@@ -6903,16 +7178,16 @@
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 							<div class="tg-topbar-right" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px;">
-								<a href="javascript:void(0);" style="color: white; text-decoration: none; transition: color 0.3s ease;">
+								<a href="https://facebook.com/anbokcollection" target="_blank" style="color: white; text-decoration: none; transition: color 0.3s ease;">
 									<i class="fa fa-facebook"></i>
 								</a>
-								<a href="javascript:void(0);" style="color: white; text-decoration: none; transition: color 0.3s ease;">
+								<a href="https://twitter.com/anbokcollection" target="_blank" style="color: white; text-decoration: none; transition: color 0.3s ease;">
 									<i class="fa fa-twitter"></i>
 								</a>
-								<a href="javascript:void(0);" style="color: white; text-decoration: none; transition: color 0.3s ease;">
+								<a href="https://instagram.com/anbokcollection" target="_blank" style="color: white; text-decoration: none; transition: color 0.3s ease;">
 									<i class="fa fa-instagram"></i>
 								</a>
-								<a href="javascript:void(0);" style="color: white; text-decoration: none; transition: color 0.3s ease;">
+								<a href="https://youtube.com/anbokcollection" target="_blank" style="color: white; text-decoration: none; transition: color 0.3s ease;">
 									<i class="fa fa-youtube"></i>
 								</a>
 							</div>
@@ -7002,7 +7277,7 @@
 												<span>Yêu thích</span>
 											</a>
 											<a href="account/orders/orders-list.html" class="tg-dropdown-item">
-												<i class="fa fa-shopping-cart"></i>
+												<i class="fa fa-shopping-basket"></i>
 												<span>Đơn hàng</span>
 											</a>
 											<a href="account/setting.html" class="tg-dropdown-item">
@@ -7059,25 +7334,25 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="author.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-user" style="margin-right: 8px;"></i>
 													Tác giả
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="news.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Tin tức
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="about.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-info-circle" style="margin-right: 8px;"></i>
 													Về chúng tôi
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="contact.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-envelope" style="margin-right: 8px;"></i>
 													Liên hệ
 												</a>
@@ -7088,7 +7363,7 @@
 									<!-- Cart Button -->
 									<div class="tg-cart-btn">
 										<a href="javascript:void(0);" class="tg-cart-link" onclick="toggleCartModal();">
-											<i class="fa fa-shopping-cart"></i>
+											<i class="fa fa-shopping-basket"></i>
 											<span class="tg-cart-badge" id="cart-badge">0</span>
 										</a>
 									</div>
@@ -7236,7 +7511,7 @@
 			<div class="tg-cart-modal-overlay" onclick="toggleCartModal();"></div>
 			<div class="tg-cart-modal-content">
 				<div class="tg-cart-modal-header">
-					<h3><i class="fa fa-shopping-cart"></i> Giỏ hàng</h3>
+					<h3><i class="fa fa-shopping-basket"></i> Giỏ hàng</h3>
 					<button class="tg-cart-modal-close" onclick="toggleCartModal();">
 						<i class="fa fa-times"></i>
 					</button>
@@ -7245,7 +7520,7 @@
 									<div class="tg-cart-items" id="cart-items-container">
 					<!-- Cart items will be loaded dynamically from Firebase -->
 					<div class="tg-cart-empty" style="display: block;">
-						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-shopping-basket"></i>
 						<h4>Giỏ hàng trống</h4>
 						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
 					</div>
@@ -7253,7 +7528,7 @@
 					
 					<!-- Empty Cart Message -->
 					<div class="tg-cart-empty" style="display: none;">
-						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-shopping-basket"></i>
 						<h4>Giỏ hàng trống</h4>
 						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
 						<button class="tg-btn tg-btn-primary" onclick="toggleCartModal();">Tiếp tục mua sắm</button>
@@ -7352,11 +7627,11 @@
                                         </li>
                                     </ul>
 									<ul class="tg-socialicons">
-										<li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-										<li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-										<li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-										<li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-										<li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
+										<li class="tg-facebook"><a href="https://facebook.com/anbokcollection" target="_blank"><i class="fa fa-facebook"></i></a></li>
+										<li class="tg-twitter"><a href="https://twitter.com/anbokcollection" target="_blank"><i class="fa fa-twitter"></i></a></li>
+										<li class="tg-linkedin"><a href="https://linkedin.com/company/anbokcollection" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+										<li class="tg-instagram"><a href="https://instagram.com/anbokcollection" target="_blank"><i class="fa fa-instagram"></i></a></li>
+										<li class="tg-youtube"><a href="https://youtube.com/anbokcollection" target="_blank"><i class="fa fa-youtube"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -7367,21 +7642,21 @@
                                     </div>
                                     <div class="tg-widgetcontent">
                                                                                 <ul>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Điều khoản sử dụng</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Điều khoản mua bán</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách đổi trả</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách bảo mật</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Chính sách Cookie</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Liên hệ chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Đối tác của chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Tầm nhìn &amp; Mục tiêu</a></li>
+                                            <li><a href="about.html#terms" style="color: rgba(255, 255, 255, 0.8);">Điều khoản sử dụng</a></li>
+                                            <li><a href="about.html#policies" style="color: rgba(255, 255, 255, 0.8);">Điều khoản mua bán</a></li>
+                                            <li><a href="about.html#return" style="color: rgba(255, 255, 255, 0.8);">Chính sách đổi trả</a></li>
+                                            <li><a href="about.html#privacy" style="color: rgba(255, 255, 255, 0.8);">Chính sách bảo mật</a></li>
+                                            <li><a href="about.html#cookie" style="color: rgba(255, 255, 255, 0.8);">Chính sách Cookie</a></li>
+                                            <li><a href="contact.html" style="color: rgba(255, 255, 255, 0.8);">Liên hệ chúng tôi</a></li>
+                                            <li><a href="about.html#partners" style="color: rgba(255, 255, 255, 0.8);">Đối tác của chúng tôi</a></li>
+                                            <li><a href="about.html#vision" style="color: rgba(255, 255, 255, 0.8);">Tầm nhìn &amp; Mục tiêu</a></li>
                                         </ul>
                                         <ul>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Câu chuyện của chúng tôi</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Gặp gỡ đội ngũ</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Câu hỏi thường gặp</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Đánh giá khách hàng</a></li>
-                                            <li><a href="javascript:void(0);" style="color: rgba(255, 255, 255, 0.8);">Tham gia cùng chúng tôi</a></li>
+                                            <li><a href="about.html" style="color: rgba(255, 255, 255, 0.8);">Câu chuyện của chúng tôi</a></li>
+                                            <li><a href="about.html#team" style="color: rgba(255, 255, 255, 0.8);">Gặp gỡ đội ngũ</a></li>
+                                            <li><a href="about.html#faq" style="color: rgba(255, 255, 255, 0.8);">Câu hỏi thường gặp</a></li>
+                                            <li><a href="about.html#reviews" style="color: rgba(255, 255, 255, 0.8);">Đánh giá khách hàng</a></li>
+                                            <li><a href="menbership.html" style="color: rgba(255, 255, 255, 0.8);">Tham gia cùng chúng tôi</a></li>
                                         </ul>
                                     </div>
 								</div>
@@ -7394,23 +7669,23 @@
                                     <div class="tg-widgetcontent">
                                         <ul>
                                                                                         <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-09.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-detail.html"><img src="images/author/imag-09.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Nguyễn Văn An</a></h4>
+                                                    <h4><a href="author-detail.html" style="color: white;">Nguyễn Văn An</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">21,658 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
                                             <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-10.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-detail.html"><img src="images/author/imag-10.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Trần Thị Bình</a></h4>
+                                                    <h4><a href="author-detail.html" style="color: white;">Trần Thị Bình</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">20,257 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
                                             <li>
-                                                <figure><a href="javascript:void(0);"><img src="images/author/imag-11.jpg" alt="image description"></a></figure>
+                                                <figure><a href="author-detail.html"><img src="images/author/imag-11.jpg" alt="image description"></a></figure>
                                                 <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);" style="color: white;">Lê Văn Cường</a></h4>
+                                                    <h4><a href="author-detail.html" style="color: white;">Lê Văn Cường</a></h4>
                                                     <p style="color: rgba(255, 255, 255, 0.8);">15,686 cuốn sách đã xuất bản</p>
                                                 </div>
                                             </li>
@@ -7427,7 +7702,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
-							<span class="tg-copyright" style="color: rgba(255, 255, 255, 0.8);">2017 Bản quyền thuộc về © Thư Viện Sách</span>
+							<span class="tg-copyright" style="color: rgba(255, 255, 255, 0.8);">2024 Bản quyền thuộc về © AnBok Collection</span>
 						</div>
 					</div>
 				</div>
@@ -7537,7 +7812,7 @@
 						
 					</button>
 					<button class="tg-btn tg-btn-cart" id="tg-preview-cart">
-						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-shopping-basket"></i>
 						<span>Thêm vào giỏ</span>
 					</button>
 				</div>
@@ -7951,27 +8226,27 @@
 						
 						// Update menu items for logged in user
 						$('.tg-user-menu').html(`
-							<a href="javascript:void(0);" class="tg-menu-item">
+							<a href="profile.html" class="tg-menu-item">
 								<i class="fa fa-user"></i>
 								<span>Quản lý tài khoản</span>
 								<i class="fa fa-chevron-right tg-menu-arrow"></i>
 							</a>
-							<a href="javascript:void(0);" class="tg-menu-item">
+							<a href="book.html" class="tg-menu-item">
 								<i class="fa fa-book"></i>
 								<span>Tủ sách cá nhân</span>
 								<span class="tg-menu-badge">12</span>
 							</a>
-							<a href="javascript:void(0);" class="tg-menu-item">
-								<i class="fa fa-shopping-cart"></i>
+							<a href="checkout.html" class="tg-menu-item">
+								<i class="fa fa-shopping-basket"></i>
 								<span>Quản lý đơn hàng</span>
 								<i class="fa fa-chevron-right tg-menu-arrow"></i>
 							</a>
-							<a href="javascript:void(0);" class="tg-menu-item">
+							<a href="profile.html#ranking" class="tg-menu-item">
 								<i class="fa fa-trophy"></i>
 								<span>Thứ hạng đọc sách</span>
 								<span class="tg-menu-badge tg-badge-gold">#15</span>
 							</a>
-							<a href="javascript:void(0);" class="tg-menu-item">
+							<a href="contact.html" class="tg-menu-item">
 								<i class="fa fa-headphones"></i>
 								<span>Hỗ trợ khách hàng</span>
 								<i class="fa fa-chevron-right tg-menu-arrow"></i>
@@ -8005,22 +8280,22 @@
 									
 									// Reset menu items for guest
 									$('.tg-user-menu').html(`
-										<a href="javascript:void(0);" class="tg-menu-item">
+										<a href="auth.html" class="tg-menu-item">
 											<i class="fa fa-sign-in"></i>
 											<span>Đăng nhập</span>
 											<i class="fa fa-chevron-right tg-menu-arrow"></i>
 										</a>
-										<a href="javascript:void(0);" class="tg-menu-item">
+										<a href="auth.html#register" class="tg-menu-item">
 											<i class="fa fa-user-plus"></i>
 											<span>Đăng ký</span>
 											<i class="fa fa-chevron-right tg-menu-arrow"></i>
 										</a>
-										<a href="javascript:void(0);" class="tg-menu-item">
+										<a href="book.html" class="tg-menu-item">
 											<i class="fa fa-book"></i>
 											<span>Khám phá sách</span>
 											<i class="fa fa-chevron-right tg-menu-arrow"></i>
 										</a>
-										<a href="javascript:void(0);" class="tg-menu-item">
+										<a href="contact.html" class="tg-menu-item">
 											<i class="fa fa-headphones"></i>
 											<span>Hỗ trợ khách hàng</span>
 											<i class="fa fa-chevron-right tg-menu-arrow"></i>
@@ -8028,7 +8303,7 @@
 										
 										<div class="tg-menu-divider"></div>
 										
-										<a href="javascript:void(0);" class="tg-menu-item">
+										<a href="about.html" class="tg-menu-item">
 											<i class="fa fa-info-circle"></i>
 											<span>Về chúng tôi</span>
 											<i class="fa fa-chevron-right tg-menu-arrow"></i>
@@ -9529,7 +9804,7 @@
 		
 
 
-		// Function to load books by filter
+		// Function to load stories by filter
 		async function loadBooksByFilter(filter) {
 			const booksContainer = document.getElementById('books-container');
 			if (!booksContainer) {
@@ -9538,22 +9813,22 @@
 			}
 			
 			// Show loading state
-			booksContainer.innerHTML = '<div class="col-12 text-center"><i class="fa fa-spinner fa-spin" style="font-size: 2rem; color: #4A6366;"></i><p>Đang tải sách...</p></div>';
+			booksContainer.innerHTML = '<div class="col-12 text-center"><i class="fa fa-spinner fa-spin" style="font-size: 2rem; color: #4A6366;"></i><p>Đang tải truyện...</p></div>';
 			
 			try {
-				// Get books from Firebase
-				const books = await getBooksByFilter(filter);
+				// Get stories from Firebase
+				const stories = await getStoriesByFilter(filter);
 				
 				// Use pagination display
-				displayBooksFromFirebase(books);
+				displayStoriesFromFirebase(stories);
 				
-				// Update books count
-				updateBooksCount(books.length);
+				// Update stories count
+				updateBooksCount(stories.length);
 				
 
 			} catch (error) {
-				console.error('Error loading books:', error);
-				booksContainer.innerHTML = '<div class="col-12 text-center"><p style="color: #dc3545;">Có lỗi xảy ra khi tải sách. Vui lòng thử lại!</p></div>';
+				console.error('Error loading stories:', error);
+				booksContainer.innerHTML = '<div class="col-12 text-center"><p style="color: #dc3545;">Có lỗi xảy ra khi tải truyện. Vui lòng thử lại!</p></div>';
 			}
 		}
 		
@@ -9743,7 +10018,7 @@
 									<i class="fa fa-heart"></i>
 								</button>
 								<button class="tg-action-btn" onclick="addToCart('${story.story_id}')" style="background: #28a745; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">
-									<i class="fa fa-shopping-cart"></i>
+									<i class="fa fa-shopping-basket"></i>
 								</button>
 							</div>
 						</div>
@@ -10180,7 +10455,7 @@
 				// Hiển thị giỏ hàng trống
 				cartItemsContainer.innerHTML = `
 					<div class="tg-cart-empty" style="display: block;">
-						<i class="fa fa-shopping-cart"></i>
+						<i class="fa fa-shopping-basket"></i>
 						<h4>Giỏ hàng trống</h4>
 						<p>Hãy thêm sản phẩm vào giỏ hàng</p>
 					</div>
@@ -10745,12 +11020,18 @@
 		// Load books from Firebase
 		async function loadBooksFromFirebase(database) {
 			try {
-				// First, try to load books
-				const booksSnapshot = await database.ref('Books').once('value');
-				const booksData = booksSnapshot.val();
+				// First, try to load stories from Stories collection
+				const storiesSnapshot = await database.ref('Stories').once('value');
+				const storiesData = storiesSnapshot.val();
 				
-				if (booksData) {
-					const allBooks = Object.values(booksData);
+				if (storiesData) {
+					const stories = Object.keys(storiesData).map(key => {
+						return {
+							...storiesData[key],
+							id: key,
+							story_id: key
+						};
+					});
 					
 					// Update book count
 					updateBooksCount(stories.length);
@@ -10931,134 +11212,99 @@
 				}
 
 				return `
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
-						<div class="tg-story-card" onclick="viewStory('${story.story_id}')" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; height: 420px; position: relative; border: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; cursor: pointer;">
-							<!-- Story Image with Overlay -->
-							<div class="tg-story-image-container" style="position: relative; overflow: hidden; height: 200px; flex-shrink: 0;">
-								<img src="${story.cover_image}" alt="${story.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
-								<div class="tg-story-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(74, 99, 102, 0.9) 0%, rgba(58, 79, 82, 0.9) 100%); display: flex; align-items: center; justify-content: center; opacity: 0; transition: all 0.4s ease;">
-									<div class="tg-overlay-actions" style="display: flex; gap: 10px;">
-										<button class="tg-overlay-btn" onclick="event.stopPropagation(); viewStory('${story.story_id}')" style="background: rgba(255,255,255,0.9); color: #4A6366; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 35px; padding: 8px;">
+						<div class="tg-story-card modern-book-card" onclick="viewStory('${story.story_id}')" data-story-id="${story.story_id}">
+							<!-- Story Image Section -->
+							<div class="book-image-wrapper">
+								<div class="book-image-container">
+									<img src="${story.cover_image}" alt="${story.title}" class="book-cover-img">
+									
+
+									
+									<!-- Quick Action Buttons -->
+									<div class="book-quick-actions">
+										<button class="quick-action-btn view-btn" onclick="event.stopPropagation(); viewStory('${story.story_id}')" title="Xem chi tiết">
 											<i class="fa fa-eye"></i>
 										</button>
-										<button class="tg-overlay-btn" onclick="event.stopPropagation(); addToWishlist('${story.story_id}')" style="background: rgba(255,255,255,0.9); color: #F4A261; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+										<button class="quick-action-btn wishlist-btn" onclick="event.stopPropagation(); addToWishlist('${story.story_id}')" title="Thêm vào yêu thích">
 											<i class="fa fa-heart"></i>
 										</button>
-										<button class="tg-overlay-btn" onclick="event.stopPropagation(); ${buttonInfo.action === 'buyMembership' ? 'buyMembership' : 'addToCart'}('${story.story_id}')" style="background: rgba(255,255,255,0.9); color: ${buttonInfo.action === 'buyMembership' ? '#F4A261' : '#28a745'}; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+										${!story.is_member_only ? `
+										<button class="quick-action-btn cart-btn" onclick="event.stopPropagation(); ${buttonInfo.action === 'buyMembership' ? 'buyMembership' : 'addToCart'}('${story.story_id}')" title="${buttonInfo.text}">
 											<i class="fa fa-${buttonInfo.icon}"></i>
 										</button>
+										` : ''}
 									</div>
-								</div>
-								
-								<!-- Status Badges -->
-								<div class="tg-story-badges" style="position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 4px;">
-									${story.is_free ? '<span style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 4px 8px; border-radius: 12px; font-size: 9px; font-weight: 600; box-shadow: 0 1px 4px rgba(40, 167, 69, 0.3);">MIỄN PHÍ</span>' : ''}
-									${story.is_featured ? '<span style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #333; padding: 4px 8px; border-radius: 12px; font-size: 9px; font-weight: 600; box-shadow: 0 1px 4px rgba(255, 215, 0, 0.3);">NỔI BẬT</span>' : ''}
-									${story.is_member_only ? '<span style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; padding: 4px 8px; border-radius: 12px; font-size: 9px; font-weight: 600; box-shadow: 0 1px 4px rgba(220, 53, 69, 0.3);">HỘI VIÊN</span>' : ''}
-								</div>
-								
-								<!-- Category Badge -->
-								<div style="position: absolute; top: 10px; right: 10px;">
-									<span style="background: rgba(255,255,255,0.9); color: #4A6366; padding: 4px 8px; border-radius: 12px; font-size: 9px; font-weight: 600; backdrop-filter: blur(10px);">${story.category_name}</span>
+									
+									<!-- Status Badges -->
+									<div class="book-status-badges">
+										${story.is_free ? '<span class="status-badge free-badge">MIỄN PHÍ</span>' : ''}
+										${story.is_featured ? '<span class="status-badge featured-badge">NỔI BẬT</span>' : ''}
+										${story.is_member_only ? '<span class="status-badge member-badge">HỘI VIÊN</span>' : ''}
+									</div>
+									
+									<!-- Category Badge -->
+									<div class="book-category-badge">
+										<span class="category-tag">${story.category_name}</span>
+									</div>
+									
+									<!-- Rating Preview -->
+									<div class="book-rating-preview">
+										<div class="rating-stars">${generateStars(story.rating)}</div>
+										<span class="rating-value">${story.rating}</span>
+									</div>
 								</div>
 							</div>
 							
-							<!-- Story Content -->
-							<div class="tg-story-content" style="padding: 15px; flex: 1; display: flex; flex-direction: column;">
+							<!-- Story Information Section -->
+							<div class="book-info-section">
 								<!-- Story Title -->
-								<h3 class="tg-story-title" style="margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 700; line-height: 1.3; color: #2c3e50; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8rem;">
-									<a href="javascript:void(0);" onclick="viewStory('${story.story_id}')" style="color: inherit; text-decoration: none; transition: color 0.3s ease; cursor: pointer;">
+								<h3 class="book-title">
+									<a href="javascript:void(0);" onclick="viewStory('${story.story_id}')">
 										${story.title}
 									</a>
 								</h3>
 								
-								<!-- Story Author -->
-								<div class="tg-story-author" style="margin-bottom: 10px;">
-									<span style="color: #7f8c8d; font-size: 0.85rem; font-weight: 500;">
-										<i class="fa fa-user" style="margin-right: 4px; color: #95a5a6;"></i>
-										${story.author}
-									</span>
+								<!-- Author Info -->
+								<div class="book-author-info">
+									<i class="fa fa-user"></i>
+									<span class="author-name">${story.author}</span>
 								</div>
 								
-								<!-- Story Rating -->
-								<div class="tg-story-rating" style="margin-bottom: 12px;">
-									<div style="display: flex; align-items: center; gap: 8px;">
-										<div style="color: #f39c12; font-size: 0.9rem;">
-											${generateStars(story.rating)}
+								<!-- Story Statistics -->
+								<div class="book-stats">
+									<div class="stat-item">
+										<div class="rating-detailed">
+											<span class="rating-score">${story.rating}</span>
+											<div class="rating-stars-small">${generateStars(story.rating)}</div>
 										</div>
-										<div style="display: flex; flex-direction: column;">
-											<span style="color: #2c3e50; font-weight: 600; font-size: 0.8rem;">${story.rating}</span>
-											<span style="color: #95a5a6; font-size: 0.7rem;">${story.review_count} đánh giá</span>
-										</div>
+									</div>
+									<div class="stat-item">
+										<span class="review-count">${story.review_count} đánh giá</span>
 									</div>
 								</div>
 								
-								<!-- Story Price -->
-								<div class="tg-story-price" style="margin-bottom: 12px;">
+								<!-- Price Section -->
+								<div class="book-pricing">
 									${story.is_free ? 
-										'<div style="display: flex; align-items: center; gap: 6px;"><span style="color: #27ae60; font-weight: 700; font-size: 1.1rem;">Miễn phí</span><i class="fa fa-gift" style="color: #27ae60; font-size: 0.9rem;"></i></div>' :
+										'<div class="price-free"><i class="fa fa-gift"></i><span>Miễn phí</span></div>' :
 										story.is_member_only ? 
-										'<div style="display: flex; align-items: center; gap: 6px;"><span style="color: #27ae60; font-weight: 700; font-size: 1.1rem;">Miễn phí cho hội viên</span><i class="fa fa-gift" style="color: #27ae60; font-size: 0.9rem;"></i></div>' :
-										`<div style="display: flex; align-items: center; gap: 8px;">
-											<span style="color: #e74c3c; font-weight: 700; font-size: 1.1rem;">${formatPrice(story.price)}</span>
+										'<div class="price-member"><i class="fa fa-crown"></i><span>Miễn phí cho hội viên</span></div>' :
+										`<div class="price-paid">
+											<span class="current-price">${formatPrice(story.price)}</span>
 											${story.original_price > story.price ? 
-												`<span style="color: #95a5a6; text-decoration: line-through; font-size: 0.9rem;">${formatPrice(story.original_price)}</span>` : 
+												`<span class="original-price">${formatPrice(story.original_price)}</span>` : 
 												''
 											}
 										</div>`
 									}
 								</div>
 								
-								<!-- Story Actions -->
-								<div class="tg-story-actions" style="display: flex; gap: 8px; margin-top: auto;">
-									<button class="${buttonClass}" onclick="event.stopPropagation(); ${buttonInfo.action}('${story.story_id}')" style="${buttonStyle}">
-										<i class="fa fa-${buttonInfo.icon}" style="font-size: 0.8rem;"></i>
-										${buttonInfo.text}
-									</button>
-									<button class="tg-btn-secondary" onclick="event.stopPropagation(); addToWishlist('${story.story_id}')" style="background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(244, 162, 97, 0.3);">
-										<i class="fa fa-heart" style="font-size: 0.8rem;"></i>
-									</button>
-								</div>
+
 							</div>
 							
-							<!-- Hover Effects -->
-							<style>
-								.tg-story-card:hover {
-									transform: translateY(-8px);
-									box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-								}
-								.tg-story-card:hover .tg-story-overlay {
-									opacity: 1;
-								}
-								.tg-story-card:hover .tg-story-image-container img {
-									transform: scale(1.1);
-								}
-								.tg-overlay-btn:hover {
-									transform: scale(1.1);
-									box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-								}
-								.tg-btn-primary:hover {
-									transform: translateY(-2px);
-									box-shadow: 0 6px 20px rgba(74, 99, 102, 0.4);
-								}
-								.tg-btn-secondary:hover {
-									transform: translateY(-2px);
-									box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4);
-								}
-								.tg-btn-membership:hover {
-									transform: translateY(-2px);
-									box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4);
-								}
-								.tg-story-title a:hover {
-									color: #4A6366;
-								}
-								.tg-story-card {
-									cursor: pointer;
-								}
-								.tg-story-card:hover {
-									cursor: pointer;
-								}
-							</style>
+							<!-- Hover Indicator -->
+							<div class="book-hover-indicator"></div>
 						</div>
 					</div>
 				`;

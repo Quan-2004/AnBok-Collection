@@ -392,6 +392,25 @@
 			width: 24px;
 			height: 24px;
 		}
+		
+		/* Logout button styles */
+		.auth-logout-btn {
+			background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+			color: white !important;
+			border: none !important;
+			cursor: pointer !important;
+			transition: all 0.3s ease !important;
+		}
+		
+		.auth-logout-btn:hover {
+			background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%) !important;
+			transform: translateY(-2px) !important;
+			box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3) !important;
+		}
+		
+		.auth-logout-btn:active {
+			transform: translateY(0) !important;
+		}
 
 		.auth-footer {
 			text-align: center;
@@ -699,6 +718,7 @@
 		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 		import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithPopup, GoogleAuthProvider, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 		import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+		import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 		// Your web app's Firebase configuration
 		const firebaseConfig = {
@@ -716,10 +736,14 @@
 		const app = initializeApp(firebaseConfig);
 		const auth = getAuth(app);
 		const analytics = getAnalytics(app);
+		const database = getDatabase(app);
 		const googleProvider = new GoogleAuthProvider();
 
 		// Make Firebase available globally
 		window.firebaseAuth = auth;
+		window.firebaseDatabase = database;
+		window.firebaseRef = ref;
+		window.firebaseGet = get;
 		window.googleProvider = googleProvider;
 		window.signInWithPopup = signInWithPopup;
 		window.signInWithEmailAndPassword = signInWithEmailAndPassword;
@@ -851,9 +875,9 @@
 				localStorage.setItem('user', JSON.stringify(userData));
 				
 				showMessage('Đăng nhập thành công!', 'success');
-				setTimeout(() => {
-					window.location.href = 'index.html';
-				}, 1500);
+				
+				// Kiểm tra vai trò người dùng và chuyển hướng
+				checkUserRoleAndRedirect(user.uid);
 			} catch (error) {
 				submitBtn.classList.remove('loading');
 				submitBtn.textContent = 'Đăng nhập';
@@ -925,6 +949,8 @@
 				localStorage.setItem('user', JSON.stringify(userData));
 				
 				showMessage('Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.', 'success');
+				
+				// Kiểm tra trạng thái tác giả và chuyển hướng (sau khi đăng ký mới)
 				setTimeout(() => {
 					window.location.href = 'index.html';
 				}, 2000);
@@ -1004,9 +1030,9 @@
 				localStorage.setItem('user', JSON.stringify(userData));
 				
 				showMessage('Đăng nhập Google thành công!', 'success');
-				setTimeout(() => {
-					window.location.href = 'index.html';
-				}, 1500);
+				
+				// Kiểm tra vai trò người dùng và chuyển hướng
+				checkUserRoleAndRedirect(user.uid);
 			} catch (error) {
 				console.error('Google login error:', error);
 				let errorMessage = 'Đăng nhập Google thất bại!';
@@ -1056,8 +1082,110 @@
 			}
 		}
 		
+		// Function to check user role and redirect accordingly
+		async function checkUserRoleAndRedirect(userId) {
+			try {
+				console.log('Checking user role for user:', userId);
+				
+				// Import Firebase functions if not available
+				if (!window.firebaseDatabase || !window.firebaseRef || !window.firebaseGet) {
+					console.log('Firebase not ready, importing...');
+					await importFirebaseFunctions();
+				}
+				
+				// First check if user is admin
+				const userRef = window.firebaseRef(window.firebaseDatabase, `users/${userId}`);
+				const userSnapshot = await window.firebaseGet(userRef);
+				
+				if (userSnapshot.exists()) {
+					const userData = userSnapshot.val();
+					console.log('User data:', userData);
+					
+					// Check if user is admin
+					if (userData.role === 'admin' || userData.role === 'superAdmin') {
+						console.log('User is admin, redirecting to admin dashboard');
+						showMessage('Chào mừng Admin! Đang chuyển đến bảng điều khiển quản trị...', 'success');
+						setTimeout(() => {
+							window.location.href = 'admin-dashboard.html';
+						}, 1500);
+						return; // Exit early for admin users
+					}
+				}
+				
+				// If not admin, check author status
+				const userAuthorRef = window.firebaseRef(window.firebaseDatabase, `users/${userId}/authorRegistration`);
+				const authorSnapshot = await window.firebaseGet(userAuthorRef);
+				
+				if (authorSnapshot.exists()) {
+					const authorData = authorSnapshot.val();
+					console.log('Author registration data:', authorData);
+					
+					if (authorData.status === 'approved') {
+						console.log('User is approved author, redirecting to author dashboard');
+						showMessage('Chào mừng tác giả! Đang chuyển đến studio tác giả...', 'success');
+						setTimeout(() => {
+							window.location.href = 'author-dashboard.html';
+						}, 1500);
+					} else if (authorData.status === 'pending') {
+						console.log('User is pending author, redirecting to index');
+						showMessage('Đăng ký tác giả đang chờ duyệt. Chuyển đến trang chủ...', 'info');
+						setTimeout(() => {
+							window.location.href = 'index.html';
+						}, 2000);
+					} else if (authorData.status === 'rejected') {
+						console.log('User is rejected author, redirecting to index');
+						showMessage('Đăng ký tác giả bị từ chối. Chuyển đến trang chủ...', 'info');
+						setTimeout(() => {
+							window.location.href = 'index.html';
+						}, 2000);
+					} else {
+						console.log('Unknown author status, redirecting to index');
+						setTimeout(() => {
+							window.location.href = 'index.html';
+						}, 1500);
+					}
+				} else {
+					console.log('No author registration found, redirecting to index');
+					setTimeout(() => {
+						window.location.href = 'index.html';
+					}, 1500);
+				}
+			} catch (error) {
+				console.error('Error checking user role:', error);
+				// Fallback to index.html if there's an error
+				showMessage('Có lỗi xảy ra, chuyển đến trang chủ...', 'error');
+				setTimeout(() => {
+					window.location.href = 'index.html';
+				}, 2000);
+			}
+		}
+		
+		// Function to import Firebase functions if needed
+		async function importFirebaseFunctions() {
+			try {
+				const { getDatabase, ref, get } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+				
+				window.firebaseDatabase = getDatabase();
+				window.firebaseRef = ref;
+				window.firebaseGet = get;
+				
+				console.log('Firebase functions imported successfully');
+			} catch (error) {
+				console.error('Error importing Firebase functions:', error);
+			}
+		}
+		
 		// Call test function on page load
 		window.addEventListener('load', testFirebaseConfig);
+		
+		// Add event listener for logout button
+		document.addEventListener('click', function(e) {
+			if (e.target.classList.contains('auth-logout-btn') || 
+				e.target.closest('.auth-logout-btn')) {
+				e.preventDefault();
+				window.logoutFromAuthPage();
+			}
+		});
 
 		// Auto-hide messages after 5 seconds
 		setInterval(() => {
@@ -1084,9 +1212,9 @@
 			console.log('Video section found:', !!videoSection);
 			
 			if (user && user.isLoggedIn) {
-				// User is logged in - show user info instead of login form
-				console.log('User is logged in, showing user info');
-				showUserInfoOnAuthPage(user);
+				// User is logged in - check user role and redirect
+				console.log('User is logged in, checking user role');
+				checkUserRoleAndRedirect(user.uid);
 			} else {
 				// User is not logged in - show login form (default)
 				console.log('User is not logged in, showing login form');
@@ -1096,68 +1224,9 @@
 		
 		// Function to show user info when already logged in
 		function showUserInfoOnAuthPage(user) {
-			const authContainer = document.querySelector('.auth-form-container');
-			const videoSection = document.querySelector('.auth-video-section');
-			
-			if (authContainer) {
-				authContainer.innerHTML = `
-					<div class="auth-form-logo">
-						<img src="images/logo-Photoroom.png" alt="AnBok">
-					</div>
-					<div class="auth-form-header">
-						<h2 class="auth-form-title">Chào mừng trở lại!</h2>
-						<p class="auth-form-subtitle">Bạn đã đăng nhập thành công</p>
-					</div>
-					
-					<div class="auth-user-info" style="text-align: center; padding: 30px 0;">
-						<div class="auth-user-avatar" style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; border: 4px solid #4A6366;">
-							<img src="${user.photoURL || 'images/users/img-01.jpg'}" alt="User Avatar" style="width: 100%; height: 100%; object-fit: cover;">
-						</div>
-						<h3 style="color: #333; margin-bottom: 10px; font-size: 1.5rem;">${user.displayName || user.email || 'Người dùng'}</h3>
-						<p style="color: #666; margin-bottom: 30px;">${user.email || ''}</p>
-						
-						<div class="auth-user-actions" style="display: flex; flex-direction: column; gap: 15px;">
-							<a href="index.html" class="auth-submit" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px;">
-								<i class="fa fa-home"></i>
-								Về trang chủ
-							</a>
-							<a href="account/profile.html" class="auth-submit" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%);">
-								<i class="fa fa-user"></i>
-								Hồ sơ cá nhân
-							</a>
-							<button class="auth-submit auth-logout-btn" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); border: none; cursor: pointer;">
-								<i class="fa fa-sign-out"></i>
-								Đăng xuất
-							</button>
-						</div>
-					</div>
-				`;
-			}
-			
-			// Update video section content
-			if (videoSection) {
-				const videoContent = videoSection.querySelector('.auth-video-content');
-				if (videoContent) {
-					videoContent.innerHTML = `
-						<h1 class="auth-video-title">Chào mừng trở lại!</h1>
-						<p class="auth-video-subtitle">Bạn đã đăng nhập thành công vào AnBok. Hãy khám phá thế giới sách tuyệt vời của chúng tôi.</p>
-						<div class="auth-video-features">
-							<div class="auth-video-feature">
-								<i class="fa fa-book"></i>
-								<span>Hơn 10,000 đầu sách</span>
-							</div>
-							<div class="auth-video-feature">
-								<i class="fa fa-heart"></i>
-								<span>Danh sách yêu thích</span>
-							</div>
-							<div class="auth-video-feature">
-								<i class="fa fa-clock-o"></i>
-								<span>Đọc sách 24/7</span>
-							</div>
-						</div>
-					`;
-				}
-			}
+			// This function is no longer needed as we redirect immediately
+			// But keeping it for potential future use
+			console.log('showUserInfoOnAuthPage called but redirecting instead');
 		}
 		
 		// Function to show login form (default state)
@@ -1170,6 +1239,9 @@
 		window.logoutFromAuthPage = function() {
 			// Clear user data from localStorage
 			localStorage.removeItem('user');
+			localStorage.removeItem('userProfile');
+			localStorage.removeItem('authorRegistration');
+			sessionStorage.clear();
 			
 			// Firebase logout if available
 			if (window.firebaseAuth) {

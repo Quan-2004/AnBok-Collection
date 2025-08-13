@@ -1,0 +1,314 @@
+{
+  "Authors": {
+    "author_001": {
+      "maTacGia": "AUTH001",
+      "revenueShare": 0.15,
+      "bio": "Nam Cao (1915-1951) là nhà văn hiện thực xuất sắc của văn học Việt Nam. Ông chuyên viết về người nông dân nghèo khổ với những trăn trở về tình người, lòng tự trọng và sự hy sinh. Tác phẩm tiêu biểu: Lão Hạc, Chí Phèo, Sống mòn.",
+      "chuyenMon": "Văn học hiện thực",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.2,
+      "ngayThamGia": "2024-01-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Nam Cao",
+      "email": "namcao@anbok.com",
+      "soDienThoai": "+84-123-456-789",
+      "diaChi": "Hà Nội, Việt Nam",
+      "website": "https://namcao.vn",
+      "socialMedia": {
+        "facebook": "namcao.author",
+        "twitter": "@namcao_vn",
+        "instagram": "namcao.official"
+      },
+      "ngonNgu": ["Vietnamese", "French"],
+      "theLoaiChinh": ["Tiểu thuyết", "Truyện ngắn"],
+      "thanhTich": [
+        "Giải thưởng Văn học Hồ Chí Minh",
+        "Nhà văn tiêu biểu thế kỷ 20"
+      ],
+      "sach": ["book_001"]
+    },
+    "author_002": {
+      "maTacGia": "AUTH002",
+      "revenueShare": 0.20,
+      "bio": "Paulo Coelho (1947-) là nhà văn Brazil nổi tiếng thế giới. Ông chuyên viết về hành trình tìm kiếm bản thân và ý nghĩa cuộc sống. Tác phẩm tiêu biểu: Nhà Giả Kim, Veronika quyết chết, Mười một phút.",
+      "chuyenMon": "Tiểu thuyết tâm linh",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.5,
+      "ngayThamGia": "2023-11-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Paulo Coelho",
+      "email": "paulo.coelho@anbok.com",
+      "soDienThoai": "+55-11-98765-4321",
+      "diaChi": "Rio de Janeiro, Brazil",
+      "website": "https://paulocoelho.com",
+      "socialMedia": {
+        "facebook": "paulocoelho",
+        "twitter": "@paulocoelho",
+        "instagram": "paulocoelho"
+      },
+      "ngonNgu": ["Portuguese", "English", "Spanish"],
+      "theLoaiChinh": ["Tiểu thuyết", "Tâm linh"],
+      "thanhTich": [
+        "Bán được hơn 350 triệu bản sách",
+        "Được dịch ra 80 ngôn ngữ",
+        "Nhận nhiều giải thưởng văn học quốc tế"
+      ],
+      "sach": ["book_002"]
+    },
+    "author_003": {
+      "maTacGia": "AUTH003",
+      "revenueShare": 0.18,
+      "bio": "Dale Carnegie (1888-1955) là nhà văn và diễn giả người Mỹ. Ông chuyên viết về kỹ năng giao tiếp, lãnh đạo và phát triển bản thân. Tác phẩm tiêu biểu: Đắc Nhân Tâm, Quảng giao thành công.",
+      "chuyenMon": "Kỹ năng sống và phát triển bản thân",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.8,
+      "ngayThamGia": "2023-09-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Dale Carnegie",
+      "email": "dale.carnegie@anbok.com",
+      "soDienThoai": "+1-555-123-4567",
+      "diaChi": "New York, USA",
+      "website": "https://dalecarnegie.com",
+      "socialMedia": {
+        "facebook": "dalecarnegie",
+        "twitter": "@dalecarnegie",
+        "instagram": "dalecarnegie"
+      },
+      "ngonNgu": ["English"],
+      "theLoaiChinh": ["Kỹ năng sống", "Phát triển bản thân"],
+      "thanhTich": [
+        "Sách bán chạy nhất mọi thời đại",
+        "Được sử dụng trong đào tạo doanh nghiệp",
+        "Ảnh hưởng đến hàng triệu người trên thế giới"
+      ],
+      "sach": ["book_003"]
+    },
+    "author_004": {
+      "maTacGia": "AUTH004",
+      "revenueShare": 0.25,
+      "bio": "J.K. Rowling (1965-) là nhà văn Anh, tác giả series Harry Potter nổi tiếng thế giới. Bà chuyên viết về thế giới phép thuật với những câu chuyện phiêu lưu hấp dẫn.",
+      "chuyenMon": "Tiểu thuyết fantasy",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.7,
+      "ngayThamGia": "2023-12-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "J.K. Rowling",
+      "email": "jk.rowling@anbok.com",
+      "soDienThoai": "+44-20-7123-4567",
+      "diaChi": "Edinburgh, Scotland",
+      "website": "https://jkrowling.com",
+      "socialMedia": {
+        "facebook": "jkrowling",
+        "twitter": "@jk_rowling",
+        "instagram": "jkrowling"
+      },
+      "ngonNgu": ["English"],
+      "theLoaiChinh": ["Fantasy", "Tiểu thuyết"],
+      "thanhTich": [
+        "Series sách bán chạy nhất lịch sử",
+        "Tạo ra hiện tượng văn hóa toàn cầu",
+        "Được chuyển thể thành phim thành công"
+      ],
+      "sach": ["book_004"]
+    },
+    "author_005": {
+      "maTacGia": "AUTH005",
+      "revenueShare": 0.0,
+      "bio": "Tác giả ẩn danh chuyên viết về các vấn đề khoa học và bảo tồn thiên nhiên. Các tác phẩm tập trung vào việc nâng cao nhận thức về môi trường và đa dạng sinh học.",
+      "chuyenMon": "Khoa học và môi trường",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.0,
+      "ngayThamGia": "2024-02-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Tác giả Ẩn danh",
+      "email": "anonymous@anbok.com",
+      "soDienThoai": "+84-987-654-321",
+      "diaChi": "Việt Nam",
+      "website": "",
+      "socialMedia": {},
+      "ngonNgu": ["Vietnamese"],
+      "theLoaiChinh": ["Khoa học", "Môi trường"],
+      "thanhTich": [
+        "Đóng góp cho công tác bảo tồn thiên nhiên",
+        "Nâng cao nhận thức cộng đồng"
+      ],
+      "sach": ["book_005"]
+    },
+    "author_006": {
+      "maTacGia": "AUTH006",
+      "revenueShare": 0.22,
+      "bio": "Tôn Tử (544-496 TCN) là nhà quân sự và triết gia Trung Quốc cổ đại. Tác phẩm 'Nghệ Thuật Chiến Tranh' của ông được coi là kinh điển về chiến lược và được áp dụng rộng rãi trong nhiều lĩnh vực.",
+      "chuyenMon": "Chiến lược và nghệ thuật quân sự",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.6,
+      "ngayThamGia": "2023-10-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Tôn Tử",
+      "email": "suntzu@anbok.com",
+      "soDienThoai": "",
+      "diaChi": "Trung Quốc cổ đại",
+      "website": "",
+      "socialMedia": {},
+      "ngonNgu": ["Chinese", "Vietnamese"],
+      "theLoaiChinh": ["Chiến lược", "Triết học"],
+      "thanhTich": [
+        "Tác giả kinh điển về nghệ thuật quân sự",
+        "Ảnh hưởng đến nhiều lĩnh vực khác nhau",
+        "Được nghiên cứu và áp dụng trên toàn thế giới"
+      ],
+      "sach": ["book_006"]
+    },
+    "author_007": {
+      "maTacGia": "AUTH007",
+      "revenueShare": 0.16,
+      "bio": "Nguyễn Du (1766-1820) là đại thi hào dân tộc Việt Nam. Tác phẩm 'Truyện Kiều' của ông được coi là kiệt tác văn học và được UNESCO công nhận. Ông có ảnh hưởng lớn đến văn học Việt Nam.",
+      "chuyenMon": "Thơ ca và văn học cổ điển",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.9,
+      "ngayThamGia": "2023-08-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Nguyễn Du",
+      "email": "nguyendu@anbok.com",
+      "soDienThoai": "",
+      "diaChi": "Nghi Xuân, Hà Tĩnh, Việt Nam",
+      "website": "",
+      "socialMedia": {},
+      "ngonNgu": ["Vietnamese", "Chinese"],
+      "theLoaiChinh": ["Thơ ca", "Văn học cổ điển"],
+      "thanhTich": [
+        "Đại thi hào dân tộc Việt Nam",
+        "Tác phẩm Truyện Kiều được UNESCO công nhận",
+        "Ảnh hưởng lớn đến văn học Việt Nam"
+      ],
+      "sach": ["book_007"]
+    },
+    "author_008": {
+      "maTacGia": "AUTH008",
+      "revenueShare": 0.17,
+      "bio": "Nhóm tác giả chuyên nghiên cứu về công nghệ và khoa học. Họ tập trung vào việc phân tích và dự đoán xu hướng công nghệ trong tương lai, đặc biệt là cuộc cách mạng công nghiệp 4.0.",
+      "chuyenMon": "Công nghệ và khoa học",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.3,
+      "ngayThamGia": "2024-01-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Nhiều tác giả",
+      "email": "tech.authors@anbok.com",
+      "soDienThoai": "+84-123-789-456",
+      "diaChi": "Hà Nội, Việt Nam",
+      "website": "https://tech-authors.vn",
+      "socialMedia": {
+        "facebook": "techauthors",
+        "twitter": "@techauthors_vn"
+      },
+      "ngonNgu": ["Vietnamese", "English"],
+      "theLoaiChinh": ["Công nghệ", "Khoa học"],
+      "thanhTich": [
+        "Nghiên cứu về công nghệ 4.0",
+        "Đóng góp cho sự phát triển công nghệ Việt Nam"
+      ],
+      "sach": ["book_008"]
+    },
+    "author_009": {
+      "maTacGia": "AUTH009",
+      "revenueShare": 0.19,
+      "bio": "Napoleon Hill (1883-1970) là nhà văn và diễn giả người Mỹ chuyên về chủ đề thành công và làm giàu. Ông đã nghiên cứu và phỏng vấn hàng trăm người thành công để đúc kết ra những nguyên tắc thành công.",
+      "chuyenMon": "Thành công và làm giàu",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.4,
+      "ngayThamGia": "2023-11-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Napoleon Hill",
+      "email": "napoleon.hill@anbok.com",
+      "soDienThoai": "+1-555-987-6543",
+      "diaChi": "Virginia, USA",
+      "website": "https://napoleonhill.com",
+      "socialMedia": {
+        "facebook": "napoleonhill",
+        "twitter": "@napoleonhill"
+      },
+      "ngonNgu": ["English"],
+      "theLoaiChinh": ["Thành công", "Làm giàu"],
+      "thanhTich": [
+        "Nghiên cứu về thành công của 500 người giàu nhất",
+        "Tác giả nhiều cuốn sách bán chạy",
+        "Ảnh hưởng đến hàng triệu người trên thế giới"
+      ],
+      "sach": ["book_009"]
+    },
+    "author_010": {
+      "maTacGia": "AUTH010",
+      "revenueShare": 0.14,
+      "bio": "Chef Minh là đầu bếp chuyên nghiệp với hơn 20 năm kinh nghiệm trong ẩm thực Việt Nam và quốc tế. Ông chuyên về các món ăn truyền thống và hiện đại, đồng thời là tác giả của nhiều sách dạy nấu ăn.",
+      "chuyenMon": "Ẩm thực và nấu ăn",
+      "soSachDaXuatBan": 1,
+      "danhGiaTrungBinh": 4.6,
+      "ngayThamGia": "2023-12-01T00:00:00Z",
+      "trangThai": "active",
+      "tenTacGia": "Chef Minh",
+      "email": "chef.minh@anbok.com",
+      "soDienThoai": "+84-987-123-456",
+      "diaChi": "TP. Hồ Chí Minh, Việt Nam",
+      "website": "https://chefminh.vn",
+      "socialMedia": {
+        "facebook": "chefminh",
+        "instagram": "chefminh_official",
+        "youtube": "ChefMinhChannel"
+      },
+      "ngonNgu": ["Vietnamese", "English", "French"],
+      "theLoaiChinh": ["Nấu ăn", "Ẩm thực"],
+      "thanhTich": [
+        "Đầu bếp chuyên nghiệp 20+ năm kinh nghiệm",
+        "Tác giả nhiều sách dạy nấu ăn",
+        "Chuyên gia ẩm thực Việt Nam"
+      ],
+      "sach": ["book_010"]
+    }
+  },
+  "AuthorStats": {
+    "totalAuthors": 10,
+    "activeAuthors": 10,
+    "inactiveAuthors": 0,
+    "bannedAuthors": 0,
+    "averageRating": 4.5,
+    "totalBooks": 10,
+    "revenueDistribution": {
+      "highShare": 3,
+      "mediumShare": 4,
+      "lowShare": 2,
+      "noShare": 1
+    },
+    "specializations": {
+      "Văn học": 3,
+      "Kỹ năng sống": 1,
+      "Fantasy": 1,
+      "Khoa học": 2,
+      "Chiến lược": 1,
+      "Thơ ca": 1,
+      "Công nghệ": 1,
+      "Thành công": 1,
+      "Nấu ăn": 1
+    }
+  },
+  "RevenueTiers": {
+    "tier1": {
+      "range": "0.20-0.25",
+      "authors": ["author_004", "author_006"],
+      "description": "Tác giả có sách bán chạy hoặc độc quyền cao"
+    },
+    "tier2": {
+      "range": "0.15-0.19",
+      "authors": ["author_001", "author_003", "author_007", "author_009"],
+      "description": "Tác giả có sách nổi bật hoặc chuyên môn cao"
+    },
+    "tier3": {
+      "range": "0.10-0.14",
+      "authors": ["author_010"],
+      "description": "Tác giả mới hoặc chuyên môn đặc biệt"
+    },
+    "tier4": {
+      "range": "0.00",
+      "authors": ["author_005"],
+      "description": "Tác giả ẩn danh hoặc sách miễn phí"
+    }
+  }
+} 
