@@ -272,12 +272,10 @@
 
 		// Function to register package
 		window.registerPackage = function(packageId, packageName, price, duration) {
-			// Show confirmation dialog
-			if (confirm(`Bạn có muốn đăng ký ${packageName} với giá ${formatPrice(price)}?`)) {
-				// Redirect to payment page
-				const paymentUrl = `payment.html?package=${packageId}`;
-				window.location.href = paymentUrl;
-			}
+			// Direct registration without confirmation
+			// Redirect to payment page
+			const paymentUrl = `payment.html?package=${packageId}`;
+			window.location.href = paymentUrl;
 		};
 
 		// Load packages when DOM is ready
@@ -4866,51 +4864,50 @@
 							e.preventDefault();
 							e.stopPropagation();
 							
-							if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-								showNotification('Đăng xuất thành công!', 'success');
-								$('#user-dropdown').removeClass('show');
+							// Direct logout without confirmation
+							showNotification('Đăng xuất thành công!', 'success');
+							$('#user-dropdown').removeClass('show');
+							
+							// Reset to guest state
+							setTimeout(() => {
+								$('.tg-user-info h4').text('Khách');
+								$('.tg-user-status').text('Chưa đăng nhập');
+								$('.tg-points span').text('0');
+								$('.tg-become-member span').text('Đăng ký hội viên');
+								$('.tg-become-member i').removeClass('fa-crown').addClass('fa-user-plus');
 								
-								// Reset to guest state
-								setTimeout(() => {
-									$('.tg-user-info h4').text('Khách');
-									$('.tg-user-status').text('Chưa đăng nhập');
-									$('.tg-points span').text('0');
-									$('.tg-become-member span').text('Đăng ký hội viên');
-									$('.tg-become-member i').removeClass('fa-crown').addClass('fa-user-plus');
+								// Reset menu items for guest
+								$('.tg-user-menu').html(`
+									<a href="javascript:void(0);" class="tg-menu-item">
+										<i class="fa fa-sign-in"></i>
+										<span>Đăng nhập</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
+									<a href="javascript:void(0);" class="tg-menu-item">
+										<i class="fa fa-user-plus"></i>
+										<span>Đăng ký</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
+									<a href="javascript:void(0);" class="tg-menu-item">
+										<i class="fa fa-book"></i>
+										<span>Khám phá sách</span>
+											<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
+									<a href="javascript:void(0);" class="tg-menu-item">
+										<i class="fa fa-headphones"></i>
+										<span>Hỗ trợ khách hàng</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
 									
-									// Reset menu items for guest
-									$('.tg-user-menu').html(`
-										<a href="javascript:void(0);" class="tg-menu-item">
-											<i class="fa fa-sign-in"></i>
-											<span>Đăng nhập</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-										<a href="javascript:void(0);" class="tg-menu-item">
-											<i class="fa fa-user-plus"></i>
-											<span>Đăng ký</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-										<a href="javascript:void(0);" class="tg-menu-item">
-											<i class="fa fa-book"></i>
-											<span>Khám phá sách</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-										<a href="javascript:void(0);" class="tg-menu-item">
-											<i class="fa fa-headphones"></i>
-											<span>Hỗ trợ khách hàng</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-										
-										<div class="tg-menu-divider"></div>
-										
-										<a href="javascript:void(0);" class="tg-menu-item">
-											<i class="fa fa-info-circle"></i>
-											<span>Về chúng tôi</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-									`);
-								}, 1000);
-							}
+									<div class="tg-menu-divider"></div>
+									
+									<a href="javascript:void(0);" class="tg-menu-item">
+										<i class="fa fa-info-circle"></i>
+										<span>Về chúng tôi</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
+								`);
+							}, 1000);
 						});
 					}, 1000);
 				}
@@ -5685,10 +5682,9 @@
 		
 		// Logout function
 		function logout() {
-			if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-				// Add logout logic here
-				window.location.href = 'auth.html';
-			}
+			// Direct logout without confirmation
+			// Add logout logic here
+			window.location.href = 'auth.html';
 		}
 		
 		// Search suggestions click handler
@@ -5900,19 +5896,17 @@
 					const packageName = card.querySelector('h3').textContent;
 					const packagePrice = card.querySelector('.tg-price-amount').textContent;
 					
-					// Show confirmation
-					if (confirm(`Bạn có muốn đăng ký ${packageName} với giá ${packagePrice}?`)) {
-						// Add loading effect
-						this.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Đang xử lý...';
-						this.style.pointerEvents = 'none';
-						
-						// Simulate processing
-						setTimeout(() => {
-							alert('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.');
-							this.innerHTML = 'Đăng Ký Ngay';
-							this.style.pointerEvents = 'auto';
-						}, 2000);
-					}
+					// Direct registration without confirmation
+					// Add loading effect
+					this.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Đang xử lý...';
+					this.style.pointerEvents = 'none';
+					
+					// Simulate processing
+					setTimeout(() => {
+						alert('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.');
+						this.innerHTML = 'Đăng Ký Ngay';
+						this.style.pointerEvents = 'auto';
+					}, 2000);
 				});
 			});
 			

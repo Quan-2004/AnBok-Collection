@@ -807,7 +807,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, update, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, set, update, get, onValue, off, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
         import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 
@@ -840,7 +840,20 @@
         window.firebaseGet = get;
         window.firebaseAuth = getAuth;
         window.onAuthStateChanged = onAuthStateChanged;
+        window.onValue = onValue;
+        window.off = off;
+        window.query = query;
+        window.orderByChild = orderByChild;
+        window.equalTo = equalTo;
+
+        // Initialize RealtimeDatabaseManager
+        if (window.realtimeDB) {
+            window.realtimeDB.initialize({ ref, onValue, off, get }, database);
+        }
     </script>
+    
+    <!-- RealtimeDatabaseManager -->
+    <script src="js/realtime-database.js"></script>
     
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
@@ -859,6 +872,31 @@
             return urlParams.get('id');
         }
 
+        // Get book info from sessionStorage (if coming from detail page)
+        function getBookInfoFromSession() {
+            try {
+                const bookInfo = sessionStorage.getItem('currentBook');
+                if (bookInfo) {
+                    const parsed = JSON.parse(bookInfo);
+                    console.log('Retrieved book info from session:', parsed);
+                    return parsed;
+                }
+            } catch (error) {
+                console.error('Error parsing book info from session:', error);
+            }
+            return null;
+        }
+
+        // Clear session storage after successful load
+        function clearBookSession() {
+            try {
+                sessionStorage.removeItem('currentBook');
+                console.log('Cleared book session storage');
+            } catch (error) {
+                console.error('Error clearing book session storage:', error);
+            }
+        }
+
         // Load book content
         async function loadBookContent() {
             const bookId = getBookIdFromUrl();
@@ -871,6 +909,85 @@
             try {
                 console.log('Loading book content for ID:', bookId);
                 
+                // Set up real-time listener for Books
+                setupRealtimeListener(bookId);
+                
+                // Initial data fetch
+                await fetchInitialData(bookId);
+                
+            } catch (error) {
+                console.error('Error loading book content:', error);
+                showError('Lỗi khi tải nội dung sách');
+            }
+        }
+
+        // Set up real-time listener for Books
+        function setupRealtimeListener(bookId) {
+            if (!window.realtimeDB || !window.realtimeDB.isInitialized) {
+                console.warn('RealtimeDatabaseManager not available, falling back to basic listener');
+                setupBasicRealtimeListener(bookId);
+                return;
+            }
+
+            try {
+                // Set up listener for Books node
+                const listener = window.realtimeDB.setupListener('Books', bookId, (book, snapshot) => {
+                    if (book) {
+                        console.log('Real-time book update:', book);
+                        displayBookContent(book);
+                        loadReadingProgressAndScroll(bookId);
+                    }
+                }, { autoCleanup: true });
+
+                if (listener) {
+                    console.log('Real-time listener set up successfully for Books');
+                } else {
+                    console.warn('Failed to setup real-time listener, falling back to basic listener');
+                    setupBasicRealtimeListener(bookId);
+                }
+
+            } catch (error) {
+                console.error('Error setting up real-time listener with RealtimeDatabaseManager:', error);
+                // Fallback to basic listener
+                setupBasicRealtimeListener(bookId);
+            }
+        }
+
+        // Fallback basic real-time listener
+        function setupBasicRealtimeListener(bookId) {
+            // Remove existing listener if any
+            if (window.bookListener) {
+                window.off(window.bookListener);
+            }
+
+            // Real-time listener for Books
+            const booksRef = window.firebaseRef(window.firebase.database(), 'Books');
+            window.bookListener = window.onValue(booksRef, (snapshot) => {
+                const allBooks = snapshot.val();
+                if (allBooks) {
+                    const bookEntries = Object.entries(allBooks);
+                    const foundBook = bookEntries.find(([key, bookData]) => 
+                        bookData.book_id === bookId || key === bookId
+                    );
+                    
+                    if (foundBook) {
+                        const book = foundBook[1];
+                        console.log('Real-time book update:', book);
+                        displayBookContent(book);
+                        
+                        // Load reading progress and scroll to position
+                        loadReadingProgressAndScroll(bookId);
+                        return;
+                    }
+                }
+            }, (error) => {
+                console.error('Error in Books real-time listener:', error);
+            });
+        }
+
+        // Fetch initial data
+        async function fetchInitialData(bookId) {
+            try {
                 // Search for book in all books
                 const booksRef = window.firebaseRef(window.firebase.database(), 'Books');
                 const snapshot = await window.firebaseGet(booksRef);
@@ -896,8 +1013,8 @@
                     showError('Không có dữ liệu sách');
                 }
             } catch (error) {
-                console.error('Error loading book content:', error);
-                showError('Lỗi khi tải nội dung sách');
+                console.error('Error fetching initial data:', error);
+                showError('Lỗi khi tải dữ liệu ban đầu');
             }
         }
 
@@ -1017,6 +1134,9 @@
 
             // Initialize reading features
             initializeReadingFeatures();
+            
+            // Clear session storage after successful display
+            clearBookSession();
         }
 
         // Initialize reading features
@@ -1459,6 +1579,29 @@
         // Save reading session when leaving page
         window.addEventListener('beforeunload', saveReadingSession);
         window.addEventListener('pagehide', saveReadingSession);
+
+        // Cleanup real-time listeners when page is unloaded
+        window.addEventListener('beforeunload', cleanupRealtimeListeners);
+        window.addEventListener('pagehide', cleanupRealtimeListeners);
+
+        // Cleanup function for real-time listeners
+        function cleanupRealtimeListeners() {
+            try {
+                // Use RealtimeDatabaseManager if available
+                if (window.realtimeDB && window.realtimeDB.isInitialized) {
+                    window.realtimeDB.removeAllListeners();
+                } else {
+                    // Fallback cleanup for basic listener
+                    if (window.bookListener) {
+                        window.off(window.bookListener);
+                        window.bookListener = null;
+                    }
+                }
+                console.log('Real-time listeners cleaned up');
+            } catch (error) {
+                console.error('Error cleaning up real-time listeners:', error);
+            }
+        }
 
         // Show FAB on scroll
         window.addEventListener('scroll', () => {

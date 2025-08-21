@@ -944,6 +944,9 @@
                     return;
                 }
 
+                // Add bookId to book object for button generation
+                book.bookId = bookId;
+
                 await displayBookDetails(book);
             } catch (error) {
                 console.error('Error loading story details:', error);
@@ -1033,12 +1036,12 @@
                                 </div>
                                 
                             <div class="action-buttons">
-                                <button class="${buttonClass}" onclick="${buttonInfo.action}('${book.story_id}')" style="${buttonStyle}">
+                                <button class="${buttonClass}" onclick="${buttonInfo.action}('${book.story_id || book.bookId}')" style="${buttonStyle}">
                                     ${buttonInfo.icon ? `<span class="material-icons">${buttonInfo.icon}</span>` : ''}
                                         ${buttonInfo.text}
                                 </button>
                                 ${buttonInfo.style !== 'membership' ? `
-                                <button class="btn-secondary-modern" onclick="addToWishlist('${book.story_id}')">
+                                <button class="btn-secondary-modern" onclick="addToWishlist('${book.story_id || book.bookId}')">
                                     <span class="material-icons">favorite_border</span>
                                         Yêu thích
                                 </button>
@@ -1174,6 +1177,34 @@
         function readBook(storyId) {
             console.log('Reading story:', storyId);
             
+            // Validate story ID
+            if (!storyId || storyId.trim() === '') {
+                Swal.fire({
+                    title: 'Lỗi',
+                    text: 'ID truyện không hợp lệ',
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end'
+                });
+                return;
+            }
+
+            // Validate current book data
+            if (!window.currentBookData) {
+                Swal.fire({
+                    title: 'Lỗi',
+                    text: 'Không thể lấy thông tin truyện',
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end'
+                });
+                return;
+            }
+
             // Show modern loading toast
             Swal.fire({
                 title: 'Đang mở truyện...',
@@ -1184,7 +1215,29 @@
                 toast: true,
                 position: 'top-end'
             }).then(() => {
-                window.location.href = `read-story.html?id=${storyId}`;
+                try {
+                    // Store story info in sessionStorage for reading page
+                    sessionStorage.setItem('currentStory', JSON.stringify({
+                        id: storyId,
+                        title: window.currentBookData.title,
+                        author: window.currentBookData.author,
+                        cover: window.currentBookData.cover_image
+                    }));
+
+                    // Redirect to reading page
+                    const redirectUrl = `read-story.html?id=${encodeURIComponent(storyId)}`;
+                    console.log('Redirecting to:', redirectUrl);
+                    
+                    window.location.href = redirectUrl;
+                } catch (error) {
+                    console.error('Error redirecting to reading page:', error);
+                    Swal.fire({
+                        title: 'Lỗi chuyển hướng',
+                        text: 'Không thể chuyển đến trang đọc truyện',
+                        icon: 'error',
+                        confirmButtonText: 'Thử lại'
+                    });
+                }
             });
         }
 

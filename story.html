@@ -7334,7 +7334,7 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="author.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="author-bio.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-user" style="margin-right: 8px;"></i>
 													Tác giả
 												</a>
@@ -10026,7 +10026,7 @@
 					</div>
 					<div class="tg-story-content" style="padding: 15px;">
 						<div class="tg-story-category" style="margin-bottom: 8px;">
-							<span style="background: ${getCategoryBadgeColor(story.category_code)}; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px;">${story.category_name}</span>
+							<span style="background: ${getCategoryBadgeColor(story.category_code)}; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px;">${story.category_name || story.category || 'Chưa phân loại'}</span>
 						</div>
 						<h3 class="tg-story-title" style="font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: #333; line-height: 1.3;">
 							<a href="javascript:void(0);" onclick="viewStory('${story.story_id}')" style="color: inherit; text-decoration: none;">${story.title}</a>
@@ -10036,9 +10036,9 @@
 						</p>
 						<div class="tg-story-rating" style="margin-bottom: 10px;">
 							<span class="tg-stars" style="color: #ffd700; font-size: 0.9rem;">
-								${'★'.repeat(Math.floor(story.rating))}${'☆'.repeat(5-Math.floor(story.rating))}
+								${'★'.repeat(Math.floor(story.rating || 0))}${'☆'.repeat(5-Math.floor(story.rating || 0))}
 							</span>
-							<span style="color: #666; font-size: 0.75rem;">(${story.rating})</span>
+							<span style="color: #666; font-size: 0.75rem;">(${story.rating || 0})</span>
 						</div>
 						<div class="tg-story-price" style="display: flex; align-items: center; justify-content: space-between;">
 							<div>
@@ -10069,14 +10069,17 @@
 							if (snapshot.exists()) {
 								const stories = snapshot.val();
 								console.log('Stories loaded from Firebase:', stories);
-								// Convert Firebase object to array
+								// Convert Firebase object to array and add missing fields
 								const storiesArray = Object.keys(stories).map(key => {
 									const storyData = stories[key];
 									console.log('Processing story with key:', key);
 									console.log('Story data:', storyData);
 									
+									// Add missing category fields based on existing properties
+									const enhancedStoryData = addMissingCategoryFields(storyData);
+									
 									return {
-										...storyData,
+										...enhancedStoryData,
 										id: key,
 										story_id: key
 									};
@@ -10096,6 +10099,108 @@
 					reject(new Error('Firebase Database not available'));
 				}
 			});
+		}
+		
+		// Function to add missing category fields based on existing properties
+		function addMissingCategoryFields(storyData) {
+			const enhancedData = { ...storyData };
+			
+			// If category_code is missing, determine it based on other properties
+			if (!enhancedData.category_code) {
+				if (enhancedData.is_free) {
+					enhancedData.category_code = 'TMF003';
+					enhancedData.category_name = 'Free Stories';
+				} else if (enhancedData.is_featured) {
+					enhancedData.category_code = 'TNB002';
+					enhancedData.category_name = 'Featured Stories';
+				} else if (enhancedData.is_member_only) {
+					enhancedData.category_code = 'THV004';
+					enhancedData.category_name = 'Member Stories';
+				} else {
+					// Check if it's a new story (recently added)
+					const publishDate = enhancedData.publish_date || enhancedData.last_updated;
+					if (publishDate) {
+						const publishYear = new Date(publishDate).getFullYear();
+						const currentYear = new Date().getFullYear();
+						if (currentYear - publishYear <= 1) {
+							enhancedData.category_code = 'TM001';
+							enhancedData.category_name = 'New Stories';
+						} else {
+							enhancedData.category_code = 'TM001';
+							enhancedData.category_name = 'New Stories';
+						}
+					} else {
+						enhancedData.category_code = 'TM001';
+						enhancedData.category_name = 'New Stories';
+					}
+				}
+			}
+			
+			// If category_name is missing but category_code exists
+			if (!enhancedData.category_name && enhancedData.category_code) {
+				const categoryMap = {
+					'TM001': 'New Stories',
+					'TNB002': 'Featured Stories',
+					'THV004': 'Member Stories',
+					'TMF003': 'Free Stories'
+				};
+				enhancedData.category_name = categoryMap[enhancedData.category_code] || 'New Stories';
+			}
+			
+			// Add missing rating and review_count if not present
+			if (typeof enhancedData.rating === 'undefined' || enhancedData.rating === null) {
+				enhancedData.rating = 0;
+			}
+			if (typeof enhancedData.review_count === 'undefined' || enhancedData.review_count === null) {
+				enhancedData.review_count = 0;
+			}
+			
+			return enhancedData;
+		}
+		
+		// Function to update Firebase data with missing fields
+		async function updateFirebaseStoriesWithMissingFields() {
+			try {
+				const stories = await getStoriesFromFirebase();
+				const { database, ref, set } = window.firebase;
+				
+				let updatedCount = 0;
+				
+				for (const story of stories) {
+					const originalData = { ...story };
+					const enhancedData = addMissingCategoryFields(originalData);
+					
+					// Check if any fields were added
+					const hasChanges = (
+						!originalData.category_code && enhancedData.category_code ||
+						!originalData.category_name && enhancedData.category_name ||
+						(typeof originalData.rating === 'undefined' || originalData.rating === null) ||
+						(typeof originalData.review_count === 'undefined' || originalData.review_count === null)
+					);
+					
+					if (hasChanges) {
+						// Remove id and story_id from data before saving
+						const { id, story_id, ...dataToSave } = enhancedData;
+						
+						await set(ref(database, `Stories/${story.id}`), dataToSave);
+						updatedCount++;
+						console.log(`Updated story: ${story.title} with category: ${enhancedData.category_name}`);
+					}
+				}
+				
+				if (updatedCount > 0) {
+					console.log(`Updated ${updatedCount} stories with missing fields`);
+					// Reload the page to show updated data
+					setTimeout(() => {
+						window.location.reload();
+					}, 2000);
+				} else {
+					console.log('No stories needed updates');
+				}
+				
+			} catch (error) {
+				console.error('Error updating Firebase stories:', error);
+			}
 		}
 		
 		// Function to check user membership status
@@ -10262,14 +10367,30 @@
 				if (filter === 'all') {
 					return stories;
 				} else if (filter === 'TM001') {
-					return stories.filter(story => story.category_code === 'TM001');
+					return stories.filter(story => 
+						story.category_code === 'TM001' || 
+						story.category === 'new_stories' ||
+						(story.category_name && story.category_name.toLowerCase().includes('new'))
+					);
 				} else if (filter === 'TNB002') {
-					return stories.filter(story => story.category_code === 'TNB002');
+					return stories.filter(story => 
+						story.category_code === 'TNB002' || 
+						story.category === 'featured_stories' ||
+						(story.category_name && story.category_name.toLowerCase().includes('featured'))
+					);
 				} else if (filter === 'THV004') {
 					// Show all member stories (buttons will be handled by getStoryButtonInfo)
-					return stories.filter(story => story.category_code === 'THV004');
+					return stories.filter(story => 
+						story.category_code === 'THV004' || 
+						story.category === 'member_stories' ||
+						(story.category_name && story.category_name.toLowerCase().includes('member'))
+					);
 				} else if (filter === 'free') {
-					return stories.filter(story => story.is_free === true);
+					return stories.filter(story => 
+						story.is_free === true || 
+						story.price === 0 || 
+						story.price === '0'
+					);
 				}
 				
 				return stories;
@@ -10744,13 +10865,29 @@
 		
 		// Function to update category counts
 		function updateCategoryCounts(stories) {
-			// Count stories by category
+			// Count stories by category using enhanced data
 			const categoryCounts = {
 				'all': stories.length,
-				'TM001': stories.filter(story => story.category_code === 'TM001').length,
-				'TNB002': stories.filter(story => story.category_code === 'TNB002').length,
-				'THV004': stories.filter(story => story.category_code === 'THV004').length,
-				'free': stories.filter(story => story.is_free === true).length
+				'TM001': stories.filter(story => 
+					story.category_code === 'TM001' || 
+					story.category === 'new_stories' ||
+					(story.category_name && story.category_name.toLowerCase().includes('new'))
+				).length,
+				'TNB002': stories.filter(story => 
+					story.category_code === 'TNB002' || 
+					story.category === 'featured_stories' ||
+					(story.category_name && story.category_name.toLowerCase().includes('featured'))
+				).length,
+				'THV004': stories.filter(story => 
+					story.category_code === 'THV004' || 
+					story.category === 'member_stories' ||
+					(story.category_name && story.category_name.toLowerCase().includes('member'))
+				).length,
+				'free': stories.filter(story => 
+					story.is_free === true || 
+					story.price === 0 || 
+					story.price === '0'
+				).length
 			};
 			
 			// Update category count displays
@@ -11245,13 +11382,13 @@
 									
 									<!-- Category Badge -->
 									<div class="book-category-badge">
-										<span class="category-tag">${story.category_name}</span>
+										<span class="category-tag">${story.category_name || story.category || 'Chưa phân loại'}</span>
 									</div>
 									
 									<!-- Rating Preview -->
 									<div class="book-rating-preview">
-										<div class="rating-stars">${generateStars(story.rating)}</div>
-										<span class="rating-value">${story.rating}</span>
+										<div class="rating-stars">${generateStars(story.rating || 0)}</div>
+										<span class="rating-value">${story.rating || 0}</span>
 									</div>
 								</div>
 							</div>
@@ -11275,12 +11412,12 @@
 								<div class="book-stats">
 									<div class="stat-item">
 										<div class="rating-detailed">
-											<span class="rating-score">${story.rating}</span>
-											<div class="rating-stars-small">${generateStars(story.rating)}</div>
+											<span class="rating-score">${story.rating || 0}</span>
+											<div class="rating-stars-small">${generateStars(story.rating || 0)}</div>
 										</div>
 									</div>
 									<div class="stat-item">
-										<span class="review-count">${story.review_count} đánh giá</span>
+										<span class="review-count">${story.review_count || 0} đánh giá</span>
 									</div>
 								</div>
 								

@@ -807,7 +807,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, update, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, set, update, get, onValue, off, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
         import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 
@@ -840,7 +840,20 @@
         window.firebaseGet = get;
         window.firebaseAuth = getAuth;
         window.onAuthStateChanged = onAuthStateChanged;
+        window.onValue = onValue;
+        window.off = off;
+        window.query = query;
+        window.orderByChild = orderByChild;
+        window.equalTo = equalTo;
+
+        // Initialize RealtimeDatabaseManager
+        if (window.realtimeDB) {
+            window.realtimeDB.initialize({ ref, onValue, off, get }, database);
+        }
     </script>
+    
+    <!-- RealtimeDatabaseManager -->
+    <script src="js/realtime-database.js"></script>
     
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
@@ -859,6 +872,31 @@
             return urlParams.get('id');
         }
 
+        // Get story info from sessionStorage (if coming from detail page)
+        function getStoryInfoFromSession() {
+            try {
+                const storyInfo = sessionStorage.getItem('currentStory');
+                if (storyInfo) {
+                    const parsed = JSON.parse(storyInfo);
+                    console.log('Retrieved story info from session:', parsed);
+                    return parsed;
+                }
+            } catch (error) {
+                console.error('Error parsing story info from session:', error);
+            }
+            return null;
+        }
+
+        // Clear session storage after successful load
+        function clearStorySession() {
+            try {
+                sessionStorage.removeItem('currentStory');
+                console.log('Cleared story session storage');
+            } catch (error) {
+                console.error('Error clearing story session storage:', error);
+            }
+        }
+
         // Load book content
         async function loadBookContent() {
             const bookId = getBookIdFromUrl();
@@ -871,6 +909,127 @@
             try {
                 console.log('Loading story content for ID:', bookId);
                 
+                // Set up real-time listeners for both Stories and Books
+                setupRealtimeListeners(bookId);
+                
+                // Initial data fetch
+                await fetchInitialData(bookId);
+                
+            } catch (error) {
+                console.error('Error loading story content:', error);
+                showError('Lỗi khi tải nội dung truyện');
+            }
+        }
+
+        // Set up real-time listeners for Stories and Books
+        function setupRealtimeListeners(bookId) {
+            if (!window.realtimeDB || !window.realtimeDB.isInitialized) {
+                console.warn('RealtimeDatabaseManager not available, falling back to basic listeners');
+                setupBasicRealtimeListeners(bookId);
+                return;
+            }
+
+            try {
+                // Set up listeners for both Stories and Books nodes
+                const listeners = [
+                    {
+                        nodePath: 'Stories',
+                        itemId: bookId,
+                        callback: (story, snapshot) => {
+                            if (story) {
+                                console.log('Real-time story update:', story);
+                                displayBookContent(story);
+                                loadReadingProgressAndScroll(bookId);
+                            }
+                        },
+                        options: { autoCleanup: true }
+                    },
+                    {
+                        nodePath: 'Books',
+                        itemId: bookId,
+                        callback: (book, snapshot) => {
+                            if (book) {
+                                console.log('Real-time book update:', book);
+                                displayBookContent(book);
+                                loadReadingProgressAndScroll(bookId);
+                            }
+                        },
+                        options: { autoCleanup: true }
+                    }
+                ];
+
+                const results = window.realtimeDB.setupMultipleListeners(listeners);
+                console.log('Real-time listeners setup results:', results);
+
+            } catch (error) {
+                console.error('Error setting up real-time listeners with RealtimeDatabaseManager:', error);
+                // Fallback to basic listeners
+                setupBasicRealtimeListeners(bookId);
+            }
+        }
+
+        // Fallback basic real-time listeners
+        function setupBasicRealtimeListeners(bookId) {
+            // Remove existing listeners if any
+            if (window.storyListener) {
+                window.off(window.storyListener);
+            }
+            if (window.bookListener) {
+                window.off(window.bookListener);
+            }
+
+            // Real-time listener for Stories
+            const storiesRef = window.firebaseRef(window.firebase.database(), 'Stories');
+            window.storyListener = window.onValue(storiesRef, (snapshot) => {
+                const allStories = snapshot.val();
+                if (allStories) {
+                    const storyEntries = Object.entries(allStories);
+                    const foundStory = storyEntries.find(([key, storyData]) => 
+                        storyData.story_id === bookId || key === bookId
+                    );
+                    
+                    if (foundStory) {
+                        const story = foundStory[1];
+                        console.log('Real-time story update:', story);
+                        displayBookContent(story);
+                        
+                        // Load reading progress and scroll to position
+                        loadReadingProgressAndScroll(bookId);
+                        return;
+                    }
+                }
+            }, (error) => {
+                console.error('Error in Stories real-time listener:', error);
+            });
+
+            // Real-time listener for Books
+            const booksRef = window.firebaseRef(window.firebase.database(), 'Books');
+            window.bookListener = window.onValue(booksRef, (snapshot) => {
+                const allBooks = snapshot.val();
+                if (allBooks) {
+                    const bookEntries = Object.entries(allBooks);
+                    const foundBook = bookEntries.find(([key, bookData]) => 
+                        bookData.book_id === bookId || key === bookId
+                    );
+                    
+                    if (foundBook) {
+                        const book = foundBook[1];
+                        console.log('Real-time book update:', book);
+                        displayBookContent(book);
+                        
+                        // Load reading progress and scroll to position
+                        loadReadingProgressAndScroll(bookId);
+                        return;
+                    }
+                }
+            }, (error) => {
+                console.error('Error in Books real-time listener:', error);
+            });
+        }
+
+        // Fetch initial data
+        async function fetchInitialData(bookId) {
+            try {
                 // First search in Stories collection
                 const storiesRef = window.firebaseRef(window.firebase.database(), 'Stories');
                 const storiesSnapshot = await window.firebaseGet(storiesRef);
@@ -918,8 +1077,8 @@
                 showError('Không tìm thấy truyện');
                 
             } catch (error) {
-                console.error('Error loading story content:', error);
-                showError('Lỗi khi tải nội dung truyện');
+                console.error('Error fetching initial data:', error);
+                showError('Lỗi khi tải dữ liệu ban đầu');
             }
         }
 
@@ -1022,6 +1181,9 @@
 
             // Initialize reading features
             initializeReadingFeatures();
+            
+            // Clear session storage after successful display
+            clearStorySession();
         }
 
         // Initialize reading features
@@ -1465,6 +1627,33 @@
         // Save reading session when leaving page
         window.addEventListener('beforeunload', saveReadingSession);
         window.addEventListener('pagehide', saveReadingSession);
+
+        // Cleanup real-time listeners when page is unloaded
+        window.addEventListener('beforeunload', cleanupRealtimeListeners);
+        window.addEventListener('pagehide', cleanupRealtimeListeners);
+
+        // Cleanup function for real-time listeners
+        function cleanupRealtimeListeners() {
+            try {
+                // Use RealtimeDatabaseManager if available
+                if (window.realtimeDB && window.realtimeDB.isInitialized) {
+                    window.realtimeDB.removeAllListeners();
+                } else {
+                    // Fallback cleanup for basic listeners
+                    if (window.storyListener) {
+                        window.off(window.storyListener);
+                        window.storyListener = null;
+                    }
+                    if (window.bookListener) {
+                        window.off(window.bookListener);
+                        window.bookListener = null;
+                    }
+                }
+                console.log('Real-time listeners cleaned up');
+            } catch (error) {
+                console.error('Error cleaning up real-time listeners:', error);
+            }
+        }
 
         // Show FAB on scroll
         window.addEventListener('scroll', () => {

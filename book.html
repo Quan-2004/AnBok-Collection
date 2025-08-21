@@ -4270,25 +4270,25 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="author-bio.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-user" style="margin-right: 8px;"></i>
 													Tác giả
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="news.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-newspaper-o" style="margin-right: 8px;"></i>
 													Tin tức
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="about.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-info-circle" style="margin-right: 8px;"></i>
 													Về chúng tôi
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="javascript:void(0);" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="contact.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-envelope" style="margin-right: 8px;"></i>
 													Liên hệ
 												</a>
@@ -6749,11 +6749,30 @@
 							if (snapshot.exists()) {
 								const books = snapshot.val();
 								console.log('Books loaded from Firebase:', books);
-								// Convert Firebase object to array
-								const booksArray = Object.keys(books).map(key => ({
-									...books[key],
-									id: key
-								}));
+								// Convert Firebase object to array and add default values
+								const booksArray = Object.keys(books).map(key => {
+									const book = books[key];
+									return {
+										...book,
+										id: key,
+										book_id: key,
+										// Add default values for missing fields
+										rating: book.rating || 0,
+										review_count: book.review_count || 0,
+										category_name: book.category_name || book.category || 'Chưa phân loại',
+										category_code: book.category_code || 'UNKNOWN',
+										author: book.author || 'Tác giả ẩn danh',
+										description: book.description || 'Chưa có mô tả',
+										cover_image: book.cover_image || 'images/books/default-book.jpg',
+										price: book.price || 0,
+										original_price: book.original_price || book.price || 0,
+										is_free: book.is_free || false,
+										is_member_only: book.is_member_only || false,
+										is_featured: book.is_featured || false,
+										view_count: book.view_count || 0,
+										download_count: book.download_count || 0
+									};
+								});
 								resolve(booksArray);
 							} else {
 								console.log('No books found in Firebase');
@@ -7200,9 +7219,21 @@
 			// Count books by category from real data
 			const categoryCounts = {
 				'all': books.length,
-				'SM001': books.filter(book => book.category_code === 'SM001' || book.category === 'new_books').length,
-				'SNB002': books.filter(book => book.category_code === 'SNB002' || book.category === 'featured_books').length,
-				'SHV003': books.filter(book => book.category_code === 'SHV003' || book.category === 'member_books').length,
+				'SM001': books.filter(book => 
+					book.category_code === 'SM001' || 
+					book.category === 'new_books' ||
+					(book.category_name && book.category_name.toLowerCase().includes('new'))
+				).length,
+				'SNB002': books.filter(book => 
+					book.category_code === 'SNB002' || 
+					book.category === 'featured_books' ||
+					(book.category_name && book.category_name.toLowerCase().includes('featured'))
+				).length,
+				'SHV003': books.filter(book => 
+					book.category_code === 'SHV003' || 
+					book.category === 'member_books' ||
+					(book.category_name && book.category_name.toLowerCase().includes('member'))
+				).length,
 				'free': books.filter(book => book.is_free === true || book.price === 0 || book.price === '0').length
 			};
 			
@@ -7742,7 +7773,9 @@
 				console.log('Showing free books:', booksToDisplay.length);
 			} else {
 				booksToDisplay = allBooks.filter(book => 
-					book.category_code === categoryCode
+					book.category_code === categoryCode ||
+					book.category === categoryCode ||
+					(book.category_name && book.category_name.toLowerCase().includes(categoryCode.toLowerCase()))
 				);
 				console.log(`Showing books with category ${categoryCode}:`, booksToDisplay.length);
 			}
@@ -7944,13 +7977,13 @@
 									
 									<!-- Category Badge -->
 									<div class="book-category-badge">
-										<span class="category-tag">${book.category_name}</span>
+										<span class="category-tag">${book.category_name || book.category || 'Chưa phân loại'}</span>
 									</div>
 									
 									<!-- Rating Preview -->
 									<div class="book-rating-preview">
-										<div class="rating-stars">${generateStars(book.rating)}</div>
-										<span class="rating-value">${book.rating}</span>
+										<div class="rating-stars">${generateStars(book.rating || 0)}</div>
+										<span class="rating-value">${book.rating || 0}</span>
 									</div>
 								</div>
 							</div>
@@ -7974,12 +8007,12 @@
 								<div class="book-stats">
 									<div class="stat-item">
 										<div class="rating-detailed">
-											<span class="rating-score">${book.rating}</span>
-											<div class="rating-stars-small">${generateStars(book.rating)}</div>
+											<span class="rating-score">${book.rating || 0}</span>
+											<div class="rating-stars-small">${generateStars(book.rating || 0)}</div>
 										</div>
 									</div>
 									<div class="stat-item">
-										<span class="review-count">${book.review_count} đánh giá</span>
+										<span class="review-count">${book.review_count || 0} đánh giá</span>
 									</div>
 								</div>
 								

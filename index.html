@@ -18,6 +18,7 @@
 	
 	<!-- SweetAlert2 CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/color-custom.css">
 	<link rel="stylesheet" href="css/responsive.css">
@@ -3767,15 +3768,9 @@
 												</a>
 											</li>
 											<li style="position: relative;">
-												<a href="author.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
+												<a href="author-bio.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
 													<i class="fa fa-user" style="margin-right: 8px;"></i>
 													Tác giả
-												</a>
-											</li>
-											<li style="position: relative;">
-												<a href="menbership.html" style="display: flex; align-items: center; padding: 20px 25px; color: #333; text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative;">
-													<i class="fa fa-star" style="margin-right: 8px;"></i>
-													Thành viên
 												</a>
 											</li>
 											<li style="position: relative;">
@@ -4551,6 +4546,7 @@
 	
 	<!-- SweetAlert2 JS -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
 	
 	<!-- Firebase SDK -->
 	<script type="module">
@@ -4705,9 +4701,16 @@
                 localStorage.setItem('cart', JSON.stringify(cart));
                 
                 // Show success notification
-                if (window.showNotification) {
-                    window.showNotification('Đã thêm vào giỏ hàng!', 'success');
-                } else {
+                		if (window.showNotification) {
+			Swal.fire({
+				title: 'Thành công!',
+				text: 'Đã thêm vào giỏ hàng!',
+				icon: 'success',
+				confirmButtonColor: '#4A6366',
+				timer: 1500,
+				showConfirmButton: false
+			});
+		} else {
                     alert('Đã thêm vào giỏ hàng!');
                 }
                 
@@ -5672,7 +5675,14 @@
 				console.log('Login attempt:', { email, password });
 				
 				// Simulate login success
-				showSuccessAlert('Đăng nhập thành công!');
+				Swal.fire({
+					title: 'Thành công!',
+					text: 'Đăng nhập thành công!',
+					icon: 'success',
+					confirmButtonColor: '#4A6366',
+					timer: 2000,
+					showConfirmButton: false
+				});
 				closeAuthModal('loginModal');
 			});
 		}
@@ -5696,7 +5706,14 @@
 				console.log('Register attempt:', { name, email, password });
 				
 				// Simulate registration success
-				showSuccessAlert('Đăng ký thành công!');
+				Swal.fire({
+					title: 'Thành công!',
+					text: 'Đăng ký thành công!',
+					icon: 'success',
+					confirmButtonColor: '#4A6366',
+					timer: 2000,
+					showConfirmButton: false
+				});
 				closeAuthModal('registerModal');
 			});
 		}
@@ -5712,7 +5729,14 @@
 				console.log('Forgot password attempt:', { email });
 				
 				// Simulate success
-				showSuccessAlert('Email đặt lại mật khẩu đã được gửi!');
+				Swal.fire({
+					title: 'Thành công!',
+					text: 'Email đặt lại mật khẩu đã được gửi!',
+					icon: 'success',
+					confirmButtonColor: '#4A6366',
+					timer: 2000,
+					showConfirmButton: false
+				});
 				closeAuthModal('forgotPasswordModal');
 			});
 		}
@@ -5821,7 +5845,14 @@
 			$('.tg-become-member').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
-				showSuccessAlert('Đang chuyển hướng đến trang đăng ký hội viên...');
+				Swal.fire({
+					title: 'Thành công!',
+					text: 'Đang chuyển hướng đến trang đăng ký hội viên...',
+					icon: 'success',
+					confirmButtonColor: '#4A6366',
+					timer: 2000,
+					showConfirmButton: false
+				});
 			});
 			
 			// Login functionality for guest users
@@ -5832,7 +5863,14 @@
 				const action = $(this).find('span').text();
 				
 				if (action === 'Đăng nhập') {
-					showNotification('Chuyển hướng đến trang đăng nhập...', 'info');
+					Swal.fire({
+						title: 'Thông báo',
+						text: 'Chuyển hướng đến trang đăng nhập...',
+						icon: 'info',
+						confirmButtonColor: '#4A6366',
+						timer: 1500,
+						showConfirmButton: false
+					});
 					// Simulate login process
 					setTimeout(() => {
 						$('.tg-user-info h4').text('Quân Phạm');
@@ -5883,51 +5921,57 @@
 							e.preventDefault();
 							e.stopPropagation();
 							
-							if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-								showNotification('Đăng xuất thành công!', 'success');
-								$('#user-dropdown').removeClass('show');
+							// Direct logout without confirmation
+							Swal.fire({
+								title: 'Thành công!',
+								text: 'Đăng xuất thành công!',
+								icon: 'success',
+								confirmButtonColor: '#4A6366',
+								timer: 1500,
+								showConfirmButton: false
+							});
+							$('#user-dropdown').removeClass('show');
+							
+							// Reset to guest state
+							setTimeout(() => {
+								$('.tg-user-info h4').text('Khách');
+								$('.tg-user-status').text('Chưa đăng nhập');
+								$('.tg-points span').text('0');
+								$('.tg-become-member span').text('Đăng ký hội viên');
+								$('.tg-become-member i').removeClass('fa-crown').addClass('fa-user-plus');
 								
-								// Reset to guest state
-								setTimeout(() => {
-									$('.tg-user-info h4').text('Khách');
-									$('.tg-user-status').text('Chưa đăng nhập');
-									$('.tg-points span').text('0');
-									$('.tg-become-member span').text('Đăng ký hội viên');
-									$('.tg-become-member i').removeClass('fa-crown').addClass('fa-user-plus');
+								// Reset menu items for guest
+								$('.tg-user-menu').html(`
+									<a href="auth.html" class="tg-menu-item">
+										<i class="fa fa-sign-in"></i>
+										<span>Đăng nhập</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
+									<a href="auth.html#register" class="tg-menu-item">
+										<i class="fa fa-user-plus"></i>
+										<span>Đăng ký</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
+									<a href="book.html" class="tg-menu-item">
+										<i class="fa fa-book"></i>
+										<span>Khám phá sách</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
+									<a href="contact.html" class="tg-menu-item">
+										<i class="fa fa-headphones"></i>
+										<span>Hỗ trợ khách hàng</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
 									
-									// Reset menu items for guest
-									$('.tg-user-menu').html(`
-										<a href="auth.html" class="tg-menu-item">
-											<i class="fa fa-sign-in"></i>
-											<span>Đăng nhập</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-										<a href="auth.html#register" class="tg-menu-item">
-											<i class="fa fa-user-plus"></i>
-											<span>Đăng ký</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-										<a href="book.html" class="tg-menu-item">
-											<i class="fa fa-book"></i>
-											<span>Khám phá sách</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-										<a href="contact.html" class="tg-menu-item">
-											<i class="fa fa-headphones"></i>
-											<span>Hỗ trợ khách hàng</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-										
-										<div class="tg-menu-divider"></div>
-										
-										<a href="about.html" class="tg-menu-item">
-											<i class="fa fa-info-circle"></i>
-											<span>Về chúng tôi</span>
-											<i class="fa fa-chevron-right tg-menu-arrow"></i>
-										</a>
-									`);
-								}, 1000);
-							}
+									<div class="tg-menu-divider"></div>
+									
+									<a href="about.html" class="tg-menu-item">
+										<i class="fa fa-info-circle"></i>
+										<span>Về chúng tôi</span>
+										<i class="fa fa-chevron-right tg-menu-arrow"></i>
+									</a>
+								`);
+							}, 1000);
 						});
 					}, 1000);
 				}
@@ -5943,16 +5987,44 @@
 				// Handle different menu actions for guest users
 				switch(action) {
 					case 'Đăng ký':
-						showNotification('Chuyển hướng đến trang đăng ký...', 'info');
+						Swal.fire({
+							title: 'Thông báo',
+							text: 'Chuyển hướng đến trang đăng ký...',
+							icon: 'info',
+							confirmButtonColor: '#4A6366',
+							timer: 1500,
+							showConfirmButton: false
+						});
 						break;
 					case 'Khám phá sách':
-						showNotification('Chuyển hướng đến trang sách...', 'info');
+						Swal.fire({
+							title: 'Thông báo',
+							text: 'Chuyển hướng đến trang sách...',
+							icon: 'info',
+							confirmButtonColor: '#4A6366',
+							timer: 1500,
+							showConfirmButton: false
+						});
 						break;
 					case 'Hỗ trợ khách hàng':
-						showNotification('Chuyển hướng đến trang hỗ trợ...', 'info');
+						Swal.fire({
+							title: 'Thông báo',
+							text: 'Chuyển hướng đến trang hỗ trợ...',
+							icon: 'info',
+							confirmButtonColor: '#4A6366',
+							timer: 1500,
+							showConfirmButton: false
+						});
 						break;
 					case 'Về chúng tôi':
-						showNotification('Chuyển hướng đến trang giới thiệu...', 'info');
+						Swal.fire({
+							title: 'Thông báo',
+							text: 'Chuyển hướng đến trang giới thiệu...',
+							icon: 'info',
+							confirmButtonColor: '#4A6366',
+							timer: 1500,
+							showConfirmButton: false
+						});
 						break;
 				}
 			});
@@ -6150,7 +6222,14 @@
 						$('#tg-search').click();
 						break;
 					case 'wishlist':
-						showNotification('Chuyển đến trang yêu thích...', 'info');
+						Swal.fire({
+					title: 'Thông báo',
+					text: 'Chuyển đến trang yêu thích...',
+					icon: 'info',
+					confirmButtonColor: '#4A6366',
+					timer: 1500,
+					showConfirmButton: false
+				});
 						break;
 					case 'cart':
 						$('#tg-minicart').click();
@@ -6182,16 +6261,37 @@
 			});
 			
 			$('#tg-preview-read').on('click', function() {
-				showNotification('Mở trang đọc thử...', 'info');
+				Swal.fire({
+					title: 'Thông báo',
+					text: 'Mở trang đọc thử...',
+					icon: 'info',
+					confirmButtonColor: '#4A6366',
+					timer: 1500,
+					showConfirmButton: false
+				});
 				$('#tg-book-modal').removeClass('active');
 			});
 			
 			$('#tg-preview-wishlist').on('click', function() {
-				showNotification('Đã thêm vào danh sách yêu thích!', 'success');
+				Swal.fire({
+					title: 'Thành công!',
+					text: 'Đã thêm vào danh sách yêu thích!',
+					icon: 'success',
+					confirmButtonColor: '#4A6366',
+					timer: 1500,
+					showConfirmButton: false
+				});
 			});
 			
 			$('#tg-preview-cart').on('click', function() {
-				showNotification('Đã thêm vào giỏ hàng!', 'success');
+				Swal.fire({
+					title: 'Thành công!',
+					text: 'Đã thêm vào giỏ hàng!',
+					icon: 'success',
+					confirmButtonColor: '#4A6366',
+					timer: 1500,
+					showConfirmButton: false
+				});
 			});
 			
 			// Reading Timer Functionality
@@ -6586,11 +6686,25 @@
 				if (newQuantity <= 0) {
 					// Xóa item nếu số lượng <= 0
 					cart.splice(itemIndex, 1);
-					showNotification('Đã xóa sản phẩm khỏi giỏ hàng!', 'success');
+					Swal.fire({
+						title: 'Thành công!',
+						text: 'Đã xóa sản phẩm khỏi giỏ hàng!',
+						icon: 'success',
+						confirmButtonColor: '#4A6366',
+						timer: 1500,
+						showConfirmButton: false
+					});
 				} else {
 					// Cập nhật số lượng
 					cart[itemIndex].quantity = newQuantity;
-					showNotification('Đã cập nhật số lượng!', 'success');
+					Swal.fire({
+						title: 'Thành công!',
+						text: 'Đã cập nhật số lượng!',
+						icon: 'success',
+						confirmButtonColor: '#4A6366',
+						timer: 1500,
+						showConfirmButton: false
+					});
 				}
 				
 				localStorage.setItem('cart', JSON.stringify(cart));
@@ -6608,23 +6722,41 @@
 				localStorage.setItem('cart', JSON.stringify(cart));
 				updateCartDisplay();
 				updateCartCount();
-				showNotification(`Đã xóa "${removedItem.title}" khỏi giỏ hàng!`, 'success');
+				Swal.fire({
+					title: 'Thành công!',
+					text: `Đã xóa "${removedItem.title}" khỏi giỏ hàng!`,
+					icon: 'success',
+					confirmButtonColor: '#4A6366',
+					timer: 1500,
+					showConfirmButton: false
+				});
 			}
 		};
 		
 		window.clearCart = function() {
-			if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
-				localStorage.removeItem('cart');
-				updateCartDisplay();
-				updateCartCount();
-				showNotification('Đã xóa toàn bộ giỏ hàng!', 'success');
-			}
+			// Direct cart clearing without confirmation
+			localStorage.removeItem('cart');
+			updateCartDisplay();
+			updateCartCount();
+			Swal.fire({
+				title: 'Thành công!',
+				text: 'Đã xóa toàn bộ giỏ hàng!',
+				icon: 'success',
+				confirmButtonColor: '#4A6366',
+				timer: 1500,
+				showConfirmButton: false
+			});
 		};
 		
 		window.checkout = function() {
 			const cart = JSON.parse(localStorage.getItem('cart')) || [];
 			if (cart.length === 0) {
-				showNotification('Giỏ hàng trống!', 'error');
+				Swal.fire({
+					title: 'Lỗi!',
+					text: 'Giỏ hàng trống!',
+					icon: 'error',
+					confirmButtonColor: '#4A6366'
+				});
 				return;
 			}
 			
@@ -6645,7 +6777,14 @@
 			sessionStorage.setItem('checkoutCart', JSON.stringify(cartData));
 			
 			// Chuyển đến trang thanh toán
-			showNotification('Đang chuyển đến trang thanh toán...', 'info');
+			Swal.fire({
+				title: 'Thông báo',
+				text: 'Đang chuyển đến trang thanh toán...',
+				icon: 'info',
+				confirmButtonColor: '#4A6366',
+				timer: 1000,
+				showConfirmButton: false
+			});
 			setTimeout(() => {
 				window.location.href = 'checkout.html?source=cart';
 			}, 1000);

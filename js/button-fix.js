@@ -8,33 +8,29 @@
     window.logout = function() {
         console.log('Logout button clicked');
         
-        // Show confirmation dialog
-        if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-            console.log('User confirmed logout');
-            
-            // Show loading state
-            showLoadingState();
-            
-            // Use synchronized logout if available
-            if (window.syncLogout) {
-                console.log('Using sync logout');
-                window.syncLogout();
-            } else if (window.firebaseAuth) {
-                console.log('Using Firebase logout');
-                // Firebase logout
-                window.firebaseAuth.signOut().then(() => {
-                    console.log('Firebase sign out successful');
-                    completeLogout();
-                }).catch((error) => {
-                    console.error('Firebase sign out error:', error);
-                    completeLogout();
-                });
-            } else {
-                console.log('Using localStorage logout');
+        // Direct logout without confirmation
+        console.log('User confirmed logout');
+        
+        // Show loading state
+        showLoadingState();
+        
+        // Use synchronized logout if available
+        if (window.syncLogout) {
+            console.log('Using sync logout');
+            window.syncLogout();
+        } else if (window.firebaseAuth) {
+            console.log('Using Firebase logout');
+            // Firebase logout
+            window.firebaseAuth.signOut().then(() => {
+                console.log('Firebase sign out successful');
                 completeLogout();
-            }
+            }).catch((error) => {
+                console.error('Firebase sign out error:', error);
+                completeLogout();
+            });
         } else {
-            console.log('User cancelled logout');
+            console.log('Using localStorage logout');
+            completeLogout();
         }
     };
     
@@ -243,37 +239,33 @@
     window.logoutFromProfile = function() {
         console.log('Logout from profile page clicked');
         
-        // Show confirmation dialog
-        if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-            console.log('User confirmed logout from profile');
-            
-            // Show loading state
-            showLoadingState();
-            
-            // Use synchronized logout if available
-            if (window.syncLogout) {
-                console.log('Using sync logout from profile');
-                window.syncLogout();
-                // Override redirect for profile page
-                setTimeout(() => {
-                    window.location.href = '../auth.html';
-                }, 1500);
-            } else if (window.firebaseAuth) {
-                console.log('Using Firebase logout from profile');
-                // Firebase logout
-                window.firebaseAuth.signOut().then(() => {
-                    console.log('Firebase sign out successful from profile');
-                    completeProfileLogout();
-                }).catch((error) => {
-                    console.error('Firebase sign out error from profile:', error);
-                    completeProfileLogout();
-                });
-            } else {
-                console.log('Using localStorage logout from profile');
+        // Direct logout without confirmation
+        console.log('User confirmed logout from profile');
+        
+        // Show loading state
+        showLoadingState();
+        
+        // Use synchronized logout if available
+        if (window.syncLogout) {
+            console.log('Using sync logout from profile');
+            window.syncLogout();
+            // Override redirect for profile page
+            setTimeout(() => {
+                window.location.href = '../auth.html';
+            }, 1500);
+        } else if (window.firebaseAuth) {
+            console.log('Using Firebase logout from profile');
+            // Firebase logout
+            window.firebaseAuth.signOut().then(() => {
+                console.log('Firebase sign out successful from profile');
                 completeProfileLogout();
-            }
+            }).catch((error) => {
+                console.error('Firebase sign out error from profile:', error);
+                completeProfileLogout();
+            });
         } else {
-            console.log('User cancelled logout from profile');
+            console.log('Using localStorage logout from profile');
+            completeProfileLogout();
         }
     };
     

@@ -874,10 +874,17 @@
 				};
 				localStorage.setItem('user', JSON.stringify(userData));
 				
-				showMessage('Đăng nhập thành công!', 'success');
-				
-				// Kiểm tra vai trò người dùng và chuyển hướng
-				checkUserRoleAndRedirect(user.uid);
+				// Check if user is admin by email
+				if (user.email === 'quantrianbokcollection@gmail.com') {
+					showMessage('Chào mừng Admin! Đang chuyển đến bảng điều khiển quản trị...', 'success');
+					setTimeout(() => {
+						window.location.href = 'admin-dashboard.html';
+					}, 1500);
+				} else {
+					showMessage('Đăng nhập thành công!', 'success');
+					// Kiểm tra vai trò người dùng và chuyển hướng
+					checkUserRoleAndRedirect(user.uid);
+				}
 			} catch (error) {
 				submitBtn.classList.remove('loading');
 				submitBtn.textContent = 'Đăng nhập';
@@ -1029,10 +1036,17 @@
 				};
 				localStorage.setItem('user', JSON.stringify(userData));
 				
-				showMessage('Đăng nhập Google thành công!', 'success');
-				
-				// Kiểm tra vai trò người dùng và chuyển hướng
-				checkUserRoleAndRedirect(user.uid);
+				// Check if user is admin by email
+				if (user.email === 'quantrianbokcollection@gmail.com') {
+					showMessage('Chào mừng Admin! Đang chuyển đến bảng điều khiển quản trị...', 'success');
+					setTimeout(() => {
+						window.location.href = 'admin-dashboard.html';
+					}, 1500);
+				} else {
+					showMessage('Đăng nhập Google thành công!', 'success');
+					// Kiểm tra vai trò người dùng và chuyển hướng
+					checkUserRoleAndRedirect(user.uid);
+				}
 			} catch (error) {
 				console.error('Google login error:', error);
 				let errorMessage = 'Đăng nhập Google thất bại!';
@@ -1091,6 +1105,17 @@
 				if (!window.firebaseDatabase || !window.firebaseRef || !window.firebaseGet) {
 					console.log('Firebase not ready, importing...');
 					await importFirebaseFunctions();
+				}
+				
+				// Get current user from Firebase Auth
+				const currentUser = window.firebaseAuth.currentUser;
+				if (currentUser && currentUser.email === 'quantrianbokcollection@gmail.com') {
+					console.log('Admin email detected, redirecting to admin dashboard');
+					showMessage('Chào mừng Admin! Đang chuyển đến bảng điều khiển quản trị...', 'success');
+					setTimeout(() => {
+						window.location.href = 'admin-dashboard.html';
+					}, 1500);
+					return; // Exit early for admin users
 				}
 				
 				// First check if user is admin

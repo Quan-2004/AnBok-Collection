@@ -865,6 +865,53 @@
             border: 1px solid #ffeaa7;
             border-radius: 8px;
         }
+
+        /* Analytics specific styles */
+        .analytics-insights {
+            background: rgba(248, 250, 252, 0.8);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+
+        .insight-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        .insight-item:last-child {
+            border-bottom: none;
+        }
+
+        .hover-bg:hover {
+            background: rgba(99, 102, 241, 0.05) !important;
+        }
+
+        /* Chart container improvements */
+        .chart-container canvas {
+            max-height: 350px;
+        }
+
+        /* Revenue and earnings styling */
+        .earnings-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Transaction status badges */
+        .status-completed {
+            background: linear-gradient(135deg, var(--success-color), #059669);
+            color: white;
+        }
+
+        .status-pending {
+            background: linear-gradient(135deg, var(--warning-color), #d97706);
+            color: white;
+        }
+
+        .status-failed {
+            background: linear-gradient(135deg, var(--danger-color), #dc2626);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -896,26 +943,6 @@
                 <a href="#" class="nav-link" data-section="analytics">
                     <i class="fas fa-chart-bar"></i>
                     <span>Phân tích</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link" data-section="earnings">
-                    <i class="fas fa-wallet"></i>
-                    <span>Thu nhập</span>
-                    <span class="badge">0</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link" data-section="comments">
-                    <i class="fas fa-comments"></i>
-                    <span>Bình luận</span>
-                    <span class="badge">0</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link" data-section="settings">
-                    <i class="fas fa-cog"></i>
-                    <span>Cài đặt</span>
                 </a>
             </div>
             <!-- <div class="nav-item mt-auto">
@@ -1129,6 +1156,604 @@
                         </ul>
                     </nav>
                 </div>
+    </div>
+
+    <!-- Analytics Section -->
+    <div id="analytics-section" class="content-section">
+        <!-- Header with Actions -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <div>
+                <h1 class="h3 mb-0 text-gray-800">Phân tích dữ liệu</h1>
+                <p class="text-muted mb-0">Theo dõi hiệu suất và thống kê của bạn</p>
+            </div>
+            <div class="d-flex gap-2">
+                <select class="form-select" id="analytics-period" style="width: auto;">
+                    <option value="7">7 ngày qua</option>
+                    <option value="30" selected>30 ngày qua</option>
+                    <option value="90">3 tháng qua</option>
+                    <option value="365">1 năm qua</option>
+                </select>
+                <button class="btn btn-outline-primary" onclick="exportAnalytics()">
+                    <i class="fas fa-download me-1"></i>Xuất báo cáo
+                </button>
+            </div>
+        </div>
+
+        <!-- Overview Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card stat-card stat-card-primary h-100">
+                    <div class="card-body text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-value" id="analytics-total-views">0</div>
+                        <div class="stat-label">Tổng lượt xem</div>
+                        <div class="stat-change positive" id="analytics-views-change">+0%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card stat-card stat-card-success h-100">
+                    <div class="card-body text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value" id="analytics-unique-readers">0</div>
+                        <div class="stat-label">Độc giả duy nhất</div>
+                        <div class="stat-change positive" id="analytics-readers-change">+0%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card stat-card stat-card-info h-100">
+                    <div class="card-body text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-value" id="analytics-engagement">0%</div>
+                        <div class="stat-label">Tỷ lệ tương tác</div>
+                        <div class="stat-change positive" id="analytics-engagement-change">+0%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card stat-card stat-card-warning h-100">
+                    <div class="card-body text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-value" id="analytics-revenue">0₫</div>
+                        <div class="stat-label">Doanh thu</div>
+                        <div class="stat-change positive" id="analytics-revenue-change">+0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row mb-4">
+            <!-- Views Chart -->
+            <div class="col-lg-8 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-chart-line me-2"></i>Biểu đồ lượt xem theo thời gian
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="viewsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Top Content -->
+            <div class="col-lg-4 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-trophy me-2"></i>Nội dung phổ biến nhất
+                    </div>
+                    <div class="card-body">
+                        <div id="top-content-list">
+                            <!-- Top content will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Performance & Reader Demographics -->
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-chart-pie me-2"></i>Hiệu suất theo thể loại
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-chart-bar me-2"></i>Thống kê độc giả
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="readerChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Analytics Tables -->
+        <div class="row mb-4">
+            <!-- Content Performance Table -->
+            <div class="col-lg-8 mb-4">
+                <div class="card table-container">
+                    <div class="table-header">
+                        <i class="fas fa-table me-2"></i>Hiệu suất chi tiết từng tác phẩm
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tác phẩm</th>
+                                    <th>Loại</th>
+                                    <th>Lượt xem</th>
+                                    <th>Lượt thích</th>
+                                    <th>Bình luận</th>
+                                    <th>Đánh giá</th>
+                                    <th>Tăng trưởng</th>
+                                </tr>
+                            </thead>
+                            <tbody id="content-performance-table">
+                                <!-- Content performance data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="col-lg-4 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-clock me-2"></i>Hoạt động gần đây
+                    </div>
+                    <div class="card-body">
+                        <div id="recent-activity-list" style="max-height: 400px; overflow-y: auto;">
+                            <!-- Recent activities will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reading Patterns & Engagement -->
+        <div class="row mb-4">
+            <div class="col-lg-12">
+                <div class="card table-container">
+                    <div class="table-header">
+                        <i class="fas fa-chart-area me-2"></i>Mẫu đọc và tương tác
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    <canvas id="engagementChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="analytics-insights">
+                                    <h6 class="mb-3">Thông tin chi tiết</h6>
+                                    <div class="insight-item mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Thời gian đọc trung bình</span>
+                                            <strong id="avg-reading-time">0 phút</strong>
+                                        </div>
+                                    </div>
+                                    <div class="insight-item mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Tỷ lệ hoàn thành đọc</span>
+                                            <strong id="completion-rate">0%</strong>
+                                        </div>
+                                    </div>
+                                    <div class="insight-item mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Giờ đọc phổ biến</span>
+                                            <strong id="peak-hours">20:00 - 22:00</strong>
+                                        </div>
+                                    </div>
+                                    <div class="insight-item mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Thiết bị phổ biến</span>
+                                            <strong id="popular-device">Mobile (65%)</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings Section -->
+    <div id="earnings-section" class="content-section">
+        <!-- Header with Actions -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <div>
+                <h1 class="h3 mb-0 text-gray-800">Thu nhập</h1>
+                <p class="text-muted mb-0">Theo dõi doanh thu và thu nhập từ tác phẩm</p>
+            </div>
+            <div class="d-flex gap-2">
+                <select class="form-select" id="earnings-period" style="width: auto;">
+                    <option value="7">7 ngày qua</option>
+                    <option value="30" selected>30 ngày qua</option>
+                    <option value="90">3 tháng qua</option>
+                    <option value="365">1 năm qua</option>
+                </select>
+                <button class="btn btn-outline-success" onclick="requestPayout()">
+                    <i class="fas fa-money-bill-wave me-1"></i>Rút tiền
+                </button>
+            </div>
+        </div>
+
+        <!-- Earnings Overview -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card stat-card stat-card-success h-100">
+                    <div class="card-body text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-value" id="total-earnings">0₫</div>
+                        <div class="stat-label">Tổng thu nhập</div>
+                        <div class="stat-change positive" id="earnings-change">+0%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card stat-card stat-card-info h-100">
+                    <div class="card-body text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="stat-value" id="available-balance">0₫</div>
+                        <div class="stat-label">Số dư khả dụng</div>
+                        <div class="stat-change" id="balance-change">0₫</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card stat-card stat-card-warning h-100">
+                    <div class="card-body text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-value" id="monthly-revenue">0₫</div>
+                        <div class="stat-label">Doanh thu tháng này</div>
+                        <div class="stat-change positive" id="monthly-change">+0%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card stat-card stat-card-danger h-100">
+                    <div class="card-body text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="stat-value" id="pending-payout">0₫</div>
+                        <div class="stat-label">Chờ thanh toán</div>
+                        <div class="stat-change" id="payout-change">0₫</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Chart & Top Earning Content -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-chart-area me-2"></i>Biểu đồ doanh thu
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-star me-2"></i>Tác phẩm thu nhập cao nhất
+                    </div>
+                    <div class="card-body">
+                        <div id="top-earning-content">
+                            <!-- Top earning content will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Breakdown & Payment Methods -->
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-chart-pie me-2"></i>Phân tích nguồn thu nhập
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="revenueBreakdownChart"></canvas>
+                        </div>
+                        <div class="revenue-breakdown mt-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Truyện dài</span>
+                                <span class="fw-bold text-primary">45%</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Truyện ngắn</span>
+                                <span class="fw-bold text-success">30%</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Tiểu thuyết</span>
+                                <span class="fw-bold text-warning">20%</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-muted">Khác</span>
+                                <span class="fw-bold text-info">5%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-credit-card me-2"></i>Phương thức thanh toán
+                    </div>
+                    <div class="card-body">
+                        <div class="payment-methods">
+                            <div class="payment-method-item d-flex align-items-center justify-content-between p-3 mb-3 rounded bg-light">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-credit-card text-primary me-3 fa-lg"></i>
+                                    <div>
+                                        <h6 class="mb-1">Thẻ ngân hàng</h6>
+                                        <small class="text-muted">Visa, Mastercard, JCB</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-success">Đã kích hoạt</span>
+                            </div>
+                            
+                            <div class="payment-method-item d-flex align-items-center justify-content-between p-3 mb-3 rounded bg-light">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-university text-info me-3 fa-lg"></i>
+                                    <div>
+                                        <h6 class="mb-1">Chuyển khoản ngân hàng</h6>
+                                        <small class="text-muted">Chuyển khoản trực tiếp</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-success">Đã kích hoạt</span>
+                            </div>
+                            
+                            <div class="payment-method-item d-flex align-items-center justify-content-between p-3 mb-3 rounded bg-light">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-mobile-alt text-warning me-3 fa-lg"></i>
+                                    <div>
+                                        <h6 class="mb-1">Ví điện tử</h6>
+                                        <small class="text-muted">Momo, ZaloPay, VNPay</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-secondary">Chưa kích hoạt</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-outline-primary w-100 mt-3" onclick="addPaymentMethod()">
+                            <i class="fas fa-plus me-2"></i>Thêm phương thức thanh toán
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card table-container">
+                    <div class="table-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-history me-2"></i>Lịch sử giao dịch
+                        </div>
+                        <div class="d-flex gap-2">
+                            <select class="form-select form-select-sm" id="transaction-filter" style="width: auto;">
+                                <option value="">Tất cả giao dịch</option>
+                                <option value="completed">Hoàn thành</option>
+                                <option value="pending">Đang xử lý</option>
+                                <option value="failed">Thất bại</option>
+                            </select>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="exportTransactions()">
+                                <i class="fas fa-download me-1"></i>Xuất CSV
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Mã GD</th>
+                                    <th>Ngày</th>
+                                    <th>Tác phẩm</th>
+                                    <th>Loại giao dịch</th>
+                                    <th>Số tiền</th>
+                                    <th>Phương thức</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaction-history-table">
+                                <!-- Transaction history will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payout History & Settings -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mb-4">
+                <div class="card table-container">
+                    <div class="table-header">
+                        <i class="fas fa-money-bill-wave me-2"></i>Lịch sử rút tiền
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Mã rút tiền</th>
+                                    <th>Ngày yêu cầu</th>
+                                    <th>Số tiền</th>
+                                    <th>Phương thức</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày hoàn thành</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payout-history-table">
+                                <!-- Payout history will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-cog me-2"></i>Cài đặt thanh toán
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Ngưỡng rút tiền tối thiểu</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="min-payout" value="50000" min="10000">
+                                <span class="input-group-text">₫</span>
+                            </div>
+                            <small class="text-muted">Số tiền tối thiểu để yêu cầu rút</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tự động rút tiền</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="auto-payout">
+                                <label class="form-check-label" for="auto-payout">
+                                    Tự động rút tiền khi đạt ngưỡng
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tần suất rút tiền</label>
+                            <select class="form-select" id="payout-frequency">
+                                <option value="weekly">Hàng tuần</option>
+                                <option value="monthly" selected>Hàng tháng</option>
+                                <option value="quarterly">Hàng quý</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-primary w-100" onclick="savePaymentSettings()">
+                            <i class="fas fa-save me-2"></i>Lưu cài đặt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tax Information & Reports -->
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-file-invoice-dollar me-2"></i>Thông tin thuế
+                    </div>
+                    <div class="card-body">
+                        <div class="tax-info">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>Thu nhập chịu thuế (năm 2024)</span>
+                                <span class="fw-bold" id="taxable-income">0₫</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>Thuế TNCN (10%)</span>
+                                <span class="fw-bold text-danger" id="tax-amount">0₫</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>Thu nhập sau thuế</span>
+                                <span class="fw-bold text-success" id="net-income">0₫</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-semibold">Tổng thu nhập thực nhận</span>
+                                <span class="fw-bold text-primary" id="total-net-income">0₫</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-outline-info w-100 mt-3" onclick="downloadTaxReport()">
+                            <i class="fas fa-download me-2"></i>Tải báo cáo thuế
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="card table-container h-100">
+                    <div class="table-header">
+                        <i class="fas fa-chart-line me-2"></i>Dự báo thu nhập
+                    </div>
+                    <div class="card-body">
+                        <div class="forecast-info">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary mb-2" id="forecast-amount">0₫</h4>
+                                <p class="text-muted mb-0">Dự kiến thu nhập tháng tới</p>
+                            </div>
+                            
+                            <div class="forecast-chart mb-3">
+                                <div class="chart-container" style="height: 200px;">
+                                    <canvas id="forecastChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="forecast-factors">
+                                <h6 class="mb-3">Các yếu tố ảnh hưởng:</h6>
+                                <div class="factor-item d-flex align-items-center mb-2">
+                                    <i class="fas fa-arrow-up text-success me-2"></i>
+                                    <span>Tăng trưởng độc giả: <strong>+15%</strong></span>
+                                </div>
+                                <div class="factor-item d-flex align-items-center mb-2">
+                                    <i class="fas fa-arrow-up text-success me-2"></i>
+                                    <span>Nội dung mới: <strong>+8%</strong></span>
+                                </div>
+                                <div class="factor-item d-flex align-items-center mb-2">
+                                    <i class="fas fa-arrow-down text-warning me-2"></i>
+                                    <span>Mùa thấp điểm: <strong>-5%</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Books Management Section -->
@@ -5116,6 +5741,1008 @@
             setTimeout(() => {
                 editChapter(storyId, chapterId);
             }, 500);
+        }
+
+        // Analytics Functions
+        let analyticsCharts = {};
+
+        // Load analytics data
+        async function loadAnalyticsData(userId, period = 30) {
+            try {
+                console.log('Loading analytics data for user:', userId, 'period:', period);
+                
+                // Get user stories and books for analytics
+                const [storiesSnapshot, booksSnapshot] = await Promise.all([
+                    database.ref(`users/${userId}/stories`).once('value'),
+                    database.ref(`users/${userId}/books`).once('value')
+                ]);
+                
+                const stories = storiesSnapshot.val() || {};
+                const books = booksSnapshot.val() || {};
+                
+                // Generate analytics data
+                const analyticsData = generateAnalyticsData(stories, books, period);
+                
+                // Update analytics UI
+                updateAnalyticsUI(analyticsData);
+                
+                // Initialize charts
+                initializeAnalyticsCharts(analyticsData);
+                
+            } catch (error) {
+                console.error('Error loading analytics data:', error);
+                showNotification('Lỗi khi tải dữ liệu phân tích: ' + error.message, 'error');
+            }
+        }
+
+        // Generate analytics data from stories and books
+        function generateAnalyticsData(stories, books, period) {
+            const now = new Date();
+            const startDate = new Date(now.getTime() - (period * 24 * 60 * 60 * 1000));
+            
+            const allContent = [
+                ...Object.entries(stories).map(([id, story]) => ({id, type: 'story', ...story})),
+                ...Object.entries(books).map(([id, book]) => ({id, type: 'book', ...book}))
+            ];
+            
+            // Calculate total metrics
+            const totalViews = allContent.reduce((sum, item) => sum + (item.totalViews || 0), 0);
+            const totalLikes = allContent.reduce((sum, item) => sum + (item.totalLikes || 0), 0);
+            const uniqueReaders = Math.floor(totalViews * 0.7); // Estimate unique readers
+            const engagementRate = totalViews > 0 ? Math.round((totalLikes / totalViews) * 100) : 0;
+            
+            // Generate daily views data for chart
+            const dailyViews = [];
+            const labels = [];
+            for (let i = period - 1; i >= 0; i--) {
+                const date = new Date(now.getTime() - (i * 24 * 60 * 60 * 1000));
+                labels.push(date.toLocaleDateString('vi-VN', { month: 'short', day: 'numeric' }));
+                // Simulate daily views with some randomness
+                const baseViews = Math.floor(totalViews / period);
+                const randomVariation = Math.floor(Math.random() * baseViews * 0.5);
+                dailyViews.push(Math.max(0, baseViews + randomVariation - (baseViews * 0.25)));
+            }
+            
+            // Category performance
+            const categoryStats = {};
+            allContent.forEach(item => {
+                if (item.category) {
+                    if (!categoryStats[item.category]) {
+                        categoryStats[item.category] = { views: 0, likes: 0, count: 0 };
+                    }
+                    categoryStats[item.category].views += item.totalViews || 0;
+                    categoryStats[item.category].likes += item.totalLikes || 0;
+                    categoryStats[item.category].count += 1;
+                }
+            });
+            
+            // Top performing content
+            const topContent = allContent
+                .sort((a, b) => (b.totalViews || 0) - (a.totalViews || 0))
+                .slice(0, 5);
+            
+            // Generate revenue data (mock)
+            const revenue = Math.floor(totalViews * 0.1); // 0.1₫ per view
+            const monthlyRevenue = Math.floor(revenue * 0.3);
+            const availableBalance = Math.floor(revenue * 0.8);
+            const pendingPayout = Math.floor(revenue * 0.2);
+            
+            // Generate recent activities
+            const recentActivities = generateRecentActivities(allContent, 10);
+            
+            return {
+                overview: {
+                    totalViews,
+                    uniqueReaders,
+                    engagementRate,
+                    revenue
+                },
+                charts: {
+                    dailyViews: { labels, data: dailyViews },
+                    categoryStats,
+                    readerDemographics: generateReaderDemographics()
+                },
+                topContent,
+                recentActivities,
+                earnings: {
+                    total: revenue,
+                    monthly: monthlyRevenue,
+                    available: availableBalance,
+                    pending: pendingPayout
+                }
+            };
+        }
+
+        // Generate reader demographics data
+        function generateReaderDemographics() {
+            return {
+                ageGroups: [
+                    { label: '18-25', value: 35 },
+                    { label: '26-35', value: 40 },
+                    { label: '36-45', value: 20 },
+                    { label: '46+', value: 5 }
+                ],
+                devices: [
+                    { label: 'Mobile', value: 65 },
+                    { label: 'Desktop', value: 25 },
+                    { label: 'Tablet', value: 10 }
+                ]
+            };
+        }
+
+        // Generate recent activities
+        function generateRecentActivities(content, limit) {
+            const activities = [];
+            const activityTypes = [
+                { type: 'view', icon: 'eye', color: 'primary', text: 'đã xem' },
+                { type: 'like', icon: 'heart', color: 'danger', text: 'đã thích' },
+                { type: 'comment', icon: 'comment', color: 'info', text: 'đã bình luận' },
+                { type: 'share', icon: 'share', color: 'success', text: 'đã chia sẻ' }
+            ];
+            
+            content.forEach(item => {
+                const numActivities = Math.min(3, Math.floor(Math.random() * 4) + 1);
+                for (let i = 0; i < numActivities; i++) {
+                    const activity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
+                    const timeAgo = Math.floor(Math.random() * 24) + 1;
+                    activities.push({
+                        content: item.title,
+                        type: activity.type,
+                        icon: activity.icon,
+                        color: activity.color,
+                        text: activity.text,
+                        timeAgo: `${timeAgo} giờ trước`
+                    });
+                }
+            });
+            
+            return activities.slice(0, limit);
+        }
+
+        // Update analytics UI
+        function updateAnalyticsUI(data) {
+            // Update overview stats
+            document.getElementById('analytics-total-views').textContent = formatNumber(data.overview.totalViews);
+            document.getElementById('analytics-unique-readers').textContent = formatNumber(data.overview.uniqueReaders);
+            document.getElementById('analytics-engagement').textContent = data.overview.engagementRate + '%';
+            document.getElementById('analytics-revenue').textContent = formatCurrency(data.overview.revenue);
+            
+            // Update earnings
+            document.getElementById('total-earnings').textContent = formatCurrency(data.earnings.total);
+            document.getElementById('available-balance').textContent = formatCurrency(data.earnings.available);
+            document.getElementById('monthly-revenue').textContent = formatCurrency(data.earnings.monthly);
+            document.getElementById('pending-payout').textContent = formatCurrency(data.earnings.pending);
+            
+            // Update top content list
+            updateTopContentList(data.topContent);
+            
+            // Update recent activities
+            updateRecentActivities(data.recentActivities);
+            
+            // Update content performance table
+            updateContentPerformanceTable(data.topContent);
+            
+            // Update insights
+            updateAnalyticsInsights(data);
+        }
+
+        // Initialize analytics charts
+        function initializeAnalyticsCharts(data) {
+            // Destroy existing charts
+            Object.values(analyticsCharts).forEach(chart => {
+                if (chart) chart.destroy();
+            });
+            analyticsCharts = {};
+            
+            // Views Chart
+            const viewsCtx = document.getElementById('viewsChart');
+            if (viewsCtx) {
+                analyticsCharts.views = new Chart(viewsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: data.charts.dailyViews.labels,
+                        datasets: [{
+                            label: 'Lượt xem',
+                            data: data.charts.dailyViews.data,
+                            borderColor: 'rgb(99, 102, 241)',
+                            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            }
+            
+            // Category Chart
+            const categoryCtx = document.getElementById('categoryChart');
+            if (categoryCtx) {
+                const categoryLabels = Object.keys(data.charts.categoryStats).map(cat => getCategoryText(cat));
+                const categoryData = Object.values(data.charts.categoryStats).map(stat => stat.views);
+                
+                analyticsCharts.category = new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: categoryLabels,
+                        datasets: [{
+                            data: categoryData,
+                            backgroundColor: [
+                                'rgba(99, 102, 241, 0.8)',
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(245, 158, 11, 0.8)',
+                                'rgba(239, 68, 68, 0.8)',
+                                'rgba(6, 182, 212, 0.8)',
+                                'rgba(139, 92, 246, 0.8)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom' }
+                        }
+                    }
+                });
+            }
+            
+            // Reader Demographics Chart
+            const readerCtx = document.getElementById('readerChart');
+            if (readerCtx) {
+                analyticsCharts.reader = new Chart(readerCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.charts.readerDemographics.ageGroups.map(group => group.label),
+                        datasets: [{
+                            label: 'Độc giả (%)',
+                            data: data.charts.readerDemographics.ageGroups.map(group => group.value),
+                            backgroundColor: 'rgba(99, 102, 241, 0.6)',
+                            borderColor: 'rgba(99, 102, 241, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, max: 50 }
+                        }
+                    }
+                });
+            }
+            
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart');
+            if (revenueCtx) {
+                const revenueLabels = data.charts.dailyViews.labels;
+                const revenueData = data.charts.dailyViews.data.map(views => views * 0.1);
+                
+                analyticsCharts.revenue = new Chart(revenueCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: revenueLabels,
+                        datasets: [{
+                            label: 'Doanh thu (₫)',
+                            data: revenueData,
+                            backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            }
+            
+            // Engagement Chart
+            const engagementCtx = document.getElementById('engagementChart');
+            if (engagementCtx) {
+                analyticsCharts.engagement = new Chart(engagementCtx, {
+                    type: 'line',
+                    data: {
+                        labels: data.charts.dailyViews.labels,
+                        datasets: [
+                            {
+                                label: 'Lượt xem',
+                                data: data.charts.dailyViews.data,
+                                borderColor: 'rgb(99, 102, 241)',
+                                backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                                yAxisID: 'y'
+                            },
+                            {
+                                label: 'Lượt thích',
+                                data: data.charts.dailyViews.data.map(views => Math.floor(views * 0.1)),
+                                borderColor: 'rgb(239, 68, 68)',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        scales: {
+                            y: { type: 'linear', display: true, position: 'left' },
+                            y1: { type: 'linear', display: true, position: 'right', grid: { drawOnChartArea: false } }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Update top content list
+        function updateTopContentList(topContent) {
+            const container = document.getElementById('top-content-list');
+            if (!container) return;
+            
+            if (topContent.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-chart-line fa-2x mb-2"></i>
+                        <p>Chưa có dữ liệu</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = topContent.map((item, index) => `
+                <div class="d-flex align-items-center mb-3 p-2 rounded ${index < 3 ? 'bg-light' : ''}">
+                    <div class="me-3">
+                        <span class="badge bg-${index === 0 ? 'warning' : index === 1 ? 'secondary' : index === 2 ? 'info' : 'light'} rounded-circle" style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+                            ${index + 1}
+                        </span>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 fw-bold" style="font-size: 0.875rem;">${item.title}</h6>
+                        <small class="text-muted">${item.type === 'story' ? 'Truyện' : 'Sách'} • ${formatNumber(item.totalViews || 0)} lượt xem</small>
+                    </div>
+                    <div class="text-end">
+                        <small class="text-success fw-bold">+${Math.floor(Math.random() * 20) + 5}%</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update recent activities
+        function updateRecentActivities(activities) {
+            const container = document.getElementById('recent-activity-list');
+            if (!container) return;
+            
+            if (activities.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-clock fa-2x mb-2"></i>
+                        <p>Chưa có hoạt động</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = activities.map(activity => `
+                <div class="d-flex align-items-center mb-3 p-2 rounded hover-bg">
+                    <div class="me-3">
+                        <i class="fas fa-${activity.icon} text-${activity.color}"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="mb-1" style="font-size: 0.875rem;">
+                            Độc giả <strong>${activity.text}</strong> "${activity.content}"
+                        </p>
+                        <small class="text-muted">${activity.timeAgo}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update content performance table
+        function updateContentPerformanceTable(content) {
+            const tbody = document.getElementById('content-performance-table');
+            if (!tbody) return;
+            
+            if (content.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            <i class="fas fa-chart-bar fa-2x mb-2"></i>
+                            <p>Chưa có dữ liệu hiệu suất</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = content.map(item => {
+                const growth = Math.floor(Math.random() * 30) + 5;
+                const isPositive = Math.random() > 0.3;
+                
+                return `
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="${item.coverImage || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop'}" 
+                                     class="story-cover me-2" alt="Cover">
+                                <div>
+                                    <div class="fw-semibold">${item.title}</div>
+                                    <small class="text-muted">${item.authorName || 'Tác giả'}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-primary bg-opacity-10 text-primary">${item.type === 'story' ? 'Truyện' : 'Sách'}</span></td>
+                        <td>${formatNumber(item.totalViews || 0)}</td>
+                        <td>${formatNumber(item.totalLikes || 0)}</td>
+                        <td>${Math.floor(Math.random() * 50)}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">${item.rating ? item.rating.toFixed(1) : '0.0'}</span>
+                                <div class="text-warning">
+                                    ${'★'.repeat(Math.floor(item.rating || 0))}${'☆'.repeat(5 - Math.floor(item.rating || 0))}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="stat-change ${isPositive ? 'positive' : 'negative'}">
+                                ${isPositive ? '+' : '-'}${growth}%
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Update analytics insights
+        function updateAnalyticsInsights(data) {
+            const avgReadingTime = Math.floor(Math.random() * 15) + 5;
+            const completionRate = Math.floor(Math.random() * 40) + 60;
+            
+            document.getElementById('avg-reading-time').textContent = avgReadingTime + ' phút';
+            document.getElementById('completion-rate').textContent = completionRate + '%';
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Export analytics function
+        function exportAnalytics() {
+            showNotification('Đang chuẩn bị báo cáo...', 'info');
+            
+            // Simulate export process
+            setTimeout(() => {
+                showNotification('Báo cáo đã được xuất thành công!', 'success');
+            }, 2000);
+        }
+
+        // Request payout function
+        function requestPayout() {
+            const availableBalance = document.getElementById('available-balance').textContent;
+            
+            if (confirm(`Bạn có muốn yêu cầu rút ${availableBalance} không?`)) {
+                showNotification('Yêu cầu rút tiền đã được gửi!', 'success');
+                
+                // Update pending payout
+                document.getElementById('pending-payout').textContent = availableBalance;
+                document.getElementById('available-balance').textContent = '0₫';
+            }
+        }
+
+        // Load analytics when section is activated
+        document.addEventListener('DOMContentLoaded', function() {
+            // Analytics period change handler
+            const analyticsPeriod = document.getElementById('analytics-period');
+            if (analyticsPeriod) {
+                analyticsPeriod.addEventListener('change', function() {
+                    const userId = currentUser ? currentUser.uid : 'Tt50hFcTNLNZB1tggdFzKWCFcvB3';
+                    loadAnalyticsData(userId, parseInt(this.value));
+                });
+            }
+            
+            // Load analytics data when switching to analytics section
+            const analyticsNavLink = document.querySelector('[data-section="analytics"]');
+            if (analyticsNavLink) {
+                analyticsNavLink.addEventListener('click', function() {
+                    setTimeout(() => {
+                        const userId = currentUser ? currentUser.uid : 'Tt50hFcTNLNZB1tggdFzKWCFcvB3';
+                        loadAnalyticsData(userId, 30);
+                    }, 300);
+                });
+            }
+
+            // Load earnings data when switching to earnings section
+            const earningsNavLink = document.querySelector('[data-section="earnings"]');
+            if (earningsNavLink) {
+                earningsNavLink.addEventListener('click', function() {
+                    setTimeout(() => {
+                        const userId = currentUser ? currentUser.uid : 'Tt50hFcTNLNZB1tggdFzKWCFcvB3';
+                        loadEarningsData(userId);
+                    }, 300);
+                });
+            }
+
+            // Initialize earnings components
+            initializeEarningsComponents();
+        });
+
+        // Earnings Functions
+        let earningsCharts = {};
+
+        // Load earnings data
+        async function loadEarningsData(userId) {
+            try {
+                console.log('Loading earnings data for user:', userId);
+                
+                // Get user stories and books for earnings calculation
+                const [storiesSnapshot, booksSnapshot] = await Promise.all([
+                    database.ref(`users/${userId}/stories`).once('value'),
+                    database.ref(`users/${userId}/books`).once('value')
+                ]);
+                
+                const stories = storiesSnapshot.val() || {};
+                const books = booksSnapshot.val() || {};
+                
+                // Generate earnings data
+                const earningsData = generateEarningsData(stories, books);
+                
+                // Update earnings UI
+                updateEarningsUI(earningsData);
+                
+                // Initialize earnings charts
+                initializeEarningsCharts(earningsData);
+                
+                // Load transaction history
+                loadTransactionHistory(userId);
+                
+                // Load payout history
+                loadPayoutHistory(userId);
+                
+            } catch (error) {
+                console.error('Error loading earnings data:', error);
+                showNotification('Lỗi khi tải dữ liệu thu nhập: ' + error.message, 'error');
+            }
+        }
+
+        // Generate earnings data
+        function generateEarningsData(stories, books) {
+            const allContent = [
+                ...Object.entries(stories).map(([id, story]) => ({id, type: 'story', ...story})),
+                ...Object.entries(books).map(([id, book]) => ({id, type: 'book', ...book}))
+            ];
+            
+            // Calculate earnings by content type
+            const earningsByType = {
+                'series': 0,      // Truyện dài
+                'oneshot': 0,     // Truyện ngắn
+                'novel': 0,       // Tiểu thuyết
+                'other': 0        // Khác
+            };
+            
+            allContent.forEach(item => {
+                const views = item.totalViews || 0;
+                const earnings = Math.floor(views * 0.1); // 0.1₫ per view
+                
+                if (item.type === 'story') {
+                    if (item.storyType === 'series') earningsByType.series += earnings;
+                    else if (item.storyType === 'oneshot') earningsByType.oneshot += earnings;
+                    else earningsByType.other += earnings;
+                } else if (item.type === 'book') {
+                    if (item.bookType === 'novel') earningsByType.novel += earnings;
+                    else earningsByType.other += earnings;
+                }
+            });
+            
+            const totalEarnings = Object.values(earningsByType).reduce((sum, val) => sum + val, 0);
+            const monthlyRevenue = Math.floor(totalEarnings * 0.3);
+            const availableBalance = Math.floor(totalEarnings * 0.8);
+            const pendingPayout = Math.floor(totalEarnings * 0.2);
+            
+            // Calculate tax information
+            const taxableIncome = totalEarnings;
+            const taxAmount = Math.floor(taxableIncome * 0.1); // 10% tax
+            const netIncome = taxableIncome - taxAmount;
+            
+            // Generate forecast data
+            const forecastAmount = Math.floor(monthlyRevenue * 1.15); // 15% growth
+            
+            return {
+                overview: {
+                    total: totalEarnings,
+                    monthly: monthlyRevenue,
+                    available: availableBalance,
+                    pending: pendingPayout
+                },
+                breakdown: earningsByType,
+                tax: {
+                    taxable: taxableIncome,
+                    amount: taxAmount,
+                    net: netIncome
+                },
+                forecast: forecastAmount
+            };
+        }
+
+        // Update earnings UI
+        function updateEarningsUI(data) {
+            // Update overview stats
+            document.getElementById('total-earnings').textContent = formatCurrency(data.overview.total);
+            document.getElementById('available-balance').textContent = formatCurrency(data.overview.available);
+            document.getElementById('monthly-revenue').textContent = formatCurrency(data.overview.monthly);
+            document.getElementById('pending-payout').textContent = formatCurrency(data.overview.pending);
+            
+            // Update tax information
+            document.getElementById('taxable-income').textContent = formatCurrency(data.tax.taxable);
+            document.getElementById('tax-amount').textContent = formatCurrency(data.tax.amount);
+            document.getElementById('net-income').textContent = formatCurrency(data.tax.net);
+            document.getElementById('total-net-income').textContent = formatCurrency(data.tax.net);
+            
+            // Update forecast
+            document.getElementById('forecast-amount').textContent = formatCurrency(data.forecast);
+        }
+
+        // Initialize earnings charts
+        function initializeEarningsCharts(data) {
+            // Destroy existing charts
+            Object.values(earningsCharts).forEach(chart => {
+                if (chart) chart.destroy();
+            });
+            earningsCharts = {};
+            
+            // Revenue Breakdown Chart
+            const breakdownCtx = document.getElementById('revenueBreakdownChart');
+            if (breakdownCtx) {
+                const labels = ['Truyện dài', 'Truyện ngắn', 'Tiểu thuyết', 'Khác'];
+                const values = [
+                    data.breakdown.series,
+                    data.breakdown.oneshot,
+                    data.breakdown.novel,
+                    data.breakdown.other
+                ];
+                
+                earningsCharts.breakdown = new Chart(breakdownCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: values,
+                            backgroundColor: [
+                                'rgba(99, 102, 241, 0.8)',
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(245, 158, 11, 0.8)',
+                                'rgba(6, 182, 212, 0.8)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom' }
+                        }
+                    }
+                });
+            }
+            
+            // Forecast Chart
+            const forecastCtx = document.getElementById('forecastChart');
+            if (forecastCtx) {
+                const months = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'];
+                const actualData = [data.overview.monthly * 0.8, data.overview.monthly * 0.9, data.overview.monthly];
+                const forecastData = [data.overview.monthly, data.overview.monthly * 1.05, data.forecast];
+                
+                earningsCharts.forecast = new Chart(forecastCtx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [
+                            {
+                                label: 'Thực tế',
+                                data: actualData,
+                                borderColor: 'rgb(99, 102, 241)',
+                                backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                                borderWidth: 3,
+                                fill: false
+                            },
+                            {
+                                label: 'Dự báo',
+                                data: forecastData,
+                                borderColor: 'rgb(16, 185, 129)',
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                borderWidth: 3,
+                                borderDash: [5, 5],
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'top' }
+                        },
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Load transaction history
+        async function loadTransactionHistory(userId) {
+            try {
+                // Generate mock transaction data
+                const transactions = generateMockTransactions(userId);
+                
+                // Update transaction table
+                updateTransactionTable(transactions);
+                
+            } catch (error) {
+                console.error('Error loading transaction history:', error);
+            }
+        }
+
+        // Generate mock transaction data
+        function generateMockTransactions(userId) {
+            const transactionTypes = [
+                { type: 'view_revenue', name: 'Thu nhập từ lượt xem', icon: 'eye' },
+                { type: 'subscription', name: 'Thuê bao Premium', icon: 'crown' },
+                { type: 'donation', name: 'Ủng hộ từ độc giả', icon: 'heart' },
+                { type: 'ad_revenue', name: 'Quảng cáo', icon: 'ad' }
+            ];
+            
+            const paymentMethods = ['Thẻ ngân hàng', 'Chuyển khoản', 'Ví điện tử'];
+            const statuses = ['completed', 'pending', 'failed'];
+            
+            const transactions = [];
+            const now = new Date();
+            
+            for (let i = 0; i < 20; i++) {
+                const date = new Date(now.getTime() - (i * 24 * 60 * 60 * 1000));
+                const type = transactionTypes[Math.floor(Math.random() * transactionTypes.length)];
+                const amount = Math.floor(Math.random() * 50000) + 1000;
+                const status = statuses[Math.floor(Math.random() * statuses.length)];
+                const method = paymentMethods[Math.floor(Math.random() * paymentMethods.length)];
+                
+                transactions.push({
+                    id: `TXN_${Date.now()}_${i}`,
+                    date: date,
+                    content: `Truyện ${i + 1}`,
+                    type: type,
+                    amount: amount,
+                    method: method,
+                    status: status
+                });
+            }
+            
+            return transactions.sort((a, b) => b.date - a.date);
+        }
+
+        // Update transaction table
+        function updateTransactionTable(transactions) {
+            const tbody = document.getElementById('transaction-history-table');
+            if (!tbody) return;
+            
+            if (transactions.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">
+                            <i class="fas fa-history fa-2x mb-2"></i>
+                            <p>Chưa có giao dịch nào</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = transactions.map(txn => `
+                <tr>
+                    <td><code class="small">${txn.id}</code></td>
+                    <td>${txn.date.toLocaleDateString('vi-VN')}</td>
+                    <td>${txn.content}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-${txn.type.icon} me-2 text-primary"></i>
+                            <span>${txn.type.name}</span>
+                        </div>
+                    </td>
+                    <td class="fw-bold">${formatCurrency(txn.amount)}</td>
+                    <td>${txn.method}</td>
+                    <td>
+                        <span class="status-badge status-${txn.status}">
+                            ${getTransactionStatusText(txn.status)}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-info" onclick="viewTransactionDetails('${txn.id}')">
+                            <i class="fas fa-eye"></i>
+                        </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load payout history
+        async function loadPayoutHistory(userId) {
+            try {
+                // Generate mock payout data
+                const payouts = generateMockPayouts(userId);
+                
+                // Update payout table
+                updatePayoutTable(payouts);
+                
+            } catch (error) {
+                console.error('Error loading payout history:', error);
+            }
+        }
+
+        // Generate mock payout data
+        function generateMockPayouts(userId) {
+            const payouts = [];
+            const now = new Date();
+            
+            for (let i = 0; i < 10; i++) {
+                const requestDate = new Date(now.getTime() - (i * 7 * 24 * 60 * 60 * 1000));
+                const amount = Math.floor(Math.random() * 200000) + 50000;
+                const status = i < 3 ? 'completed' : i < 6 ? 'pending' : 'processing';
+                const completedDate = status === 'completed' ? new Date(requestDate.getTime() + (3 * 24 * 60 * 60 * 1000)) : null;
+                
+                payouts.push({
+                    id: `PAY_${Date.now()}_${i}`,
+                    requestDate: requestDate,
+                    amount: amount,
+                    method: 'Chuyển khoản ngân hàng',
+                    status: status,
+                    completedDate: completedDate
+                });
+            }
+            
+            return payouts.sort((a, b) => b.requestDate - a.requestDate);
+        }
+
+        // Update payout table
+        function updatePayoutTable(payouts) {
+            const tbody = document.getElementById('payout-history-table');
+            if (!tbody) return;
+            
+            if (payouts.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            <i class="fas fa-money-bill-wave fa-2x mb-2"></i>
+                            <p>Chưa có lịch sử rút tiền</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = payouts.map(payout => `
+                <tr>
+                    <td><code class="small">${payout.id}</code></td>
+                    <td>${payout.requestDate.toLocaleDateString('vi-VN')}</td>
+                    <td class="fw-bold">${formatCurrency(payout.amount)}</td>
+                    <td>${payout.method}</td>
+                    <td>
+                        <span class="status-badge status-${payout.status}">
+                            ${getPayoutStatusText(payout.status)}
+                        </span>
+                    </td>
+                    <td>${payout.completedDate ? payout.completedDate.toLocaleDateString('vi-VN') : '-'}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Initialize earnings components
+        function initializeEarningsComponents() {
+            // Transaction filter handler
+            const transactionFilter = document.getElementById('transaction-filter');
+            if (transactionFilter) {
+                transactionFilter.addEventListener('change', function() {
+                    filterTransactions(this.value);
+                });
+            }
+        }
+
+        // Filter transactions
+        function filterTransactions(status) {
+            const rows = document.querySelectorAll('#transaction-history-table tr');
+            
+            rows.forEach(row => {
+                if (status === '') {
+                    row.style.display = '';
+                } else {
+                    const statusCell = row.querySelector('.status-badge');
+                    if (statusCell && statusCell.classList.contains(`status-${status}`)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Helper functions
+        function getTransactionStatusText(status) {
+            const statusTexts = {
+                'completed': 'Hoàn thành',
+                'pending': 'Đang xử lý',
+                'failed': 'Thất bại'
+            };
+            return statusTexts[status] || status;
+        }
+
+        function getPayoutStatusText(status) {
+            const statusTexts = {
+                'completed': 'Hoàn thành',
+                'pending': 'Chờ xử lý',
+                'processing': 'Đang xử lý'
+            };
+            return statusTexts[status] || status;
+        }
+
+        // Payment method functions
+        function addPaymentMethod() {
+            showNotification('Chức năng thêm phương thức thanh toán sẽ được cập nhật sớm!', 'info');
+        }
+
+        // Export functions
+        function exportTransactions() {
+            showNotification('Đang xuất dữ liệu giao dịch...', 'info');
+            setTimeout(() => {
+                showNotification('Đã xuất dữ liệu giao dịch thành công!', 'success');
+            }, 2000);
+        }
+
+        function downloadTaxReport() {
+            showNotification('Đang tạo báo cáo thuế...', 'info');
+            setTimeout(() => {
+                showNotification('Báo cáo thuế đã được tải xuống!', 'success');
+            }, 2000);
+        }
+
+        // Payment settings functions
+        function savePaymentSettings() {
+            const minPayout = document.getElementById('min-payout').value;
+            const autoPayout = document.getElementById('auto-payout').checked;
+            const frequency = document.getElementById('payout-frequency').value;
+            
+            // Save to Firebase or local storage
+            localStorage.setItem('paymentSettings', JSON.stringify({
+                minPayout: parseInt(minPayout),
+                autoPayout: autoPayout,
+                frequency: frequency
+            }));
+            
+            showNotification('Cài đặt thanh toán đã được lưu!', 'success');
+        }
+
+        // View transaction details
+        function viewTransactionDetails(transactionId) {
+            showNotification(`Xem chi tiết giao dịch: ${transactionId}`, 'info');
+            // Implement transaction details modal here
         }
     </script>
 

@@ -3695,6 +3695,9 @@
 									<button class="tg-btn" style="background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: 0.9rem; margin: 0 5px;" onclick="createSampleAuthorsData()">
 										<i class="fa fa-database"></i> Dữ liệu mẫu
 									</button>
+									<button class="tg-btn" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: 0.9rem; margin: 0 5px;" onclick="testAuthorRegistrationsNode()">
+										<i class="fa fa-search"></i> Kiểm tra authorRegistrations
+									</button>
 								</div>
 							</div>
 						</div>
@@ -5378,6 +5381,7 @@
 								<span class="visually-hidden">Loading...</span>
 							</div>
 							<p style="margin-top: 20px; color: #666;">Đang tải danh sách tác giả từ Firebase...</p>
+							<p style="margin-top: 10px; color: #999; font-size: 0.9rem;">Đang tìm kiếm tại node: authorRegistrations</p>
 						</div>
 					`;
 				}
@@ -5387,6 +5391,7 @@
 				
 				if (authors && authors.length > 0) {
 					console.log('Authors loaded successfully:', authors);
+					console.log('Number of authors found:', authors.length);
 					displayAuthors(authors);
 				} else {
 					console.log('No authors found, showing default authors');
@@ -5408,53 +5413,71 @@
 
 				console.log('Attempting to fetch authors from Firebase...');
 				const dbRef = window.firebaseRef(window.firebaseDatabase);
-				const snapshot = await window.firebaseGet(window.firebaseChild(dbRef, 'Authors'));
+				
+				// First try to get from authorRegistrations node
+				console.log('Trying to fetch from authorRegistrations node...');
+				const snapshot = await window.firebaseGet(window.firebaseChild(dbRef, 'authorRegistrations'));
 				
 				if (snapshot.exists()) {
 					const authorsData = snapshot.val();
-					console.log('Raw authors data from Firebase:', authorsData);
+					console.log('Raw authors data from authorRegistrations:', authorsData);
 					
-					// Convert object to array if needed
+					// Convert object to array and filter approved authors
 					if (typeof authorsData === 'object' && !Array.isArray(authorsData)) {
-						const authorsArray = Object.keys(authorsData).map(key => ({
-							id: key,
-							...authorsData[key]
-						}));
-						console.log('Converted authors array:', authorsArray);
-						return authorsArray;
-					}
-					
-					return authorsData;
-				} else {
-					console.log('No authors found in Firebase at path: /Authors');
-					
-					// Try alternative paths
-					const alternativePaths = ['authors', 'Author', 'author', 'TacGia', 'tacgia'];
-					
-					for (const path of alternativePaths) {
-						try {
-							console.log(`Trying alternative path: /${path}`);
-							const altSnapshot = await window.firebaseGet(window.firebaseChild(dbRef, path));
-							if (altSnapshot.exists()) {
-								const altData = altSnapshot.val();
-								console.log(`Found authors at path /${path}:`, altData);
-								
-								if (typeof altData === 'object' && !Array.isArray(altData)) {
-									return Object.keys(altData).map(key => ({
-										id: key,
-										...altData[key]
-									}));
-								}
-								return altData;
-							}
-						} catch (altError) {
-							console.log(`Path /${path} not found or error:`, altError.message);
+						const authorsArray = Object.keys(authorsData)
+							.filter(key => authorsData[key].status === 'approved') // Only show approved authors
+							.map(key => ({
+								id: key,
+								name: authorsData[key].penName || 'Tác giả chưa có tên',
+								description: authorsData[key].bio || 'Tác giả nổi tiếng',
+								image: `images/author/imag-${Math.floor(Math.random() * 8) + 1}.jpg`, // Random image
+								books_count: authorsData[key].specialization ? '1' : '1',
+								sales_count: 'Mới',
+								contactEmail: authorsData[key].contactEmail,
+								contactPhone: authorsData[key].contactPhone,
+								website: authorsData[key].website,
+								specialization: authorsData[key].specialization,
+								sampleWork: authorsData[key].sampleWork,
+								submittedAt: authorsData[key].submittedAt,
+								reviewed: authorsData[key].reviewed,
+								notes: authorsData[key].notes
+							}));
+						
+						console.log('Converted authors array from authorRegistrations:', authorsArray);
+						
+						if (authorsArray.length > 0) {
+							return authorsArray;
 						}
 					}
-					
-					console.log('No authors found in any Firebase paths');
-					return null;
 				}
+				
+				// If no approved authors found in authorRegistrations, try alternative paths
+				console.log('No approved authors found in authorRegistrations, trying alternative paths...');
+				const alternativePaths = ['Authors', 'authors', 'Author', 'author', 'TacGia', 'tacgia'];
+				
+				for (const path of alternativePaths) {
+					try {
+						console.log(`Trying alternative path: /${path}`);
+						const altSnapshot = await window.firebaseGet(window.firebaseChild(dbRef, path));
+						if (altSnapshot.exists()) {
+							const altData = altSnapshot.val();
+							console.log(`Found authors at path /${path}:`, altData);
+							
+							if (typeof altData === 'object' && !Array.isArray(altData)) {
+								return Object.keys(altData).map(key => ({
+									id: key,
+									...altData[key]
+								}));
+							}
+							return altData;
+						}
+					} catch (altError) {
+						console.log(`Path /${path} not found or error:`, altError.message);
+					}
+				}
+				
+				console.log('No authors found in any Firebase paths');
+				return null;
 			} catch (error) {
 				console.error('Error fetching authors from Firebase:', error);
 				throw error;
@@ -5591,14 +5614,23 @@
 			const col = document.createElement('div');
 			col.className = 'col-xs-12 col-sm-6 col-md-4 col-lg-3';
 			
-			// Default values for missing data
+			// Enhanced data handling for authorRegistrations structure
 			const authorData = {
-				name: author.name || author.author_name || 'Tác giả chưa có tên',
+				name: author.name || author.penName || author.author_name || 'Tác giả chưa có tên',
 				description: author.description || author.bio || author.author_bio || 'Tác giả nổi tiếng',
 				image: author.image || author.avatar || author.author_image || `images/author/imag-${Math.floor(Math.random() * 8) + 1}.jpg`,
-				books_count: author.books_count || author.total_books || author.books || Math.floor(Math.random() * 50) + 10,
-				sales_count: author.sales_count || author.total_sales || author.sales || `${Math.floor(Math.random() * 100) + 10}M+`,
-				id: author.id || author.author_id || Math.random().toString(36).substr(2, 9)
+				books_count: author.books_count || author.total_books || author.books || (author.specialization ? '1' : '1'),
+				sales_count: author.sales_count || author.total_sales || author.sales || 'Mới',
+				id: author.id || author.author_id || Math.random().toString(36).substr(2, 9),
+				// Additional fields from authorRegistrations
+				specialization: author.specialization || 'Chưa xác định',
+				contactEmail: author.contactEmail || '',
+				contactPhone: author.contactPhone || '',
+				website: author.website || '',
+				sampleWork: author.sampleWork || '',
+				submittedAt: author.submittedAt || '',
+				reviewed: author.reviewed || false,
+				notes: author.notes || ''
 			};
 
 			// Truncate description if too long
@@ -5611,15 +5643,20 @@
 				authorData.name.substring(0, 20) + '...' : 
 				authorData.name;
 
+			// Format submission date
+			const submissionDate = authorData.submittedAt ? 
+				new Date(authorData.submittedAt).toLocaleDateString('vi-VN') : 'Chưa xác định';
+
 			col.innerHTML = `
-				<div class="tg-author-card" style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; margin-bottom: 20px; height: 320px; display: flex; flex-direction: column; justify-content: space-between;">
+				<div class="tg-author-card" style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; margin-bottom: 20px; height: 350px; display: flex; flex-direction: column;">
 					<div class="tg-author-avatar" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; overflow: hidden; border: 3px solid #F4A261; flex-shrink: 0;">
 						<img src="${authorData.image}" alt="${authorData.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='images/author/imag-01.jpg'">
 					</div>
-					<div class="tg-author-info" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-						<div>
+					<div class="tg-author-info" style="flex: 1; display: flex; flex-direction: column;">
+						<div style="flex: 1;">
 							<h3 style="font-size: 1.1rem; font-weight: 700; color: #4A6366; margin-bottom: 8px; line-height: 1.3; height: 2.6em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" title="${authorData.name}">${truncatedName}</h3>
-							<p style="color: #666; margin-bottom: 12px; font-style: italic; font-size: 0.9rem; line-height: 1.4; height: 2.8em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" title="${authorData.description}">${truncatedDescription}</p>
+							<p style="color: #666; margin-bottom: 8px; font-style: italic; font-size: 0.9rem; line-height: 1.4; height: 2.8em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" title="${authorData.description}">${truncatedDescription}</p>
+							<p style="color: #F4A261; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px;">${authorData.specialization}</p>
 						</div>
 						<div class="tg-author-stats" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 15px;">
 							<div class="tg-stat">
@@ -5628,12 +5665,17 @@
 							</div>
 							<div class="tg-stat">
 								<div style="font-weight: bold; color: #F4A261; font-size: 1rem;">${authorData.sales_count}</div>
-								<div style="font-size: 0.8rem; color: #666;">Bán ra</div>
+								<div style="font-size: 0.8rem; color: #666;">Trạng thái</div>
 							</div>
 						</div>
-						<a href="javascript:void(0);" class="tg-btn" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: 0.9rem; display: inline-block; width: 100%;" onclick="viewAuthorDetails('${authorData.id}')">
-							Chi tiết
-						</a>
+						<div style="margin-bottom: 15px;">
+							<small style="color: #999; font-size: 0.75rem;">Đăng ký: ${submissionDate}</small>
+						</div>
+						<div style="margin-top: auto;">
+							<a href="javascript:void(0);" class="tg-btn" style="background: linear-gradient(135deg, #4A6366 0%, #3A4F52 100%); color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: 0.9rem; display: block; width: 100%; text-align: center;" onclick="viewAuthorDetails('${authorData.id}', ${JSON.stringify(authorData).replace(/"/g, '&quot;')})">
+								Chi tiết
+							</a>
+						</div>
 					</div>
 				</div>
 			`;
@@ -5797,15 +5839,19 @@
 		}
 
 		// Function to view author details
-		function viewAuthorDetails(authorId) {
+		function viewAuthorDetails(authorId, authorData = null) {
 			console.log('Viewing author details for:', authorId);
+			console.log('Author data:', authorData);
 			
 			// Show notification
 			if (typeof showNotification === 'function') {
 				showNotification('Đang chuyển đến trang chi tiết tác giả...', 'info');
 			}
 			
-			// Store author ID in session storage for the detail page
+			// Store author data in session storage for the detail page
+			if (authorData) {
+				sessionStorage.setItem('selectedAuthorData', JSON.stringify(authorData));
+			}
 			sessionStorage.setItem('selectedAuthorId', authorId);
 			
 			// Redirect to author detail page
@@ -6158,13 +6204,53 @@
 								<button class="tg-btn" style="background: linear-gradient(135deg, #F4A261 0%, #E8944A 100%); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; margin: 0 10px;" onclick="displayDefaultAuthors()">
 									<i class="fa fa-users"></i> Hiển thị mặc định
 								</button>
+								<button class="tg-btn" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; margin: 0 10px;" onclick="testAuthorRegistrationsNode()">
+									<i class="fa fa-database"></i> Kiểm tra authorRegistrations
+								</button>
 							</div>
 						</div>
 					</div>
 				`;
 			}
 		};
+
+		// Function to test authorRegistrations node specifically
+		window.testAuthorRegistrationsNode = async function() {
+			try {
+				if (!window.firebaseDatabase || !window.firebaseRef || !window.firebaseGet) {
+					alert('Firebase không khả dụng');
+					return;
+				}
+
+				console.log('Testing authorRegistrations node...');
+				const dbRef = window.firebaseRef(window.firebaseDatabase);
+				const snapshot = await window.firebaseGet(window.firebaseChild(dbRef, 'authorRegistrations'));
+				
+				if (snapshot.exists()) {
+					const data = snapshot.val();
+					console.log('authorRegistrations data found:', data);
+					
+					// Count approved authors
+					const approvedCount = Object.keys(data).filter(key => data[key].status === 'approved').length;
+					const totalCount = Object.keys(data).length;
+					
+					alert(`Tìm thấy ${totalCount} đăng ký tác giả, trong đó ${approvedCount} đã được duyệt.`);
+					
+					// Show the data in console for debugging
+					console.log('Total registrations:', totalCount);
+					console.log('Approved authors:', approvedCount);
+					console.log('Raw data:', data);
+				} else {
+					alert('Không tìm thấy dữ liệu tại node authorRegistrations');
+					console.log('No data found at authorRegistrations node');
+				}
+			} catch (error) {
+				console.error('Error testing authorRegistrations node:', error);
+				alert('Lỗi khi kiểm tra node authorRegistrations: ' + error.message);
+			}
+		};
 	</script>
 </body>
 
+</html>
 </html>

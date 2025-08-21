@@ -234,12 +234,11 @@ window.removeCartItem = function(itemId) {
 
 // Function để xóa toàn bộ giỏ hàng
 window.clearCart = function() {
-    if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
-        localStorage.removeItem('cart');
-        updateCartDisplay();
-        updateCartCount();
-        showNotification('Đã xóa toàn bộ giỏ hàng!', 'success');
-    }
+    // Direct cart clearing without confirmation
+    localStorage.removeItem('cart');
+    updateCartDisplay();
+    updateCartCount();
+    showNotification('Đã xóa toàn bộ giỏ hàng!', 'success');
 };
 
 // Function để cập nhật số lượng sản phẩm trên badge
